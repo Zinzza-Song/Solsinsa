@@ -67,6 +67,10 @@ public class Home extends JFrame {
       setContentPane(contentPane);
       contentPane.setLayout(null);
       
+      DressPanel banner = new DressPanel();
+      contentPane.add(banner);
+      
+      banner.startThread();
       JPanel homeName = new JPanel();
       homeName.setBounds(12, 53, 683, 71);
       homeName.setBackground(new Color(76, 76, 76));

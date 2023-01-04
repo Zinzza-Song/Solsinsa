@@ -33,31 +33,31 @@ public class DressPanel extends JPanel {
 		this.setLayout(new GridLayout(0, 4, 0, 0));
 	    this.setBackground(new Color(255, 255, 255));
 		
-		// 1¹ø»çÁø »çÀÌÁî Á¶Àý
-		ImageIcon image1 = new ImageIcon("src/top_1.jpg");
+		// 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		ImageIcon image1 = new ImageIcon("Solsinsa/src/gui/ì‡¼í•‘ëª° ì‚¬ì§„/ìƒì˜/TOP_1.jpg");
 		Image img1 = image1.getImage();
 		Image changeimg1 = img1.getScaledInstance(150, 130, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon1 = new ImageIcon(changeimg1);
 
-		// 2¹ø»çÁø »çÀÌÁî Á¶Àý
+		// 2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		ImageIcon image2 = new ImageIcon("src/top_2.jpg");
 		Image img2 = image2.getImage();
 		Image changeimg2 = img2.getScaledInstance(150, 130, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon2 = new ImageIcon(changeimg2);
 
-		// 3¹ø»çÁø »çÀÌÁî Á¶Àý
+		// 3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		ImageIcon image3 = new ImageIcon("src/top_5.jpg");
 		Image img3 = image3.getImage();
 		Image changeimg3 = img3.getScaledInstance(150, 130, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon3 = new ImageIcon(changeimg3);
 
-		// 4¹ø»çÁø »çÀÌÁî Á¶Àý
+		// 4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		ImageIcon image4 = new ImageIcon("src/top_4.jpg");
 		Image img4 = image4.getImage();
 		Image changeimg4 = img4.getScaledInstance(150, 130, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon4 = new ImageIcon(changeimg4);
 		
-		//°¢°¢ÀÇ ÆÐ³Î¿¡ ÀÌ¹ÌÁö ¶óº§ ºÎÂø
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð³Î¿ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		productPanel1 = new JPanel();
 		product1 = new JLabel(changeIcon1);
 		product1.setBounds(0, 0, 100, 100);
@@ -86,7 +86,7 @@ public class DressPanel extends JPanel {
 		productPanel4.setBackground(new Color(255, 255, 255));
 		this.add(productPanel4);
 		
-		//ÆÐ³Î¿¡ ¸¶¿ì½º¸¦ ¿Ã¸®¸é ½º·¹µå Àç¿ì±â
+		//ï¿½Ð³Î¿ï¿½ ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½Ã¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		this.addMouseListener(new MouseListener() {
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
@@ -109,11 +109,11 @@ public class DressPanel extends JPanel {
 			public void mouseExited(MouseEvent e) {}
 		});
 		
-		//ÀÌ¹ÌÁö Å¬¸¯ ½Ã »ó¼¼Á¤º¸ ÆäÀÌÁö·Î ÀÌµ¿
+		//ï¿½Ì¹ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 //		productPanel2.addMouseListener(new MouseListener() {
 //			@Override
 //			public void mouseClicked(MouseEvent e) {
-//				// »çÁøÀÇ »ó¼¼ Á¤º¸ ÆäÀÌÁö·Î ÀÌµ¿
+//				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 //			}
 //			@Override
 //			public void mousePressed(MouseEvent e) {}
@@ -125,11 +125,11 @@ public class DressPanel extends JPanel {
 //			public void mouseEntered(MouseEvent e) {}
 //		});
 //		
-		//ÀÌ¹ÌÁö Å¬¸¯ ½Ã »ó¼¼Á¤º¸ ÆäÀÌÁö·Î ÀÌµ¿
+		//ï¿½Ì¹ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 //		productPanel3.addMouseListener(new MouseListener() {
 //			@Override
 //			public void mouseClicked(MouseEvent e) {
-//				// »çÁøÀÇ »ó¼¼ Á¤º¸ ÆäÀÌÁö·Î ÀÌµ¿
+//				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 //			}
 //			@Override
 //			public void mousePressed(MouseEvent e) {}
@@ -141,11 +141,11 @@ public class DressPanel extends JPanel {
 //			public void mouseEntered(MouseEvent e) {}
 //		});
 //		
-		//ÀÌ¹ÌÁö Å¬¸¯ ½Ã »ó¼¼Á¤º¸ ÆäÀÌÁö·Î ÀÌµ¿
+		//ï¿½Ì¹ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 //		productPanel4.addMouseListener(new MouseListener() {
 //			@Override
 //			public void mouseClicked(MouseEvent e) {
-//				// »çÁøÀÇ »ó¼¼ Á¤º¸ ÆäÀÌÁö·Î ÀÌµ¿
+//				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 //			}
 //			@Override
 //			public void mousePressed(MouseEvent e) {}
@@ -159,7 +159,7 @@ public class DressPanel extends JPanel {
 		
 	}
 
-	// ¸ÞÀÎ¿¡¼­ »ç¿ëÇÒ ÀÇ·ù»çÁø ¿òÁ÷ÀÌ´Â ½º·¹µå ½ÃÀÛ¸Þ¼Òµå
+	// ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û¸Þ¼Òµï¿½
 	public void startThread() {
 		dressThread = new DressThread1(product1, productPanel1);
 		dressThread.start();
@@ -184,26 +184,26 @@ public class DressPanel extends JPanel {
 			this.productJPanel = productJPanel;
 		}
 
-		// ½º·¹µå½ÇÇà ½Ã ÀÌ¹ÌÁö ¿òÁ÷ÀÓ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		public void run() {
 			while (true) {
 				int x = productJPanel.getX() + 3;
 				int y = productJPanel.getY();
 				
-				// ÇÁ·¹ÀÓ ¹ÛÀ¸·Î ³ª°£ °æ¿ì
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 				if (x > DressPanel.this.getWidth()) {
 					productJPanel.setLocation(0,0);
 				}
-				// ÇÁ·¹ÀÓ ¾È¿¡ ÀÖ´Â °æ¿ì
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
 				else {
 					productJPanel.setLocation(x, y);
 				}
-				// ±âº»ÀûÀ¸·Î 1ÃÊ¸¶´Ù ÀÌµ¿
+				// ï¿½âº»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½Ê¸ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 				try {
 					sleep(50);
 					
 				}
-				// ½º·¹µå°¡ Á×°Ô µÇ¸é ÃÊ±â À§Ä¡·Î ÀÌµ¿ ÈÄ 0.5ÃÊ ÈÄ ½ÇÇà
+				// ï¿½ï¿½ï¿½ï¿½ï¿½å°¡ ï¿½×°ï¿½ ï¿½Ç¸ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ 0.5ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				catch (Exception e) {
 					productJPanel.setLocation(0, 0);
 
@@ -226,28 +226,28 @@ public class DressPanel extends JPanel {
 			productJLabel.setLocation(productJPanel.getWidth(), productJPanel.getHeight());
 		}
 		
-		// ½º·¹µå½ÇÇà ½Ã ÀÌ¹ÌÁö ¿òÁ÷ÀÓ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		public void run() {
 			while (true) {
 				int x = productJPanel.getX() + 3;
 				int y = productJPanel.getY();
 				
-				// ÇÁ·¹ÀÓ ¹ÛÀ¸·Î ³ª°£ °æ¿ì
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 				if (x > DressPanel.this.getWidth()) {
 					productJPanel.setLocation(0,0);
 				}
-				// ÇÁ·¹ÀÓ ¾È¿¡ ÀÖ´Â °æ¿ì
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
 				else {
 					productJPanel.setLocation(x, y);
 				}
-				// ±âº»ÀûÀ¸·Î 1ÃÊ¸¶´Ù ÀÌµ¿
+				// ï¿½âº»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½Ê¸ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 				try {
 					sleep(50);
 					
 				}
 				
 				
-				// ½º·¹µå°¡ Á×°Ô µÇ¸é ÃÊ±â À§Ä¡·Î ÀÌµ¿ ÈÄ 0.5ÃÊ ÈÄ ½ÇÇà
+				// ï¿½ï¿½ï¿½ï¿½ï¿½å°¡ ï¿½×°ï¿½ ï¿½Ç¸ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ 0.5ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				catch (Exception e) {
 					productJPanel.setLocation(0, 0);
 					
@@ -268,26 +268,26 @@ public class DressPanel extends JPanel {
 			this.productJPanel = productJPanel;
 		}
 		
-		// ½º·¹µå½ÇÇà ½Ã ÀÌ¹ÌÁö ¿òÁ÷ÀÓ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		public void run() {
 			while (true) {
 				int x = productJPanel.getX() + 3;
 				int y = productJPanel.getY();
 				
-				// ÇÁ·¹ÀÓ ¹ÛÀ¸·Î ³ª°£ °æ¿ì
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 				if (x > DressPanel.this.getWidth()) {
 					productJPanel.setLocation(0,0);
 				}
-				// ÇÁ·¹ÀÓ ¾È¿¡ ÀÖ´Â °æ¿ì
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
 				else {
 					productJPanel.setLocation(x, y);
 				}
-				// ±âº»ÀûÀ¸·Î 1ÃÊ¸¶´Ù ÀÌµ¿
+				// ï¿½âº»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½Ê¸ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 				try {
 					sleep(50);
 					
 				}
-				// ½º·¹µå°¡ Á×°Ô µÇ¸é ÃÊ±â À§Ä¡·Î ÀÌµ¿ ÈÄ 0.5ÃÊ ÈÄ ½ÇÇà
+				// ï¿½ï¿½ï¿½ï¿½ï¿½å°¡ ï¿½×°ï¿½ ï¿½Ç¸ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ 0.5ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				catch (Exception e) {
 					productJPanel.setLocation(0, 0);
 					
@@ -308,26 +308,26 @@ public class DressPanel extends JPanel {
 			this.productJPanel = productJPanel;
 		}
 		
-		// ½º·¹µå½ÇÇà ½Ã ÀÌ¹ÌÁö ¿òÁ÷ÀÓ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		public void run() {
 			while (true) {
 				int x = productJPanel.getX() + 3;
 				int y = productJPanel.getY();
 				
-				// ÇÁ·¹ÀÓ ¹ÛÀ¸·Î ³ª°£ °æ¿ì
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 				if (x > DressPanel.this.getWidth()) {
 					productJPanel.setLocation(0,0);
 				}
-				// ÇÁ·¹ÀÓ ¾È¿¡ ÀÖ´Â °æ¿ì
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½
 				else {
 					productJPanel.setLocation(x, y);
 				}
-				// ±âº»ÀûÀ¸·Î 1ÃÊ¸¶´Ù ÀÌµ¿
+				// ï¿½âº»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½Ê¸ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 				try {
 					sleep(50);
 					
 				}
-				// ½º·¹µå°¡ Á×°Ô µÇ¸é ÃÊ±â À§Ä¡·Î ÀÌµ¿ ÈÄ 0.5ÃÊ ÈÄ ½ÇÇà
+				// ï¿½ï¿½ï¿½ï¿½ï¿½å°¡ ï¿½×°ï¿½ ï¿½Ç¸ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ 0.5ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				catch (Exception e) {
 					productJPanel.setLocation(0, 0);
 					

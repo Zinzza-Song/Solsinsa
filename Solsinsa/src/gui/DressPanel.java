@@ -40,19 +40,19 @@ public class DressPanel extends JPanel {
 		ImageIcon changeIcon1 = new ImageIcon(changeimg1);
 
 		// 2������ ������ ����
-		ImageIcon image2 = new ImageIcon("src/top_2.jpg");
+		ImageIcon image2 = new ImageIcon("Solsinsa/src/gui/쇼핑몰 사진/상의/TOP_2.jpg");
 		Image img2 = image2.getImage();
 		Image changeimg2 = img2.getScaledInstance(150, 130, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon2 = new ImageIcon(changeimg2);
 
 		// 3������ ������ ����
-		ImageIcon image3 = new ImageIcon("src/top_5.jpg");
+		ImageIcon image3 = new ImageIcon("Solsinsa/src/gui/쇼핑몰 사진/상의/TOP_3.jpg");
 		Image img3 = image3.getImage();
 		Image changeimg3 = img3.getScaledInstance(150, 130, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon3 = new ImageIcon(changeimg3);
 
 		// 4������ ������ ����
-		ImageIcon image4 = new ImageIcon("src/top_4.jpg");
+		ImageIcon image4 = new ImageIcon("Solsinsa/src/gui/쇼핑몰 사진/상의/TOP_4.jpg");
 		Image img4 = image4.getImage();
 		Image changeimg4 = img4.getScaledInstance(150, 130, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon4 = new ImageIcon(changeimg4);

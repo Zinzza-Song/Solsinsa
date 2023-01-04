@@ -1,10 +1,14 @@
 import java.sql.SQLException;
 
+import gui.Home;
+
 public class SolsinsaMain {
 
 	public static void main(String[] args) throws SQLException {
 
-		System.out.println("ÇÁ·Î±×·¥ ½ÃÀÛÁ¡");
+		//í™ˆ í™”ë©´
+		Home h = new Home();
+		h.setVisible(true);
 
 	}
 

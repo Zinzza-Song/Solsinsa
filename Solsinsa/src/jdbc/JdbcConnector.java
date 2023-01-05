@@ -11,29 +11,29 @@ public static Connection getCon() throws ClassNotFoundException, SQLException {
 		Connection con = null;
 		
 		try {
-			String id = "c##zinzza"; // °èÁ¤¸í
-			String pw = "1234"; // °èÁ¤ÆÐ½º¿öµå
-			String url = "jdbc:oracle:thin:@1.239.126.62:11521:xe"; // È£½ºÆ® À§Ä¡
+			String id = "c##zinzza"; // ê³„ì •ëª…
+			String pw = "1234"; // ê³„ì •íŒ¨ìŠ¤ì›Œë“œ
+			String url = "jdbc:oracle:thin:@1.239.126.62:11521:xe"; // í˜¸ìŠ¤íŠ¸ ìœ„ì¹˜
 			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			// Class Å¬·¡½º·Î JDBC µå¶óÀÌ¹ö¸¦ ·ÎµùÇÏ´Â ÄÚµå => DriverManager¿¡ µî·ÏµÊ
+			// Class í´ëž˜ìŠ¤ë¡œ JDBC ë“œë¼ì´ë²„ë¥¼ ë¡œë”©í•˜ëŠ” ì½”ë“œ => DriverManagerì— ë“±ë¡ë¨
 			
 			con = DriverManager.getConnection(url, id, pw);
-			// Connection °´Ã¼¸¦ ¾òÀ½
-			// conÀº ½ÇÁ¦·Î µ¥ÀÌÅÍº£ÀÌ½º¿Í ¿¬°áÇÏ¿© ÀÛ¾÷À» ¼öÇàÇÒ ¼ö ÀÖ´Â Åë·Î·Î ÀÚ¿ëÇÏ´Â Áß¿äÇÑ °´Ã¼ º¯¼ö·Î »ç¿ë
+			// Connection ê°ì²´ë¥¼ ì–»ìŒ
+			// conì€ ì‹¤ì œë¡œ ë°ì´í„°ë² ì´ìŠ¤ì™€ ì—°ê²°í•˜ì—¬ ìž‘ì—…ì„ ìˆ˜í–‰í•  ìˆ˜ ìžˆëŠ” í†µë¡œë¡œ ìžìš©í•˜ëŠ” ì¤‘ìš”í•œ ê°ì²´ ë³€ìˆ˜ë¡œ ì‚¬ìš©
 			
 			return con;
-		} catch (Exception e) { // dbÀ§Ä¡¿¡¼­ ÀÛ¾÷ÇÒ °æ¿ì(È£½ºÆ®¿¡¼­´Â È£½ºÆ®ÀÇ ¿ÜºÎ¾ÆÀÌÇÇ·Î Á¢±Ù ºÒ°¡)
-			String id = "c##zinzza"; // °èÁ¤¸í
-			String pw = "1234"; // °èÁ¤ÆÐ½º¿öµå
-			String url = "jdbc:oracle:thin:@localhost:1521:xe"; // dbÀ§Ä¡
+		} catch (Exception e) { // dbìœ„ì¹˜ì—ì„œ ìž‘ì—…í•  ê²½ìš°(í˜¸ìŠ¤íŠ¸ì—ì„œëŠ” í˜¸ìŠ¤íŠ¸ì˜ ì™¸ë¶€ì•„ì´í”¼ë¡œ ì ‘ê·¼ ë¶ˆê°€)
+			String id = "c##zinzza"; // ê³„ì •ëª…
+			String pw = "1234"; // ê³„ì •íŒ¨ìŠ¤ì›Œë“œ
+			String url = "jdbc:oracle:thin:@localhost:1521:xe"; // dbìœ„ì¹˜
 			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			// Class Å¬·¡½º·Î JDBC µå¶óÀÌ¹ö¸¦ ·ÎµùÇÏ´Â ÄÚµå => DriverManager¿¡ µî·ÏµÊ
+			// Class í´ëž˜ìŠ¤ë¡œ JDBC ë“œë¼ì´ë²„ë¥¼ ë¡œë”©í•˜ëŠ” ì½”ë“œ => DriverManagerì— ë“±ë¡ë¨
 			
 			con = DriverManager.getConnection(url, id, pw);
-			// Connection °´Ã¼¸¦ ¾òÀ½
-			// conÀº ½ÇÁ¦·Î µ¥ÀÌÅÍº£ÀÌ½º¿Í ¿¬°áÇÏ¿© ÀÛ¾÷À» ¼öÇàÇÒ ¼ö ÀÖ´Â Åë·Î·Î ÀÚ¿ëÇÏ´Â Áß¿äÇÑ °´Ã¼ º¯¼ö·Î »ç¿ë
+			// Connection ê°ì²´ë¥¼ ì–»ìŒ
+			// conì€ ì‹¤ì œë¡œ ë°ì´í„°ë² ì´ìŠ¤ì™€ ì—°ê²°í•˜ì—¬ ìž‘ì—…ì„ ìˆ˜í–‰í•  ìˆ˜ ìžˆëŠ” í†µë¡œë¡œ ìžìš©í•˜ëŠ” ì¤‘ìš”í•œ ê°ì²´ ë³€ìˆ˜ë¡œ ì‚¬ìš©
 			
 			return con;
 		}

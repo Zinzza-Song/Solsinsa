@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import jdbc.JdbcConnector;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -33,25 +34,25 @@ public class DressPanel extends JPanel {
 		this.setBackground(new Color(255, 255, 255));
 
 		// 1번 사진
-		ImageIcon image1 = new ImageIcon("C:/Users/soldesk/Desktop/git/Solsinsa/Solsinsa/src/gui/쇼핑몰 사진/상의/TOP_1.jpg");
+		ImageIcon image1 = new ImageIcon("./src/쇼핑몰 사진/상의/TOP_1.jpg");
 		Image img1 = image1.getImage();
 		Image changeimg1 = img1.getScaledInstance(150, 130, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon1 = new ImageIcon(changeimg1);
 
 		// 2번 사진
-		ImageIcon image2 = new ImageIcon("C:/Users/soldesk/Desktop/git/Solsinsa/Solsinsa/src/gui/쇼핑몰 사진/상의/TOP_1.jpg");
+		ImageIcon image2 = new ImageIcon("./src/쇼핑몰 사진/상의/TOP_1.jpg");
 		Image img2 = image2.getImage();
 		Image changeimg2 = img2.getScaledInstance(150, 130, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon2 = new ImageIcon(changeimg2);
 
 		// 3번 사진
-		ImageIcon image3 = new ImageIcon("C:/Users/soldesk/Desktop/git/Solsinsa/Solsinsa/src/gui/쇼핑몰 사진/상의/TOP_1.jpg");
+		ImageIcon image3 = new ImageIcon("./src/쇼핑몰 사진/상의/TOP_1.jpg");
 		Image img3 = image3.getImage();
 		Image changeimg3 = img3.getScaledInstance(150, 130, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon3 = new ImageIcon(changeimg3);
 
 		// 4번 사진
-		ImageIcon image4 = new ImageIcon("C:/Users/soldesk/Desktop/git/Solsinsa/Solsinsa/src/gui/쇼핑몰 사진/상의/TOP_1.jpg");
+		ImageIcon image4 = new ImageIcon("./src/쇼핑몰 사진/상의/TOP_1.jpg");
 		Image img4 = image4.getImage();
 		Image changeimg4 = img4.getScaledInstance(150, 130, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon4 = new ImageIcon(changeimg4);

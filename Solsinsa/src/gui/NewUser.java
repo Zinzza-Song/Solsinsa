@@ -1,15 +1,19 @@
 package gui;
-import java.awt.EventQueue;
+import jdbc.JdbcConnector;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class NewUser extends JFrame {
 
@@ -22,24 +26,8 @@ public class NewUser extends JFrame {
 	private JTextField emailTextField;
 	private JTextField phoneTextField;
 	private JTextField dateOfBirthTextField;
-
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					NewUser frame = new NewUser();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	
 	public NewUser() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 425, 419);  //위치 사이즈설정
 		setResizable(false);   //사이즈 조절 불가능
 		contentPane = new JPanel(); 
@@ -76,6 +64,13 @@ public class NewUser extends JFrame {
 		reduplicationCheckBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		reduplicationCheckBtn.setBounds(301, 59, 97, 23);
 		contentPane.add(reduplicationCheckBtn);
+		reduplicationCheckBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		
 		JLabel nameLabel = new JLabel("\uC774 \uB984");
@@ -176,12 +171,31 @@ public class NewUser extends JFrame {
 		confirmBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		confirmBtn.setBounds(205, 346, 84, 23);
 		contentPane.add(confirmBtn);
+		confirmBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				//프레임 종료
+				dispose();
+			}
+		});
 		
 		//취소버튼
 		JButton cancleBtn = new JButton("\uCDE8 \uC18C");
 		cancleBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		cancleBtn.setBounds(301, 346, 84, 23);
 		contentPane.add(cancleBtn);
+		cancleBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub	
+				
+				//프레임 종료
+				dispose();
+			}
+			
+		});
 	}
 
 }

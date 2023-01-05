@@ -1,4 +1,5 @@
 package gui;
+import jdbc.JdbcConnector;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,6 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JList;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
@@ -46,7 +50,6 @@ public class Cart extends JFrame {
 
 	
 	public Cart() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 585, 492);
 		setResizable(false);  //프레임사이즈조절 불가능
 		contentPane = new JPanel();
@@ -166,12 +169,30 @@ public class Cart extends JFrame {
 		paymentbtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
 		paymentbtn.setBounds(336, 420, 97, 23);
 		contentPane.add(paymentbtn);
+		paymentbtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub	
+				
+			}
+			
+		});
 		
 		//취소버튼
 		JButton canclebtn = new JButton("\uCDE8 \uC18C");
 		canclebtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
 		canclebtn.setBounds(445, 420, 97, 23);
 		contentPane.add(canclebtn);
+		canclebtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub	
+				
+				//프레임 종료
+				dispose();
+			}
+			
+		});
 		
 		JLabel totalPriceLabel = new JLabel("\uCD1D \uAE08\uC561");
 		totalPriceLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));

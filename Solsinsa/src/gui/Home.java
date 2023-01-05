@@ -117,15 +117,27 @@ public class Home extends JFrame {
 		CategoryOuter.setBounds(447, 134, 160, 25);
 		contentPane.add(CategoryOuter);
 
+		//로그인 버튼
 		JButton loginbtn = new JButton("login");
 		loginbtn.setFont(new Font("굴림", Font.PLAIN, 12));
 		loginbtn.setBounds(310, 20, 67, 23);
 		contentPane.add(loginbtn);
-
+		
+		//회원가입 버튼
 		JButton joinbtn = new JButton("join");
 		joinbtn.setFont(new Font("굴림", Font.PLAIN, 12));
 		joinbtn.setBounds(389, 21, 67, 23);
 		contentPane.add(joinbtn);
+		joinbtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				NewUser userFrame = new NewUser();
+				userFrame.setVisible(true);
+			}
+			
+		});
 
 		// 상품표시패널
 		JPanel productPanel1 = new JPanel();

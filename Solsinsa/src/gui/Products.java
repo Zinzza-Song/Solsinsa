@@ -1,8 +1,12 @@
 package gui;
 
+import jdbc.JdbcConnector;
+
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,332 +18,149 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.GridBagConstraints;
-
-import jdbc.JdbcConnector;
-
+import java.awt.Image;
 
 public class Products extends JFrame {
 
 	private JPanel contentPane;
-	
-	private JTextField productName_1;
-	private JTextField productPrice_1;
-	private JTextField productName_2;
-	private JTextField productPrice_2;
-	private JTextField productName_3;
-	private JTextField productPrice_3;
-	private JTextField productName_4;
-	private JTextField productPrice_4;
-	private JTextField productName_5;
-	private JTextField productPrice_5;
-	private JTextField productName_6;
-	private JTextField productPrice_6;
-	private JButton productImgBtn_7;
-	private JTextField productName_7;
-	private JTextField productPrice_7;
-	private JButton productImgBtn_8;
-	private JTextField productName_8;
-	private JTextField productPrice_8;
-	private JButton productImgBtn_9;
-	private JTextField productName_9;
-	private JTextField productPrice_9;
-	private JButton productImgBtn_10;
-	private JTextField productName_10;
-	private JTextField productPrice_10;
-	private JButton productImgBtn_11;
-	private JTextField productName_11;
-	private JButton productImgBtn_12;
-	private JTextField productName_12;
-	private JTextField productPrice_12;
-	
-	public Products() {
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	JButton productImgBtn[];
+	JTextField productName[];
+	JTextField productPrice[];
+
+	String top[] = { "허드슨 아란 점퍼 니트 님부스 / WJ 5740", "Velour Soccer Jersey Black", "WORLD EP HOODIE SLATE BLUE",
+			"코튼 워셔블 하찌 하프집업 니트_5 COLOR", "레터링 타투 후드 기모 블랙", "벌키 브러쉬 아가일 니트 BLACK", "미니멀 울 라이크 반목폴라 니트 [그레이]",
+			"Fluff Mood Check shirt S24 Navy", "프레첼 코듀로이 셔츠 카키브라운 JJLS7525", "울 하이넥 케이블 집업 니트 - 샌드",
+			"CROPPED HAIRY KNIT - MELANGE", "옵티멀 베이직 셔츠-화이트" };
+
+	String outer[] = {"BROWN reversible shearling short coat(OJ315)","LIGHTWEIGHT VEGAN LEATHER MA-1 JACKET [BLACK]",
+			"오버사이즈 울 트렌치 코트 [BEIGE]","Flat Single Coat (Black)","OVERSIZED BALMACAAN COAT _ BLACK",
+			"말본 아노락 자켓 BEIGE (MAN)","[PRIMALOFT] 몬스터 숏패딩_블랙","REVERSIBLE WARM UP QUILTING JACKET BLACK / IVORY",
+			"후드 미니멀 푸퍼_SPJPC4TC12","[리뉴얼ver]컴포터블 벌룬핏 다운 패딩 다크그레이 COOSJP031D.GRAY",
+			"PERTEX® T Down Jacket Bandana Grey","[리뉴얼ver]컨템포러리 몬스터파카 다크그레이 COOSJP028D.GRAY"};
+
+	String bottom[] = {"WIDE DENIM PANTS [BLACK]","컷 오프 블리치 워시드 데님 팬츠 (TP0042)",
+			"1967 JET BLACK JEANS [WIDE STRAIGHT]","와이드 워시드 카고 데님 팬츠 블랙","TAG FLEECE PANTS - BLACK","코듀로이 원턱 조거팬츠-KHAKI",
+			"939 LOGO SWEAT PANTS (BLACK)","와이드 히든 밴딩 슬랙스 [블랙]","테이퍼드 히든 밴딩 크롭 슬랙스 [라이트 베이지]",
+			"세미 부츠컷 슬랙스 [그레이]","데님 오버롤 멜빵 팬츠 [블루]","오버라운드 퍼티그 점프슈트 OF-501 블랙"};
+
+	// 홈 화면에서 카테고리에 따라 사진 변경을 위한 String category 추가
+	public Products(String category) {
+
 		setBounds(100, 100, 694, 602);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setResizable(false);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		
-		
-		JButton CategoryTop = new JButton("TOP");
-		CategoryTop.setBounds(67, 10, 160, 25);
-		CategoryTop.setForeground(new Color(255, 255, 255));
-		CategoryTop.setBackground(new Color(80, 80, 80));
-		CategoryTop.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
-		contentPane.add(CategoryTop);
-		
-		JButton CategoryBottom = new JButton("BOTTOM");
-		CategoryBottom.setBounds(257, 10, 160, 25);
-		CategoryBottom.setForeground(new Color(255, 255, 255));
-		CategoryBottom.setBackground(new Color(80, 80, 80));
-		CategoryBottom.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
-		contentPane.add(CategoryBottom);
-		
-		JButton CategoryOuter = new JButton("OUTER");
-		CategoryOuter.setBounds(442, 10, 160, 25);
-		CategoryOuter.setForeground(new Color(255, 255, 255));
-		CategoryOuter.setBackground(new Color(80, 80, 80));
-		CategoryOuter.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
-		contentPane.add(CategoryOuter);
-		
-		//상품 패널 만들고 스크롤팬안에 패널 넣기
-		
+
+		// 상품 패널 만들고 스크롤팬안에 패널 넣기
 		JPanel productPanel = new JPanel();
 		productPanel.setPreferredSize(new Dimension(490, 980));
-		
+
 		JScrollPane productScrollPane = new JScrollPane(productPanel);
-		productScrollPane.setBounds(12, 45, 663, 498);
+		productScrollPane.setBounds(0, 0, 680, 498);
 		productPanel.setLayout(null);
-		
-		JButton productImgBtn_1 = new JButton("New button");
-		productImgBtn_1.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productImgBtn_1.setBounds(12, 10, 189, 172);
-		productPanel.add(productImgBtn_1);
-		
-		productName_1 = new JTextField();
-		productName_1.setHorizontalAlignment(SwingConstants.CENTER);
-		productName_1.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productName_1.setBounds(48, 192, 116, 21);
-		productPanel.add(productName_1);
-		productName_1.setColumns(10);
-		
-		productPrice_1 = new JTextField();
-		productPrice_1.setHorizontalAlignment(SwingConstants.CENTER);
-		productPrice_1.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productPrice_1.setText("");
-		productPrice_1.setBounds(48, 223, 116, 21);
-		productPanel.add(productPrice_1);
-		productPrice_1.setColumns(10);
-		
-		JButton productImgBtn_2 = new JButton("New button");
-		productImgBtn_2.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productImgBtn_2.setBounds(226, 10, 189, 172);
-		productPanel.add(productImgBtn_2);
-		
-		productName_2 = new JTextField();
-		productName_2.setHorizontalAlignment(SwingConstants.CENTER);
-		productName_2.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productName_2.setColumns(10);
-		productName_2.setBounds(262, 192, 116, 21);
-		productPanel.add(productName_2);
-		
-		productPrice_2 = new JTextField();
-		productPrice_2.setText("");
-		productPrice_2.setHorizontalAlignment(SwingConstants.CENTER);
-		productPrice_2.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productPrice_2.setColumns(10);
-		productPrice_2.setBounds(262, 223, 116, 21);
-		productPanel.add(productPrice_2);
-		
-		JButton productImgBtn_3 = new JButton("New button");
-		productImgBtn_3.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productImgBtn_3.setBounds(438, 10, 189, 172);
-		productPanel.add(productImgBtn_3);
-		
-		productName_3 = new JTextField();
-		productName_3.setHorizontalAlignment(SwingConstants.CENTER);
-		productName_3.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productName_3.setColumns(10);
-		productName_3.setBounds(474, 192, 116, 21);
-		productPanel.add(productName_3);
-		
-		productPrice_3 = new JTextField();
-		productPrice_3.setText("");
-		productPrice_3.setHorizontalAlignment(SwingConstants.CENTER);
-		productPrice_3.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productPrice_3.setColumns(10);
-		productPrice_3.setBounds(474, 223, 116, 21);
-		productPanel.add(productPrice_3);
-		
-		JButton productImgBtn_4 = new JButton("New button");
-		productImgBtn_4.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productImgBtn_4.setBounds(12, 258, 189, 172);
-		productPanel.add(productImgBtn_4);
-		
-		productName_4 = new JTextField();
-		productName_4.setHorizontalAlignment(SwingConstants.CENTER);
-		productName_4.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productName_4.setColumns(10);
-		productName_4.setBounds(48, 440, 116, 21);
-		productPanel.add(productName_4);
-		
-		productPrice_4 = new JTextField();
-		productPrice_4.setText("");
-		productPrice_4.setHorizontalAlignment(SwingConstants.CENTER);
-		productPrice_4.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productPrice_4.setColumns(10);
-		productPrice_4.setBounds(48, 471, 116, 21);
-		productPanel.add(productPrice_4);
-		
-		JButton productImgBtn_5 = new JButton("New button");
-		productImgBtn_5.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productImgBtn_5.setBounds(226, 258, 189, 172);
-		productPanel.add(productImgBtn_5);
-		
-		productName_5 = new JTextField();
-		productName_5.setHorizontalAlignment(SwingConstants.CENTER);
-		productName_5.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productName_5.setColumns(10);
-		productName_5.setBounds(262, 440, 116, 21);
-		productPanel.add(productName_5);
-		
-		productPrice_5 = new JTextField();
-		productPrice_5.setText("");
-		productPrice_5.setHorizontalAlignment(SwingConstants.CENTER);
-		productPrice_5.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productPrice_5.setColumns(10);
-		productPrice_5.setBounds(262, 471, 116, 21);
-		productPanel.add(productPrice_5);
-		
-		JButton productImgBtn_6 = new JButton("New button");
-		productImgBtn_6.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productImgBtn_6.setBounds(438, 258, 189, 172);
-		productPanel.add(productImgBtn_6);
-		
-		productName_6 = new JTextField();
-		productName_6.setHorizontalAlignment(SwingConstants.CENTER);
-		productName_6.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productName_6.setColumns(10);
-		productName_6.setBounds(474, 440, 116, 21);
-		productPanel.add(productName_6);
-		
-		productPrice_6 = new JTextField();
-		productPrice_6.setText("");
-		productPrice_6.setHorizontalAlignment(SwingConstants.CENTER);
-		productPrice_6.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productPrice_6.setColumns(10);
-		productPrice_6.setBounds(474, 471, 116, 21);
-		
-		productPanel.add(productPrice_6);
-		
-		productImgBtn_7 = new JButton("New button");
-		productImgBtn_7.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productImgBtn_7.setBounds(12, 502, 189, 172);
-		productPanel.add(productImgBtn_7);
-		
-		productName_7 = new JTextField();
-		productName_7.setHorizontalAlignment(SwingConstants.CENTER);
-		productName_7.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productName_7.setColumns(10);
-		productName_7.setBounds(48, 684, 116, 21);
-		productPanel.add(productName_7);
-		
-		productPrice_7 = new JTextField();
-		productPrice_7.setText("");
-		productPrice_7.setHorizontalAlignment(SwingConstants.CENTER);
-		productPrice_7.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productPrice_7.setColumns(10);
-		productPrice_7.setBounds(48, 715, 116, 21);
-		productPanel.add(productPrice_7);
-		
-		productImgBtn_8 = new JButton("New button");
-		productImgBtn_8.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productImgBtn_8.setBounds(226, 502, 189, 172);
-		productPanel.add(productImgBtn_8);
-		
-		productName_8 = new JTextField();
-		productName_8.setHorizontalAlignment(SwingConstants.CENTER);
-		productName_8.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productName_8.setColumns(10);
-		productName_8.setBounds(262, 684, 116, 21);
-		productPanel.add(productName_8);
-		
-		productPrice_8 = new JTextField();
-		productPrice_8.setText("");
-		productPrice_8.setHorizontalAlignment(SwingConstants.CENTER);
-		productPrice_8.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productPrice_8.setColumns(10);
-		productPrice_8.setBounds(262, 715, 116, 21);
-		productPanel.add(productPrice_8);
-		
-		productImgBtn_9 = new JButton("New button");
-		productImgBtn_9.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productImgBtn_9.setBounds(438, 502, 189, 172);
-		productPanel.add(productImgBtn_9);
-		
-		productName_9 = new JTextField();
-		productName_9.setHorizontalAlignment(SwingConstants.CENTER);
-		productName_9.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productName_9.setColumns(10);
-		productName_9.setBounds(474, 684, 116, 21);
-		productPanel.add(productName_9);
-		
-		productPrice_9 = new JTextField();
-		productPrice_9.setText("");
-		productPrice_9.setHorizontalAlignment(SwingConstants.CENTER);
-		productPrice_9.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productPrice_9.setColumns(10);
-		productPrice_9.setBounds(474, 715, 116, 21);
-		productPanel.add(productPrice_9);
-		
-		productImgBtn_10 = new JButton("New button");
-		productImgBtn_10.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productImgBtn_10.setBounds(12, 750, 189, 172);
-		productPanel.add(productImgBtn_10);
-		
-		productName_10 = new JTextField();
-		productName_10.setHorizontalAlignment(SwingConstants.CENTER);
-		productName_10.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productName_10.setColumns(10);
-		productName_10.setBounds(48, 932, 116, 21);
-		productPanel.add(productName_10);
-		
-		productPrice_10 = new JTextField();
-		productPrice_10.setText("");
-		productPrice_10.setHorizontalAlignment(SwingConstants.CENTER);
-		productPrice_10.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productPrice_10.setColumns(10);
-		productPrice_10.setBounds(48, 963, 116, 21);
-		productPanel.add(productPrice_10);
-		
-		productImgBtn_11 = new JButton("New button");
-		productImgBtn_11.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productImgBtn_11.setBounds(226, 750, 189, 172);
-		productPanel.add(productImgBtn_11);
-		
-		productName_11 = new JTextField();
-		productName_11.setHorizontalAlignment(SwingConstants.CENTER);
-		productName_11.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productName_11.setColumns(10);
-		productName_11.setBounds(262, 932, 116, 21);
-		productPanel.add(productName_11);
-		
-		JTextField productPrice_11 = new JTextField();
-		productPrice_11.setText("");
-		productPrice_11.setHorizontalAlignment(SwingConstants.CENTER);
-		productPrice_11.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productPrice_11.setColumns(10);
-		productPrice_11.setBounds(262, 963, 116, 21);
-		productPanel.add(productPrice_11);
-		
-		productImgBtn_12 = new JButton("New button");
-		productImgBtn_12.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productImgBtn_12.setBounds(438, 750, 189, 172);
-		productPanel.add(productImgBtn_12);
-		
-		productName_12 = new JTextField();
-		productName_12.setHorizontalAlignment(SwingConstants.CENTER);
-		productName_12.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productName_12.setColumns(10);
-		productName_12.setBounds(474, 932, 116, 21);
-		productPanel.add(productName_12);
-		
-		productPrice_12 = new JTextField();
-		productPrice_12.setText("");
-		productPrice_12.setHorizontalAlignment(SwingConstants.CENTER);
-		productPrice_12.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		productPrice_12.setColumns(10);
-		productPrice_12.setBounds(474, 963, 116, 21);
-		productPanel.add(productPrice_12);
+
+		// productImgBth 상품 이미지 넣을 버튼
+		// productName 상품 이름
+		// productPrice 상품 가격
+		productImgBtn = new JButton[12];
+		productName = new JTextField[12];
+		productPrice = new JTextField[12];
+		// x, y 좌표 설정 초기화
+		int xBtn1 = 20, xName1 = 28, xPrice1 = 58;
+		int xBtn2 = 20, xName2 = 28, xPrice2 = 58;
+		int xBtn3 = 20, xName3 = 28, xPrice3 = 58;
+		int xBtn4 = 20, xName4 = 28, xPrice4 = 58;
+
+		for (int i = 0; i < 12; i++) {
+			if (category.equals("TOP")) {
+				
+				ImageIcon imageIcon = new ImageIcon("./src/쇼핑몰 사진/상의/TOP_" + (i + 1) + ".jpg");
+				Image Img = imageIcon.getImage();
+				Image changeImg = Img.getScaledInstance(160, 172, Image.SCALE_SMOOTH);
+				ImageIcon changeIcon = new ImageIcon(changeImg);
+				
+				productImgBtn[i] = new JButton(changeIcon);
+				productName[i] = new JTextField(top[i]);
+				productPrice[i] = new JTextField("");
+			}
+			else if(category.equals("BOTTOM")) {
+				
+				ImageIcon imageIcon = new ImageIcon("./src/쇼핑몰 사진/하의/BOTTOM_" + (i + 1) + ".jpg");
+				Image Img = imageIcon.getImage();
+				Image changeImg = Img.getScaledInstance(160, 172, Image.SCALE_SMOOTH);
+				ImageIcon changeIcon = new ImageIcon(changeImg);
+				
+				productImgBtn[i] = new JButton(changeIcon);
+				productName[i] = new JTextField(bottom[i]);
+				productPrice[i] = new JTextField("");
+			}
+			else if(category.equals("OUTER")) {
+				
+				ImageIcon imageIcon = new ImageIcon("./src/쇼핑몰 사진/아우터/OUTER_" + (i + 1) + ".jpg");
+				Image Img = imageIcon.getImage();
+				Image changeImg = Img.getScaledInstance(160, 172, Image.SCALE_SMOOTH);
+				ImageIcon changeIcon = new ImageIcon(changeImg);
+				
+				productImgBtn[i] = new JButton(changeIcon);
+				productName[i] = new JTextField(outer[i]);
+				productPrice[i] = new JTextField("");
+			}
+			
+			productName[i].setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
+			productName[i].setHorizontalAlignment(SwingConstants.CENTER);
+			productName[i].setColumns(10);
+
+			productPrice[i].setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
+			productPrice[i].setHorizontalAlignment(SwingConstants.CENTER);
+			productPrice[i].setColumns(10);
+
+			if (i < 3) {
+				productImgBtn[i].setBounds(xBtn1, 20, 189, 172);
+				productPanel.add(productImgBtn[i]);
+				productName[i].setBounds(xName1, 195, 180, 21);
+				productPanel.add(productName[i]);
+				productPrice[i].setBounds(xPrice1, 225, 116, 21);
+				productPanel.add(productPrice[i]);
+				xBtn1 += 222;
+				xName1 += 220;
+				xPrice1 += 220;
+			} else if (i < 6) {
+				productImgBtn[i].setBounds(xBtn2, 260, 189, 172);
+				productPanel.add(productImgBtn[i]);
+				productName[i].setBounds(xName2, 435, 180, 21);
+				productPanel.add(productName[i]);
+				productPrice[i].setBounds(xPrice2, 465, 116, 21);
+				productPanel.add(productPrice[i]);
+				xBtn2 += 222;
+				xName2 += 220;
+				xPrice2 += 220;
+			} else if (i < 9) {
+				productImgBtn[i].setBounds(xBtn3, 500, 189, 172);
+				productPanel.add(productImgBtn[i]);
+				productName[i].setBounds(xName3, 675, 180, 21);
+				productPanel.add(productName[i]);
+				productPrice[i].setBounds(xPrice3, 705, 116, 21);
+				productPanel.add(productPrice[i]);
+				xBtn3 += 222;
+				xName3 += 220;
+				xPrice3 += 220;
+			} else {
+				productImgBtn[i].setBounds(xBtn4, 740, 189, 172);
+				productPanel.add(productImgBtn[i]);
+				productName[i].setBounds(xName4, 915, 180, 21);
+				productPanel.add(productName[i]);
+				productPrice[i].setBounds(xPrice4, 945, 116, 21);
+				productPanel.add(productPrice[i]);
+				xBtn4 += 222;
+				xName4 += 220;
+				xPrice4 += 220;
+			}
+		}
+
 		productScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		contentPane.add(productScrollPane);
-		contentPane.add(productScrollPane);
-		
-		
-		
+
 	}
 }

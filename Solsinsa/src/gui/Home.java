@@ -101,21 +101,52 @@ public class Home extends JFrame {
 		JLabel pwLabel = new JLabel("PW");
 		pwLabel.setBounds(159, 24, 20, 15);
 		contentPane.add(pwLabel);
-
+		
+		//카테고리 버튼
 		JButton CategoryTop = new JButton("TOP");
 		CategoryTop.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryTop.setBounds(72, 134, 160, 25);
 		contentPane.add(CategoryTop);
+		CategoryTop.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String column = e.getActionCommand();
+				Products prod = new Products(column);
+				prod.setVisible(true);
+			}
+		});
 
 		JButton CategoryBottom = new JButton("BOTTOM");
 		CategoryBottom.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryBottom.setBounds(262, 134, 160, 25);
 		contentPane.add(CategoryBottom);
+		CategoryBottom.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String column = e.getActionCommand();
+				Products prod = new Products(column);
+				prod.setVisible(true);
+			}
+		});
+		
 		JButton CategoryOuter = new JButton("OUTER");
 		CategoryOuter.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryOuter.setBounds(447, 134, 160, 25);
 		contentPane.add(CategoryOuter);
+		CategoryOuter.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String column = e.getActionCommand();
+				Products prod = new Products(column);
+				prod.setVisible(true);
+			}
+		});
 
 		//로그인 버튼
 		JButton loginbtn = new JButton("login");
@@ -160,6 +191,7 @@ public class Home extends JFrame {
 		imagebtn1.setBounds(12, 10, 295, 210);
 		productPanel1.add(imagebtn1);
 
+		//이미지 버튼 for문 사용 후 수정
 		imagebtn1Name = new JTextField();
 		imagebtn1Name.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
 		imagebtn1Name.setText("\uC544\uAC00\uC77C");
@@ -232,7 +264,8 @@ public class Home extends JFrame {
 		productPanel1.add(imagebtn4Price);
 
 		productPanel1.setPreferredSize(new Dimension(633, 596));
-
+		//========================================================
+		
 		JScrollPane scrollPane = new JScrollPane(productPanel1, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setViewportBorder(new LineBorder(new Color(0, 0, 0), 2));

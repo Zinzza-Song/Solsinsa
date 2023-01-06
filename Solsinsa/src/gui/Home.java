@@ -25,8 +25,10 @@ public class Home extends JFrame {
 	private JPanel contentPane;
 	private JTextField idtextField;
 	private JTextField pwtextField;
-	private JTextField imagebtn1Name;
-	private JTextField imagebtn1Price;
+	private JButton productJbtn[];
+	private JTextField imageJbtnName[];
+	private JTextField imageJbtnPrice[];
+	
 	private JTextField imagebtn2Name;
 	private JTextField imagebtn2Price;
 	private JTextField imagebtn3Name;
@@ -167,44 +169,61 @@ public class Home extends JFrame {
 				NewUser userFrame = new NewUser();
 				userFrame.setVisible(true);
 			}
-			
 		});
 
 		// 상품표시패널
 		JPanel productPanel1 = new JPanel();
 		productPanel1.setSize(633, 1000);
 		productPanel1.setLayout(null);
+		
+		int random = (int)(Math.random()*3)+1;
+		ImageIcon iconArr[] = new ImageIcon[3];
+		for(int i = 0; i < 4; i++) {
+			ImageIcon icon = new ImageIcon("src/쇼핑몰 사진/상의/TOP_"+(i+1)+".jpg");
+			Image img = icon.getImage();
+			Image changeimg = img.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
+			ImageIcon changeIcon1 = new ImageIcon(changeimg);
+			
+			ImageIcon icon2 = new ImageIcon("src/쇼핑몰 사진/하의/BOTTOM_"+(i+1)+".jpg");
+			Image img2 = icon.getImage();
+			Image changeimg2 = img.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
+			ImageIcon changeIcon2 = new ImageIcon(changeimg);
+			
+			ImageIcon icon3 = new ImageIcon("src/쇼핑몰 사진/아우터/OUTER_"+(i+1)+".jpg");
+			Image img3 = icon.getImage();
+			Image changeimg3 = img.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
+			ImageIcon changeIcon3 = new ImageIcon(changeimg);
+			
+			productJbtn = new JButton[4];
+			productJbtn[i] = new JButton(changeIcon1);
+			productJbtn[i].setBackground(new Color(255, 255, 255)); // 버튼 색상 변경
+			// 액션리스너
+			productJbtn[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			productJbtn[i].setBounds(12, 10, 295, 210);
+			productPanel1.add(productJbtn[i]);
+			//이미지 버튼 for문 사용 후 수정
+			imageJbtnName = new JTextField[4];
+			imageJbtnName[i] = new JTextField("");
+			imageJbtnName[i].setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
+			imageJbtnName[i].setText("\uC544\uAC00\uC77C");
+			imageJbtnName[i].setBounds(34, 230, 243, 22);
+			productPanel1.add(imageJbtnName[i]);
+			imageJbtnName[i].setColumns(10);
+			
+			imageJbtnPrice = new JTextField[4];
+			imageJbtnPrice[i] = new JTextField("");
+			imageJbtnPrice[i].setText("\uC544\uAC00\uC77C");
+			imageJbtnPrice[i].setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
+			imageJbtnPrice[i].setColumns(10);
+			imageJbtnPrice[i].setBounds(34, 262, 243, 22);
+			productPanel1.add(imageJbtnPrice[i]);
+		}
 
-		ImageIcon icon = new ImageIcon("src/쇼핑몰 사진/상의/님부스그레이.jpg");
-		Image img1 = icon.getImage();
-		Image changeimg1 = img1.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
-		ImageIcon changeIcon1 = new ImageIcon(changeimg1);
 
-		JButton imagebtn1 = new JButton(changeIcon1);
-		imagebtn1.setBackground(new Color(255, 255, 255)); // 버튼 색상 변경
 
-		// 액션리스너
-		imagebtn1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		imagebtn1.setBounds(12, 10, 295, 210);
-		productPanel1.add(imagebtn1);
-
-		//이미지 버튼 for문 사용 후 수정
-		imagebtn1Name = new JTextField();
-		imagebtn1Name.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		imagebtn1Name.setText("\uC544\uAC00\uC77C");
-		imagebtn1Name.setBounds(34, 230, 243, 22);
-		productPanel1.add(imagebtn1Name);
-		imagebtn1Name.setColumns(10);
-
-		imagebtn1Price = new JTextField();
-		imagebtn1Price.setText("\uC544\uAC00\uC77C");
-		imagebtn1Price.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
-		imagebtn1Price.setColumns(10);
-		imagebtn1Price.setBounds(34, 262, 243, 22);
-		productPanel1.add(imagebtn1Price);
 
 		JButton imagebtn2 = new JButton("New button");
 		imagebtn2.setBackground(new Color(255, 255, 255));

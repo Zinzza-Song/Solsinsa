@@ -1,5 +1,7 @@
 package gui;
 
+import jdbc.JdbcConnector;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
@@ -73,6 +75,12 @@ public class Lookup extends JFrame {
 				{"아이디","비밀번호","이름","생일","주소","핸드폰","이메일"},
 				{"아이디","비밀번호","이름","생일","주소","핸드폰","이메일"}};
 		
+		//로그 테이블에 행 추가하기
+		String logHeader[] = {"NO","LOG"};
+		String logInformation[][] = {{"번호","000님이 회원가입 하셨습니다."},
+				{"번호","상품이름이 추가되었습니다."},{"번호","000님이 회원탈퇴 하셨습니다."},
+				{"번호","상품이름이 감소되었습니다."}};
+		
 		contentPane.setLayout(null);
 
 		productTable = new JTable(productInformation,productHeader);
@@ -82,7 +90,18 @@ public class Lookup extends JFrame {
 		productScrolledPane1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		getContentPane().add(productScrolledPane1);
 		
-		customerTable = new JTable(userInformation,userHeader);
+		customerTable = new JTable(logInformation,logHeader);
+		customerTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"\uBC88\uD638", "000\uB2D8\uC774 \uD68C\uC6D0\uAC00\uC785 \uD558\uC168\uC2B5\uB2C8\uB2E4."},
+				{"\uBC88\uD638", "\uC0C1\uD488\uC774\uB984\uC774 \uCD94\uAC00\uB418\uC5C8\uC2B5\uB2C8\uB2E4."},
+				{"\uBC88\uD638", "000\uB2D8\uC774 \uD68C\uC6D0\uD0C8\uD1F4 \uD558\uC168\uC2B5\uB2C8\uB2E4."},
+				{"\uBC88\uD638", "\uC0C1\uD488\uC774\uB984\uC774 \uAC10\uC18C\uB418\uC5C8\uC2B5\uB2C8\uB2E4."},
+			},
+			new String[] {
+				"NO", "LOG"
+			}
+		));
 		customerTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		customerScrolledPane = new JScrollPane(customerTable);
 		customerScrolledPane.setBounds(0, 294, 783, 282);

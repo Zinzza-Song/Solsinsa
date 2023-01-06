@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+
 import java.awt.Component;
 import javax.swing.table.TableModel;
 import javax.swing.border.LineBorder;
@@ -26,10 +28,10 @@ public class Lookup extends JFrame {
 
 	private JScrollPane productScrolledPane1;
 	private JScrollPane customerScrolledPane;
-	private JScrollPane totalScrolledPane;
+	private JScrollPane logScrolledPane;
 	private JTable productTable;
 	private JTable customerTable;
-	private JTable totalTable;
+	private JTable logTable;
 
 	/**
 	 * Launch the application.
@@ -58,61 +60,49 @@ public class Lookup extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		// 상품 테이블에 행 추가하기
-		String productHeader[] = { "NO", "NAME", "PRICE", "CTG", "STOCK"};
-		String[][] productInformation = {{"상품번호","상품명","가격","카테고리","재고"},
-				{"상품번호","상품명","가격","카테고리","재고"},
-				{"상품번호","상품명","가격","카테고리","재고"},
-				{"상품번호","상품명","가격","카테고리","재고"},
-				{"상품번호","상품명","가격","카테고리","재고"}};
-		
+		String productHeader[] = { "NO", "NAME", "PRICE", "CTG", "STOCK" };
+		String[][] productInformation = { { "상품번호", "상품명", "가격", "카테고리", "재고" }, { "상품번호", "상품명", "가격", "카테고리", "재고" },
+				{ "상품번호", "상품명", "가격", "카테고리", "재고" }, { "상품번호", "상품명", "가격", "카테고리", "재고" },
+				{ "상품번호", "상품명", "가격", "카테고리", "재고" } };
+
 		// 유저 테이블에 행 추가하기
-		String userHeader[] = { "ID", "PW", "NAME", "BIRTH", "ADDR", "PHONE", "EMAIL"};
-		String[][] userInformation = {{"아이디","비밀번호","이름","생일","주소","핸드폰","이메일"},
-				{"아이디","비밀번호","이름","생일","주소","핸드폰","이메일"},
-				{"아이디","비밀번호","이름","생일","주소","핸드폰","이메일"},
-				{"아이디","비밀번호","이름","생일","주소","핸드폰","이메일"},
-				{"아이디","비밀번호","이름","생일","주소","핸드폰","이메일"}};
-		
-		//로그 테이블에 행 추가하기
-		String logHeader[] = {"NO","LOG"};
-		String logInformation[][] = {{"번호","000님이 회원가입 하셨습니다."},
-				{"번호","상품이름이 추가되었습니다."},{"번호","000님이 회원탈퇴 하셨습니다."},
-				{"번호","상품이름이 감소되었습니다."}};
-		
+		String userHeader[] = { "ID", "PW", "NAME", "BIRTH", "ADDR", "PHONE", "EMAIL" };
+		String[][] userInformation = { { "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" },
+				{ "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" }, { "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" },
+				{ "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" }, { "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" } };
+
+		// 로그 테이블에 행 추가하기
+		String logHeader[] = { "NO", "LOG" };
+		String logInformation[][] = { { "번호", "000님이 회원가입 하셨습니다." }, { "번호", "상품이름이 추가되었습니다." },
+				{ "번호", "000님이 회원탈퇴 하셨습니다." }, { "번호", "상품이름이 감소되었습니다." } };
+
 		contentPane.setLayout(null);
 
-		productTable = new JTable(productInformation,productHeader);
+		productTable = new JTable(productInformation, productHeader);
 		productTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		productScrolledPane1 = new JScrollPane(productTable);
 		productScrolledPane1.setBounds(5, 5, 386, 282);
 		productScrolledPane1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		getContentPane().add(productScrolledPane1);
-		
-		customerTable = new JTable(logInformation,logHeader);
-		customerTable.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"\uBC88\uD638", "000\uB2D8\uC774 \uD68C\uC6D0\uAC00\uC785 \uD558\uC168\uC2B5\uB2C8\uB2E4."},
-				{"\uBC88\uD638", "\uC0C1\uD488\uC774\uB984\uC774 \uCD94\uAC00\uB418\uC5C8\uC2B5\uB2C8\uB2E4."},
-				{"\uBC88\uD638", "000\uB2D8\uC774 \uD68C\uC6D0\uD0C8\uD1F4 \uD558\uC168\uC2B5\uB2C8\uB2E4."},
-				{"\uBC88\uD638", "\uC0C1\uD488\uC774\uB984\uC774 \uAC10\uC18C\uB418\uC5C8\uC2B5\uB2C8\uB2E4."},
-			},
-			new String[] {
-				"NO", "LOG"
-			}
-		));
+
+		customerTable = new JTable(logInformation, logHeader);
 		customerTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		customerScrolledPane = new JScrollPane(customerTable);
 		customerScrolledPane.setBounds(0, 294, 783, 282);
 		customerScrolledPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		contentPane.add(customerScrolledPane);
+
+		logTable = new JTable(userInformation, userHeader);
+		logTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+//		logTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+//		logTable.getColumn("LOG").setPreferredWidth(700);
+		logScrolledPane = new JScrollPane(logTable);
 		
-		totalTable = new JTable(userInformation,userHeader);
-		totalTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		totalScrolledPane = new JScrollPane(totalTable);
-		totalScrolledPane.setBounds(397,5, 386, 282);
-		totalScrolledPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-		contentPane.add(totalScrolledPane);
+
+		logScrolledPane.setBounds(397, 5, 386, 282);
+		logScrolledPane.setBorder(new LineBorder(new Color(0, 0, 0)));
+		contentPane.add(logScrolledPane);
 	}
 }

@@ -19,11 +19,15 @@ import javax.swing.SwingConstants;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Products extends JFrame {
 
 	private JPanel contentPane;
 	JButton productImgBtn[];
+	JButton cancleBtn;
+	JButton cartBtn;
 	JTextField productName[];
 	JTextField productPrice[];
 
@@ -45,7 +49,7 @@ public class Products extends JFrame {
 
 	// 홈 화면에서 카테고리에 따라 사진 변경을 위한 String category 추가
 	public Products(String category) {
-
+		setTitle(category);
 		setBounds(100, 100, 694, 602);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -158,7 +162,20 @@ public class Products extends JFrame {
 				xPrice4 += 220;
 			}
 		}
+		
+		cancleBtn = new JButton("닫기");
+		cancleBtn.setBounds(265,510,150,35);
+		contentPane.add(cancleBtn);
+		cancleBtn.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dispose();
+			}
+			
+		});
+		
 		productScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		contentPane.add(productScrollPane);
 

@@ -6,13 +6,11 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import jdbc.JdbcConnector;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class DressPanel extends JPanel {
-
 	DressThread1 dressThread;
 	DressThread2 dressThread2;
 	DressThread3 dressThread3;
@@ -32,7 +30,7 @@ public class DressPanel extends JPanel {
 		this.setBounds(12, 169, 683, 124);
 		this.setLayout(new GridLayout(0, 4, 0, 0));
 		this.setBackground(new Color(255, 255, 255));
-
+			
 		// 1번 사진
 		ImageIcon image1 = new ImageIcon("./src/쇼핑몰 사진/상의/TOP_1.jpg");
 		Image img1 = image1.getImage();
@@ -40,19 +38,19 @@ public class DressPanel extends JPanel {
 		ImageIcon changeIcon1 = new ImageIcon(changeimg1);
 
 		// 2번 사진
-		ImageIcon image2 = new ImageIcon("./src/쇼핑몰 사진/상의/TOP_1.jpg");
+		ImageIcon image2 = new ImageIcon("./src/쇼핑몰 사진/아우터/OUTER_5.jpg");
 		Image img2 = image2.getImage();
 		Image changeimg2 = img2.getScaledInstance(150, 130, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon2 = new ImageIcon(changeimg2);
 
 		// 3번 사진
-		ImageIcon image3 = new ImageIcon("./src/쇼핑몰 사진/상의/TOP_1.jpg");
+		ImageIcon image3 = new ImageIcon("./src/쇼핑몰 사진/상의/TOP_7.jpg");
 		Image img3 = image3.getImage();
 		Image changeimg3 = img3.getScaledInstance(150, 130, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon3 = new ImageIcon(changeimg3);
 
 		// 4번 사진
-		ImageIcon image4 = new ImageIcon("./src/쇼핑몰 사진/상의/TOP_1.jpg");
+		ImageIcon image4 = new ImageIcon("./src/쇼핑몰 사진/아우터/OUTER_9.jpg");
 		Image img4 = image4.getImage();
 		Image changeimg4 = img4.getScaledInstance(150, 130, Image.SCALE_SMOOTH);
 		ImageIcon changeIcon4 = new ImageIcon(changeimg4);
@@ -95,8 +93,8 @@ public class DressPanel extends JPanel {
 					DressThread2.sleep(500);
 					DressThread3.sleep(500);
 					DressThread4.sleep(500);
-				} catch (Exception exc) {
-					exc.printStackTrace();
+				} catch (Exception e1) {
+					e1.printStackTrace();
 				}
 			}
 
@@ -200,6 +198,7 @@ public class DressPanel extends JPanel {
 
 				// DressPanel을 벗어 난 경우
 				if (x > DressPanel.this.getWidth()) {
+					product1 = new JLabel("./src/쇼핑몰 사진/상의/TOP_4.jpg");
 					productJPanel.setLocation(0, 0);
 				}
 				// 벗어나지 않은 경우
@@ -244,6 +243,7 @@ public class DressPanel extends JPanel {
 
 				// DressPanel을 벗어 난 경우
 				if (x > DressPanel.this.getWidth()) {
+					product2 = new JLabel("./src/쇼핑몰 사진/상의/TOP_4.jpg");
 					productJPanel.setLocation(0, 0);
 				}
 				// 벗어나지 않은 경우
@@ -286,7 +286,9 @@ public class DressPanel extends JPanel {
 
 				// DressPanel을 벗어 난 경우
 				if (x > DressPanel.this.getWidth()) {
+					product3 = new JLabel("./src/쇼핑몰 사진/상의/TOP_4.jpg");
 					productJPanel.setLocation(0, 0);
+
 				}
 				// 벗어나지 않은 경우
 				else {
@@ -328,7 +330,9 @@ public class DressPanel extends JPanel {
 
 				// DressPanel을 벗어 난 경우
 				if (x > DressPanel.this.getWidth()) {
+					product4 = new JLabel("./src/쇼핑몰 사진/상의/TOP_4.jpg");
 					productJPanel.setLocation(0, 0);
+
 				}
 				// 벗어나지 않은 경우
 				else {

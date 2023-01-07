@@ -44,12 +44,6 @@ public class Home extends JFrame {
 			"1967 JET BLACK JEANS [WIDE STRAIGHT]","와이드 워시드 카고 데님 팬츠 블랙","TAG FLEECE PANTS - BLACK","코듀로이 원턱 조거팬츠-KHAKI",
 			"939 LOGO SWEAT PANTS (BLACK)","와이드 히든 밴딩 슬랙스 [블랙]","테이퍼드 히든 밴딩 크롭 슬랙스 [라이트 베이지]",
 			"세미 부츠컷 슬랙스 [그레이]","데님 오버롤 멜빵 팬츠 [블루]","오버라운드 퍼티그 점프슈트 OF-501 블랙"};
-	private JTextField imagebtn2Name;
-	private JTextField imagebtn2Price;
-	private JTextField imagebtn3Name;
-	private JTextField imagebtn4name;
-	private JTextField imagebtn3Price;
-	private JTextField imagebtn4Price;
 
 	/**
 	 * Launch the application.

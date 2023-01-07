@@ -2,7 +2,6 @@ package gui;
 import jdbc.JdbcConnector;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -167,7 +167,7 @@ public class NewUser extends JFrame {
 		
 		
 		//확인버튼
-		JButton confirmBtn = new JButton("\uD655 \uC778");
+		JButton confirmBtn = new JButton("회원가입 완료");
 		confirmBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		confirmBtn.setBounds(205, 346, 84, 23);
 		contentPane.add(confirmBtn);
@@ -175,7 +175,7 @@ public class NewUser extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
 				//프레임 종료
 				dispose();
 			}

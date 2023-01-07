@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JList;
 import javax.swing.JRadioButton;
@@ -25,31 +27,10 @@ public class Cart extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField totalPrice;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-
+	private JCheckBox productCheckBox;
+	private JTextField priceTextField;
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Cart frame = new Cart();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	
-	public Cart() {
+	public Cart(String productName) {
 		setBounds(100, 100, 585, 492);
 		setResizable(false);  //프레임사이즈조절 불가능
 		contentPane = new JPanel();
@@ -57,112 +38,28 @@ public class Cart extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		// 장바구니 패널
 		JPanel cartPanel = new JPanel();
 		cartPanel.setBounds(0, 40, 569, 324);
-		
 		cartPanel.setLayout(null);
 		
 		//구매할 목록 체크하는 체크박스 
 		//여기부터
-		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("\uC0C1\uD488\uBA85");
-		chckbxNewCheckBox_1.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
-		chckbxNewCheckBox_1.setBounds(8, 31, 367, 23);
-		cartPanel.add(chckbxNewCheckBox_1);
+		int yCoordinate = 31;
+		for(int i = 0; i < 5; i++) {
+		productCheckBox = new JCheckBox(productName);
+		productCheckBox.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
+		productCheckBox.setBounds(8, yCoordinate, 367, 23);
+		cartPanel.add(productCheckBox);
 		
-		textField_1 = new JTextField();
-		textField_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField_1.setText("\uAC00\uACA9");
-		textField_1.setBounds(396, 31, 144, 23);
-		cartPanel.add(textField_1);
-		textField_1.setColumns(10);
-		
-		//여기까지 포문 돌리면 될듯?
-		JCheckBox chckbxNewCheckBox_2 = new JCheckBox("\uC0C1\uD488\uBA85");
-		chckbxNewCheckBox_2.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
-		chckbxNewCheckBox_2.setBounds(8, 69, 367, 23);
-		cartPanel.add(chckbxNewCheckBox_2);
-		
-		textField_2 = new JTextField();
-		textField_2.setHorizontalAlignment(SwingConstants.RIGHT); //글씨 오른쪽 정렬
-		textField_2.setText("\uAC00\uACA9");
-		textField_2.setColumns(10);
-		textField_2.setBounds(396, 69, 144, 23);
-		cartPanel.add(textField_2);
-		
-		JCheckBox chckbxNewCheckBox_3 = new JCheckBox("\uC0C1\uD488\uBA85");
-		chckbxNewCheckBox_3.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
-		chckbxNewCheckBox_3.setBounds(8, 102, 367, 23);
-		cartPanel.add(chckbxNewCheckBox_3);
-		
-		textField_3 = new JTextField();
-		textField_3.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField_3.setText("\uAC00\uACA9");
-		textField_3.setColumns(10);
-		textField_3.setBounds(396, 102, 144, 23);
-		cartPanel.add(textField_3);
-		
-		JCheckBox chckbxNewCheckBox_4 = new JCheckBox("\uC0C1\uD488\uBA85");
-		chckbxNewCheckBox_4.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
-		chckbxNewCheckBox_4.setBounds(8, 140, 367, 23);
-		cartPanel.add(chckbxNewCheckBox_4);
-		
-		textField_4 = new JTextField();
-		textField_4.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField_4.setText("\uAC00\uACA9");
-		textField_4.setColumns(10);
-		textField_4.setBounds(396, 140, 144, 23);
-		cartPanel.add(textField_4);
-		
-		JCheckBox chckbxNewCheckBox_5 = new JCheckBox("\uC0C1\uD488\uBA85");
-		chckbxNewCheckBox_5.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
-		chckbxNewCheckBox_5.setBounds(8, 179, 367, 23);
-		cartPanel.add(chckbxNewCheckBox_5);
-		
-		textField_5 = new JTextField();
-		textField_5.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField_5.setText("\uAC00\uACA9");
-		textField_5.setColumns(10);
-		textField_5.setBounds(396, 179, 144, 23);
-		cartPanel.add(textField_5);
-		
-		JCheckBox chckbxNewCheckBox_6 = new JCheckBox("\uC0C1\uD488\uBA85");
-		chckbxNewCheckBox_6.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
-		chckbxNewCheckBox_6.setBounds(8, 217, 367, 23);
-		cartPanel.add(chckbxNewCheckBox_6);
-		
-		textField_6 = new JTextField();
-		textField_6.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField_6.setText("\uAC00\uACA9");
-		textField_6.setColumns(10);
-		textField_6.setBounds(396, 217, 144, 23);
-		cartPanel.add(textField_6);
-		
-		JCheckBox chckbxNewCheckBox_7 = new JCheckBox("\uC0C1\uD488\uBA85");
-		chckbxNewCheckBox_7.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
-		chckbxNewCheckBox_7.setBounds(8, 250, 367, 23);
-		cartPanel.add(chckbxNewCheckBox_7);
-		
-		textField_7 = new JTextField();
-		textField_7.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField_7.setText("\uAC00\uACA9");
-		textField_7.setColumns(10);
-		textField_7.setBounds(396, 250, 144, 23);
-		cartPanel.add(textField_7);
-		
-		JCheckBox chckbxNewCheckBox_8 = new JCheckBox("\uC0C1\uD488\uBA85");
-		chckbxNewCheckBox_8.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
-		chckbxNewCheckBox_8.setBounds(8, 288, 367, 23);
-		cartPanel.add(chckbxNewCheckBox_8);
-		
-		textField_8 = new JTextField();
-		textField_8.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField_8.setText("\uAC00\uACA9");
-		textField_8.setColumns(10);
-		textField_8.setBounds(396, 288, 144, 23);
-		cartPanel.add(textField_8);
-		
-		//까지 상품 목록
+		priceTextField = new JTextField();
+		priceTextField.setHorizontalAlignment(SwingConstants.RIGHT); //글씨 오른쪽 정렬
+		priceTextField.setText("\uAC00\uACA9");
+		priceTextField.setColumns(10);
+		priceTextField.setBounds(396, yCoordinate, 144, 23);
+		yCoordinate += 38;
+		cartPanel.add(priceTextField);
+		}
 		
 		//결제버튼
 		JButton paymentbtn = new JButton("\uACB0\uC81C\uD558\uAE30");

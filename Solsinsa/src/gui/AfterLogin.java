@@ -12,7 +12,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -21,11 +20,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-public class Home extends JFrame {
+public class AfterLogin extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField idtextField;
-	private JTextField pwtextField;
 	private JButton productJbtn[];
 	private JTextField imageJbtnName[];
 	private JTextField imageJbtnPrice[];
@@ -53,7 +50,7 @@ public class Home extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Home frame = new Home();
+					AfterLogin frame = new AfterLogin();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,8 +62,7 @@ public class Home extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Home() {
-
+	public AfterLogin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 723, 653);
 		contentPane = new JPanel();
@@ -95,24 +91,6 @@ public class Home extends JFrame {
 		TitleLabel.setForeground(new Color(255, 255, 255));
 		TitleLabel.setBounds(228, 10, 212, 51);
 		homeName.add(TitleLabel);
-
-		idtextField = new JTextField();
-		idtextField.setBounds(33, 22, 116, 21);
-		contentPane.add(idtextField);
-		idtextField.setColumns(10);
-
-		pwtextField = new JTextField();
-		pwtextField.setBounds(184, 21, 116, 21);
-		contentPane.add(pwtextField);
-		pwtextField.setColumns(10);
-
-		JLabel idLabel = new JLabel("ID");
-		idLabel.setBounds(12, 25, 20, 15);
-		contentPane.add(idLabel);
-
-		JLabel pwLabel = new JLabel("PW");
-		pwLabel.setBounds(159, 24, 20, 15);
-		contentPane.add(pwLabel);
 
 		// 카테고리 버튼 클릭시 제품 창 띄워짐
 		JButton CategoryTop = new JButton("TOP");
@@ -157,41 +135,6 @@ public class Home extends JFrame {
 				String column = e.getActionCommand();
 				Products prod = new Products(column);
 				prod.setVisible(true);
-			}
-		});
-		// ===========================================================================
-		// 로그인 버튼
-		JButton loginbtn = new JButton("login");
-		loginbtn.setFont(new Font("굴림", Font.PLAIN, 12));
-		loginbtn.setBounds(310, 20, 67, 23);
-		contentPane.add(loginbtn);
-		loginbtn.addActionListener(new ActionListener() {
-			// 로그인 버튼 클릭 시 db와 연동해서 로그인
-			// db에 없는 데이터라면 오류 띄우기
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				// if(db의 회원 정보에서 아이디나 비밀번호 2가지 중 1개가 맞지 않는 경우){ }
-				JOptionPane.showMessageDialog(null, "아이디와 비밀번호가 존재하지 않습니다.");
-				// else if(아이디, 비밀번호가 둘 다 일치하는 경우){ }
-				// 로그인프레임 login = new 로그인프레임();
-				AfterLogin login = new AfterLogin();
-				login.setVisible(true);
-				dispose();
-			}
-		});
-		// 회원가입 버튼
-		JButton joinbtn = new JButton("join");
-		joinbtn.setFont(new Font("굴림", Font.PLAIN, 12));
-		joinbtn.setBounds(389, 21, 67, 23);
-		contentPane.add(joinbtn);
-		joinbtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				NewUser userFrame = new NewUser();
-				userFrame.setVisible(true);
 			}
 		});
 		// ===========================================================================
@@ -277,5 +220,34 @@ public class Home extends JFrame {
 		scrollPane.setBounds(12, 303, 683, 311);
 
 		contentPane.add(scrollPane);
+		//장바구니 밑 상단에 표시될 기능들
+		JButton cartBtn = new JButton("장바구니");
+		cartBtn.setForeground(new Color(255, 255, 255));
+		cartBtn.setBackground(new Color(0, 0, 64));
+		cartBtn.setBounds(497, 10, 81, 35);
+		contentPane.add(cartBtn);
+		cartBtn.setOpaque(true);
+		cartBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Cart cart = new Cart();
+				cart.setVisible(true);
+				
+			}
+			
+		});
+		
+		JButton mypageBtn = new JButton("마이페이지");
+		mypageBtn.setBackground(new Color(128, 128, 192));
+		mypageBtn.setBounds(614, 10, 81, 35);
+		contentPane.add(mypageBtn);
+		mypageBtn.setOpaque(true);
+		
+		JLabel welcomeLabel = new JLabel("000님 환영합니다.");
+		welcomeLabel.setFont(new Font("굴림", Font.PLAIN, 20));
+		welcomeLabel.setBounds(280, 10, 192, 35);
+		contentPane.add(welcomeLabel);
 	}
 }

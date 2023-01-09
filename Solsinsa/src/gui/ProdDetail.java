@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
@@ -22,24 +23,24 @@ public class ProdDetail extends JFrame {
 
 	Home h = new Home();
 	private JTextField textField;
-	
+
 	/**
 	 * Create the frame.
 	 */
-	public ProdDetail(String category,ImageIcon img, String probName) {
+	public ProdDetail(String category, ImageIcon img, String probName) {
 		setBounds(100, 100, 931, 751);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		//좌측 상품 이미지 패널
+
+		// 좌측 상품 이미지 패널
 		JPanel productimgPanel = new JPanel();
 		productimgPanel.setBounds(22, 33, 468, 426);
 		contentPane.add(productimgPanel);
 		productimgPanel.setLayout(null);
-		//상품 이미지 라벨
+		// 상품 이미지 라벨
 		JLabel productimgLabel = new JLabel(img);
 		productimgLabel.setBounds(0, 0, 468, 425);
 		productimgPanel.add(productimgLabel);
@@ -50,48 +51,52 @@ public class ProdDetail extends JFrame {
 		productName.setFont(new Font("맑은 고딕", Font.BOLD, 22));
 		productName.setBounds(524, 33, 101, 38);
 		contentPane.add(productName);
-		
+
 		JLabel productNameLabel = new JLabel(probName);
 		productNameLabel.setFont(new Font("맑은 고딕", Font.BOLD, 22));
 		productNameLabel.setBounds(613, 30, 319, 38);
 		contentPane.add(productNameLabel);
-		
+
 		JLabel productPriceLabel = new JLabel("New label");
 		productPriceLabel.setFont(new Font("맑은 고딕", Font.BOLD, 24));
 		productPriceLabel.setBounds(622, 104, 319, 38);
 		contentPane.add(productPriceLabel);
-		
+
 		JLabel productPrice = new JLabel("가격 : ");
 		productPrice.setFont(new Font("맑은 고딕", Font.BOLD, 22));
 		productPrice.setBounds(544, 107, 101, 38);
 		contentPane.add(productPrice);
-		
+
 		JLabel producDetail = new JLabel("상품정보");
 		producDetail.setFont(new Font("맑은 고딕", Font.BOLD, 22));
 		producDetail.setBounds(502, 238, 101, 38);
 		contentPane.add(producDetail);
-		//============================
-		//하단 버튼
+		// ============================
+		// 하단 버튼
 		JButton addCartBtn = new JButton("장바구니 담기");
 		addCartBtn.setFont(new Font("맑은 고딕", Font.BOLD, 30));
 		addCartBtn.setBounds(148, 624, 272, 49);
 		contentPane.add(addCartBtn);
+
+		// 장바구니 db 연결 ========================
 		addCartBtn.addActionListener(new ActionListener() {
-			//장바구니 담기 클릭 시 장바구니에 추가됨
-			//리스트 사용해서 만들기 (아직 CartList 클래스 미완성)
+			// 장바구니 담기 클릭 시 장바구니에 추가됨
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Cart cart = new Cart(productNameLabel.getText());
-				
+
+				JOptionPane.showMessageDialog(null, "장바구니에 추가되었습니다.");
+				dispose();
+				Products prod = new Products(category);
+				prod.setVisible(true);
 			}
 		});
-		
+
 		JButton cancelBtn = new JButton("닫기");
 		cancelBtn.setFont(new Font("맑은 고딕", Font.BOLD, 30));
 		cancelBtn.setBounds(535, 624, 272, 49);
 		contentPane.add(cancelBtn);
-		
+
 		textField = new JTextField();
 		textField.setBounds(613, 245, 208, 214);
 		contentPane.add(textField);
@@ -104,7 +109,7 @@ public class ProdDetail extends JFrame {
 				dispose();
 			}
 		});
-		
+
 	}
 
 }

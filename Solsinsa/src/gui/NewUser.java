@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -20,8 +21,8 @@ public class NewUser extends JFrame {
 	private JPanel contentPane;
 	private JTextField idTextField;
 	private JTextField nameTextField;
-	private JTextField pwTextField;
-	private JTextField pwCheckTextField;
+	private JPasswordField pwTextField;
+	private JPasswordField pwCheckTextField;
 	private JTextField addressTextField;
 	private JTextField emailTextField;
 	private JTextField phoneTextField;
@@ -93,7 +94,7 @@ public class NewUser extends JFrame {
 		contentPane.add(pwLabel);
 		
 		//비번입력창
-		pwTextField = new JTextField();
+		pwTextField = new JPasswordField();         //JPasswordField
 		pwTextField.setHorizontalAlignment(SwingConstants.LEFT);
 		pwTextField.setColumns(10);
 		pwTextField.setBounds(108, 128, 181, 22);
@@ -107,7 +108,7 @@ public class NewUser extends JFrame {
 		contentPane.add(pwCheckLabel);
 		
 		//비번체크창
-		pwCheckTextField = new JTextField();
+		pwCheckTextField = new JPasswordField();
 		pwCheckTextField.setHorizontalAlignment(SwingConstants.LEFT);
 		pwCheckTextField.setColumns(10);
 		pwCheckTextField.setBounds(108, 162, 181, 22);

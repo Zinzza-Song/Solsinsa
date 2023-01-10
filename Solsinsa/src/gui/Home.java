@@ -118,6 +118,7 @@ public class Home extends JFrame {
 		JButton CategoryTop = new JButton("TOP");
 		CategoryTop.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryTop.setBounds(72, 134, 160, 25);
+		CategoryTop.setFocusPainted(false);
 		contentPane.add(CategoryTop);
 		CategoryTop.addActionListener(new ActionListener() {
 

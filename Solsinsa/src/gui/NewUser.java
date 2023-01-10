@@ -1,16 +1,17 @@
 package gui;
-import jdbc.JdbcConnector;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -18,16 +19,33 @@ import javax.swing.border.EmptyBorder;
 public class NewUser extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField idTextField;
-	private JTextField nameTextField;
-	private JTextField pwTextField;
-	private JTextField pwCheckTextField;
-	private JTextField addressTextField;
-	private JTextField emailTextField;
-	private JTextField phoneTextField;
-	private JTextField dateOfBirthTextField;
+	private JLabel signUpLabel;
 	
-	public NewUser() {
+	private JLabel idLabel;
+	private JTextField idTextField;
+	private JLabel nameLabel;
+	private JTextField nameTextField;
+	private JButton reduplicationCheckBtn;
+	private JLabel pwLabel;
+	private JPasswordField pwTextField;
+	private JLabel pwCheckLabel;
+	private JPasswordField pwCheckTextField;
+	private JLabel addressLabel;
+	private JTextField addressTextField;
+	private JLabel emailLabel;
+	private JTextField emailTextField;
+	private JLabel phoneLabel;
+	private JTextField phoneTextField;
+	private JLabel BirthLabel;
+	private JTextField BirthTextField;
+	
+	//이메일 형식 확인용
+	private static final String EMAIL_PATTERN = 
+		    "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+		    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	private static final String PHONE_PATTERN = "";
+	
+			public NewUser() {
 		setBounds(100, 100, 425, 419);  //위치 사이즈설정
 		setResizable(false);   //사이즈 조절 불가능
 		contentPane = new JPanel(); 
@@ -37,7 +55,7 @@ public class NewUser extends JFrame {
 		contentPane.setLayout(null);
 		
 		//회원가입라벨
-		JLabel signUpLabel = new JLabel("\uD68C\uC6D0\uAC00\uC785");
+		signUpLabel = new JLabel("\uD68C\uC6D0\uAC00\uC785");
 		signUpLabel.setForeground(new Color(255, 255, 255));
 		signUpLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 23));
 		signUpLabel.setBackground(new Color(60, 61, 72));  //라벨 배경색
@@ -46,8 +64,8 @@ public class NewUser extends JFrame {
 		signUpLabel.setHorizontalAlignment(JLabel.CENTER);  //중앙정렬
 		
 		contentPane.add(signUpLabel);
-		
-		JLabel idLabel = new JLabel("ID");
+		//id라벨
+		idLabel = new JLabel("ID");
 		idLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		idLabel.setBounds(12, 58, 84, 24);
 		contentPane.add(idLabel);
@@ -60,7 +78,7 @@ public class NewUser extends JFrame {
 		idTextField.setColumns(10);
 		
 		//중복확인버튼
-		JButton reduplicationCheckBtn = new JButton("\uC911\uBCF5\uD655\uC778");
+		reduplicationCheckBtn = new JButton("\uC911\uBCF5\uD655\uC778");
 		reduplicationCheckBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		reduplicationCheckBtn.setBounds(301, 59, 97, 23);
 		contentPane.add(reduplicationCheckBtn);
@@ -68,12 +86,12 @@ public class NewUser extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				JOptionPane.showMessageDialog(null, "아이디가 이미 존재합니다.");
 			}
 		});
 		
-		
-		JLabel nameLabel = new JLabel("\uC774 \uB984");
+		//이름 라벨
+		nameLabel = new JLabel("\uC774 \uB984");
 		nameLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		nameLabel.setBounds(12, 92, 84, 24);
 		contentPane.add(nameLabel);
@@ -84,68 +102,79 @@ public class NewUser extends JFrame {
 		nameTextField.setColumns(10);
 		nameTextField.setBounds(108, 94, 181, 22);
 		contentPane.add(nameTextField);
+		nameTextField.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent k) {
+				JTextField src = (JTextField)k.getSource();
+				if(src.getText().length() >= 3){
+					k.consume();
+				}
+			}
+		});
 		
-		
-		
-		JLabel pwLabel = new JLabel("PW");
+		//비밀번호 라벨
+		pwLabel = new JLabel("PW");
 		pwLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		pwLabel.setBounds(12, 126, 84, 24);
 		contentPane.add(pwLabel);
 		
 		//비번입력창
-		pwTextField = new JTextField();
+		pwTextField = new JPasswordField();
 		pwTextField.setHorizontalAlignment(SwingConstants.LEFT);
 		pwTextField.setColumns(10);
 		pwTextField.setBounds(108, 128, 181, 22);
 		contentPane.add(pwTextField);
 		
 		
-		
-		JLabel pwCheckLabel = new JLabel("PW \uD655\uC778");
+		//비밀번호 확인 라벨
+		pwCheckLabel = new JLabel("PW \uD655\uC778");
 		pwCheckLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		pwCheckLabel.setBounds(12, 160, 84, 24);
 		contentPane.add(pwCheckLabel);
 		
-		//비번체크창
-		pwCheckTextField = new JTextField();
+		//비밀번호 확인 창
+		pwCheckTextField = new JPasswordField();
 		pwCheckTextField.setHorizontalAlignment(SwingConstants.LEFT);
 		pwCheckTextField.setColumns(10);
 		pwCheckTextField.setBounds(108, 162, 181, 22);
 		contentPane.add(pwCheckTextField);
 		
-		
-		
-		JLabel addressLabel = new JLabel("\uC8FC \uC18C");
+		//주소 라벨
+		addressLabel = new JLabel("\uC8FC \uC18C");
 		addressLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		addressLabel.setBounds(12, 194, 84, 24);
 		contentPane.add(addressLabel);
-		
+		//주소 입력 창
 		addressTextField = new JTextField();
 		addressTextField.setHorizontalAlignment(SwingConstants.LEFT);
 		addressTextField.setColumns(10);
 		addressTextField.setBounds(108, 196, 181, 22);
 		contentPane.add(addressTextField);
 		
-		
-		
-		JLabel emailLabel = new JLabel("\uC774\uBA54\uC77C");
+		//이메일 라벨
+		emailLabel = new JLabel("\uC774\uBA54\uC77C");
 		emailLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		emailLabel.setBounds(12, 228, 84, 24);
 		contentPane.add(emailLabel);
-		
+		//이메일 입력창
 		emailTextField = new JTextField();
 		emailTextField.setHorizontalAlignment(SwingConstants.LEFT);
 		emailTextField.setColumns(10);
 		emailTextField.setBounds(108, 230, 181, 22);
 		contentPane.add(emailTextField);
-		
-		
-		
-		JLabel phoneLabel = new JLabel("\uC804\uD654\uBC88\uD638");
+		emailTextField.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent k) {
+				JTextField src = (JTextField)k.getSource();
+				if(!src.getText().matches(EMAIL_PATTERN)){
+					k.consume();
+				}
+			}
+		});
+		//휴대전화 번호 라벨
+		phoneLabel = new JLabel("\uC804\uD654\uBC88\uD638");
 		phoneLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		phoneLabel.setBounds(12, 262, 84, 24);
 		contentPane.add(phoneLabel);
-		
+		//전화번호 입력창
 		phoneTextField = new JTextField();
 		phoneTextField.setHorizontalAlignment(SwingConstants.LEFT);
 		phoneTextField.setColumns(10);
@@ -154,30 +183,49 @@ public class NewUser extends JFrame {
 		
 		
 		
-		JLabel dateOfBirthLabel = new JLabel("\uC0DD\uB144\uC6D4\uC77C");
-		dateOfBirthLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
-		dateOfBirthLabel.setBounds(12, 296, 84, 24);
-		contentPane.add(dateOfBirthLabel);
+		// 생년월일 라벨
+		BirthLabel = new JLabel("\uC0DD\uB144\uC6D4\uC77C");
+		BirthLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
+		BirthLabel.setBounds(12, 296, 84, 24);
+		contentPane.add(BirthLabel);
+		//생년월일 입력 창
+		BirthTextField = new JTextField();
+		BirthTextField.setHorizontalAlignment(SwingConstants.LEFT);
+		BirthTextField.setColumns(10);
+		BirthTextField.setBounds(108, 298, 181, 22);
+		contentPane.add(BirthTextField);
+		BirthTextField.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent k) {
+				JTextField src = (JTextField)k.getSource();
+				if(src.getText().length() >= 8){
+					k.consume();
+				}
+			}
+		});
 		
-		dateOfBirthTextField = new JTextField();
-		dateOfBirthTextField.setHorizontalAlignment(SwingConstants.LEFT);
-		dateOfBirthTextField.setColumns(10);
-		dateOfBirthTextField.setBounds(108, 298, 181, 22);
-		contentPane.add(dateOfBirthTextField);
-		
-		
-		//확인버튼
-		JButton confirmBtn = new JButton("회원가입 완료");
+		//회원가입 버튼
+		JButton confirmBtn = new JButton("회원가입");
 		confirmBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		confirmBtn.setBounds(205, 346, 84, 23);
 		contentPane.add(confirmBtn);
 		confirmBtn.addActionListener(new ActionListener() {
+			//db에 있는 회원 정보 중에서 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				// 비밀번호가 일치하지 않으면 다이어로그 호출로 회원가입 방지
+				if(!pwTextField.getText().equals(pwCheckTextField.getText())) {
+					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
+				}
+				// 이메일 형식이 맞지 않는 경우
+				else if(!phoneTextField.getText().matches(EMAIL_PATTERN)) {
+					phoneTextField.setText("이메일 형식이 아닙니다.");
+				}
+				// 비밀번호가 일치하는 경우
+				else {
 				JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
 				//프레임 종료
 				dispose();
+				}
 			}
 		});
 		

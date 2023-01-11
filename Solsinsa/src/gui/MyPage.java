@@ -75,6 +75,7 @@ public class MyPage extends JFrame {
 		changePanel.setBounds(0, 0, 384, 430);
 		contentPane.add(changePanel);
 		changePanel.setLayout(null);
+		changePanel.setVisible(true);  //수정누르면 false;
 		
 		
 		JLabel myPageLabel = new JLabel("MY Page");
@@ -119,7 +120,7 @@ public class MyPage extends JFrame {
 		
 		myOrderTable.getTableHeader().setReorderingAllowed(false);
 		//테이블의 컬럼 이동을 제한
-		//myOrderTable.getTableHeader().setResizingAllowed(false);
+		myOrderTable.getTableHeader().setResizingAllowed(false);
 		//테이블 컬럼의 사이즈를 고정시킨다. 이걸 사용하면 컬럼 사이즈가 변하지 않는다.
 		
 		myOrderTable.getColumnModel().getColumn(0).setPreferredWidth(200);
@@ -161,14 +162,14 @@ public class MyPage extends JFrame {
 			myTextField[i]=new JTextField(myTexts[i]);
 			myTextField[i].setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 			myTextField[i].setBounds(126,startY,161,24);
-			myTextField[i].setEditable(true);  //텍스트필드 수정가능 완료버튼 후 다시 false.
+			myTextField[i].setEditable(false);   //텍스트필드 수정불가 
 			changePanel.add(myTextField[i]);
 			startY+=35;
 			
 		}
 		///////////////////////////////////////////////////////////////////////////
 		
-		//수정 후 패널
+		//수정클릭 후 패널
 		JPanel afterPanel = new JPanel();
 		afterPanel.setBackground(new Color(25, 25, 25));
 		afterPanel.setBounds(0, 0, 384, 430);
@@ -180,7 +181,7 @@ public class MyPage extends JFrame {
 		myPageLabel2.setFont(new Font("굴림", Font.BOLD, 30));
 		myPageLabel2.setHorizontalAlignment(SwingConstants.CENTER);
 		myPageLabel2.setBounds(53, 10, 282, 63);
-		afterPanel.add(myPageLabel);
+		afterPanel.add(myPageLabel2);
 		
 		JButton btnNewButton2 = new JButton("수 정");
 		btnNewButton2.setFont(new Font("굴림", Font.PLAIN, 25));
@@ -196,7 +197,7 @@ public class MyPage extends JFrame {
 	
 		
 		String myNames2[]= {"ID","이 름","PW","주소","이메일","전화번호","생년월일"}; 
-		//int startY2 =83;
+		int startY2 =83;
 		String myName2;  //라벨들이 들어갈 이름
 		String myTexts2[]={"ID","이 름","PW","주소","이메일","전화번호","생년월일"};; // 수정된 값이 들어와야함
 		String myText2;  // 수정된 값이 차례대로 들어갈 변수명
@@ -206,17 +207,17 @@ public class MyPage extends JFrame {
 			myLabel2 = new JLabel[7];
 			myLabel2[i]=new JLabel(myNames2[i]);
 			myLabel2[i].setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
-			myLabel2[i].setBounds(40, startY,82,24);
+			myLabel2[i].setBounds(40, startY2,82,24);
 			myLabel2[i].setForeground(new Color(255, 255, 255));
 			afterPanel.add(myLabel2[i]);
 			
 			myTextField2= new JTextField[7];  //
 			myTextField2[i]=new JTextField(myTexts[i]);
 			myTextField2[i].setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
-			myTextField2[i].setBounds(126,startY,161,24);
-			myTextField2[i].setEditable(false);  //텍스트필드 수정불가
+			myTextField2[i].setBounds(126,startY2,161,24);
+			myTextField2[i].setEditable(true); //
 			afterPanel.add(myTextField2[i]);
-			startY+=35;
+			startY2+=35;
 			
 		}
 		afterPanel.setVisible(false);  //수정누르기전에 false 누르면 true.

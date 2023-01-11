@@ -45,22 +45,6 @@ public class AfterLogin extends JFrame {
 			"세미 부츠컷 슬랙스 [그레이]", "데님 오버롤 멜빵 팬츠 [블루]", "오버라운드 퍼티그 점프슈트 OF-501 블랙" };
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AfterLogin frame = new AfterLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public AfterLogin() {
@@ -153,6 +137,7 @@ public class AfterLogin extends JFrame {
 		int xBtn1 = 20, xName1 = 45, xPrice1 = 65;
 		int xBtn2 = 15, xName2 = 40, xPrice2 = 55;
 		for (int i = 0; i < 4; i++) {
+			int num = i;
 			//
 			String topImg = "src/쇼핑몰 사진/상의/TOP_" + (i + 1) + ".jpg";
 			ImageIcon topIcon = new ImageIcon(topImg);
@@ -183,11 +168,18 @@ public class AfterLogin extends JFrame {
 			imageJbtnPrice[i].setHorizontalAlignment(SwingConstants.CENTER);
 			imageJbtnPrice[i].setColumns(10);
 			// 액션리스너
-//			productJbtn[i].addActionListener(new ActionListener() {
-//				public void actionPerformed(ActionEvent e) {
-//					
-//				}
-//			});
+			productJbtn[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(num % 2 != 0) {
+						ProdDetail prod = new ProdDetail("TOP", topIcon, top[num+5]);
+						prod.setVisible(true);
+					}
+					else {
+						ProdDetail prod = new ProdDetail("OUTER", outerIcon, outer[num+5]);
+						prod.setVisible(true);
+					}
+				}
+			});
 			if (i < 2) {
 				productJbtn[i].setBounds(xBtn1, 10, 295, 210);
 				productPanel1.add(productJbtn[i]);

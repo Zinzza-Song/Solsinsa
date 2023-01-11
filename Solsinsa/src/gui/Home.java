@@ -197,18 +197,18 @@ public class Home extends JFrame {
 		int xBtn2 = 15, xName2 = 40, xPrice2 = 55;
 
 		for (int i = 0; i < 4; i++) {
-			int random = (int) (Math.random() * 12) + 1;
+			int num = i;
 			// 상의 사진
-			String topImg = "src/쇼핑몰 사진/상의/TOP_" + random + ".jpg";
+			String topImg = "src/쇼핑몰 사진/상의/TOP_" + (i+5) + ".jpg";
 			ImageIcon topIcon = new ImageIcon(topImg);
 			Image img = topIcon.getImage();
 			Image changeimg = img.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
 			// 아우터 사진
-			String outerImg = "src/쇼핑몰 사진/아우터/OUTER_" + random + ".jpg";
+			String outerImg = "src/쇼핑몰 사진/아우터/OUTER_" + (i+5) + ".jpg";
 			ImageIcon outerIcon = new ImageIcon(outerImg);
 			Image img3 = outerIcon.getImage();
 			Image changeimg2 = img3.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
-
+			
 			// 상품 이미지 버튼
 			if (i % 2 != 0) {
 				imgIcon[i] = new ImageIcon(changeimg);
@@ -219,7 +219,7 @@ public class Home extends JFrame {
 			productJbtn[i].setBackground(new Color(255, 255, 255)); // 버튼 색상 변경
 
 			// 상품 이름
-			imageJbtnName[i] = new JTextField(top[i]);
+			imageJbtnName[i] = new JTextField(top[i+4]);
 			imageJbtnName[i].setFont(new Font("한컴 말랑말랑", Font.BOLD, 12));
 			imageJbtnName[i].setHorizontalAlignment(SwingConstants.CENTER);
 			imageJbtnName[i].setColumns(10);
@@ -233,7 +233,14 @@ public class Home extends JFrame {
 			// 상품 클릭 시 상품 상세정보로 이동
 			productJbtn[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-
+					if(num % 2 != 0) {
+						ProdDetail prod = new ProdDetail("TOP", topIcon, top[num+5]);
+						prod.setVisible(true);
+					}
+					else {
+						ProdDetail prod = new ProdDetail("OUTER", outerIcon, outer[num+5]);
+						prod.setVisible(true);
+					}
 				}
 			});
 			if (i < 2) {

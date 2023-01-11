@@ -24,7 +24,10 @@ public class MyPage extends JFrame {
 	private JLabel myLabel[];
 	private JTextField myTextField[];
 	private JTable myOrderTable;
-
+	
+	
+	private JLabel myLabel2[];
+	private JTextField myTextField2[];
 
 	/**
 	 * Launch the application.
@@ -67,28 +70,29 @@ public class MyPage extends JFrame {
 		contentPane.setLayout(null);
 		
 		//수정전 패널
-		JPanel changePanel1=new JPanel();
-		changePanel1.setBackground(new Color(25, 25, 25));
-		changePanel1.setBounds(0, 0, 384, 430);
-		contentPane.add(changePanel1);
-		changePanel1.setLayout(null);
+		JPanel changePanel=new JPanel();
+		changePanel.setBackground(new Color(25, 25, 25));
+		changePanel.setBounds(0, 0, 384, 430);
+		contentPane.add(changePanel);
+		changePanel.setLayout(null);
+		
 		
 		JLabel myPageLabel = new JLabel("MY Page");
 		myPageLabel.setForeground(new Color(255, 255, 255));
 		myPageLabel.setFont(new Font("굴림", Font.BOLD, 30));
 		myPageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		myPageLabel.setBounds(53, 10, 282, 63);
-		changePanel1.add(myPageLabel);
+		changePanel.add(myPageLabel);
 		
 		JButton btnNewButton = new JButton("수 정");
 		btnNewButton.setFont(new Font("굴림", Font.PLAIN, 25));
 		btnNewButton.setBounds(53, 354, 112, 52);
-		changePanel1.add(btnNewButton);
+		changePanel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("탈 퇴");
 		btnNewButton_1.setFont(new Font("굴림", Font.PLAIN, 25));
 		btnNewButton_1.setBounds(207, 354, 112, 52);
-		changePanel1.add(btnNewButton_1);
+		changePanel.add(btnNewButton_1);
 		
 		//나의 주문 목록 패널
 		JPanel panel = new JPanel();
@@ -97,6 +101,8 @@ public class MyPage extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
+		
+		//주문 목록 조회 테이블 
 		int orderCnt=2;  //주문완료한 상품의 개수 
 		String myOrderListHeader[]= {"상품명", "가 격", "주문일"};
 		
@@ -121,9 +127,7 @@ public class MyPage extends JFrame {
 		myOrderTable.getColumnModel().getColumn(2).setPreferredWidth(80);
 		myOrderTable.setBounds(12, 46, 360, 129);
 		
-		
-		
-		
+				
 		
 		JLabel lblNewLabel = new JLabel("나의 주문 목록");
 		lblNewLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 18));
@@ -151,19 +155,72 @@ public class MyPage extends JFrame {
 			myLabel[i].setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 			myLabel[i].setBounds(40, startY,82,24);
 			myLabel[i].setForeground(new Color(255, 255, 255));
-			changePanel1.add(myLabel[i]);
+			changePanel.add(myLabel[i]);
 			
 			myTextField= new JTextField[7];  //
 			myTextField[i]=new JTextField(myTexts[i]);
 			myTextField[i].setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 			myTextField[i].setBounds(126,startY,161,24);
-			myTextField[i].setEditable(false);  //텍스트필드 수정불가
-			changePanel1.add(myTextField[i]);
+			myTextField[i].setEditable(true);  //텍스트필드 수정가능 완료버튼 후 다시 false.
+			changePanel.add(myTextField[i]);
 			startY+=35;
 			
 		}
+		///////////////////////////////////////////////////////////////////////////
+		
+		//수정 후 패널
+		JPanel afterPanel = new JPanel();
+		afterPanel.setBackground(new Color(25, 25, 25));
+		afterPanel.setBounds(0, 0, 384, 430);
+		contentPane.add(afterPanel);
+		afterPanel.setLayout(null);
+		
+		JLabel myPageLabel2 = new JLabel("MY Page");
+		myPageLabel2.setForeground(new Color(255, 255, 255));
+		myPageLabel2.setFont(new Font("굴림", Font.BOLD, 30));
+		myPageLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+		myPageLabel2.setBounds(53, 10, 282, 63);
+		afterPanel.add(myPageLabel);
+		
+		JButton btnNewButton2 = new JButton("수 정");
+		btnNewButton2.setFont(new Font("굴림", Font.PLAIN, 25));
+		btnNewButton2.setBounds(53, 354, 112, 52);
+		afterPanel.add(btnNewButton2);
+		
+		JButton btnNewButton3 = new JButton("탈 퇴");
+		btnNewButton3.setFont(new Font("굴림", Font.PLAIN, 25));
+		btnNewButton3.setBounds(207, 354, 112, 52);
+		afterPanel.add(btnNewButton3);
+		
 		
 	
-	
+		
+		String myNames2[]= {"ID","이 름","PW","주소","이메일","전화번호","생년월일"}; 
+		//int startY2 =83;
+		String myName2;  //라벨들이 들어갈 이름
+		String myTexts2[]={"ID","이 름","PW","주소","이메일","전화번호","생년월일"};; // 수정된 값이 들어와야함
+		String myText2;  // 수정된 값이 차례대로 들어갈 변수명
+		
+		for(int i=0;i<myNames2.length;i++) {
+			
+			myLabel2 = new JLabel[7];
+			myLabel2[i]=new JLabel(myNames2[i]);
+			myLabel2[i].setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
+			myLabel2[i].setBounds(40, startY,82,24);
+			myLabel2[i].setForeground(new Color(255, 255, 255));
+			afterPanel.add(myLabel2[i]);
+			
+			myTextField2= new JTextField[7];  //
+			myTextField2[i]=new JTextField(myTexts[i]);
+			myTextField2[i].setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
+			myTextField2[i].setBounds(126,startY,161,24);
+			myTextField2[i].setEditable(false);  //텍스트필드 수정불가
+			afterPanel.add(myTextField2[i]);
+			startY+=35;
+			
+		}
+		afterPanel.setVisible(false);  //수정누르기전에 false 누르면 true.
+		
+		
 	}
 }

@@ -41,6 +41,7 @@ public class NewUser extends JFrame {
 	private JTextField BirthTextField;
 	
 	//형식 확인용 (정규표현식 사용)
+	private static final String NAME_PATTERN = "^[가-힣]{2,5}$";
 	private static final String EMAIL_PATTERN = "^[0-9a-zA-Z]+@[0-9a-zA-Z]+\\.[a-zA-Z]+$";
 	private static final String PHONE_PATTERN = "^01(?:[0-9])-(?:\\d{3,4})-\\d{4}$";
 	private static final String BIRTH_PATTERN = "^(19[0-9][0-9]|20\\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$";
@@ -85,8 +86,9 @@ public class NewUser extends JFrame {
 		reduplicationCheckBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				//if( 아이디가 존재하는 경우 )
 				JOptionPane.showMessageDialog(null, "아이디가 이미 존재합니다.");
+				//else (아이디가 존재하지 않는 경우)
 			}
 		});
 		
@@ -202,19 +204,39 @@ public class NewUser extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if((idTextField.getText() == null || idTextField.getText().length() == 0) || (pwTextField.getText() == null || pwTextField.getText().length() == 0)||
+						(pwCheckTextField.getText() == null || pwCheckTextField.getText().length() == 0) || (addressTextField.getText() == null|| addressTextField.getText().length() == 0)||
+						(emailTextField.getText() == null || emailTextField.getText().length() == 0)||(phoneTextField.getText() == null || phoneTextField.getText().length() == 0)||
+						(BirthTextField.getText() == null || BirthTextField.getText().length() == 0)) {
+					JOptionPane.showMessageDialog(null, "모든 정보를 입력해 주세요");
+				}
 				// 비밀번호가 일치하지 않으면 다이어로그 호출로 회원가입 방지
 				if(!pwTextField.getText().equals(pwCheckTextField.getText())) {
 					pwTextField.setText("");
 					pwCheckTextField.setText("");
 					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
 				}
-				//텍스트 입력창이 빈칸이 존재하는 경우 다이어로그 호출로 회원가입 방지
-				if((idTextField.getText() == null || idTextField.getText().length() == 0) || (pwTextField.getText() == null || pwTextField.getText().length() == 0)||
-				  (pwCheckTextField.getText() == null || pwCheckTextField.getText().length() == 0) || (addressTextField.getText() == null|| addressTextField.getText().length() == 0)||
-				  (emailTextField.getText() == null || emailTextField.getText().length() == 0)||(phoneTextField.getText() == null || phoneTextField.getText().length() == 0)||
-				  (BirthTextField.getText() == null || BirthTextField.getText().length() == 0)) {
-					JOptionPane.showMessageDialog(null, "모든 정보를 입력해 주세요");
+				// 이름 입력
+				else if(Pattern.matches(NAME_PATTERN,nameTextField.getText()) == false) {
+					nameTextField.setText("");
+					JOptionPane.showMessageDialog(null, "이름은 한글로 작성해 주세요 ( 2글자 ~ 5글자 )");
 				}
+				// 전화번호 입력
+				else if(Pattern.matches(PHONE_PATTERN,phoneTextField.getText()) == false) {
+					phoneTextField.setText("");
+					JOptionPane.showMessageDialog(null, "전화번호를 형식에 맞게 작성해주세요\n01(0 ~ 9) - 0000 - 0000");
+				}
+				//이메일 입력
+				else if(Pattern.matches(EMAIL_PATTERN,emailTextField.getText()) == false) {
+					emailTextField.setText("");
+					JOptionPane.showMessageDialog(null, "이메일을 형식에 맞게 입력해 주세요 ( 영어, 숫자 사용 )\n계정 @ 도메인 .com");
+				}
+				//생일 입력
+				else if(Pattern.matches(BIRTH_PATTERN,BirthTextField.getText()) == false) {
+					BirthTextField.setText("");
+					JOptionPane.showMessageDialog(null, "생년월일을 형식에 맞게 입력해 주세요\n(1900 또는 2000) - (01 ~ 12) - (01 ~ 31)");
+				}
+				
 				else if((idTextField.getText() != null && idTextField.getText().length() != 0) || (pwTextField.getText() != null || pwTextField.getText().length() != 0)||
 						(pwCheckTextField.getText() != null && pwCheckTextField.getText().length() != 0) || (addressTextField.getText() != null|| addressTextField.getText().length() != 0)||
 						(emailTextField.getText() != null && emailTextField.getText().length() != 0)||(phoneTextField.getText() != null || phoneTextField.getText().length() != 0)||
@@ -234,22 +256,7 @@ public class NewUser extends JFrame {
 					client.Client.msg = data + code;
 					
 					JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
-				}
-				// 텍스트 입력 형식이 맞지 않는 경우
-				// 전화번호 입력
-				if(Pattern.matches(PHONE_PATTERN,phoneTextField.getText()) == false) {
-					phoneTextField.setText("");
-					JOptionPane.showMessageDialog(null, "전화번호를 형식에 맞게 작성해주세요\n000 - 0000 - 0000");
-				}
-				//이메일 입력
-				if(Pattern.matches(EMAIL_PATTERN,emailTextField.getText()) == false) {
-					emailTextField.setText("");
-					JOptionPane.showMessageDialog(null, "이메일을 형식에 맞게 입력해 주세요(영어, 숫자 사용)\n계정 @ 도메인 .com");
-				}
-				//생일 입력
-				if(Pattern.matches(BIRTH_PATTERN,BirthTextField.getText()) == false) {
-					BirthTextField.setText("");
-					JOptionPane.showMessageDialog(null, "생년월일을 형식에 맞게 입력해 주세요\n1900 - 00 - 00");
+					dispose();
 				}
 		}});
 		

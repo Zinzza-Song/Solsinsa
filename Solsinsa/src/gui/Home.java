@@ -1,25 +1,10 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
+import javax.swing.*;
+import javax.swing.border.*;
 
 public class Home extends JFrame {
 
@@ -31,22 +16,11 @@ public class Home extends JFrame {
 	private JTextField imageJbtnPrice[];
 	private ImageIcon imgIcon[] = new ImageIcon[4];
 
-	static String top[] = { "허드슨 아란 점퍼 니트 님부스 / WJ 5740", "Velour Soccer Jersey Black", "WORLD EP HOODIE SLATE BLUE",
-			"코튼 워셔블 하찌 하프집업 니트_5 COLOR", "레터링 타투 후드 기모 블랙", "벌키 브러쉬 아가일 니트 BLACK", "미니멀 울 라이크 반목폴라 니트 [그레이]",
-			"Fluff Mood Check shirt S24 Navy", "프레첼 코듀로이 셔츠 카키브라운 JJLS7525", "울 하이넥 케이블 집업 니트 - 샌드",
-			"CROPPED HAIRY KNIT - MELANGE", "옵티멀 베이직 셔츠-화이트" };
+	static String top[] = { "허드슨 아란 점퍼 니트 님부스 / WJ 5740", "Velour Soccer Jersey Black", "WORLD EP HOODIE SLATE BLUE","코튼 워셔블 하찌 하프집업 니트_5 COLOR", "레터링 타투 후드 기모 블랙", "벌키 브러쉬 아가일 니트 BLACK", "미니멀 울 라이크 반목폴라 니트 [그레이]","Fluff Mood Check shirt S24 Navy", "프레첼 코듀로이 셔츠 카키브라운 JJLS7525", "울 하이넥 케이블 집업 니트 - 샌드","CROPPED HAIRY KNIT - MELANGE", "옵티멀 베이직 셔츠-화이트" };
 
-	static String outer[] = { "BROWN reversible shearling short coat(OJ315)",
-			"LIGHTWEIGHT VEGAN LEATHER MA-1 JACKET [BLACK]", "오버사이즈 울 트렌치 코트 [BEIGE]", "Flat Single Coat (Black)",
-			"OVERSIZED BALMACAAN COAT _ BLACK", "말본 아노락 자켓 BEIGE (MAN)", "[PRIMALOFT] 몬스터 숏패딩_블랙",
-			"REVERSIBLE WARM UP QUILTING JACKET BLACK / IVORY", "후드 미니멀 푸퍼_SPJPC4TC12",
-			"[리뉴얼ver]컴포터블 벌룬핏 다운 패딩 다크그레이 COOSJP031D.GRAY", "PERTEX® T Down Jacket Bandana Grey",
-			"[리뉴얼ver]컨템포러리 몬스터파카 다크그레이 COOSJP028D.GRAY" };
+	static String outer[] = { "BROWN reversible shearling short coat(OJ315)","LIGHTWEIGHT VEGAN LEATHER MA-1 JACKET [BLACK]", "오버사이즈 울 트렌치 코트 [BEIGE]", "Flat Single Coat (Black)","OVERSIZED BALMACAAN COAT _ BLACK", "말본 아노락 자켓 BEIGE (MAN)", "[PRIMALOFT] 몬스터 숏패딩_블랙","REVERSIBLE WARM UP QUILTING JACKET BLACK / IVORY", "후드 미니멀 푸퍼_SPJPC4TC12","[리뉴얼ver]컴포터블 벌룬핏 다운 패딩 다크그레이 COOSJP031D.GRAY", "PERTEX® T Down Jacket Bandana Grey","[리뉴얼ver]컨템포러리 몬스터파카 다크그레이 COOSJP028D.GRAY" };
 
-	static String bottom[] = { "WIDE DENIM PANTS [BLACK]", "컷 오프 블리치 워시드 데님 팬츠 (TP0042)",
-			"1967 JET BLACK JEANS [WIDE STRAIGHT]", "와이드 워시드 카고 데님 팬츠 블랙", "TAG FLEECE PANTS - BLACK",
-			"코듀로이 원턱 조거팬츠-KHAKI", "939 LOGO SWEAT PANTS (BLACK)", "와이드 히든 밴딩 슬랙스 [블랙]", "테이퍼드 히든 밴딩 크롭 슬랙스 [라이트 베이지]",
-			"세미 부츠컷 슬랙스 [그레이]", "데님 오버롤 멜빵 팬츠 [블루]", "오버라운드 퍼티그 점프슈트 OF-501 블랙" };
+	static String bottom[] = { "WIDE DENIM PANTS [BLACK]", "컷 오프 블리치 워시드 데님 팬츠 (TP0042)","1967 JET BLACK JEANS [WIDE STRAIGHT]", "와이드 워시드 카고 데님 팬츠 블랙", "TAG FLEECE PANTS - BLACK","코듀로이 원턱 조거팬츠-KHAKI", "939 LOGO SWEAT PANTS (BLACK)", "와이드 히든 밴딩 슬랙스 [블랙]", "테이퍼드 히든 밴딩 크롭 슬랙스 [라이트 베이지]","세미 부츠컷 슬랙스 [그레이]", "데님 오버롤 멜빵 팬츠 [블루]", "오버라운드 퍼티그 점프슈트 OF-501 블랙" };
 
 	/**
 	 * Launch the application.

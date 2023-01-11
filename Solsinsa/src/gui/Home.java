@@ -146,12 +146,17 @@ public class Home extends JFrame {
 
 		// 로그인 시 액션 리스너
 		loginbtn.addActionListener(new ActionListener() {
+			// 관리자 계정 로그인 시 조회프레임 호출
 			// 로그인 버튼 클릭 시 db와 연동해서 로그인
 			// db에 없는 데이터라면 오류 띄우기
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				// if(db의 회원 정보에서 아이디나 비밀번호 2가지 중 1개가 맞지 않는 경우){ }
+				if(idtextField.getText().equals("admin")&&pwtextField.getText().equals("1234")) {
+					dispose();
+					Lookup lookup = new Lookup();
+					lookup.setVisible(true);
+				}
+				// else if(db의 회원 정보에서 아이디나 비밀번호 2가지 중 1개가 맞지 않는 경우){ }
 				JOptionPane.showMessageDialog(null, "아이디와 비밀번호가 존재하지 않습니다.");
 
 				// else if(아이디, 비밀번호가 둘 다 일치하는 경우){ }

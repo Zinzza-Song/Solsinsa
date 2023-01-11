@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -39,9 +40,10 @@ public class NewUser extends JFrame {
 	private JLabel BirthLabel;
 	private JTextField BirthTextField;
 	
-	//이메일 형식 확인용 (정규표현식 사용)
-	private static final String EMAIL_PATTERN = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$";
-	private static final String PHONE_PATTERN = "^01(?0|1|[0-9])[-]?(\\d{3}\\d{4})[-]?(\\d{4})$";
+	//형식 확인용 (정규표현식 사용)
+	private static final String EMAIL_PATTERN = "^[0-9a-zA-Z]+@[0-9a-zA-Z]+\\.[a-zA-Z]+$";
+	private static final String PHONE_PATTERN = "^01(?:[0-9])-(?:\\d{3,4})-\\d{4}$";
+	private static final String BIRTH_PATTERN = "^(19[0-9][0-9]|20\\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$";
 	
 		public NewUser() {
 		setBounds(100, 100, 425, 419);  //위치 사이즈설정
@@ -75,7 +77,7 @@ public class NewUser extends JFrame {
 		contentPane.add(idTextField);
 		idTextField.setColumns(10);
 		
-		//중복확인버튼
+		//중복확인버튼 - DB연동
 		reduplicationCheckBtn = new JButton("\uC911\uBCF5\uD655\uC778");
 		reduplicationCheckBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		reduplicationCheckBtn.setBounds(301, 59, 97, 23);
@@ -103,7 +105,7 @@ public class NewUser extends JFrame {
 		nameTextField.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent k) {
 				JTextField src = (JTextField)k.getSource();
-				if(src.getText().length() >= 3){
+				if(src.getText().length() >= 5){
 					k.consume();
 				}
 			}
@@ -165,7 +167,6 @@ public class NewUser extends JFrame {
 		contentPane.add(phoneLabel);
 		//전화번호 입력창
 		phoneTextField = new JTextField();
-		phoneTextField.setText("번호 사이에 - 입력");
 		phoneTextField.setHorizontalAlignment(SwingConstants.LEFT);
 		phoneTextField.setColumns(10);
 		phoneTextField.setBounds(108, 264, 181, 22);
@@ -185,7 +186,7 @@ public class NewUser extends JFrame {
 		BirthTextField.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent k) {
 				JTextField src = (JTextField)k.getSource();
-				if(src.getText().length() >= 8){
+				if(src.getText().length() >= 11){
 					k.consume();
 				}
 			}
@@ -215,21 +216,28 @@ public class NewUser extends JFrame {
 					JOptionPane.showMessageDialog(null, "모든 정보를 입력해 주세요");
 				}
 				else if((idTextField.getText() != null && idTextField.getText().length() != 0) || (pwTextField.getText() != null || pwTextField.getText().length() != 0)||
-						 (pwCheckTextField.getText() != null && pwCheckTextField.getText().length() != 0) || (addressTextField.getText() != null|| addressTextField.getText().length() != 0)||
-						 (emailTextField.getText() != null && emailTextField.getText().length() != 0)||(phoneTextField.getText() != null || phoneTextField.getText().length() != 0)||
-						 (BirthTextField.getText() != null && BirthTextField.getText().length() != 0)) {
-							JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
-						}
-				// 텍스트 입력 형식이 맞지 않는 경우
-				if(!phoneTextField.getText().matches(EMAIL_PATTERN)) {
-					phoneTextField.setText("");
-					JOptionPane.showMessageDialog(null, "전화번호를 형식에 맞게 작성해주세요\n000-0000-0000");
+						(pwCheckTextField.getText() != null && pwCheckTextField.getText().length() != 0) || (addressTextField.getText() != null|| addressTextField.getText().length() != 0)||
+						(emailTextField.getText() != null && emailTextField.getText().length() != 0)||(phoneTextField.getText() != null || phoneTextField.getText().length() != 0)||
+						(BirthTextField.getText() != null && BirthTextField.getText().length() != 0)) {
+					JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
 				}
-				else if(emailTextField.getText().matches(PHONE_PATTERN))
+				// 텍스트 입력 형식이 맞지 않는 경우
+				// 전화번호 입력
+				if(Pattern.matches(PHONE_PATTERN,phoneTextField.getText()) == false) {
+					phoneTextField.setText("");
+					JOptionPane.showMessageDialog(null, "전화번호를 형식에 맞게 작성해주세요\n000 - 0000 - 0000");
+				}
+				//이메일 입력
+				if(Pattern.matches(EMAIL_PATTERN,emailTextField.getText()) == false) {
 					emailTextField.setText("");
-				JOptionPane.showMessageDialog(null, "이메일을 형식에 맞게 작성해주세요\n계정@도메인.com");
-			}
-		});
+					JOptionPane.showMessageDialog(null, "이메일을 형식에 맞게 입력해 주세요(영어, 숫자 사용)\n계정 @ 도메인 .com");
+				}
+				//생일 입력
+				if(Pattern.matches(BIRTH_PATTERN,BirthTextField.getText()) == false) {
+					BirthTextField.setText("");
+					JOptionPane.showMessageDialog(null, "생년월일을 형식에 맞게 입력해 주세요\n1900 - 00 - 00");
+				}
+		}});
 		
 		//취소버튼
 		JButton cancleBtn = new JButton("\uCDE8 \uC18C");

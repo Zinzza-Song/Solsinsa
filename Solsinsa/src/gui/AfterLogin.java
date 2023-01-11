@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -224,7 +225,7 @@ public class AfterLogin extends JFrame {
 		JButton cartBtn = new JButton("장바구니");
 		cartBtn.setForeground(new Color(255, 255, 255));
 		cartBtn.setBackground(new Color(0, 0, 64));
-		cartBtn.setBounds(497, 10, 81, 35);
+		cartBtn.setBounds(362, 10, 81, 35);
 		contentPane.add(cartBtn);
 		cartBtn.setOpaque(true);
 		cartBtn.addActionListener(new ActionListener() {
@@ -241,13 +242,33 @@ public class AfterLogin extends JFrame {
 		
 		JButton mypageBtn = new JButton("마이페이지");
 		mypageBtn.setBackground(new Color(128, 128, 192));
-		mypageBtn.setBounds(614, 10, 81, 35);
+		mypageBtn.setBounds(485, 10, 81, 35);
 		contentPane.add(mypageBtn);
 		mypageBtn.setOpaque(true);
 		
 		JLabel welcomeLabel = new JLabel("000님 환영합니다.");
 		welcomeLabel.setFont(new Font("굴림", Font.PLAIN, 20));
-		welcomeLabel.setBounds(280, 10, 192, 35);
+		welcomeLabel.setBounds(158, 8, 192, 35);
 		contentPane.add(welcomeLabel);
+		
+		//로그아웃 버튼
+		JButton logoutBtn = new JButton("로그아웃");
+		logoutBtn.setOpaque(true);
+		logoutBtn.setBackground(new Color(128, 128, 192));
+		logoutBtn.setBounds(614, 10, 81, 35);
+		contentPane.add(logoutBtn);
+		//로그아웃 클릭 시 액션 리스너
+		logoutBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
+				Home home = new Home();
+				home.setVisible(true);
+				dispose();
+			}
+			
+		});
 	}
 }

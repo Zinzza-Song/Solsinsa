@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.security.spec.MGF1ParameterSpec;
 import java.util.Scanner;
+import java.util.concurrent.ForkJoinTask;
 
 public class Client extends Thread{
 
@@ -26,6 +28,7 @@ public class Client extends Thread{
 			socket = new Socket(localhost, 7048); // 7048포트로 서버와 연결
 			SocketThread thread = new SocketThread(); // 메시지 수신을 위한 쓰레드 객체 생성
 			thread.start(); // 생성한 쓰레드 객체 실행
+//			thread.wait();
 			
 			out = new PrintWriter(socket.getOutputStream(), true);
 //			sc = new Scanner(System.in);
@@ -37,12 +40,15 @@ public class Client extends Thread{
  
 			while (true) {
 //				String inputLine = sc.nextLine(); // 사용자에게서 서버로 보낼 값을 입력받는 변수
-				if(msg != null)
+				sleep(1000);
+//				System.out.println(msg);
+				if(msg != null) {
 					out.println(msg); // 입력받은 키보드 값을 서버로 전송
-				
-				if(msg.equals("end"))
-					break;
-				msg = null;
+					
+					if(msg.equals("end"))
+						break;
+					msg = null;
+				}
 			}
 			System.out.println("클라종료");
 			socket.close();
@@ -74,8 +80,15 @@ public class Client extends Thread{
 	
 	public static void main(String[] args) {
 		Client client = new Client(); // 클라이언트 실행
+		System.out.println(msg);
 		client.start();
-		msg = "end";
+//		msg = "end";
+//		Scanner scanner = new Scanner(System.in);
+//		int a = scanner.nextInt();
+//		
+//		if(a == 1) {
+//			msg = "wow,ddd:1001";
+//		}
 	}
 
 }

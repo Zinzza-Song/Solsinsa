@@ -39,13 +39,11 @@ public class NewUser extends JFrame {
 	private JLabel BirthLabel;
 	private JTextField BirthTextField;
 	
-	//이메일 형식 확인용
-	private static final String EMAIL_PATTERN = 
-		    "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-		    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-	private static final String PHONE_PATTERN = "";
+	//이메일 형식 확인용 (정규표현식 사용)
+	private static final String EMAIL_PATTERN = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$";
+	private static final String PHONE_PATTERN = "^01(?0|1|[0-9])[-]?(\\d{3}\\d{4})[-]?(\\d{4})$";
 	
-			public NewUser() {
+		public NewUser() {
 		setBounds(100, 100, 425, 419);  //위치 사이즈설정
 		setResizable(false);   //사이즈 조절 불가능
 		contentPane = new JPanel(); 
@@ -116,8 +114,7 @@ public class NewUser extends JFrame {
 		pwLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		pwLabel.setBounds(12, 126, 84, 24);
 		contentPane.add(pwLabel);
-		
-		//비번입력창
+		//비밀번호 입력창
 		pwTextField = new JPasswordField();
 		pwTextField.setHorizontalAlignment(SwingConstants.LEFT);
 		pwTextField.setColumns(10);
@@ -130,7 +127,6 @@ public class NewUser extends JFrame {
 		pwCheckLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		pwCheckLabel.setBounds(12, 160, 84, 24);
 		contentPane.add(pwCheckLabel);
-		
 		//비밀번호 확인 창
 		pwCheckTextField = new JPasswordField();
 		pwCheckTextField.setHorizontalAlignment(SwingConstants.LEFT);
@@ -161,34 +157,26 @@ public class NewUser extends JFrame {
 		emailTextField.setColumns(10);
 		emailTextField.setBounds(108, 230, 181, 22);
 		contentPane.add(emailTextField);
-		emailTextField.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent k) {
-				JTextField src = (JTextField)k.getSource();
-				if(!src.getText().matches(EMAIL_PATTERN)){
-					k.consume();
-				}
-			}
-		});
-		//휴대전화 번호 라벨
+		
+		//전화번호 라벨
 		phoneLabel = new JLabel("\uC804\uD654\uBC88\uD638");
 		phoneLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		phoneLabel.setBounds(12, 262, 84, 24);
 		contentPane.add(phoneLabel);
 		//전화번호 입력창
 		phoneTextField = new JTextField();
+		phoneTextField.setText("번호 사이에 - 입력");
 		phoneTextField.setHorizontalAlignment(SwingConstants.LEFT);
 		phoneTextField.setColumns(10);
 		phoneTextField.setBounds(108, 264, 181, 22);
 		contentPane.add(phoneTextField);
-		
-		
 		
 		// 생년월일 라벨
 		BirthLabel = new JLabel("\uC0DD\uB144\uC6D4\uC77C");
 		BirthLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		BirthLabel.setBounds(12, 296, 84, 24);
 		contentPane.add(BirthLabel);
-		//생년월일 입력 창
+		// 생년월일 입력 창
 		BirthTextField = new JTextField();
 		BirthTextField.setHorizontalAlignment(SwingConstants.LEFT);
 		BirthTextField.setColumns(10);
@@ -208,24 +196,38 @@ public class NewUser extends JFrame {
 		confirmBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		confirmBtn.setBounds(205, 346, 84, 23);
 		contentPane.add(confirmBtn);
+		//회원 가입 버튼 클릭 시 액션 리스너
 		confirmBtn.addActionListener(new ActionListener() {
-			//db에 있는 회원 정보 중에서 
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// 비밀번호가 일치하지 않으면 다이어로그 호출로 회원가입 방지
 				if(!pwTextField.getText().equals(pwCheckTextField.getText())) {
+					pwTextField.setText("");
+					pwCheckTextField.setText("");
 					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
 				}
-				// 이메일 형식이 맞지 않는 경우
-				else if(!phoneTextField.getText().matches(EMAIL_PATTERN)) {
-					phoneTextField.setText("이메일 형식이 아닙니다.");
+				//텍스트 입력창이 빈칸이 존재하는 경우 다이어로그 호출로 회원가입 방지
+				if((idTextField.getText() == null || idTextField.getText().length() == 0) || (pwTextField.getText() == null || pwTextField.getText().length() == 0)||
+				  (pwCheckTextField.getText() == null || pwCheckTextField.getText().length() == 0) || (addressTextField.getText() == null|| addressTextField.getText().length() == 0)||
+				  (emailTextField.getText() == null || emailTextField.getText().length() == 0)||(phoneTextField.getText() == null || phoneTextField.getText().length() == 0)||
+				  (BirthTextField.getText() == null || BirthTextField.getText().length() == 0)) {
+					JOptionPane.showMessageDialog(null, "모든 정보를 입력해 주세요");
 				}
-				// 비밀번호가 일치하는 경우
-				else {
-				JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
-				//프레임 종료
-				dispose();
+				else if((idTextField.getText() != null && idTextField.getText().length() != 0) || (pwTextField.getText() != null || pwTextField.getText().length() != 0)||
+						 (pwCheckTextField.getText() != null && pwCheckTextField.getText().length() != 0) || (addressTextField.getText() != null|| addressTextField.getText().length() != 0)||
+						 (emailTextField.getText() != null && emailTextField.getText().length() != 0)||(phoneTextField.getText() != null || phoneTextField.getText().length() != 0)||
+						 (BirthTextField.getText() != null && BirthTextField.getText().length() != 0)) {
+							JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
+						}
+				// 텍스트 입력 형식이 맞지 않는 경우
+				if(!phoneTextField.getText().matches(EMAIL_PATTERN)) {
+					phoneTextField.setText("");
+					JOptionPane.showMessageDialog(null, "전화번호를 형식에 맞게 작성해주세요\n000-0000-0000");
 				}
+				else if(emailTextField.getText().matches(PHONE_PATTERN))
+					emailTextField.setText("");
+				JOptionPane.showMessageDialog(null, "이메일을 형식에 맞게 작성해주세요\n계정@도메인.com");
 			}
 		});
 		

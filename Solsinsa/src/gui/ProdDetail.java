@@ -22,7 +22,6 @@ public class ProdDetail extends JFrame {
 	private JPanel contentPane;
 
 	Home h = new Home();
-	private JTextField textField;
 
 	/**
 	 * Create the frame.
@@ -66,11 +65,6 @@ public class ProdDetail extends JFrame {
 		productPrice.setFont(new Font("맑은 고딕", Font.BOLD, 22));
 		productPrice.setBounds(544, 107, 101, 38);
 		contentPane.add(productPrice);
-
-		JLabel producDetail = new JLabel("상품정보");
-		producDetail.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		producDetail.setBounds(502, 238, 101, 38);
-		contentPane.add(producDetail);
 		// ============================
 		// 하단 버튼
 		JButton addCartBtn = new JButton("장바구니 담기");
@@ -96,11 +90,56 @@ public class ProdDetail extends JFrame {
 		cancelBtn.setFont(new Font("맑은 고딕", Font.BOLD, 30));
 		cancelBtn.setBounds(535, 624, 272, 49);
 		contentPane.add(cancelBtn);
-
-		textField = new JTextField();
-		textField.setBounds(613, 245, 208, 214);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		
+		JLabel productName_1 = new JLabel("상품명 : ");
+		productName_1.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+		productName_1.setBounds(524, 172, 101, 38);
+		contentPane.add(productName_1);
+		
+		JLabel productNameLabel_1 = new JLabel("<dynamic>");
+		productNameLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+		productNameLabel_1.setBounds(613, 169, 319, 38);
+		contentPane.add(productNameLabel_1);
+		
+		JLabel productName_2 = new JLabel("상품명 : ");
+		productName_2.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+		productName_2.setBounds(524, 241, 101, 38);
+		contentPane.add(productName_2);
+		
+		JLabel productNameLabel_2 = new JLabel("<dynamic>");
+		productNameLabel_2.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+		productNameLabel_2.setBounds(613, 238, 319, 38);
+		contentPane.add(productNameLabel_2);
+		
+		JLabel productName_3 = new JLabel("상품명 : ");
+		productName_3.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+		productName_3.setBounds(524, 312, 101, 38);
+		contentPane.add(productName_3);
+		
+		JLabel productNameLabel_3 = new JLabel("<dynamic>");
+		productNameLabel_3.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+		productNameLabel_3.setBounds(613, 309, 319, 38);
+		contentPane.add(productNameLabel_3);
+		
+		JLabel productName_4 = new JLabel("상품명 : ");
+		productName_4.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+		productName_4.setBounds(524, 389, 101, 38);
+		contentPane.add(productName_4);
+		
+		JLabel productNameLabel_4 = new JLabel("<dynamic>");
+		productNameLabel_4.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+		productNameLabel_4.setBounds(613, 386, 319, 38);
+		contentPane.add(productNameLabel_4);
+		
+		JLabel productName_5 = new JLabel("상품명 : ");
+		productName_5.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+		productName_5.setBounds(524, 463, 101, 38);
+		contentPane.add(productName_5);
+		
+		JLabel productNameLabel_5 = new JLabel("<dynamic>");
+		productNameLabel_5.setFont(new Font("맑은 고딕", Font.BOLD, 22));
+		productNameLabel_5.setBounds(613, 460, 319, 38);
+		contentPane.add(productNameLabel_5);
 		cancelBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -111,5 +150,4 @@ public class ProdDetail extends JFrame {
 		});
 
 	}
-
 }

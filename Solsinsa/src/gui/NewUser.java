@@ -17,6 +17,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import client.Client;
+
 public class NewUser extends JFrame {
 
 	private JPanel contentPane;
@@ -85,8 +87,26 @@ public class NewUser extends JFrame {
 		reduplicationCheckBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				JOptionPane.showMessageDialog(null, "아이디가 이미 존재합니다.");
+				String data = idTextField.getText();
+				String code = ":1002";
+				Client.msg = data + code;
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+				String str = Client.ans;
+				int check = Integer.parseInt(str);
+				
+				if(check == -1) {
+					JOptionPane.showMessageDialog(null, "아이디가 이미 존재합니다.");
+					idTextField.setText("");
+				} else if(check == -2) {
+					JOptionPane.showMessageDialog(null, "아이디가 검색 중 오류가 발생");
+				} else if(check == 0) {
+					JOptionPane.showMessageDialog(null, "아이디가 사용 가능합니다.");
+				}
+					
 			}
 		});
 		
@@ -231,7 +251,7 @@ public class NewUser extends JFrame {
 					String data = id + pw + name + date + address + phone + email;
 					String code = ":1001";
 					
-					client.Client.msg = data + code;
+					Client.msg = data + code;
 					
 					JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
 				}

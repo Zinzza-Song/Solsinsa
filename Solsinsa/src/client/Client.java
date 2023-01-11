@@ -16,6 +16,7 @@ public class Client extends Thread{
 	Scanner sc;
 	
 	public static String msg = null;
+	public static String ans = null;
 	
 	final String localhost = "127.0.0.1";
 	
@@ -40,7 +41,7 @@ public class Client extends Thread{
  
 			while (true) {
 //				String inputLine = sc.nextLine(); // 사용자에게서 서버로 보낼 값을 입력받는 변수
-				sleep(1000);
+				sleep(500);
 //				System.out.println(msg);
 				if(msg != null) {
 					out.println(msg); // 입력받은 키보드 값을 서버로 전송
@@ -67,7 +68,11 @@ public class Client extends Thread{
 					br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 					String res = null; // 수신된 메시지를 저장
 					while((res = br.readLine()) != null) { // br에 읽을 메시지가 있는 한 무한루프
+//						sleep(1000);
+//						ans = res;
 						System.out.println(res);
+						ans = res;
+						System.out.println(ans);
 					}
 				}
 				System.out.println("쓰레드 수정");

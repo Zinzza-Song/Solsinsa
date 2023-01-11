@@ -1,4 +1,4 @@
-package user;
+package client;
 
 public class Userinfo {
 	String id;

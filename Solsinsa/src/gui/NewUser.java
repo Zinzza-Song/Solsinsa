@@ -219,6 +219,20 @@ public class NewUser extends JFrame {
 						(pwCheckTextField.getText() != null && pwCheckTextField.getText().length() != 0) || (addressTextField.getText() != null|| addressTextField.getText().length() != 0)||
 						(emailTextField.getText() != null && emailTextField.getText().length() != 0)||(phoneTextField.getText() != null || phoneTextField.getText().length() != 0)||
 						(BirthTextField.getText() != null && BirthTextField.getText().length() != 0)) {
+					
+					String id = idTextField.getText() + ",";
+					String pw = pwTextField.getText() + ",";
+					String name = nameTextField.getText() + ",";
+					String date = BirthTextField.getText() + ",";
+					String address = addressTextField.getText() + ",";
+					String phone = phoneTextField.getText() + ",";
+					String email = emailTextField.getText(); // 고객 테이블에 들어갈 데이터들
+					
+					String data = id + pw + name + date + address + phone + email;
+					String code = ":1001";
+					
+					client.Client.msg = data + code;
+					
 					JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
 				}
 				// 텍스트 입력 형식이 맞지 않는 경우

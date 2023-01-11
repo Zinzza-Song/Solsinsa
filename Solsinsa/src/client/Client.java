@@ -1,4 +1,4 @@
-package server;
+package client;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -78,10 +78,10 @@ public class Client extends Thread{
 		
 	}
 	
-	public static void main(String[] args) {
-		Client client = new Client(); // 클라이언트 실행
-		System.out.println(msg);
-		client.start();
+//	public static void main(String[] args) {
+//		Client client = new Client(); // 클라이언트 실행
+//		System.out.println(msg);
+//		client.start();
 //		msg = "end";
 //		Scanner scanner = new Scanner(System.in);
 //		int a = scanner.nextInt();
@@ -89,6 +89,6 @@ public class Client extends Thread{
 //		if(a == 1) {
 //			msg = "wow,ddd:1001";
 //		}
-	}
+//	}
 
 }

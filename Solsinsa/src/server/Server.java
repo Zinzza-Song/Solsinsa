@@ -7,10 +7,15 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import jdbc.JdbcConnector;
 
 public class Server implements Runnable {
 
@@ -18,6 +23,8 @@ public class Server implements Runnable {
 //	static PrintWriter out = null;
 	static ArrayList<Socket> list = new ArrayList<Socket>(); // 클라이언트 쓰레드를 담을 리스트
 	static int UserNum = 0;
+	
+	static Connection con;
 	
 	public Server(Socket client) { // 멀티 쓰레드 환경구출을 위한 생성자, 클라이언트별 쓰레드 생성
 		this.client = client;
@@ -81,10 +88,26 @@ public class Server implements Runnable {
 	}
 	
 	void insertUser(String data) {
-		System.out.println(data);
+		
+		String pro = "{call addCustomer(?, ?, ?, ?, ?, ?, ?)}";
+	
+		try (PreparedStatement pstmt = con.prepareStatement(pro)){
+			StringTokenizer st = new StringTokenizer(data, ",");
+			int i = 1;
+			while(st.hasMoreTokens()) {
+				pstmt.setString(i, st.nextToken());
+				i++;
+			}
+			
+			pstmt.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+		
+		con = JdbcConnector.getCon();
 		
 		ExecutorService eService = Executors.newFixedThreadPool(100);
 		// 쓰레드 생성, 접속자 100명 이하로 제한(원할한 서비스 제공을 위하여 설정)

@@ -32,12 +32,12 @@ public class DressPanel extends JPanel {
 		setLayout(null);
 		
 		panel = new JPanel();
-		panel.setBounds(0, 0, 683, 124);
+		panel.setBounds(0, 0, 683, 123);
 		add(panel);
 		panel.setLayout(new GridLayout(0, 4, 0, 0));
 		
 		panel2 = new JPanel();
-		panel2.setBounds(-panel.getWidth(), 0, 683, 124);
+		panel2.setBounds(-panel.getWidth(), 0, 683, 123);
 		add(panel2);
 		panel2.setLayout(new GridLayout(0, 4, 0, 0));
 		

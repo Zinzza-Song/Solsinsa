@@ -29,20 +29,13 @@ public class Client extends Thread{
 			socket = new Socket(localhost, 7048); // 7048포트로 서버와 연결
 			SocketThread thread = new SocketThread(); // 메시지 수신을 위한 쓰레드 객체 생성
 			thread.start(); // 생성한 쓰레드 객체 실행
-//			thread.wait();
 			
 			out = new PrintWriter(socket.getOutputStream(), true);
-//			sc = new Scanner(System.in);
 			
-			String userId = "";
 			System.out.println("Connected!!");
-//			System.out.println("ID를 입력");
-//			out.print(userId);
  
 			while (true) {
-//				String inputLine = sc.nextLine(); // 사용자에게서 서버로 보낼 값을 입력받는 변수
 				sleep(500);
-//				System.out.println(msg);
 				if(msg != null) {
 					out.println(msg); // 입력받은 키보드 값을 서버로 전송
 					
@@ -68,8 +61,6 @@ public class Client extends Thread{
 					br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 					String res = null; // 수신된 메시지를 저장
 					while((res = br.readLine()) != null) { // br에 읽을 메시지가 있는 한 무한루프
-//						sleep(1000);
-//						ans = res;
 						System.out.println(res);
 						ans = res;
 						System.out.println(ans);
@@ -83,17 +74,4 @@ public class Client extends Thread{
 		
 	}
 	
-//	public static void main(String[] args) {
-//		Client client = new Client(); // 클라이언트 실행
-//		System.out.println(msg);
-//		client.start();
-//		msg = "end";
-//		Scanner scanner = new Scanner(System.in);
-//		int a = scanner.nextInt();
-//		
-//		if(a == 1) {
-//			msg = "wow,ddd:1001";
-//		}
-//	}
-
 }

@@ -288,8 +288,6 @@ public class NewUser extends JFrame {
 		cancleBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub	
-				
 				//프레임 종료
 				dispose();
 			}

@@ -7,8 +7,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -22,7 +22,7 @@ public class Server implements Runnable {
 	private static Socket client; // 클라이언트 구분을 위한 소켓 변수
 //	static PrintWriter out = null;
 	static ArrayList<Socket> list = new ArrayList<Socket>(); // 클라이언트 쓰레드를 담을 리스트
-	static int UserNum = 0;
+//	static int UserNum = 0;
 	
 	static Connection con;
 	
@@ -41,8 +41,8 @@ public class Server implements Runnable {
 			OutputStream out = client.getOutputStream(); // 클라이언트로 메세지 보내기
 			PrintWriter writer = new PrintWriter(out, true); // 송신 버퍼
 			
-			UserNum++;
-			System.out.println("클라이언트" + UserNum + "(" + Thread.currentThread() + ")" + "연결됨");
+//			UserNum++;
+//			System.out.println("클라이언트" + UserNum + "(" + Thread.currentThread() + ")" + "연결됨");
 			
 //			String userId = br.readLine(); // 클라이언트에게 id를 입력 받아 설정
 //			String inputLine; // 클라이언트가 보낸 값 저장
@@ -70,6 +70,8 @@ public class Server implements Runnable {
 						insertUser(data);
 						writer.println("회원가입완료");
 						break;
+					case 1002:
+						writer.println(checkId(data));
 					default:
 						break;
 					}
@@ -87,21 +89,40 @@ public class Server implements Runnable {
 		
 	}
 	
-	void insertUser(String data) {
+	void insertUser(String data) { // 회원가입 메소드
+		StringTokenizer st = new StringTokenizer(data, ","); // 회원가입을 위한 각각의 데이터를 분류
 		
-		String pro = "{call addCustomer(?, ?, ?, ?, ?, ?, ?)}";
+		String pro = "{call addCustomer(?, ?, ?, ?, ?, ?, ?)}"; // 회원가입을 위한 프로시저 콜
 	
-		try (PreparedStatement pstmt = con.prepareStatement(pro)){
-			StringTokenizer st = new StringTokenizer(data, ",");
-			int i = 1;
+		try (CallableStatement cstmt = con.prepareCall(pro)){
+			
+			int i = 1; // 회원가입을 위한 데이터들을 세팅
 			while(st.hasMoreTokens()) {
-				pstmt.setString(i, st.nextToken());
+				cstmt.setString(i, st.nextToken());
 				i++;
 			}
 			
-			pstmt.executeQuery();
+			cstmt.execute(); // 쿼리문을 날린다
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	int checkId(String data) { // 회원 가입시 아이디 중복 검사 메소드
+		String pro = "{call check_id(?,?)}"; 
+		// 아이디 중복 검사 프로시저 콜
+		// 아이디 사용 가능 : 0을 반환
+		// 아이디 중복 : -1을 반환
+		
+		try (CallableStatement cstmt = con.prepareCall(pro)){
+			cstmt.setString(1, data); // 중복 검사를 위한 아이디값 삽입
+			cstmt.registerOutParameter(2, oracle.jdbc.OracleTypes.NUMBER); // 결과값 반환을 위한 세팅
+			cstmt.execute(); // 쿼리문을 날린다
+			
+			return cstmt.getInt(2); // 최종적으로 결과값을 반환
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -2; // 오류가 반환하면 -2를 반환
 		}
 	}
 
@@ -119,6 +140,7 @@ public class Server implements Runnable {
 				System.out.println("waiting client....");
 				
 				client = server.accept(); // 클라이언트 연결 수락
+				System.out.println("client connect accpted");
 				
 				Server tcpServer = new Server(client); // 클라이언트별 쓰레드 객체 생성
 				eService.submit(tcpServer); // 생성한 쓰레드 객체를 등록

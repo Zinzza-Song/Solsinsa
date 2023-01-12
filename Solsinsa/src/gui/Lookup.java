@@ -2,7 +2,9 @@ package gui;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -46,7 +48,7 @@ public class Lookup extends JFrame {
 	 */
 	public Lookup() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 797, 613);
+		setBounds(100, 100, 800, 660);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -115,8 +117,24 @@ public class Lookup extends JFrame {
 		logTable.getColumn("NO").setCellRenderer(celAlignCenter);
 		
 		logScrolledPane = new JScrollPane(logTable);
-		logScrolledPane.setBounds(0, 294, 783, 282);
+		logScrolledPane.setBounds(0, 330, 783, 291);
 		logScrolledPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		contentPane.add(logScrolledPane);
+		
+		JButton custLog = new JButton("회원로그조회");
+		custLog.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+		custLog.setBounds(291, 297, 119, 23);
+		contentPane.add(custLog);
+		
+		JButton productLog = new JButton("상품로그조회");
+		productLog.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+		productLog.setBounds(153, 296, 119, 23);
+		contentPane.add(productLog);
+		
+		JButton allLog = new JButton("전체로그조회");
+		allLog.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
+		allLog.setBounds(15, 296, 119, 23);
+		contentPane.add(allLog);
+		
 }
 }

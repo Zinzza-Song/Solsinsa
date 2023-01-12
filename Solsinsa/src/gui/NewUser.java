@@ -112,8 +112,8 @@ public class NewUser extends JFrame {
 		pwLabel.setBounds(12, 126, 84, 24);
 		contentPane.add(pwLabel);
 		
-		//비밀번호 입력창
-		pwTextField = new JPasswordField();
+		//비번입력창
+		pwTextField = new JPasswordField();         //JPasswordField
 		pwTextField.setHorizontalAlignment(SwingConstants.LEFT);
 		pwTextField.setColumns(10);
 		pwTextField.setBounds(108, 128, 181, 22);
@@ -124,7 +124,8 @@ public class NewUser extends JFrame {
 		pwCheckLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		pwCheckLabel.setBounds(12, 160, 84, 24);
 		contentPane.add(pwCheckLabel);
-		//비밀번호 확인 창
+		
+		//비번체크창
 		pwCheckTextField = new JPasswordField();
 		pwCheckTextField.setHorizontalAlignment(SwingConstants.LEFT);
 		pwCheckTextField.setColumns(10);

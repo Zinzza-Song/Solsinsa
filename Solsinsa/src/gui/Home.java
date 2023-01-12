@@ -45,9 +45,12 @@ public class Home extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 723, 653);
+		setResizable(false);
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(222, 226, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -96,6 +99,7 @@ public class Home extends JFrame {
 		JButton CategoryTop = new JButton("TOP");
 		CategoryTop.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryTop.setBounds(72, 134, 160, 25);
+		CategoryTop.setFocusPainted(false);
 		contentPane.add(CategoryTop);
 		CategoryTop.addActionListener(new ActionListener() {
 

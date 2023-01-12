@@ -39,7 +39,6 @@ public class Server implements Runnable {
 			OutputStream out = client.getOutputStream(); // 클라이언트로 메세지 보내기
 			PrintWriter writer = new PrintWriter(out, true); // 송신 버퍼
 			
-			
 			StringTokenizer st = null;
 			
 			while(true) {

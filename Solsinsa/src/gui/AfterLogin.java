@@ -27,6 +27,7 @@ public class AfterLogin extends JFrame {
 	private JTextField imageJbtnName[];
 	private JTextField imageJbtnPrice[];
 	private ImageIcon imgIcon[] = new ImageIcon[4];
+	
 	String top[] = { "허드슨 아란 점퍼 니트 님부스 / WJ 5740", "Velour Soccer Jersey Black", "WORLD EP HOODIE SLATE BLUE",
 			"코튼 워셔블 하찌 하프집업 니트_5 COLOR", "레터링 타투 후드 기모 블랙", "벌키 브러쉬 아가일 니트 BLACK", "미니멀 울 라이크 반목폴라 니트 [그레이]",
 			"Fluff Mood Check shirt S24 Navy", "프레첼 코듀로이 셔츠 카키브라운 JJLS7525", "울 하이넥 케이블 집업 니트 - 샌드",
@@ -228,7 +229,7 @@ public class AfterLogin extends JFrame {
 		JButton cartBtn = new JButton("장바구니");
 		cartBtn.setForeground(new Color(255, 255, 255));
 		cartBtn.setBackground(new Color(0, 0, 64));
-		cartBtn.setBounds(497, 10, 81, 35);
+		cartBtn.setBounds(478, 10, 35, 35);
 		cartBtn.setFocusPainted(false);
 		contentPane.add(cartBtn);
 		cartBtn.setOpaque(true);
@@ -246,7 +247,7 @@ public class AfterLogin extends JFrame {
 		
 		JButton mypageBtn = new JButton("마이페이지");
 		mypageBtn.setBackground(new Color(128, 128, 192));
-		mypageBtn.setBounds(614, 10, 81, 35);
+		mypageBtn.setBounds(544, 10, 35, 35);
 		mypageBtn.setFocusPainted(false);
 		contentPane.add(mypageBtn);
 		mypageBtn.setOpaque(true);
@@ -255,5 +256,18 @@ public class AfterLogin extends JFrame {
 		welcomeLabel.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 20));
 		welcomeLabel.setBounds(280, 10, 192, 35);
 		contentPane.add(welcomeLabel);
+		
+		JButton logoutBtn = new JButton("로그아웃");
+		logoutBtn.setIcon(new ImageIcon(AfterLogin.class.getResource("/icon/Logout1.jpg")));
+		//String logoutIconImg = "src/icon/상의/Logout1.jpg";
+		//ImageIcon logoutIcon = new ImageIcon(logoutIconImg);
+		//Image imgbtn = logoutIcon.getImage();
+		//Image change = imgbtn.getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+		
+		
+		
+		
+		logoutBtn.setBounds(609, 10, 35, 35);
+		contentPane.add(logoutBtn);
 	}
 }

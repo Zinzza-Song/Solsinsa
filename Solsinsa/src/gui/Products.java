@@ -54,12 +54,14 @@ public class Products extends JFrame {
 		setBounds(100, 100, 694, 602);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(new Color(216, 210, 199));
 		setResizable(false);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		// 상품 패널 만들고 스크롤팬안에 패널 넣기
 		JPanel productPanel = new JPanel();
+		productPanel.setBackground(new Color(234, 232, 227));
 		productPanel.setPreferredSize(new Dimension(490, 980));
 
 		JScrollPane productScrollPane = new JScrollPane(productPanel);

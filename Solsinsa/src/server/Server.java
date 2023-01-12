@@ -9,6 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -43,6 +44,7 @@ public class Server implements Runnable {
 			
 			while(true) {
 				String msg = br.readLine();
+				System.out.println("요청 : " +  msg);
 				
 				st = new StringTokenizer(msg, ":");
 				
@@ -59,6 +61,10 @@ public class Server implements Runnable {
 						break;
 					case 1002:
 						writer.println(checkId(data));
+						break;
+					case 1003:
+						writer.println(login(data));
+						break;
 					default:
 						break;
 					}
@@ -69,7 +75,6 @@ public class Server implements Runnable {
 			System.out.println("클라이언트" + Thread.currentThread() + "종료");
 			
 		} catch (IOException e) {
-			e.printStackTrace();
 			System.out.println("클라 비정상 종료");
 			list.remove(client);
 		}
@@ -107,10 +112,49 @@ public class Server implements Runnable {
 			cstmt.execute(); // 쿼리문을 날린다
 			
 			return cstmt.getInt(2); // 최종적으로 결과값을 반환
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			return -2; // 오류가 반환하면 -2를 반환
 		}
+	}
+	
+	String login(String data) { // 로그인 메소드
+		StringTokenizer st = new StringTokenizer(data, ",");
+		String pro = "{call login(?,?,?)}";
+		String id = st.nextToken();
+		String pw = st.nextToken();
+		int res;
+		try(CallableStatement cstmt = con.prepareCall(pro)) {
+			cstmt.setString(1, id);
+			cstmt.setString(2, pw);
+			cstmt.registerOutParameter(3, oracle.jdbc.OracleTypes.NUMBER);
+			cstmt.execute();
+			
+			res = cstmt.getInt(3);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		pro = "{call selectLoginCustomer(?, ?)}";
+		String userData = "";
+		try(CallableStatement cstmt = con.prepareCall(pro)) {
+			cstmt.setString(1, id);
+			cstmt.registerOutParameter(2, oracle.jdbc.OracleTypes.CURSOR);
+			cstmt.execute();
+			
+			ResultSet rs = (ResultSet)cstmt.getObject(2);
+			while (rs.next()) {
+				userData = rs.getString("c_no") + "," + rs.getString("c_id") + "," + rs.getString("c_pw") + ","
+						+ rs.getString("c_name") + "," + rs.getString("c_birth") + "," + rs.getString("c_addr") + ","
+						+ rs.getString("c_phone") + "," + rs.getString("c_mail");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		return res + "/" + userData;
 	}
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {

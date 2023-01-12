@@ -66,7 +66,7 @@ public class AfterLogin extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 723, 653);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(222, 226, 235));
+		contentPane.setBackground(new Color(216,210,199));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -87,15 +87,16 @@ public class AfterLogin extends JFrame {
 		homeName.setLayout(null);
 
 		JLabel TitleLabel = new JLabel("SOLSINSA");
-		TitleLabel.setFont(new Font("한컴 말랑말랑", Font.BOLD, 40));
+		TitleLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 40));
 		TitleLabel.setForeground(new Color(255, 255, 255));
 		TitleLabel.setBounds(228, 10, 212, 51);
 		homeName.add(TitleLabel);
 
 		// 카테고리 버튼 클릭시 제품 창 띄워짐
-		JButton CategoryTop = new JButton("TOP");
+		JButton CategoryTop = new Rb("TOP");
 		CategoryTop.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryTop.setBounds(72, 134, 160, 25);
+		CategoryTop.setFocusPainted(false);
 		contentPane.add(CategoryTop);
 		CategoryTop.addActionListener(new ActionListener() {
 
@@ -108,9 +109,10 @@ public class AfterLogin extends JFrame {
 			}
 		});
 
-		JButton CategoryBottom = new JButton("BOTTOM");
+		JButton CategoryBottom = new Rb("BOTTOM");
 		CategoryBottom.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryBottom.setBounds(262, 134, 160, 25);
+		CategoryBottom.setFocusPainted(false);
 		contentPane.add(CategoryBottom);
 		CategoryBottom.addActionListener(new ActionListener() {
 
@@ -123,9 +125,10 @@ public class AfterLogin extends JFrame {
 			}
 		});
 
-		JButton CategoryOuter = new JButton("OUTER");
+		JButton CategoryOuter = new Rb("OUTER");
 		CategoryOuter.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryOuter.setBounds(447, 134, 160, 25);
+		CategoryOuter.setFocusPainted(false);
 		contentPane.add(CategoryOuter);
 		CategoryOuter.addActionListener(new ActionListener() {
 
@@ -171,6 +174,7 @@ public class AfterLogin extends JFrame {
 			imgIcon[i] = new ImageIcon(changeimg);
 			productJbtn[i] = new JButton(imgIcon[i]);
 			productJbtn[i].setBackground(new Color(255, 255, 255)); // 버튼 색상 변경
+			productJbtn[i].setFocusPainted(false);
 
 			imageJbtnName[i] = new JTextField(top[i]);
 			imageJbtnName[i].setFont(new Font("한컴 말랑말랑", Font.BOLD, 12));
@@ -225,6 +229,7 @@ public class AfterLogin extends JFrame {
 		cartBtn.setForeground(new Color(255, 255, 255));
 		cartBtn.setBackground(new Color(0, 0, 64));
 		cartBtn.setBounds(497, 10, 81, 35);
+		cartBtn.setFocusPainted(false);
 		contentPane.add(cartBtn);
 		cartBtn.setOpaque(true);
 		cartBtn.addActionListener(new ActionListener() {
@@ -242,11 +247,12 @@ public class AfterLogin extends JFrame {
 		JButton mypageBtn = new JButton("마이페이지");
 		mypageBtn.setBackground(new Color(128, 128, 192));
 		mypageBtn.setBounds(614, 10, 81, 35);
+		mypageBtn.setFocusPainted(false);
 		contentPane.add(mypageBtn);
 		mypageBtn.setOpaque(true);
 		
 		JLabel welcomeLabel = new JLabel("000님 환영합니다.");
-		welcomeLabel.setFont(new Font("굴림", Font.PLAIN, 20));
+		welcomeLabel.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 20));
 		welcomeLabel.setBounds(280, 10, 192, 35);
 		contentPane.add(welcomeLabel);
 	}

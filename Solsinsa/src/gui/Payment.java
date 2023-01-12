@@ -269,14 +269,15 @@ public class Payment extends JFrame {
 				
 				
 				// 결제버튼
-				JButton paymentBtn = new JButton("\uACB0\uC81C\uD558\uAE30");
+				JButton paymentBtn = new Rb("\uACB0\uC81C\uD558\uAE30");
 				paymentBtn.setBounds(35, 231, 96, 47);
 				panel_1.add(paymentBtn);
 				paymentBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 16));
 				
 								// 취소버튼
-								JButton cancleBtn = new JButton("\uCDE8 \uC18C");
+								JButton cancleBtn = new Rb("\uCDE8 \uC18C");
 								cancleBtn.setBounds(182, 231, 96, 47);
+								cancleBtn.setFocusPainted(false);
 								panel_1.add(cancleBtn);
 								cancleBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 16));
 								cancleBtn.addActionListener(new ActionListener() {

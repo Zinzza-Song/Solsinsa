@@ -86,6 +86,7 @@ public class Products extends JFrame {
 				Image changeImg = Img.getScaledInstance(160, 172, Image.SCALE_SMOOTH);
 				ImageIcon changeIcon = new ImageIcon(changeImg);
 				productImgBtn[i] = new JButton(changeIcon);
+				productImgBtn[i].setFocusPainted(false);
 				
 				probName = top[i];
 				productName[i] = new JTextField(probName);
@@ -162,6 +163,7 @@ public class Products extends JFrame {
 				productPanel.add(productName[i]);
 				productPrice[i].setBounds(xPrice1, 225, 116, 21);
 				productPanel.add(productPrice[i]);
+				
 				xBtn1 += 222;
 				xName1 += 220;
 				xPrice1 += 220;
@@ -199,8 +201,10 @@ public class Products extends JFrame {
 		}
 
 		// 닫기 버튼
-		cancleBtn = new JButton("닫기");
+		cancleBtn = new Rb("닫기");
+		cancleBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 24));
 		cancleBtn.setBounds(265, 510, 150, 35);
+		cancleBtn.setFocusPainted(false);
 		contentPane.add(cancleBtn);
 		cancleBtn.addActionListener(new ActionListener() {
 

@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class ProdDetail extends JFrame {
 
@@ -30,6 +31,7 @@ public class ProdDetail extends JFrame {
 	public ProdDetail(String category, ImageIcon img, String probName) {
 		setBounds(100, 100, 931, 751);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(216,210,199));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -45,36 +47,39 @@ public class ProdDetail extends JFrame {
 		productimgLabel.setBounds(0, 0, 468, 425);
 		productimgPanel.add(productimgLabel);
 		productimgLabel.setOpaque(true);
-		productimgLabel.setBackground(new Color(64, 0, 64));
+		productimgLabel.setBackground(new Color(255, 255, 255));
 		// 상품 상세정보
 		JLabel productName = new JLabel("상품명 : ");
-		productName.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productName.setBounds(524, 33, 101, 38);
+		productName.setHorizontalAlignment(SwingConstants.RIGHT);
+		productName.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 22));
+		productName.setBounds(502, 48, 78, 38);
 		contentPane.add(productName);
 
 		JLabel productNameLabel = new JLabel(probName);
-		productNameLabel.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productNameLabel.setBounds(613, 30, 319, 38);
+		productNameLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 16));
+		productNameLabel.setBounds(592, 48, 290, 38);
 		contentPane.add(productNameLabel);
 
 		JLabel productPriceLabel = new JLabel("New label");
-		productPriceLabel.setFont(new Font("맑은 고딕", Font.BOLD, 24));
-		productPriceLabel.setBounds(622, 104, 319, 38);
+		productPriceLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 24));
+		productPriceLabel.setBounds(592, 95, 290, 38);
 		contentPane.add(productPriceLabel);
 
 		JLabel productPrice = new JLabel("가격 : ");
-		productPrice.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productPrice.setBounds(544, 107, 101, 38);
+		productPrice.setHorizontalAlignment(SwingConstants.RIGHT);
+		productPrice.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 22));
+		productPrice.setBounds(502, 96, 78, 38);
 		contentPane.add(productPrice);
 
 		JLabel producDetail = new JLabel("상품정보");
-		producDetail.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		producDetail.setBounds(502, 238, 101, 38);
+		producDetail.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 22));
+		producDetail.setBounds(502, 238, 78, 38);
 		contentPane.add(producDetail);
 		// ============================
 		// 하단 버튼
-		JButton addCartBtn = new JButton("장바구니 담기");
-		addCartBtn.setFont(new Font("맑은 고딕", Font.BOLD, 30));
+		JButton addCartBtn = new Rb("장바구니 담기");
+		addCartBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 30));
+		addCartBtn.setFocusPainted(false);
 		addCartBtn.setBounds(148, 624, 272, 49);
 		contentPane.add(addCartBtn);
 
@@ -92,8 +97,9 @@ public class ProdDetail extends JFrame {
 			}
 		});
 
-		JButton cancelBtn = new JButton("닫기");
-		cancelBtn.setFont(new Font("맑은 고딕", Font.BOLD, 30));
+		JButton cancelBtn = new Rb("닫기"); 
+		cancelBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 30));
+		cancelBtn.setFocusPainted(false);
 		cancelBtn.setBounds(535, 624, 272, 49);
 		contentPane.add(cancelBtn);
 

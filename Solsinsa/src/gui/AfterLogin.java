@@ -48,8 +48,11 @@ public class AfterLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public AfterLogin() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 723, 653);
+		setLocationRelativeTo(null);
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(222, 226, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -133,32 +136,32 @@ public class AfterLogin extends JFrame {
 		imageJbtnPrice = new JTextField[4];
 		ImageIcon imgIcon[] = new ImageIcon[4];
 
-//		int random = (int)(Math.random()*12)+1;
 		int xBtn1 = 20, xName1 = 45, xPrice1 = 65;
 		int xBtn2 = 15, xName2 = 40, xPrice2 = 55;
 		for (int i = 0; i < 4; i++) {
+			int random = (int)(Math.random()*12)+1;
 			int num = i;
 			//
-			String topImg = "src/쇼핑몰 사진/상의/TOP_" + (i + 1) + ".jpg";
+			String topImg = "src/쇼핑몰 사진/상의/TOP_" + random + ".jpg";
 			ImageIcon topIcon = new ImageIcon(topImg);
 			Image img = topIcon.getImage();
 			Image changeimg = img.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
 			//
-			String bottomImg = "src/쇼핑몰 사진/하의/BOTTOM_" + (i + 1) + ".jpg";
-			ImageIcon bottomIcon = new ImageIcon(bottomImg);
-			Image img2 = bottomIcon.getImage();
-			Image changeimg2 = img2.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
-			//
-			String outerImg = "src/쇼핑몰 사진/아우터/OUTER_" + (i + 1) + ".jpg";
+			String outerImg = "src/쇼핑몰 사진/아우터/OUTER_" + random + ".jpg";
 			ImageIcon outerIcon = new ImageIcon(outerImg);
-			Image img3 = outerIcon.getImage();
-			Image changeimg3 = img3.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
+			Image img2 = outerIcon.getImage();
+			Image changeimg2 = img2.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
 
-			imgIcon[i] = new ImageIcon(changeimg);
+			// 상품 이미지 버튼
+			if (i % 2 != 0) {
+				imgIcon[i] = new ImageIcon(changeimg);
+			} else if (i % 2 == 0) {
+				imgIcon[i] = new ImageIcon(changeimg2);
+			}
 			productJbtn[i] = new JButton(imgIcon[i]);
 			productJbtn[i].setBackground(new Color(255, 255, 255)); // 버튼 색상 변경
-
-			imageJbtnName[i] = new JTextField(top[i]);
+			
+			imageJbtnName[i] = new JTextField(topImg);
 			imageJbtnName[i].setFont(new Font("한컴 말랑말랑", Font.BOLD, 12));
 			imageJbtnName[i].setHorizontalAlignment(SwingConstants.CENTER);
 			imageJbtnName[i].setColumns(10);
@@ -214,12 +217,14 @@ public class AfterLogin extends JFrame {
 
 		contentPane.add(scrollPane);
 		//장바구니 밑 상단에 표시될 기능들
+		//장바구니 버튼
 		JButton cartBtn = new JButton("장바구니");
 		cartBtn.setForeground(new Color(255, 255, 255));
 		cartBtn.setBackground(new Color(0, 0, 64));
 		cartBtn.setBounds(362, 10, 81, 35);
 		contentPane.add(cartBtn);
 		cartBtn.setOpaque(true);
+		//버튼 클릭시 장바구니 오픈
 		cartBtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -231,12 +236,22 @@ public class AfterLogin extends JFrame {
 			}
 			
 		});
-		
+		//마이 페이지 버튼
 		JButton mypageBtn = new JButton("마이페이지");
 		mypageBtn.setBackground(new Color(128, 128, 192));
 		mypageBtn.setBounds(485, 10, 81, 35);
 		contentPane.add(mypageBtn);
 		mypageBtn.setOpaque(true);
+		mypageBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				MyPage mypage = new MyPage();
+				mypage.setVisible(true);
+			}
+			
+		});
 		
 		JLabel welcomeLabel = new JLabel("000님 환영합니다.");
 		welcomeLabel.setFont(new Font("굴림", Font.PLAIN, 20));

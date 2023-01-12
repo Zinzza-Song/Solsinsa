@@ -44,8 +44,8 @@ public class Home extends JFrame {
 	public Home() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 723, 653);
-		setResizable(false);
+		setBounds(0, 0, 723, 653);
+		setLocationRelativeTo(null);
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(222, 226, 235));
@@ -161,13 +161,13 @@ public class Home extends JFrame {
 					lookup.setVisible(true);
 				}
 				// else if(db의 회원 정보에서 아이디나 비밀번호 2가지 중 1개가 맞지 않는 경우){ }
-				JOptionPane.showMessageDialog(null, "아이디와 비밀번호가 존재하지 않습니다.");
+//				JOptionPane.showMessageDialog(null, "아이디와 비밀번호가 존재하지 않습니다.");
 
 				// else if(아이디, 비밀번호가 둘 다 일치하는 경우){ }
 				// 로그인프레임 login = new 로그인프레임();
-				AfterLogin login = new AfterLogin();
+				else {AfterLogin login = new AfterLogin();
 				login.setVisible(true);
-				dispose();
+				dispose();}
 			}
 		});
 
@@ -201,18 +201,19 @@ public class Home extends JFrame {
 		int xBtn2 = 15, xName2 = 40, xPrice2 = 55;
 
 		for (int i = 0; i < 4; i++) {
+			int random = (int)(Math.random()*12)+1;
 			int num = i;
-			// 상의 사진
-			String topImg = "src/쇼핑몰 사진/상의/TOP_" + (i+5) + ".jpg";
+			//
+			String topImg = "src/쇼핑몰 사진/상의/TOP_" + random + ".jpg";
 			ImageIcon topIcon = new ImageIcon(topImg);
 			Image img = topIcon.getImage();
 			Image changeimg = img.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
-			// 아우터 사진
-			String outerImg = "src/쇼핑몰 사진/아우터/OUTER_" + (i+5) + ".jpg";
+			//
+			String outerImg = "src/쇼핑몰 사진/아우터/OUTER_" + random + ".jpg";
 			ImageIcon outerIcon = new ImageIcon(outerImg);
-			Image img3 = outerIcon.getImage();
-			Image changeimg2 = img3.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
-			
+			Image img2 = outerIcon.getImage();
+			Image changeimg2 = img2.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
+
 			// 상품 이미지 버튼
 			if (i % 2 != 0) {
 				imgIcon[i] = new ImageIcon(changeimg);

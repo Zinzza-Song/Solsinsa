@@ -35,12 +35,14 @@ public class Client extends Thread{
 			System.out.println("Connected!!");
  
 			while (true) {
-				sleep(500);
+				sleep(1000);
 				if(msg != null) {
+					System.out.println("요청할 메시지 : " + msg);
 					out.println(msg); // 입력받은 키보드 값을 서버로 전송
 					
 					if(msg.equals("end"))
 						break;
+					
 					msg = null;
 				}
 			}
@@ -61,9 +63,8 @@ public class Client extends Thread{
 					br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 					String res = null; // 수신된 메시지를 저장
 					while((res = br.readLine()) != null) { // br에 읽을 메시지가 있는 한 무한루프
-						System.out.println(res);
 						ans = res;
-						System.out.println(ans);
+						System.out.println("응답" + ans);
 					}
 				}
 				System.out.println("쓰레드 수정");

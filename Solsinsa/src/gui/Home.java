@@ -2,15 +2,19 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.StringTokenizer;
 
 import javax.swing.*;
 import javax.swing.border.*;
+
+import client.Client;
+import client.Userinfo;
 
 public class Home extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField idtextField;
-	private JTextField pwtextField;
+	private JPasswordField pwtextField;
 	private JButton productJbtn[];
 	private JTextField imageJbtnName[];
 	private JTextField imageJbtnPrice[];
@@ -25,18 +29,18 @@ public class Home extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Home frame = new Home();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Home frame = new Home();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -83,7 +87,7 @@ public class Home extends JFrame {
 		contentPane.add(idLabel);
 
 		// 비밀번호 입력 창
-		pwtextField = new JTextField();
+		pwtextField = new JPasswordField();
 		pwtextField.setBounds(184, 21, 116, 21);
 		contentPane.add(pwtextField);
 		pwtextField.setColumns(10);
@@ -151,19 +155,54 @@ public class Home extends JFrame {
 			// db에 없는 데이터라면 오류 띄우기
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(idtextField.getText().equals("admin")&&pwtextField.getText().equals("1234")) {
-					dispose();
-					Lookup lookup = new Lookup();
-					lookup.setVisible(true);
+				String id = idtextField.getText();
+				String pw = pwtextField.getText();
+				
+				String data = id + "," + pw;
+				String protocol = ":1003";
+				
+				Client.msg = data + protocol;
+				
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				} // 응답을 받기위한 대기시간
+				String str = Client.ans; // 서버 응답(로그인 결과)
+				Client.ans = null;
+				StringTokenizer st = new StringTokenizer(str, "/");
+				
+				int check = Integer.parseInt(st.nextToken()); // 해당 결과를 정수로 형변환
+				
+				if(check == -1)
+					JOptionPane.showMessageDialog(null, "해당 아이디가 없습니다.");
+				else if(check == -2)
+					JOptionPane.showMessageDialog(null, "비밀번호가 틀렸습니다.");
+				else if(check == 0) {
+					if(idtextField.getText().equals("admin")&&pwtextField.getText().equals("1234")) {
+						dispose();
+						Lookup lookup = new Lookup();
+						lookup.setVisible(true);
+					} else {
+						String userData = st.nextToken();
+						st = new StringTokenizer(userData, ",");
+						
+						int noData = Integer.parseInt(st.nextToken());
+						String idData = st.nextToken();
+						String pwData = st.nextToken();
+						String nameData = st.nextToken();
+						String birthData = st.nextToken();
+						String addrData = st.nextToken();
+						String phoneData = st.nextToken();
+						String mailData = st.nextToken();
+						
+						Userinfo.getUserInfo();
+						Userinfo.getUserInfo().setUserinfo(noData, idData, pwData, nameData, birthData, addrData, phoneData, mailData);
+						AfterLogin login = new AfterLogin();
+						login.setVisible(true);
+						dispose();
+					}
 				}
-				// else if(db의 회원 정보에서 아이디나 비밀번호 2가지 중 1개가 맞지 않는 경우){ }
-				JOptionPane.showMessageDialog(null, "아이디와 비밀번호가 존재하지 않습니다.");
-
-				// else if(아이디, 비밀번호가 둘 다 일치하는 경우){ }
-				// 로그인프레임 login = new 로그인프레임();
-				AfterLogin login = new AfterLogin();
-				login.setVisible(true);
-				dispose();
 			}
 		});
 

@@ -40,7 +40,7 @@ public class Client extends Thread{
  
 			while (true) {
 //				String inputLine = sc.nextLine(); // 사용자에게서 서버로 보낼 값을 입력받는 변수
-				sleep(1000);
+				sleep(500);
 //				System.out.println(msg);
 				if(msg != null) {
 					out.println(msg); // 입력받은 키보드 값을 서버로 전송

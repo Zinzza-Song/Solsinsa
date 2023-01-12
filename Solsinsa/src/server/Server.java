@@ -20,9 +20,7 @@ import jdbc.JdbcConnector;
 public class Server implements Runnable {
 
 	private static Socket client; // 클라이언트 구분을 위한 소켓 변수
-//	static PrintWriter out = null;
 	static ArrayList<Socket> list = new ArrayList<Socket>(); // 클라이언트 쓰레드를 담을 리스트
-//	static int UserNum = 0;
 	
 	static Connection con;
 	
@@ -41,20 +39,9 @@ public class Server implements Runnable {
 			OutputStream out = client.getOutputStream(); // 클라이언트로 메세지 보내기
 			PrintWriter writer = new PrintWriter(out, true); // 송신 버퍼
 			
-//			UserNum++;
-//			System.out.println("클라이언트" + UserNum + "(" + Thread.currentThread() + ")" + "연결됨");
-			
-//			String userId = br.readLine(); // 클라이언트에게 id를 입력 받아 설정
-//			String inputLine; // 클라이언트가 보낸 값 저장
-			
-//			writer.println(userId + "님이 접속");
-//			System.out.println(userId + "님이 접속");
-//			(inputLine = br.readLine()) != null
-			
 			StringTokenizer st = null;
 			
 			while(true) {
-//				writer.println(userId + " : " + inputLine); // 메시지 송신
 				String msg = br.readLine();
 				
 				st = new StringTokenizer(msg, ":");

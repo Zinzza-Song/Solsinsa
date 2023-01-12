@@ -89,37 +89,40 @@ public class Server implements Runnable {
 		
 	}
 	
-	void insertUser(String data) {
-		StringTokenizer st = new StringTokenizer(data, ",");
+	void insertUser(String data) { // 회원가입 메소드
+		StringTokenizer st = new StringTokenizer(data, ","); // 회원가입을 위한 각각의 데이터를 분류
 		
-		String pro = "{call addCustomer(?, ?, ?, ?, ?, ?, ?)}";
+		String pro = "{call addCustomer(?, ?, ?, ?, ?, ?, ?)}"; // 회원가입을 위한 프로시저 콜
 	
 		try (CallableStatement cstmt = con.prepareCall(pro)){
 			
-			int i = 1;
+			int i = 1; // 회원가입을 위한 데이터들을 세팅
 			while(st.hasMoreTokens()) {
 				cstmt.setString(i, st.nextToken());
 				i++;
 			}
 			
-			cstmt.execute();
+			cstmt.execute(); // 쿼리문을 날린다
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	int checkId(String data) {
-		String pro = "{call check_id(?,?)}";
+	int checkId(String data) { // 회원 가입시 아이디 중복 검사 메소드
+		String pro = "{call check_id(?,?)}"; 
+		// 아이디 중복 검사 프로시저 콜
+		// 아이디 사용 가능 : 0을 반환
+		// 아이디 중복 : -1을 반환
 		
 		try (CallableStatement cstmt = con.prepareCall(pro)){
-			cstmt.setString(1, data);
-			cstmt.registerOutParameter(2, oracle.jdbc.OracleTypes.NUMBER);
-			cstmt.execute();
+			cstmt.setString(1, data); // 중복 검사를 위한 아이디값 삽입
+			cstmt.registerOutParameter(2, oracle.jdbc.OracleTypes.NUMBER); // 결과값 반환을 위한 세팅
+			cstmt.execute(); // 쿼리문을 날린다
 			
-			return cstmt.getInt(2);
+			return cstmt.getInt(2); // 최종적으로 결과값을 반환
 		} catch (Exception e) {
 			e.printStackTrace();
-			return -2;
+			return -2; // 오류가 반환하면 -2를 반환
 		}
 	}
 

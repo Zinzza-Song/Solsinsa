@@ -88,17 +88,18 @@ public class NewUser extends JFrame {
 		reduplicationCheckBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String data = idTextField.getText();
-				String code = ":1002";
-				Client.msg = data + code;
+				String data = idTextField.getText(); // 중복검사를 할 아이디
+				String code = ":1002"; // 중복검사 프로토콜 코드
+				Client.msg = data + code; // 서버로 중복검사를 할 아이디와 프로토콜 코드를 알려줘 중복검사 작업을 요청
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
-				}
-				String str = Client.ans;
-				int check = Integer.parseInt(str);
+				} // 응답을 받기위한 대기시간
+				String str = Client.ans; // 서버 응답(중복검사 결과)
+				int check = Integer.parseInt(str); // 해당 결과를 정수로 형변환
 				
+				// 서버가 응답한 결과에 따른 처리
 				if(check == -1) {
 					JOptionPane.showMessageDialog(null, "아이디가 이미 존재합니다.");
 					idTextField.setText("");
@@ -269,10 +270,10 @@ public class NewUser extends JFrame {
 					String phone = phoneTextField.getText() + ",";
 					String email = emailTextField.getText(); // 고객 테이블에 들어갈 데이터들
 					
-					String data = id + pw + name + date + address + phone + email;
-					String code = ":1001";
+					String data = id + pw + name + date + address + phone + email; // 회원가입을 위한 데이터 세팅
+					String code = ":1001"; // 회원가입을 위한 프로토콜 코드 세팅
 					
-					Client.msg = data + code;
+					Client.msg = data + code; // 서버로 세팅한 데이터와 코드를 알려준다.
 					
 					JOptionPane.showMessageDialog(null, "회원가입이 완료되었습니다.");
 					dispose();

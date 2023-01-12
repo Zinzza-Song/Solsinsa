@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -42,22 +43,6 @@ public class AfterLogin extends JFrame {
 			"1967 JET BLACK JEANS [WIDE STRAIGHT]", "와이드 워시드 카고 데님 팬츠 블랙", "TAG FLEECE PANTS - BLACK",
 			"코듀로이 원턱 조거팬츠-KHAKI", "939 LOGO SWEAT PANTS (BLACK)", "와이드 히든 밴딩 슬랙스 [블랙]", "테이퍼드 히든 밴딩 크롭 슬랙스 [라이트 베이지]",
 			"세미 부츠컷 슬랙스 [그레이]", "데님 오버롤 멜빵 팬츠 [블루]", "오버라운드 퍼티그 점프슈트 OF-501 블랙" };
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AfterLogin frame = new AfterLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -152,6 +137,7 @@ public class AfterLogin extends JFrame {
 		int xBtn1 = 20, xName1 = 45, xPrice1 = 65;
 		int xBtn2 = 15, xName2 = 40, xPrice2 = 55;
 		for (int i = 0; i < 4; i++) {
+			int num = i;
 			//
 			String topImg = "src/쇼핑몰 사진/상의/TOP_" + (i + 1) + ".jpg";
 			ImageIcon topIcon = new ImageIcon(topImg);
@@ -182,11 +168,18 @@ public class AfterLogin extends JFrame {
 			imageJbtnPrice[i].setHorizontalAlignment(SwingConstants.CENTER);
 			imageJbtnPrice[i].setColumns(10);
 			// 액션리스너
-//			productJbtn[i].addActionListener(new ActionListener() {
-//				public void actionPerformed(ActionEvent e) {
-//					
-//				}
-//			});
+			productJbtn[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(num % 2 != 0) {
+						ProdDetail prod = new ProdDetail("TOP", topIcon, top[num+5]);
+						prod.setVisible(true);
+					}
+					else {
+						ProdDetail prod = new ProdDetail("OUTER", outerIcon, outer[num+5]);
+						prod.setVisible(true);
+					}
+				}
+			});
 			if (i < 2) {
 				productJbtn[i].setBounds(xBtn1, 10, 295, 210);
 				productPanel1.add(productJbtn[i]);
@@ -224,7 +217,7 @@ public class AfterLogin extends JFrame {
 		JButton cartBtn = new JButton("장바구니");
 		cartBtn.setForeground(new Color(255, 255, 255));
 		cartBtn.setBackground(new Color(0, 0, 64));
-		cartBtn.setBounds(497, 10, 81, 35);
+		cartBtn.setBounds(362, 10, 81, 35);
 		contentPane.add(cartBtn);
 		cartBtn.setOpaque(true);
 		cartBtn.addActionListener(new ActionListener() {
@@ -241,13 +234,33 @@ public class AfterLogin extends JFrame {
 		
 		JButton mypageBtn = new JButton("마이페이지");
 		mypageBtn.setBackground(new Color(128, 128, 192));
-		mypageBtn.setBounds(614, 10, 81, 35);
+		mypageBtn.setBounds(485, 10, 81, 35);
 		contentPane.add(mypageBtn);
 		mypageBtn.setOpaque(true);
 		
 		JLabel welcomeLabel = new JLabel("000님 환영합니다.");
 		welcomeLabel.setFont(new Font("굴림", Font.PLAIN, 20));
-		welcomeLabel.setBounds(280, 10, 192, 35);
+		welcomeLabel.setBounds(158, 8, 192, 35);
 		contentPane.add(welcomeLabel);
+		
+		//로그아웃 버튼
+		JButton logoutBtn = new JButton("로그아웃");
+		logoutBtn.setOpaque(true);
+		logoutBtn.setBackground(new Color(128, 128, 192));
+		logoutBtn.setBounds(614, 10, 81, 35);
+		contentPane.add(logoutBtn);
+		//로그아웃 클릭 시 액션 리스너
+		logoutBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
+				Home home = new Home();
+				home.setVisible(true);
+				dispose();
+			}
+			
+		});
 	}
 }

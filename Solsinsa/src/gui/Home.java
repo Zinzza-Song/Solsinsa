@@ -1,25 +1,10 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
+import javax.swing.*;
+import javax.swing.border.*;
 
 public class Home extends JFrame {
 
@@ -30,21 +15,12 @@ public class Home extends JFrame {
 	private JTextField imageJbtnName[];
 	private JTextField imageJbtnPrice[];
 	private ImageIcon imgIcon[] = new ImageIcon[4];
-	String top[] = { "허드슨 아란 점퍼 니트 님부스 / WJ 5740", "Velour Soccer Jersey Black", "WORLD EP HOODIE SLATE BLUE",
-			"코튼 워셔블 하찌 하프집업 니트_5 COLOR", "레터링 타투 후드 기모 블랙", "벌키 브러쉬 아가일 니트 BLACK", "미니멀 울 라이크 반목폴라 니트 [그레이]",
-			"Fluff Mood Check shirt S24 Navy", "프레첼 코듀로이 셔츠 카키브라운 JJLS7525", "울 하이넥 케이블 집업 니트 - 샌드",
-			"CROPPED HAIRY KNIT - MELANGE", "옵티멀 베이직 셔츠-화이트" };
 
-	String outer[] = { "BROWN reversible shearling short coat(OJ315)", "LIGHTWEIGHT VEGAN LEATHER MA-1 JACKET [BLACK]",
-			"오버사이즈 울 트렌치 코트 [BEIGE]", "Flat Single Coat (Black)", "OVERSIZED BALMACAAN COAT _ BLACK",
-			"말본 아노락 자켓 BEIGE (MAN)", "[PRIMALOFT] 몬스터 숏패딩_블랙", "REVERSIBLE WARM UP QUILTING JACKET BLACK / IVORY",
-			"후드 미니멀 푸퍼_SPJPC4TC12", "[리뉴얼ver]컴포터블 벌룬핏 다운 패딩 다크그레이 COOSJP031D.GRAY",
-			"PERTEX® T Down Jacket Bandana Grey", "[리뉴얼ver]컨템포러리 몬스터파카 다크그레이 COOSJP028D.GRAY" };
+	static String top[] = { "허드슨 아란 점퍼 니트 님부스 / WJ 5740", "Velour Soccer Jersey Black", "WORLD EP HOODIE SLATE BLUE","코튼 워셔블 하찌 하프집업 니트_5 COLOR", "레터링 타투 후드 기모 블랙", "벌키 브러쉬 아가일 니트 BLACK", "미니멀 울 라이크 반목폴라 니트 [그레이]","Fluff Mood Check shirt S24 Navy", "프레첼 코듀로이 셔츠 카키브라운 JJLS7525", "울 하이넥 케이블 집업 니트 - 샌드","CROPPED HAIRY KNIT - MELANGE", "옵티멀 베이직 셔츠-화이트" };
 
-	String bottom[] = { "WIDE DENIM PANTS [BLACK]", "컷 오프 블리치 워시드 데님 팬츠 (TP0042)",
-			"1967 JET BLACK JEANS [WIDE STRAIGHT]", "와이드 워시드 카고 데님 팬츠 블랙", "TAG FLEECE PANTS - BLACK",
-			"코듀로이 원턱 조거팬츠-KHAKI", "939 LOGO SWEAT PANTS (BLACK)", "와이드 히든 밴딩 슬랙스 [블랙]", "테이퍼드 히든 밴딩 크롭 슬랙스 [라이트 베이지]",
-			"세미 부츠컷 슬랙스 [그레이]", "데님 오버롤 멜빵 팬츠 [블루]", "오버라운드 퍼티그 점프슈트 OF-501 블랙" };
+	static String outer[] = { "BROWN reversible shearling short coat(OJ315)","LIGHTWEIGHT VEGAN LEATHER MA-1 JACKET [BLACK]", "오버사이즈 울 트렌치 코트 [BEIGE]", "Flat Single Coat (Black)","OVERSIZED BALMACAAN COAT _ BLACK", "말본 아노락 자켓 BEIGE (MAN)", "[PRIMALOFT] 몬스터 숏패딩_블랙","REVERSIBLE WARM UP QUILTING JACKET BLACK / IVORY", "후드 미니멀 푸퍼_SPJPC4TC12","[리뉴얼ver]컴포터블 벌룬핏 다운 패딩 다크그레이 COOSJP031D.GRAY", "PERTEX® T Down Jacket Bandana Grey","[리뉴얼ver]컨템포러리 몬스터파카 다크그레이 COOSJP028D.GRAY" };
+
+	static String bottom[] = { "WIDE DENIM PANTS [BLACK]", "컷 오프 블리치 워시드 데님 팬츠 (TP0042)","1967 JET BLACK JEANS [WIDE STRAIGHT]", "와이드 워시드 카고 데님 팬츠 블랙", "TAG FLEECE PANTS - BLACK","코듀로이 원턱 조거팬츠-KHAKI", "939 LOGO SWEAT PANTS (BLACK)", "와이드 히든 밴딩 슬랙스 [블랙]", "테이퍼드 히든 밴딩 크롭 슬랙스 [라이트 베이지]","세미 부츠컷 슬랙스 [그레이]", "데님 오버롤 멜빵 팬츠 [블루]", "오버라운드 퍼티그 점프슈트 OF-501 블랙" };
 
 	/**
 	 * Launch the application.
@@ -66,7 +42,7 @@ public class Home extends JFrame {
 	 * Create the frame.
 	 */
 	public Home() {
-
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 723, 653);
 		contentPane = new JPanel();
@@ -81,7 +57,7 @@ public class Home extends JFrame {
 
 		banner.startThread();
 
-		// 타이틀 패널
+		// 쇼핑몰 이름 패널
 		JPanel homeName = new JPanel();
 		homeName.setBounds(12, 53, 683, 71);
 		homeName.setBackground(new Color(76, 76, 76));
@@ -96,19 +72,21 @@ public class Home extends JFrame {
 		TitleLabel.setBounds(228, 10, 212, 51);
 		homeName.add(TitleLabel);
 
+		// 아이디 입력 창
 		idtextField = new JTextField();
 		idtextField.setBounds(33, 22, 116, 21);
 		contentPane.add(idtextField);
 		idtextField.setColumns(10);
 
+		JLabel idLabel = new JLabel("ID");
+		idLabel.setBounds(12, 25, 20, 15);
+		contentPane.add(idLabel);
+
+		// 비밀번호 입력 창
 		pwtextField = new JTextField();
 		pwtextField.setBounds(184, 21, 116, 21);
 		contentPane.add(pwtextField);
 		pwtextField.setColumns(10);
-
-		JLabel idLabel = new JLabel("ID");
-		idLabel.setBounds(12, 25, 20, 15);
-		contentPane.add(idLabel);
 
 		JLabel pwLabel = new JLabel("PW");
 		pwLabel.setBounds(159, 24, 20, 15);
@@ -165,14 +143,22 @@ public class Home extends JFrame {
 		loginbtn.setFont(new Font("굴림", Font.PLAIN, 12));
 		loginbtn.setBounds(310, 20, 67, 23);
 		contentPane.add(loginbtn);
+
+		// 로그인 시 액션 리스너
 		loginbtn.addActionListener(new ActionListener() {
+			// 관리자 계정 로그인 시 조회프레임 호출
 			// 로그인 버튼 클릭 시 db와 연동해서 로그인
 			// db에 없는 데이터라면 오류 띄우기
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				// if(db의 회원 정보에서 아이디나 비밀번호 2가지 중 1개가 맞지 않는 경우){ }
+				if(idtextField.getText().equals("admin")&&pwtextField.getText().equals("1234")) {
+					dispose();
+					Lookup lookup = new Lookup();
+					lookup.setVisible(true);
+				}
+				// else if(db의 회원 정보에서 아이디나 비밀번호 2가지 중 1개가 맞지 않는 경우){ }
 				JOptionPane.showMessageDialog(null, "아이디와 비밀번호가 존재하지 않습니다.");
+
 				// else if(아이디, 비밀번호가 둘 다 일치하는 경우){ }
 				// 로그인프레임 login = new 로그인프레임();
 				AfterLogin login = new AfterLogin();
@@ -180,13 +166,15 @@ public class Home extends JFrame {
 				dispose();
 			}
 		});
+
 		// 회원가입 버튼
 		JButton joinbtn = new JButton("join");
 		joinbtn.setFont(new Font("굴림", Font.PLAIN, 12));
 		joinbtn.setBounds(389, 21, 67, 23);
 		contentPane.add(joinbtn);
-		joinbtn.addActionListener(new ActionListener() {
 
+		// 회원가입 버튼 액션 리스너
+		joinbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -205,45 +193,56 @@ public class Home extends JFrame {
 		imageJbtnPrice = new JTextField[4];
 		ImageIcon imgIcon[] = new ImageIcon[4];
 
-//		int random = (int)(Math.random()*12)+1;
 		int xBtn1 = 20, xName1 = 45, xPrice1 = 65;
 		int xBtn2 = 15, xName2 = 40, xPrice2 = 55;
+
 		for (int i = 0; i < 4; i++) {
-			//
-			String topImg = "src/쇼핑몰 사진/상의/TOP_" + (i + 1) + ".jpg";
+			int num = i;
+			// 상의 사진
+			String topImg = "src/쇼핑몰 사진/상의/TOP_" + (i+5) + ".jpg";
 			ImageIcon topIcon = new ImageIcon(topImg);
 			Image img = topIcon.getImage();
 			Image changeimg = img.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
-			//
-			String bottomImg = "src/쇼핑몰 사진/하의/BOTTOM_" + (i + 1) + ".jpg";
-			ImageIcon bottomIcon = new ImageIcon(bottomImg);
-			Image img2 = bottomIcon.getImage();
-			Image changeimg2 = img2.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
-			//
-			String outerImg = "src/쇼핑몰 사진/아우터/OUTER_" + (i + 1) + ".jpg";
+			// 아우터 사진
+			String outerImg = "src/쇼핑몰 사진/아우터/OUTER_" + (i+5) + ".jpg";
 			ImageIcon outerIcon = new ImageIcon(outerImg);
 			Image img3 = outerIcon.getImage();
-			Image changeimg3 = img3.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
-
-			imgIcon[i] = new ImageIcon(changeimg);
+			Image changeimg2 = img3.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
+			
+			// 상품 이미지 버튼
+			if (i % 2 != 0) {
+				imgIcon[i] = new ImageIcon(changeimg);
+			} else if (i % 2 == 0) {
+				imgIcon[i] = new ImageIcon(changeimg2);
+			}
 			productJbtn[i] = new JButton(imgIcon[i]);
 			productJbtn[i].setBackground(new Color(255, 255, 255)); // 버튼 색상 변경
 
-			imageJbtnName[i] = new JTextField(top[i]);
+			// 상품 이름
+			imageJbtnName[i] = new JTextField(top[i+4]);
 			imageJbtnName[i].setFont(new Font("한컴 말랑말랑", Font.BOLD, 12));
 			imageJbtnName[i].setHorizontalAlignment(SwingConstants.CENTER);
 			imageJbtnName[i].setColumns(10);
 
-			imageJbtnPrice[i] = new JTextField(top[i]);
+			// 상품 가격
+			imageJbtnPrice[i] = new JTextField("가격");
 			imageJbtnPrice[i].setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
 			imageJbtnPrice[i].setHorizontalAlignment(SwingConstants.CENTER);
 			imageJbtnPrice[i].setColumns(10);
-			// 액션리스너
-//			productJbtn[i].addActionListener(new ActionListener() {
-//				public void actionPerformed(ActionEvent e) {
-//					
-//				}
-//			});
+
+			// 상품 클릭 시 상품 상세정보로 이동
+			productJbtn[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(num % 2 != 0) {
+						ProdDetail prod = new ProdDetail("TOP", topIcon, top[num+5]);
+						prod.setVisible(true);
+					}
+					else {
+						ProdDetail prod = new ProdDetail("OUTER", outerIcon, outer[num+5]);
+						prod.setVisible(true);
+					}
+				}
+			});
 			if (i < 2) {
 				productJbtn[i].setBounds(xBtn1, 10, 295, 210);
 				productPanel1.add(productJbtn[i]);

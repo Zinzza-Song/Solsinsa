@@ -21,6 +21,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import client.Userinfo;
+
 public class AfterLogin extends JFrame {
 
 	private JPanel contentPane;
@@ -246,7 +248,7 @@ public class AfterLogin extends JFrame {
 		contentPane.add(mypageBtn);
 		mypageBtn.setOpaque(true);
 		
-		JLabel welcomeLabel = new JLabel("000님 환영합니다.");
+		JLabel welcomeLabel = new JLabel(Userinfo.getUserInfo().getId() + "님 환영합니다.");
 		welcomeLabel.setFont(new Font("굴림", Font.PLAIN, 20));
 		welcomeLabel.setBounds(158, 8, 192, 35);
 		contentPane.add(welcomeLabel);
@@ -264,6 +266,7 @@ public class AfterLogin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
+				Userinfo.getUserInfo().Logout();
 				Home home = new Home();
 				home.setVisible(true);
 				dispose();

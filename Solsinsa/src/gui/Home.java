@@ -48,7 +48,7 @@ public class Home extends JFrame {
 		setResizable(false);
 		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(222, 226, 235));
+		contentPane.setBackground(new Color(216, 210, 199));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 
@@ -70,7 +70,7 @@ public class Home extends JFrame {
 		homeName.setLayout(null);
 
 		JLabel TitleLabel = new JLabel("SOLSINSA");
-		TitleLabel.setFont(new Font("한컴 말랑말랑", Font.BOLD, 40));
+		TitleLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 40));
 		TitleLabel.setForeground(new Color(255, 255, 255));
 		TitleLabel.setBounds(228, 10, 212, 51);
 		homeName.add(TitleLabel);
@@ -92,11 +92,14 @@ public class Home extends JFrame {
 		pwtextField.setColumns(10);
 
 		JLabel pwLabel = new JLabel("PW");
+		pwLabel.setFont(new Font("굴림", Font.BOLD, 12));
 		pwLabel.setBounds(159, 24, 20, 15);
 		contentPane.add(pwLabel);
 
 		// 카테고리 버튼 클릭시 제품 창 띄워짐
-		JButton CategoryTop = new JButton("TOP");
+		JButton CategoryTop = new Rb("TOP");
+		CategoryTop.setBackground(new Color(68, 83, 91));
+		CategoryTop.setForeground(new Color(255, 255, 255));
 		CategoryTop.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryTop.setBounds(72, 134, 160, 25);
 		CategoryTop.setFocusPainted(false);
@@ -112,9 +115,12 @@ public class Home extends JFrame {
 			}
 		});
 
-		JButton CategoryBottom = new JButton("BOTTOM");
+		JButton CategoryBottom = new Rb("BOTTOM");
+		CategoryBottom.setBackground(new Color(68, 83, 91));
+		CategoryBottom.setForeground(new Color(255, 255, 255));
 		CategoryBottom.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryBottom.setBounds(262, 134, 160, 25);
+		CategoryBottom.setFocusPainted(false);
 		contentPane.add(CategoryBottom);
 		CategoryBottom.addActionListener(new ActionListener() {
 
@@ -127,9 +133,12 @@ public class Home extends JFrame {
 			}
 		});
 
-		JButton CategoryOuter = new JButton("OUTER");
+		JButton CategoryOuter = new Rb("OUTER");
+		CategoryOuter.setBackground(new Color(68, 83, 91));
+		CategoryOuter.setForeground(new Color(255, 255, 255));
 		CategoryOuter.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryOuter.setBounds(447, 134, 160, 25);
+		CategoryOuter.setFocusPainted(false);
 		contentPane.add(CategoryOuter);
 		CategoryOuter.addActionListener(new ActionListener() {
 
@@ -144,8 +153,11 @@ public class Home extends JFrame {
 		// ===========================================================================
 		// 로그인 버튼
 		JButton loginbtn = new JButton("login");
-		loginbtn.setFont(new Font("굴림", Font.PLAIN, 12));
+		loginbtn.setBackground(new Color(77, 77, 77));
+		loginbtn.setForeground(new Color(255, 255, 255));
+		loginbtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
 		loginbtn.setBounds(310, 20, 67, 23);
+		loginbtn.setFocusPainted(false);
 		contentPane.add(loginbtn);
 
 		// 로그인 시 액션 리스너
@@ -173,8 +185,11 @@ public class Home extends JFrame {
 
 		// 회원가입 버튼
 		JButton joinbtn = new JButton("join");
-		joinbtn.setFont(new Font("굴림", Font.PLAIN, 12));
+		joinbtn.setBackground(new Color(77, 77, 77));
+		joinbtn.setForeground(new Color(255, 255, 255));
+		joinbtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
 		joinbtn.setBounds(389, 21, 67, 23);
+		joinbtn.setFocusPainted(false);
 		contentPane.add(joinbtn);
 
 		// 회원가입 버튼 액션 리스너
@@ -221,6 +236,7 @@ public class Home extends JFrame {
 			}
 			productJbtn[i] = new JButton(imgIcon[i]);
 			productJbtn[i].setBackground(new Color(255, 255, 255)); // 버튼 색상 변경
+			productJbtn[i].setFocusPainted(false);
 
 			// 상품 이름
 			imageJbtnName[i] = new JTextField(top[i+4]);

@@ -50,10 +50,12 @@ public class NewUser extends JFrame {
 		setBounds(100, 100, 425, 419);  //위치 사이즈설정
 		setResizable(false);   //사이즈 조절 불가능
 		contentPane = new JPanel(); 
+		contentPane.setBackground(new Color(216,210,199));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
 		
 		//회원가입라벨
 		signUpLabel = new JLabel("\uD68C\uC6D0\uAC00\uC785");
@@ -78,10 +80,11 @@ public class NewUser extends JFrame {
 		contentPane.add(idTextField);
 		idTextField.setColumns(10);
 		
-		//중복확인버튼 - DB연동
-		reduplicationCheckBtn = new JButton("\uC911\uBCF5\uD655\uC778");
+		//중복확인버튼
+		JButton reduplicationCheckBtn = new Rb("\uC911\uBCF5\uD655\uC778");
 		reduplicationCheckBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		reduplicationCheckBtn.setBounds(301, 59, 97, 23);
+		reduplicationCheckBtn.setFocusPainted(false);
 		contentPane.add(reduplicationCheckBtn);
 		reduplicationCheckBtn.addActionListener(new ActionListener() {
 			@Override
@@ -189,9 +192,10 @@ public class NewUser extends JFrame {
 		});
 		
 		//회원가입 버튼
-		JButton confirmBtn = new JButton("회원가입");
+		JButton confirmBtn = new Rb("회원가입완료");
 		confirmBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		confirmBtn.setBounds(205, 346, 84, 23);
+		confirmBtn.setFocusPainted(false);
 		contentPane.add(confirmBtn);
 		//회원 가입 버튼 클릭 시 액션 리스너
 		confirmBtn.addActionListener(new ActionListener() {
@@ -242,9 +246,10 @@ public class NewUser extends JFrame {
 		}});
 		
 		//취소버튼
-		JButton cancleBtn = new JButton("\uCDE8 \uC18C");
+		JButton cancleBtn = new Rb("\uCDE8 \uC18C");
 		cancleBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		cancleBtn.setBounds(301, 346, 84, 23);
+		cancleBtn.setFocusPainted(false);
 		contentPane.add(cancleBtn);
 		cancleBtn.addActionListener(new ActionListener() {
 			@Override

@@ -54,12 +54,14 @@ public class Products extends JFrame {
 		setBounds(100, 100, 694, 602);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(new Color(216, 210, 199));
 		setResizable(false);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		// 상품 패널 만들고 스크롤팬안에 패널 넣기
 		JPanel productPanel = new JPanel();
+		productPanel.setBackground(new Color(234, 232, 227));
 		productPanel.setPreferredSize(new Dimension(490, 980));
 
 		JScrollPane productScrollPane = new JScrollPane(productPanel);
@@ -86,6 +88,7 @@ public class Products extends JFrame {
 				Image changeImg = Img.getScaledInstance(160, 172, Image.SCALE_SMOOTH);
 				ImageIcon changeIcon = new ImageIcon(changeImg);
 				productImgBtn[i] = new JButton(changeIcon);
+				productImgBtn[i].setFocusPainted(false);
 				
 				probName = top[i];
 				productName[i] = new JTextField(probName);
@@ -162,6 +165,7 @@ public class Products extends JFrame {
 				productPanel.add(productName[i]);
 				productPrice[i].setBounds(xPrice1, 225, 116, 21);
 				productPanel.add(productPrice[i]);
+				
 				xBtn1 += 222;
 				xName1 += 220;
 				xPrice1 += 220;
@@ -199,8 +203,10 @@ public class Products extends JFrame {
 		}
 
 		// 닫기 버튼
-		cancleBtn = new JButton("닫기");
+		cancleBtn = new Rb("닫기");
+		cancleBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 24));
 		cancleBtn.setBounds(265, 510, 150, 35);
+		cancleBtn.setFocusPainted(false);
 		contentPane.add(cancleBtn);
 		cancleBtn.addActionListener(new ActionListener() {
 

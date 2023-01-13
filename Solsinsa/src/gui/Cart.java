@@ -35,12 +35,14 @@ public class Cart extends JFrame {
 		setBounds(100, 100, 585, 492);
 		setResizable(false); // 프레임사이즈조절 불가능
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(216,210, 199));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		// 장바구니 패널
 		JPanel cartPanel = new JPanel();
+		cartPanel.setBackground(new Color(247, 247, 247));
 		cartPanel.setBounds(0, 40, 569, 324);
 		cartPanel.setLayout(null);
 		
@@ -99,16 +101,17 @@ public class Cart extends JFrame {
 		totalPrice = new JTextField();
 		totalPrice.setText(Integer.toString(sum));
 		totalPrice.setHorizontalAlignment(SwingConstants.RIGHT);
-		totalPrice.setFont(new Font("���� �������� Bold", Font.PLAIN, 18));
+		totalPrice.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 18));
 		totalPrice.setBounds(357, 375, 185, 22);
 		contentPane.add(totalPrice);
 		totalPrice.setColumns(10);
 		
 		
 		// 결제버튼
-		JButton paymentBtn = new JButton("\uACB0\uC81C\uD558\uAE30");
-		paymentBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
+		JButton paymentBtn = new Rb("\uACB0\uC81C\uD558\uAE30");
+		paymentBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 12));
 		paymentBtn.setBounds(336, 420, 97, 23);
+		paymentBtn.setFocusPainted(false);
 		contentPane.add(paymentBtn);
 		paymentBtn.addActionListener(new ActionListener() {
 			@Override
@@ -120,9 +123,10 @@ public class Cart extends JFrame {
 		});
 
 		// 취소버튼
-		JButton cancleBtn = new JButton("\uCDE8 \uC18C");
-		cancleBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
+		JButton cancleBtn = new Rb("\uCDE8 \uC18C");
+		cancleBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 12));
 		cancleBtn.setBounds(445, 420, 97, 23);
+		cancleBtn.setFocusPainted(false);
 		contentPane.add(cancleBtn);
 		cancleBtn.addActionListener(new ActionListener() {
 			@Override
@@ -136,15 +140,15 @@ public class Cart extends JFrame {
 		});
 
 		JLabel totalPriceLabel = new JLabel("\uCD1D \uAE08\uC561");
-		totalPriceLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
+		totalPriceLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 18));
 		totalPriceLabel.setBounds(282, 374, 59, 23);
 		contentPane.add(totalPriceLabel);
 
-		JLabel cartLabel = new JLabel("\uC7A5\uBC14\uAD6C\uB2C8");
+		JLabel cartLabel = new JLabel("C A R T");
 		cartLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 25));
 		cartLabel.setForeground(new Color(255, 255, 255));
 		cartLabel.setBackground(new Color(60, 61, 72));
-		cartLabel.setBounds(160, 10, 245, 31);
+		cartLabel.setBounds(162, 5, 245, 31);
 		cartLabel.setOpaque(true);
 		cartLabel.setHorizontalAlignment(JLabel.CENTER);
 		contentPane.add(cartLabel);

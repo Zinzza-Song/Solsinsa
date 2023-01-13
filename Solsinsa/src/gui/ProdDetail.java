@@ -21,6 +21,7 @@ import javax.swing.JSplitPane;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.SwingConstants;
 
 public class ProdDetail extends JFrame {
 
@@ -36,6 +37,7 @@ public class ProdDetail extends JFrame {
 	public ProdDetail(String category, ImageIcon img, String probName) {
 		setBounds(100, 100, 931, 647);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(216,210,199));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -51,6 +53,7 @@ public class ProdDetail extends JFrame {
 		productimgLabel.setBounds(0, 0, 468, 425);
 		productimgPanel.add(productimgLabel);
 		productimgLabel.setOpaque(true);
+		productimgLabel.setBackground(new Color(255, 255, 255));
 		productimgLabel.setBackground(new Color(255, 255, 255));
 		
 		JPanel DetailePanel = new JPanel();
@@ -80,11 +83,10 @@ public class ProdDetail extends JFrame {
 //		contentPane.add(productPrice);
 		// ============================
 		// 하단 버튼
-		JButton addCartBtn = new JButton("장바구니 담기");
-		addCartBtn.setIcon(null);
-		addCartBtn.setSelectedIcon(null);
-		addCartBtn.setFont(new Font("맑은 고딕", Font.BOLD, 30));
-		addCartBtn.setBounds(143, 531, 272, 49);
+		JButton addCartBtn = new Rb("장바구니 담기");
+		addCartBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 30));
+		addCartBtn.setFocusPainted(false);
+		addCartBtn.setBounds(148, 624, 272, 49);
 		contentPane.add(addCartBtn);
 
 		// 장바구니 db 연결 ========================
@@ -101,9 +103,10 @@ public class ProdDetail extends JFrame {
 			}
 		});
 
-		JButton cancelBtn = new JButton("닫기");
-		cancelBtn.setFont(new Font("맑은 고딕", Font.BOLD, 30));
-		cancelBtn.setBounds(530, 531, 272, 49);
+		JButton cancelBtn = new Rb("닫기"); 
+		cancelBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 30));
+		cancelBtn.setFocusPainted(false);
+		cancelBtn.setBounds(535, 624, 272, 49);
 		contentPane.add(cancelBtn);
 		
 		JPanel FeaturePanel = new JPanel();

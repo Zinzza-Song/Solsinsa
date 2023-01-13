@@ -14,6 +14,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.ScrollPaneConstants;
 
 public class Lookup extends JFrame {
 
@@ -81,6 +82,8 @@ public class Lookup extends JFrame {
 		productTable = new JTable(productInformation, productHeader);
 		productTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		productScrolledPane1 = new JScrollPane(productTable);
+		productScrolledPane1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		productScrolledPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		productScrolledPane1.setBounds(5, 5, 386, 282);
 		productScrolledPane1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		//product테이블 글자 정렬
@@ -93,6 +96,8 @@ public class Lookup extends JFrame {
 		userTable = new JTable(userInformation, userHeader);
 		userTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		userScrolledPane = new JScrollPane(userTable);
+		userScrolledPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		userScrolledPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		userScrolledPane.setBounds(397, 5, 386, 282);
 		userScrolledPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		//customer테이블 글자 정렬
@@ -117,6 +122,8 @@ public class Lookup extends JFrame {
 		logTable.getColumn("NO").setCellRenderer(celAlignCenter);
 		
 		logScrolledPane = new JScrollPane(logTable);
+		logScrolledPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		logScrolledPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		logScrolledPane.setBounds(0, 330, 783, 291);
 		logScrolledPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		contentPane.add(logScrolledPane);

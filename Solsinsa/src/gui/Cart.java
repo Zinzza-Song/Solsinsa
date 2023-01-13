@@ -1,26 +1,11 @@
 package gui;
 
 import jdbc.JdbcConnector;
-import java.awt.EventQueue;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
-import javax.swing.JCheckBox;
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.SwingConstants;
-import javax.swing.JScrollPane;
+import javax.swing.*;
+import javax.swing.border.*;
 
 public class Cart extends JFrame {
 
@@ -28,12 +13,15 @@ public class Cart extends JFrame {
 	private JTextField totalPrice;
 	private JCheckBox productCheckBox[];
 	private JLabel priceTextField[];
+	private JTextField CountTextField;
 
 	int count; // 장바구니 품목 개수
-
+	int check; // 체크 한 상품 개수
 	public Cart() {
 		setBounds(100, 100, 585, 492);
 		setResizable(false); // 프레임사이즈조절 불가능
+		setLocationRelativeTo(null);
+		
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(216,210, 199));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -58,6 +46,7 @@ public class Cart extends JFrame {
 
 		// 장바구니 품목 개수에 맞춰서 목록 추가 생성
 		for (int i = 0; i < count; i++) {
+			check = i+1;
 			int price = prices[i];
 			// 체크 박스
 			productCheckBox = new JCheckBox[5];
@@ -74,23 +63,26 @@ public class Cart extends JFrame {
 			priceTextField[i].setBounds(396, yCoordinate, 144, 23);
 			yCoordinate += 38;
 			cartPanel.add(priceTextField[i]);
-			
+			// 체크박스 설정 시 리스너
 			productCheckBox[i].addItemListener(new ItemListener() {
 				@Override
 				public void itemStateChanged(ItemEvent e) {
-					// TODO Auto-generated method stub
+					//체크 되어있을경우
 					if (e.getStateChange() == 1) {
 						int sell = price;
 						int all = Integer.parseInt(totalPrice.getText());
 						totalPrice.setText(Integer.toString(all + sell));
+						check++;
+						CountTextField.setText(Integer.toString(check));
 					}
+					//체크 안된 경우
 					else {
 						int sell = price;
 						int all = Integer.parseInt(totalPrice.getText());
 						totalPrice.setText(Integer.toString(all - sell));
-						
+						check--;
+						CountTextField.setText(Integer.toString(check));
 					}
-					
 				}
 			});
 		}
@@ -113,13 +105,14 @@ public class Cart extends JFrame {
 		paymentBtn.setBounds(336, 420, 97, 23);
 		paymentBtn.setFocusPainted(false);
 		contentPane.add(paymentBtn);
+		//장바구니에서 결제 버튼 클릭 시
 		paymentBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
+				Payment pay = new Payment();
+				pay.setVisible(true);
+				dispose();
 			}
-
 		});
 
 		// 취소버튼
@@ -131,19 +124,16 @@ public class Cart extends JFrame {
 		cancleBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
 				// 프레임 종료
 				dispose();
 			}
-
 		});
-
+		//총 금액 라벨
 		JLabel totalPriceLabel = new JLabel("\uCD1D \uAE08\uC561");
 		totalPriceLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 18));
-		totalPriceLabel.setBounds(282, 374, 59, 23);
+		totalPriceLabel.setBounds(280, 375, 65, 23);
 		contentPane.add(totalPriceLabel);
-
+		
 		JLabel cartLabel = new JLabel("C A R T");
 		cartLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 25));
 		cartLabel.setForeground(new Color(255, 255, 255));
@@ -152,10 +142,19 @@ public class Cart extends JFrame {
 		cartLabel.setOpaque(true);
 		cartLabel.setHorizontalAlignment(JLabel.CENTER);
 		contentPane.add(cartLabel);
-
+		
 		cartPanel.setPreferredSize(new Dimension(550, 596));
 		JScrollPane cartScrollPane = new JScrollPane(cartPanel);
 		cartScrollPane.setBounds(0, 40, 569, 324);
 		contentPane.add(cartScrollPane);
+		
+		CountTextField = new JTextField();
+		CountTextField.setBounds(10, 375, 36, 21);
+		contentPane.add(CountTextField);
+		CountTextField.setColumns(10);
+		
+		JLabel totalCount = new JLabel("개");
+		totalCount.setBounds(56, 380, 50, 15);
+		contentPane.add(totalCount);
 	}
 }

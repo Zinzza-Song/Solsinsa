@@ -1,20 +1,10 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
+import java.awt.*;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.table.*;
 
 public class Lookup extends JFrame {
 
@@ -47,15 +37,15 @@ public class Lookup extends JFrame {
 				{ "상품번호", "상품명", "가격", "카테고리", "재고" } };
 
 		// 유저 테이블에 행 추가하기
-		String userHeader[] = { "ID", "PW", "NAME", "BIRTH", "ADDR", "PHONE", "EMAIL" };
-		String[][] userInformation = { { "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" },
-				{ "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" }, { "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" },
-				{ "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" }, { "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" } };
+		String userHeader[] = { "NO", "ID", "PW", "NAME", "BIRTH", "ADDR", "PHONE", "EMAIL" };
+		String[][] userInformation = { { "회원번호", "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" },
+				{ "회원번호", "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" }, { "회원번호", "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" },
+				{ "회원번호", "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" }, { "회원번호", "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" } };
 
 		// 로그 테이블에 행 추가하기
-		String logHeader[] = { "NO", "LOG" };
-		String logInformation[][] = { { "번호", "000님이 회원가입 하셨습니다." }, { "번호", "상품이름이 추가되었습니다." },
-				{ "번호", "000님이 회원탈퇴 하셨습니다." }, { "번호", "상품이름이 감소되었습니다." } };
+		String logHeader[] = { "일자", "LOG" };
+		String logInformation[][] = { { "0000/00/00", "000님이 회원가입 하셨습니다." }, { "0000/00/00", "상품이름이 추가되었습니다." },
+				{ "0000/00/00", "000님이 회원탈퇴 하셨습니다." }, { "0000/00/00", "상품이름이 감소되었습니다." } };
 		
 		// 테이블 글자 정렬
 		DefaultTableCellRenderer celAlignCenter = new DefaultTableCellRenderer();
@@ -85,7 +75,7 @@ public class Lookup extends JFrame {
 		userScrolledPane.setBounds(397, 5, 386, 282);
 		userScrolledPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		//customer테이블 글자 정렬
-		for(int i = 0; i < 7; i++) {
+		for(int i = 0; i < 8; i++) {
 			userTable.getColumn(userHeader[i]).setCellRenderer(celAlignCenter);
 		}
 		contentPane.add(userScrolledPane);
@@ -103,7 +93,7 @@ public class Lookup extends JFrame {
 		logTable.getColumnModel().getColumn(1).setMinWidth(720);
 		logTable.getColumnModel().getColumn(1).setWidth(720);
 		//log테이블 글자 정렬
-		logTable.getColumn("NO").setCellRenderer(celAlignCenter);
+		logTable.getColumn("일자").setCellRenderer(celAlignCenter);
 		
 		logScrolledPane = new JScrollPane(logTable);
 		logScrolledPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);

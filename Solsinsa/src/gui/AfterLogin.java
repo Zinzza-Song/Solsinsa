@@ -1,25 +1,11 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
+import javax.swing.*;
+import javax.swing.border.*;
 
 public class AfterLogin extends JFrame {
 
@@ -82,6 +68,7 @@ public class AfterLogin extends JFrame {
 		homeName.add(TitleLabel);
 
 		// 카테고리 버튼 클릭시 제품 창 띄워짐
+		//상의
 		JButton CategoryTop = new Rb("TOP");
 		CategoryTop.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryTop.setBounds(72, 134, 160, 25);
@@ -97,7 +84,7 @@ public class AfterLogin extends JFrame {
 				prod.setVisible(true);
 			}
 		});
-
+		//하의
 		JButton CategoryBottom = new Rb("BOTTOM");
 		CategoryBottom.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryBottom.setBounds(262, 134, 160, 25);
@@ -113,7 +100,7 @@ public class AfterLogin extends JFrame {
 				prod.setVisible(true);
 			}
 		});
-
+		//아우터
 		JButton CategoryOuter = new Rb("OUTER");
 		CategoryOuter.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryOuter.setBounds(447, 134, 160, 25);
@@ -221,7 +208,7 @@ public class AfterLogin extends JFrame {
 		scrollPane.setBounds(12, 303, 683, 311);
 
 		contentPane.add(scrollPane);
-		//장바구니 밑 상단에 표시될 기능들
+		//상단에 표시될 버튼들
 		//장바구니 버튼
 		JButton cartBtn = new JButton("장바구니");
 		cartBtn.setForeground(new Color(255, 255, 255));
@@ -256,6 +243,7 @@ public class AfterLogin extends JFrame {
 				// TODO Auto-generated method stub
 				MyPage mypage = new MyPage();
 				mypage.setVisible(true);
+				dispose();
 			}
 			
 		});

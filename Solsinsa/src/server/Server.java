@@ -149,6 +149,7 @@ public class Server implements Runnable {
 						+ rs.getString("c_name") + "," + rs.getString("c_birth") + "," + rs.getString("c_addr") + ","
 						+ rs.getString("c_phone") + "," + rs.getString("c_mail");
 			}
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;

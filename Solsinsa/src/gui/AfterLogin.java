@@ -285,10 +285,5 @@ public class AfterLogin extends JFrame {
 			
 		});
 		
-//		JLabel welcomeLabel = new JLabel("000님 환영합니다.");
-//		welcomeLabel.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 20));
-//		welcomeLabel.setBounds(280, 10, 192, 35);
-//		contentPane.add(welcomeLabel);
-		
 	}
 }

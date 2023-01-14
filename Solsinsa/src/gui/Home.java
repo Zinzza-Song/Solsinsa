@@ -314,16 +314,10 @@ public class Home extends JFrame {
 			// 상품 클릭 시 상품 상세정보로 이동
 			productJbtn[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(num % 2 != 0) {
-						ProdDetail prod = new ProdDetail("TOP", topIcon, top[num+5]);
-						prod.setVisible(true);
-					}
-					else {
-						ProdDetail prod = new ProdDetail("OUTER", outerIcon, outer[num+5]);
-						prod.setVisible(true);
-					}
-				}
-			});
+					
+				}});
+			
+			
 			if (i < 2) {
 				productJbtn[i].setBounds(xBtn1, 10, 295, 210);
 				productPanel1.add(productJbtn[i]);

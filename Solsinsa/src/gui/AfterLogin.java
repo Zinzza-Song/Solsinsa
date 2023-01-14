@@ -259,6 +259,12 @@ public class AfterLogin extends JFrame {
 		contentPane.add(welcomeLabel);
 		
 		//로그아웃 버튼
+		
+        ImageIcon logoutIcon = new ImageIcon("./src/icon/Logout1.jpg");	
+		Image logoutImg = logoutIcon.getImage();
+		Image changelogoutImg = logoutImg.getScaledInstance(35,35,Image.SCALE_SMOOTH); 
+		ImageIcon changelogoutIcon = new ImageIcon(changelogoutImg);
+
 		JButton logoutBtn = new JButton(changelogoutIcon);
 		logoutBtn.setOpaque(true);
 		logoutBtn.setBackground(new Color(128, 128, 192));
@@ -279,10 +285,10 @@ public class AfterLogin extends JFrame {
 			
 		});
 		
-		JLabel welcomeLabel = new JLabel("000님 환영합니다.");
-		welcomeLabel.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 20));
-		welcomeLabel.setBounds(280, 10, 192, 35);
-		contentPane.add(welcomeLabel);
+//		JLabel welcomeLabel = new JLabel("000님 환영합니다.");
+//		welcomeLabel.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 20));
+//		welcomeLabel.setBounds(280, 10, 192, 35);
+//		contentPane.add(welcomeLabel);
 		
 	}
 }

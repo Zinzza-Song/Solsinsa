@@ -204,6 +204,8 @@ public class Home extends JFrame {
 		// ===========================================================================
 		// 상품표시패널
 		JPanel productPanel1 = new JPanel();
+		productPanel1.setBorder(null);
+		productPanel1.setBackground(new Color(216, 210, 199));
 		productPanel1.setSize(633, 1000);
 		productPanel1.setLayout(null);
 

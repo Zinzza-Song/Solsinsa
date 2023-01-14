@@ -3,25 +3,13 @@ package gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.*;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JSplitPane;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.MatteBorder;
-import javax.swing.SwingConstants;
 
 public class ProdDetail extends JFrame {
 
@@ -35,60 +23,48 @@ public class ProdDetail extends JFrame {
 	 * Create the frame.
 	 */
 	public ProdDetail(String category, ImageIcon img, String probName) {
+		
 		setBounds(100, 100, 931, 647);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(216,210,199));
+		contentPane.setBackground(new Color(234, 232, 227));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
+		Image Img = img.getImage();
+		Image changeImg = Img.getScaledInstance(468, 500, Image.SCALE_SMOOTH);
+		ImageIcon changeIcon = new ImageIcon(changeImg);
+		
 		// 좌측 상품 이미지 패널
 		JPanel productimgPanel = new JPanel();
-		productimgPanel.setBounds(22, 33, 468, 426);
+		productimgPanel.setBounds(22, 33, 468, 500);
 		contentPane.add(productimgPanel);
 		productimgPanel.setLayout(null);
 		// 상품 이미지 라벨
-		JLabel productimgLabel = new JLabel(img);
-		productimgLabel.setBounds(0, 0, 468, 425);
+		JLabel productimgLabel = new JLabel(changeIcon);
+		productimgLabel.setBounds(0, 0, 468, 500);
 		productimgPanel.add(productimgLabel);
 		productimgLabel.setOpaque(true);
 		productimgLabel.setBackground(new Color(255, 255, 255));
 		productimgLabel.setBackground(new Color(255, 255, 255));
 		
+		// 상품 상세정보
 		JPanel DetailePanel = new JPanel();
 		DetailePanel.setBounds(-36, 145, 398, 430);
 		productimgPanel.add(DetailePanel);
 		DetailePanel.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(0, 0, 0)));
 		DetailePanel.setLayout(new GridLayout(10, 0, 0, 0));
-		// 상품 상세정보
-//		JLabel productName = new JLabel("상품명 : ");
-//		productName.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-//		productName.setBounds(524, 33, 101, 38);
-//		contentPane.add(productName);
-//
-//		JLabel productNameLabel = new JLabel(probName);
-//		productNameLabel.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-//		productNameLabel.setBounds(613, 30, 319, 38);
-//		contentPane.add(productNameLabel);
-//
-//		JLabel productPriceLabel = new JLabel("New label");
-//		productPriceLabel.setFont(new Font("맑은 고딕", Font.BOLD, 24));
-//		productPriceLabel.setBounds(622, 104, 319, 38);
-//		contentPane.add(productPriceLabel);
-//
-//		JLabel productPrice = new JLabel("가격 : ");
-//		productPrice.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-//		productPrice.setBounds(544, 107, 101, 38);
-//		contentPane.add(productPrice);
+
 		// ============================
 		// 하단 버튼
 		JButton addCartBtn = new Rb("장바구니 담기");
-		addCartBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 30));
+		addCartBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 20));
 		addCartBtn.setFocusPainted(false);
-		addCartBtn.setBounds(148, 624, 272, 49);
+		addCartBtn.setBounds(535, 520, 143, 49);
 		contentPane.add(addCartBtn);
-
+		
+		// 장바구니 담기 버튼 클릭 시
 		// 장바구니 db 연결 ========================
 		addCartBtn.addActionListener(new ActionListener() {
 			// 장바구니 담기 클릭 시 장바구니에 추가됨
@@ -106,7 +82,7 @@ public class ProdDetail extends JFrame {
 		JButton cancelBtn = new Rb("닫기"); 
 		cancelBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 30));
 		cancelBtn.setFocusPainted(false);
-		cancelBtn.setBounds(535, 624, 272, 49);
+		cancelBtn.setBounds(731, 520, 143, 49);
 		contentPane.add(cancelBtn);
 		
 		JPanel FeaturePanel = new JPanel();
@@ -118,6 +94,9 @@ public class ProdDetail extends JFrame {
 		DetailPanel.setBounds(634, 33, 271, 426);
 		contentPane.add(DetailPanel);
 		DetailPanel.setLayout(new GridLayout(14, 0, 0, 0));
+		
+		
+		
 		for(int i = 0; i < 14; i++) {
 			FeatureTextField[i] = new JTextField();
 			FeatureTextField[i].setColumns(10);
@@ -143,5 +122,9 @@ public class ProdDetail extends JFrame {
 			}
 		});
 
+		
+		
+		
+		
 	}
 }

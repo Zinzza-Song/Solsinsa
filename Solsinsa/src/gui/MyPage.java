@@ -1,20 +1,9 @@
 package gui;
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.border.*;
-
 import java.awt.*;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.JButton;
-import javax.swing.JTable;
+import java.awt.event.*;
+
 import javax.swing.*;
+import javax.swing.border.*;
 
 public class MyPage extends JFrame {
 	
@@ -26,8 +15,6 @@ public class MyPage extends JFrame {
 	private JLabel myLabel2[];
 	private JTextField myTextField2[];
 
-	// 137 번 줄 myTextField[i]=new JTextField(userTexts[i]);에 유저 정보 입력하시면 됩니다!
-	
 	public MyPage() {
 		initialize();
 	}
@@ -56,22 +43,21 @@ public class MyPage extends JFrame {
 		contentPane.add(changePanel);
 		changePanel.setLayout(null);
 		changePanel.setVisible(true);  //수정누르면 false;
-		
-		
+		//마이페이지 제목
 		JLabel myPageLabel = new JLabel("MY Page");
 		myPageLabel.setForeground(new Color(255, 255, 255));
-		myPageLabel.setFont(new Font("굴림", Font.BOLD, 30));
+		myPageLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 30));
 		myPageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		myPageLabel.setBounds(53, 10, 282, 63);
 		changePanel.add(myPageLabel);
-		
+		//정보 수정 버튼
 		JButton modifyBtn = new JButton("수 정");
-		modifyBtn.setFont(new Font("굴림", Font.PLAIN, 25));
+		modifyBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 25));
 		modifyBtn.setBounds(53, 354, 112, 52);
 		changePanel.add(modifyBtn);
-		
+		//회원 탈퇴 버튼
 		JButton ResignBtn = new JButton("탈 퇴");
-		ResignBtn.setFont(new Font("굴림", Font.PLAIN, 25));
+		ResignBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 25));
 		ResignBtn.setBounds(207, 354, 112, 52);
 		changePanel.add(ResignBtn);
 		
@@ -118,9 +104,9 @@ public class MyPage extends JFrame {
 		scrollPane.setBounds(12, 46, 360, 129);
 		orderPanel.add(scrollPane);
 		
-		String userNames[]= {"ID","이 름","PW","주소","이메일","전화번호","생년월일"}; 
+		String userNames[]= {"ID","이 름","PW","주소","이메일","전화번호","생년월일"};
 		int startY =83;
-		String userName;  //라벨에 들어갈 이름 
+		String userName;  //라벨에 들어갈 이름
 		String userTexts[]={"ID","이 름","PW","주소","이메일","전화번호","생년월일"};;
 		String userText;
 		
@@ -141,7 +127,6 @@ public class MyPage extends JFrame {
 			myTextField[i].setEditable(false);   //텍스트필드 수정불가 
 			changePanel.add(myTextField[i]);
 			startY+=35;
-			
 		}
 		
 		///////////////////////////////////////////////////////////////////////////
@@ -155,27 +140,24 @@ public class MyPage extends JFrame {
 		
 		JLabel myPageLabel2 = new JLabel("MY Page");
 		myPageLabel2.setForeground(new Color(255, 255, 255));
-		myPageLabel2.setFont(new Font("굴림", Font.BOLD, 30));
+		myPageLabel2.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 30));
 		myPageLabel2.setHorizontalAlignment(SwingConstants.CENTER);
 		myPageLabel2.setBounds(53, 10, 282, 63);
 		afterPanel.add(myPageLabel2);
 		
-		JButton okBtn = new JButton("수 정 완 료");
-		okBtn.setFont(new Font("굴림", Font.PLAIN, 25));
+		JButton okBtn = new JButton("수정완료");
+		okBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 20));
 		okBtn.setBounds(53, 354, 112, 52);
 		afterPanel.add(okBtn);
 		
 		JButton cancleBtn = new JButton("취 소");
-		cancleBtn.setFont(new Font("굴림", Font.PLAIN, 25));
+		cancleBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 25));
 		cancleBtn.setBounds(207, 354, 112, 52);
 		afterPanel.add(cancleBtn);
 		
-		
-	
-		
 		String userNames2[]= {"ID","이 름","PW","주소","이메일","전화번호","생년월일"}; 
 		int startY2 =83;
-		String myName2;  //라벨들이 들어갈 이름
+		String myName2;  // 라벨들이 들어갈 이름
 		String userTexts2[]={"ID","이 름","PW","주소","이메일","전화번호","생년월일"}; // 수정된 값이 들어와야함
 		String myText2;  // 수정된 값이 차례대로 들어갈 변수명
 		
@@ -197,10 +179,23 @@ public class MyPage extends JFrame {
 			startY2+=35;
 			
 		}
-		
 		afterPanel.setVisible(false);  //수정누르기전에 false 누르면 true.
 		
-		//수정 버튼 클릭 시 텍스트 수정가능하게 변화
+		//마이페이지 제목 표시줄의 x버튼으로 창 닫은 경우 리스너
+		this.addWindowListener(new WindowListener() {
+			@Override public void windowOpened(WindowEvent e) {}
+			@Override
+			public void windowClosing(WindowEvent e) {
+				AfterLogin after = new AfterLogin();
+				after.setVisible(true);
+			}
+			@Override public void windowClosed(WindowEvent e) {}
+			@Override public void windowIconified(WindowEvent e) {}
+			@Override public void windowDeiconified(WindowEvent e) {}
+			@Override public void windowActivated(WindowEvent e) {}
+			@Override public void windowDeactivated(WindowEvent e) {}});
+		
+		// 수정 버튼 클릭 시 텍스트 수정가능하게 변화
 		modifyBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -208,22 +203,22 @@ public class MyPage extends JFrame {
 				afterPanel.setVisible(true);
 			}
 		});
-		//회원 탈퇴 버튼 클릭 시 회원 탈퇴
+		// 회원 탈퇴 버튼 클릭 시 회원 탈퇴
 		ResignBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			int result = JOptionPane.showConfirmDialog(null, "정말로 회원 탈퇴하시겠습니까?","Confirm",JOptionPane.YES_NO_OPTION);
+			int result = JOptionPane.showConfirmDialog(null, "정말로 회원 탈퇴하시겠습니까?","회원탈퇴여부",JOptionPane.YES_NO_OPTION);
 				// 예 버튼 클릭 시 초기 홈 표출
 			if(JOptionPane.YES_OPTION == result) {
-					// 이곳에 회원 탈퇴 시 기능 작성
+					// 이곳에 회원 탈퇴 시 기능 작성 
+				// 예 버튼 클릭 시 초기 홈 화면 출력
 				Home h = new Home();
 				h.setVisible(true);
-				
 				dispose();
 				}
-			else if(JOptionPane.NO_OPTION == result) {
-				
-			}
+//			else if(JOptionPane.NO_OPTION == result) {
+//				
+//			}
 			}
 			
 		});

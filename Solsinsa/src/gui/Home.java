@@ -204,6 +204,8 @@ public class Home extends JFrame {
 		// ===========================================================================
 		// 상품표시패널
 		JPanel productPanel1 = new JPanel();
+		productPanel1.setBorder(null);
+		productPanel1.setBackground(new Color(216, 210, 199));
 		productPanel1.setSize(633, 1000);
 		productPanel1.setLayout(null);
 
@@ -222,12 +224,12 @@ public class Home extends JFrame {
 			String topImg = "src/쇼핑몰 사진/상의/TOP_" + random + ".jpg";
 			ImageIcon topIcon = new ImageIcon(topImg);
 			Image img = topIcon.getImage();
-			Image changeimg = img.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
+			Image changeimg = img.getScaledInstance(200, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
 			//
 			String outerImg = "src/쇼핑몰 사진/아우터/OUTER_" + random + ".jpg";
 			ImageIcon outerIcon = new ImageIcon(outerImg);
 			Image img2 = outerIcon.getImage();
-			Image changeimg2 = img2.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
+			Image changeimg2 = img2.getScaledInstance(200, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
 
 			// 상품 이미지 버튼
 			if (i % 2 != 0) {

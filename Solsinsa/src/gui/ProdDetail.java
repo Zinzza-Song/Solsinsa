@@ -2,76 +2,69 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
+import javax.swing.border.MatteBorder;
 
 public class ProdDetail extends JFrame {
 
 	private JPanel contentPane;
 
-	Home h = new Home();
-
+	
+	private JTextField FeatureTextField[] = new JTextField[14];
+	private JTextField DetailTextField[] = new JTextField[14];
+	private String detail[] = {"상품명","가격","재질","핏","촉감","신축성","비침","두께","사이즈","총장","너비","어깨너비","가슴단면","소매길이"};
 	/**
 	 * Create the frame.
 	 */
 	public ProdDetail(String category, ImageIcon img, String probName) {
-		setBounds(100, 100, 931, 751);
+		
+		setBounds(100, 100, 931, 647);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(234, 232, 227));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
+		Image Img = img.getImage();
+		Image changeImg = Img.getScaledInstance(468, 500, Image.SCALE_SMOOTH);
+		ImageIcon changeIcon = new ImageIcon(changeImg);
+		
 		// 좌측 상품 이미지 패널
 		JPanel productimgPanel = new JPanel();
-		productimgPanel.setBounds(22, 33, 468, 426);
+		productimgPanel.setBounds(22, 33, 468, 500);
 		contentPane.add(productimgPanel);
 		productimgPanel.setLayout(null);
 		// 상품 이미지 라벨
-		JLabel productimgLabel = new JLabel(img);
-		productimgLabel.setBounds(0, 0, 468, 425);
+		JLabel productimgLabel = new JLabel(changeIcon);
+		productimgLabel.setBounds(0, 0, 468, 500);
 		productimgPanel.add(productimgLabel);
 		productimgLabel.setOpaque(true);
-		productimgLabel.setBackground(new Color(64, 0, 64));
+		productimgLabel.setBackground(new Color(255, 255, 255));
+		productimgLabel.setBackground(new Color(255, 255, 255));
+		
 		// 상품 상세정보
-		JLabel productName = new JLabel("상품명 : ");
-		productName.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productName.setBounds(524, 33, 101, 38);
-		contentPane.add(productName);
+		JPanel DetailePanel = new JPanel();
+		DetailePanel.setBounds(-36, 145, 398, 430);
+		productimgPanel.add(DetailePanel);
+		DetailePanel.setBorder(new MatteBorder(5, 5, 5, 5, (Color) new Color(0, 0, 0)));
+		DetailePanel.setLayout(new GridLayout(10, 0, 0, 0));
 
-		JLabel productNameLabel = new JLabel(probName);
-		productNameLabel.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productNameLabel.setBounds(613, 30, 319, 38);
-		contentPane.add(productNameLabel);
-
-		JLabel productPriceLabel = new JLabel("New label");
-		productPriceLabel.setFont(new Font("맑은 고딕", Font.BOLD, 24));
-		productPriceLabel.setBounds(622, 104, 319, 38);
-		contentPane.add(productPriceLabel);
-
-		JLabel productPrice = new JLabel("가격 : ");
-		productPrice.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productPrice.setBounds(544, 107, 101, 38);
-		contentPane.add(productPrice);
 		// ============================
 		// 하단 버튼
-		JButton addCartBtn = new JButton("장바구니 담기");
-		addCartBtn.setFont(new Font("맑은 고딕", Font.BOLD, 30));
-		addCartBtn.setBounds(148, 624, 272, 49);
+		JButton addCartBtn = new Rb("장바구니 담기");
+		addCartBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 20));
+		addCartBtn.setFocusPainted(false);
+		addCartBtn.setBounds(535, 520, 143, 49);
 		contentPane.add(addCartBtn);
-
+		
+		// 장바구니 담기 버튼 클릭 시
 		// 장바구니 db 연결 ========================
 		addCartBtn.addActionListener(new ActionListener() {
 			// 장바구니 담기 클릭 시 장바구니에 추가됨
@@ -86,60 +79,40 @@ public class ProdDetail extends JFrame {
 			}
 		});
 
-		JButton cancelBtn = new JButton("닫기");
-		cancelBtn.setFont(new Font("맑은 고딕", Font.BOLD, 30));
-		cancelBtn.setBounds(535, 624, 272, 49);
+		JButton cancelBtn = new Rb("닫기"); 
+		cancelBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 30));
+		cancelBtn.setFocusPainted(false);
+		cancelBtn.setBounds(731, 520, 143, 49);
 		contentPane.add(cancelBtn);
 		
-		JLabel productName_1 = new JLabel("상품명 : ");
-		productName_1.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productName_1.setBounds(524, 172, 101, 38);
-		contentPane.add(productName_1);
+		JPanel FeaturePanel = new JPanel();
+		FeaturePanel.setBounds(518, 33, 104, 426);
+		contentPane.add(FeaturePanel);
+		FeaturePanel.setLayout(new GridLayout(14, 0, 0, 0));
 		
-		JLabel productNameLabel_1 = new JLabel("<dynamic>");
-		productNameLabel_1.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productNameLabel_1.setBounds(613, 169, 319, 38);
-		contentPane.add(productNameLabel_1);
+		JPanel DetailPanel = new JPanel();
+		DetailPanel.setBounds(634, 33, 271, 426);
+		contentPane.add(DetailPanel);
+		DetailPanel.setLayout(new GridLayout(14, 0, 0, 0));
 		
-		JLabel productName_2 = new JLabel("상품명 : ");
-		productName_2.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productName_2.setBounds(524, 241, 101, 38);
-		contentPane.add(productName_2);
 		
-		JLabel productNameLabel_2 = new JLabel("<dynamic>");
-		productNameLabel_2.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productNameLabel_2.setBounds(613, 238, 319, 38);
-		contentPane.add(productNameLabel_2);
 		
-		JLabel productName_3 = new JLabel("상품명 : ");
-		productName_3.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productName_3.setBounds(524, 312, 101, 38);
-		contentPane.add(productName_3);
+		for(int i = 0; i < 14; i++) {
+			FeatureTextField[i] = new JTextField();
+			FeatureTextField[i].setColumns(10);
+			FeatureTextField[i].setText(detail[i]);
+			FeatureTextField[i].setHorizontalAlignment(JTextField.CENTER);
+			FeaturePanel.add(FeatureTextField[i]);
+		}	
 		
-		JLabel productNameLabel_3 = new JLabel("<dynamic>");
-		productNameLabel_3.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productNameLabel_3.setBounds(613, 309, 319, 38);
-		contentPane.add(productNameLabel_3);
+		for(int i = 0; i < 14; i++) {
+			DetailTextField[i] = new JTextField();
+			DetailTextField[i].setColumns(10);
+			DetailTextField[0].setText(probName);
+			DetailTextField[i].setHorizontalAlignment(JTextField.CENTER);
+			DetailPanel.add(DetailTextField[i]);
+		}
 		
-		JLabel productName_4 = new JLabel("상품명 : ");
-		productName_4.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productName_4.setBounds(524, 389, 101, 38);
-		contentPane.add(productName_4);
-		
-		JLabel productNameLabel_4 = new JLabel("<dynamic>");
-		productNameLabel_4.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productNameLabel_4.setBounds(613, 386, 319, 38);
-		contentPane.add(productNameLabel_4);
-		
-		JLabel productName_5 = new JLabel("상품명 : ");
-		productName_5.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productName_5.setBounds(524, 463, 101, 38);
-		contentPane.add(productName_5);
-		
-		JLabel productNameLabel_5 = new JLabel("<dynamic>");
-		productNameLabel_5.setFont(new Font("맑은 고딕", Font.BOLD, 22));
-		productNameLabel_5.setBounds(613, 460, 319, 38);
-		contentPane.add(productNameLabel_5);
 		cancelBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -149,5 +122,9 @@ public class ProdDetail extends JFrame {
 			}
 		});
 
+		
+		
+		
+		
 	}
 }

@@ -1,25 +1,11 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
+import javax.swing.*;
+import javax.swing.border.*;
 
 import client.Userinfo;
 
@@ -30,6 +16,7 @@ public class AfterLogin extends JFrame {
 	private JTextField imageJbtnName[];
 	private JTextField imageJbtnPrice[];
 	private ImageIcon imgIcon[] = new ImageIcon[4];
+	
 	String top[] = { "허드슨 아란 점퍼 니트 님부스 / WJ 5740", "Velour Soccer Jersey Black", "WORLD EP HOODIE SLATE BLUE",
 			"코튼 워셔블 하찌 하프집업 니트_5 COLOR", "레터링 타투 후드 기모 블랙", "벌키 브러쉬 아가일 니트 BLACK", "미니멀 울 라이크 반목폴라 니트 [그레이]",
 			"Fluff Mood Check shirt S24 Navy", "프레첼 코듀로이 셔츠 카키브라운 JJLS7525", "울 하이넥 케이블 집업 니트 - 샌드",
@@ -47,29 +34,16 @@ public class AfterLogin extends JFrame {
 			"세미 부츠컷 슬랙스 [그레이]", "데님 오버롤 멜빵 팬츠 [블루]", "오버라운드 퍼티그 점프슈트 OF-501 블랙" };
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AfterLogin frame = new AfterLogin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public AfterLogin() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 723, 653);
+		setLocationRelativeTo(null);
+		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(222, 226, 235));
+		contentPane.setBackground(new Color(216,210,199));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -90,15 +64,17 @@ public class AfterLogin extends JFrame {
 		homeName.setLayout(null);
 
 		JLabel TitleLabel = new JLabel("SOLSINSA");
-		TitleLabel.setFont(new Font("한컴 말랑말랑", Font.BOLD, 40));
+		TitleLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 40));
 		TitleLabel.setForeground(new Color(255, 255, 255));
 		TitleLabel.setBounds(228, 10, 212, 51);
 		homeName.add(TitleLabel);
 
 		// 카테고리 버튼 클릭시 제품 창 띄워짐
-		JButton CategoryTop = new JButton("TOP");
+		//상의
+		JButton CategoryTop = new Rb("TOP");
 		CategoryTop.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryTop.setBounds(72, 134, 160, 25);
+		CategoryTop.setFocusPainted(false);
 		contentPane.add(CategoryTop);
 		CategoryTop.addActionListener(new ActionListener() {
 
@@ -110,10 +86,11 @@ public class AfterLogin extends JFrame {
 				prod.setVisible(true);
 			}
 		});
-
-		JButton CategoryBottom = new JButton("BOTTOM");
+		//하의
+		JButton CategoryBottom = new Rb("BOTTOM");
 		CategoryBottom.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryBottom.setBounds(262, 134, 160, 25);
+		CategoryBottom.setFocusPainted(false);
 		contentPane.add(CategoryBottom);
 		CategoryBottom.addActionListener(new ActionListener() {
 
@@ -125,10 +102,11 @@ public class AfterLogin extends JFrame {
 				prod.setVisible(true);
 			}
 		});
-
-		JButton CategoryOuter = new JButton("OUTER");
+		//아우터
+		JButton CategoryOuter = new Rb("OUTER");
 		CategoryOuter.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 15));
 		CategoryOuter.setBounds(447, 134, 160, 25);
+		CategoryOuter.setFocusPainted(false);
 		contentPane.add(CategoryOuter);
 		CategoryOuter.addActionListener(new ActionListener() {
 
@@ -143,6 +121,7 @@ public class AfterLogin extends JFrame {
 		// ===========================================================================
 		// 상품표시패널
 		JPanel productPanel1 = new JPanel();
+		productPanel1.setBackground(new Color(237, 233, 226));
 		productPanel1.setSize(633, 1000);
 		productPanel1.setLayout(null);
 
@@ -151,29 +130,31 @@ public class AfterLogin extends JFrame {
 		imageJbtnPrice = new JTextField[4];
 		ImageIcon imgIcon[] = new ImageIcon[4];
 
-//		int random = (int)(Math.random()*12)+1;
 		int xBtn1 = 20, xName1 = 45, xPrice1 = 65;
 		int xBtn2 = 15, xName2 = 40, xPrice2 = 55;
 		for (int i = 0; i < 4; i++) {
+			int random = (int)(Math.random()*12)+1;
+			int num = i;
 			//
-			String topImg = "src/쇼핑몰 사진/상의/TOP_" + (i + 1) + ".jpg";
+			String topImg = "src/쇼핑몰 사진/상의/TOP_" + random + ".jpg";
 			ImageIcon topIcon = new ImageIcon(topImg);
 			Image img = topIcon.getImage();
 			Image changeimg = img.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
 			//
-			String bottomImg = "src/쇼핑몰 사진/하의/BOTTOM_" + (i + 1) + ".jpg";
-			ImageIcon bottomIcon = new ImageIcon(bottomImg);
-			Image img2 = bottomIcon.getImage();
-			Image changeimg2 = img2.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
-			//
-			String outerImg = "src/쇼핑몰 사진/아우터/OUTER_" + (i + 1) + ".jpg";
+			String outerImg = "src/쇼핑몰 사진/아우터/OUTER_" + random + ".jpg";
 			ImageIcon outerIcon = new ImageIcon(outerImg);
-			Image img3 = outerIcon.getImage();
-			Image changeimg3 = img3.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
+			Image img2 = outerIcon.getImage();
+			Image changeimg2 = img2.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
 
-			imgIcon[i] = new ImageIcon(changeimg);
+			// 상품 이미지 버튼
+			if (i % 2 != 0) {
+				imgIcon[i] = new ImageIcon(changeimg);
+			} else if (i % 2 == 0) {
+				imgIcon[i] = new ImageIcon(changeimg2);
+			}
 			productJbtn[i] = new JButton(imgIcon[i]);
 			productJbtn[i].setBackground(new Color(255, 255, 255)); // 버튼 색상 변경
+			productJbtn[i].setFocusPainted(false);
 
 			imageJbtnName[i] = new JTextField(top[i]);
 			imageJbtnName[i].setFont(new Font("한컴 말랑말랑", Font.BOLD, 12));
@@ -185,11 +166,18 @@ public class AfterLogin extends JFrame {
 			imageJbtnPrice[i].setHorizontalAlignment(SwingConstants.CENTER);
 			imageJbtnPrice[i].setColumns(10);
 			// 액션리스너
-//			productJbtn[i].addActionListener(new ActionListener() {
-//				public void actionPerformed(ActionEvent e) {
-//					
-//				}
-//			});
+			productJbtn[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(num % 2 != 0) {
+						ProdDetail prod = new ProdDetail("TOP", topIcon, top[num+5]);
+						prod.setVisible(true);
+					}
+					else {
+						ProdDetail prod = new ProdDetail("OUTER", outerIcon, outer[num+5]);
+						prod.setVisible(true);
+					}
+				}
+			});
 			if (i < 2) {
 				productJbtn[i].setBounds(xBtn1, 10, 295, 210);
 				productPanel1.add(productJbtn[i]);
@@ -223,15 +211,25 @@ public class AfterLogin extends JFrame {
 		scrollPane.setBounds(12, 303, 683, 311);
 
 		contentPane.add(scrollPane);
-		//장바구니 밑 상단에 표시될 기능들
-		JButton cartBtn = new JButton("장바구니");
+		//상단에 표시될 버튼들
+		
+		
+		ImageIcon cartIcon = new ImageIcon("./src/icon/Cart1.png");		
+		Image cartImg = cartIcon.getImage();
+		Image changeCartImg = cartImg.getScaledInstance(35,35,Image.SCALE_SMOOTH); 
+		ImageIcon changeCartIcon = new ImageIcon(changeCartImg);
+		
+		//장바구니 버튼
+		JButton cartBtn = new JButton(changeCartIcon);
 		cartBtn.setForeground(new Color(255, 255, 255));
 		cartBtn.setBackground(new Color(0, 0, 64));
-		cartBtn.setBounds(362, 10, 81, 35);
+		cartBtn.setBounds(478, 10, 35, 35);
+		cartBtn.setFocusPainted(false);
 		contentPane.add(cartBtn);
 		cartBtn.setOpaque(true);
+		//버튼 클릭시 장바구니 오픈
 		cartBtn.addActionListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -242,9 +240,16 @@ public class AfterLogin extends JFrame {
 			
 		});
 		
-		JButton mypageBtn = new JButton("마이페이지");
+        ImageIcon myIcon = new ImageIcon("./src/icon/Mypage1.png");	
+		Image myImg = myIcon.getImage();
+		Image changeMyImg = myImg.getScaledInstance(35,35,Image.SCALE_SMOOTH); 
+		ImageIcon changeMyIcon = new ImageIcon(changeMyImg);
+		
+		//마이 페이지 버튼
+		JButton mypageBtn = new JButton(changeMyIcon);
 		mypageBtn.setBackground(new Color(128, 128, 192));
-		mypageBtn.setBounds(485, 10, 81, 35);
+		mypageBtn.setBounds(544, 10, 35, 35);
+		mypageBtn.setFocusPainted(false);
 		contentPane.add(mypageBtn);
 		mypageBtn.setOpaque(true);
 		
@@ -254,14 +259,14 @@ public class AfterLogin extends JFrame {
 		contentPane.add(welcomeLabel);
 		
 		//로그아웃 버튼
-		JButton logoutBtn = new JButton("로그아웃");
+		JButton logoutBtn = new JButton(changelogoutIcon);
 		logoutBtn.setOpaque(true);
 		logoutBtn.setBackground(new Color(128, 128, 192));
-		logoutBtn.setBounds(614, 10, 81, 35);
+		logoutBtn.setBounds(610, 10, 35, 35);
 		contentPane.add(logoutBtn);
 		//로그아웃 클릭 시 액션 리스너
 		logoutBtn.addActionListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -273,5 +278,11 @@ public class AfterLogin extends JFrame {
 			}
 			
 		});
+		
+		JLabel welcomeLabel = new JLabel("000님 환영합니다.");
+		welcomeLabel.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 20));
+		welcomeLabel.setBounds(280, 10, 192, 35);
+		contentPane.add(welcomeLabel);
+		
 	}
 }

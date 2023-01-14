@@ -54,12 +54,14 @@ public class Products extends JFrame {
 		setBounds(100, 100, 694, 602);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(new Color(216, 210, 199));
 		setResizable(false);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		// 상품 패널 만들고 스크롤팬안에 패널 넣기
 		JPanel productPanel = new JPanel();
+		productPanel.setBackground(new Color(234, 232, 227));
 		productPanel.setPreferredSize(new Dimension(490, 980));
 
 		JScrollPane productScrollPane = new JScrollPane(productPanel);
@@ -73,10 +75,10 @@ public class Products extends JFrame {
 		productName = new JTextField[12];
 		productPrice = new JTextField[12];
 		// x, y 좌표 설정 초기화
-		int xBtn1 = 20, xName1 = 28, xPrice1 = 58;
-		int xBtn2 = 20, xName2 = 28, xPrice2 = 58;
-		int xBtn3 = 20, xName3 = 28, xPrice3 = 58;
-		int xBtn4 = 20, xName4 = 28, xPrice4 = 58;
+		int xBtn1 = 30, xName1 = 22, xPrice1 = 53;
+		int xBtn2 = 30, xName2 = 22, xPrice2 = 53;
+		int xBtn3 = 30, xName3 = 22, xPrice3 = 53;
+		int xBtn4 = 30, xName4 = 22, xPrice4 = 53;
 
 		for (int i = 0; i < 12; i++) {
 			if (category.equals("TOP")) {
@@ -85,7 +87,11 @@ public class Products extends JFrame {
 				Image Img = imageIcon.getImage();
 				Image changeImg = Img.getScaledInstance(160, 172, Image.SCALE_SMOOTH);
 				ImageIcon changeIcon = new ImageIcon(changeImg);
+				
 				productImgBtn[i] = new JButton(changeIcon);
+				productImgBtn[i].setFocusPainted(false);
+				productImgBtn[i].setBackground(new Color(234, 232, 227));
+				productImgBtn[i].setOpaque(true);
 				
 				probName = top[i];
 				productName[i] = new JTextField(probName);
@@ -156,17 +162,18 @@ public class Products extends JFrame {
 			productPrice[i].setColumns(10);
 
 			if (i < 3) {
-				productImgBtn[i].setBounds(xBtn1, 20, 189, 172);
+				productImgBtn[i].setBounds(xBtn1, 20, 160, 172);
 				productPanel.add(productImgBtn[i]);
 				productName[i].setBounds(xName1, 195, 180, 21);
 				productPanel.add(productName[i]);
 				productPrice[i].setBounds(xPrice1, 225, 116, 21);
 				productPanel.add(productPrice[i]);
+				
 				xBtn1 += 222;
 				xName1 += 220;
 				xPrice1 += 220;
 			} else if (i < 6) {
-				productImgBtn[i].setBounds(xBtn2, 260, 189, 172);
+				productImgBtn[i].setBounds(xBtn2, 260, 160, 172);
 				productPanel.add(productImgBtn[i]);
 				productName[i].setBounds(xName2, 435, 180, 21);
 				productPanel.add(productName[i]);
@@ -176,7 +183,7 @@ public class Products extends JFrame {
 				xName2 += 220;
 				xPrice2 += 220;
 			} else if (i < 9) {
-				productImgBtn[i].setBounds(xBtn3, 500, 189, 172);
+				productImgBtn[i].setBounds(xBtn3, 500, 160, 172);
 				productPanel.add(productImgBtn[i]);
 				productName[i].setBounds(xName3, 675, 180, 21);
 				productPanel.add(productName[i]);
@@ -186,7 +193,7 @@ public class Products extends JFrame {
 				xName3 += 220;
 				xPrice3 += 220;
 			} else {
-				productImgBtn[i].setBounds(xBtn4, 740, 189, 172);
+				productImgBtn[i].setBounds(xBtn4, 740, 160, 172);
 				productPanel.add(productImgBtn[i]);
 				productName[i].setBounds(xName4, 915, 180, 21);
 				productPanel.add(productName[i]);
@@ -199,8 +206,10 @@ public class Products extends JFrame {
 		}
 
 		// 닫기 버튼
-		cancleBtn = new JButton("닫기");
+		cancleBtn = new Rb("닫기");
+		cancleBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 24));
 		cancleBtn.setBounds(265, 510, 150, 35);
+		cancleBtn.setFocusPainted(false);
 		contentPane.add(cancleBtn);
 		cancleBtn.addActionListener(new ActionListener() {
 

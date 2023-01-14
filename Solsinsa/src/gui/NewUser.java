@@ -52,10 +52,12 @@ public class NewUser extends JFrame {
 		setBounds(100, 100, 425, 419);  //위치 사이즈설정
 		setResizable(false);   //사이즈 조절 불가능
 		contentPane = new JPanel(); 
+		contentPane.setBackground(new Color(216,210,199));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
 		
 		//회원가입라벨
 		signUpLabel = new JLabel("\uD68C\uC6D0\uAC00\uC785");
@@ -65,8 +67,8 @@ public class NewUser extends JFrame {
 		signUpLabel.setBounds(109, 10, 180, 33);
 		signUpLabel.setOpaque(true);   //라벨에 배경색 입히는 코드
 		signUpLabel.setHorizontalAlignment(JLabel.CENTER);  //중앙정렬
-		
 		contentPane.add(signUpLabel);
+		
 		//id라벨
 		idLabel = new JLabel("ID");
 		idLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
@@ -80,10 +82,11 @@ public class NewUser extends JFrame {
 		contentPane.add(idTextField);
 		idTextField.setColumns(10);
 		
-		//중복확인버튼 - DB연동
-		reduplicationCheckBtn = new JButton("\uC911\uBCF5\uD655\uC778");
+		//중복확인버튼
+		JButton reduplicationCheckBtn = new Rb("\uC911\uBCF5\uD655\uC778");
 		reduplicationCheckBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		reduplicationCheckBtn.setBounds(301, 59, 97, 23);
+		reduplicationCheckBtn.setFocusPainted(false);
 		contentPane.add(reduplicationCheckBtn);
 		reduplicationCheckBtn.addActionListener(new ActionListener() {
 			@Override
@@ -124,34 +127,27 @@ public class NewUser extends JFrame {
 		nameTextField.setColumns(10);
 		nameTextField.setBounds(108, 94, 181, 22);
 		contentPane.add(nameTextField);
-		nameTextField.addKeyListener(new KeyAdapter() {
-			public void keyTyped(KeyEvent k) {
-				JTextField src = (JTextField)k.getSource();
-				if(src.getText().length() >= 5){
-					k.consume();
-				}
-			}
-		});
 		
 		//비밀번호 라벨
 		pwLabel = new JLabel("PW");
 		pwLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		pwLabel.setBounds(12, 126, 84, 24);
 		contentPane.add(pwLabel);
-		//비밀번호 입력창
-		pwTextField = new JPasswordField();
+		
+		//비번입력창
+		pwTextField = new JPasswordField();         //JPasswordField
 		pwTextField.setHorizontalAlignment(SwingConstants.LEFT);
 		pwTextField.setColumns(10);
 		pwTextField.setBounds(108, 128, 181, 22);
 		contentPane.add(pwTextField);
-		
 		
 		//비밀번호 확인 라벨
 		pwCheckLabel = new JLabel("PW \uD655\uC778");
 		pwCheckLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		pwCheckLabel.setBounds(12, 160, 84, 24);
 		contentPane.add(pwCheckLabel);
-		//비밀번호 확인 창
+		
+		//비번체크창
 		pwCheckTextField = new JPasswordField();
 		pwCheckTextField.setHorizontalAlignment(SwingConstants.LEFT);
 		pwCheckTextField.setColumns(10);
@@ -215,9 +211,10 @@ public class NewUser extends JFrame {
 		});
 		
 		//회원가입 버튼
-		JButton confirmBtn = new JButton("회원가입");
+		JButton confirmBtn = new Rb("회원가입완료");
 		confirmBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		confirmBtn.setBounds(205, 346, 84, 23);
+		confirmBtn.setFocusPainted(false);
 		contentPane.add(confirmBtn);
 		//회원 가입 버튼 클릭 시 액션 리스너
 		confirmBtn.addActionListener(new ActionListener() {
@@ -281,9 +278,10 @@ public class NewUser extends JFrame {
 		}});
 		
 		//취소버튼
-		JButton cancleBtn = new JButton("\uCDE8 \uC18C");
+		JButton cancleBtn = new Rb("\uCDE8 \uC18C");
 		cancleBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 14));
 		cancleBtn.setBounds(301, 346, 84, 23);
+		cancleBtn.setFocusPainted(false);
 		contentPane.add(cancleBtn);
 		cancleBtn.addActionListener(new ActionListener() {
 			@Override

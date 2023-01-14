@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ import javax.swing.border.*;
 
 import client.Client;
 import client.Userinfo;
+import server.Product;
 
 public class Home extends JFrame {
 
@@ -235,36 +237,54 @@ public class Home extends JFrame {
 		int xBtn1 = 20, xName1 = 45, xPrice1 = 65;
 		int xBtn2 = 15, xName2 = 40, xPrice2 = 55;
 
+		ArrayList<Integer> checkList = new ArrayList<>();
+		checkList.add(37);
+		
 		for (int i = 0; i < 4; i++) {
-			int random = (int) (Math.random() * 12) + 1;
-			// 상의 사진
-			String topImg = "src/쇼핑몰 사진/상의/TOP_" + random + ".jpg";
-			ImageIcon topIcon = new ImageIcon(topImg);
-			Image img = topIcon.getImage();
-			Image changeimg = img.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
-			// 아우터 사진
-			String outerImg = "src/쇼핑몰 사진/아우터/OUTER_" + random + ".jpg";
-			ImageIcon outerIcon = new ImageIcon(outerImg);
-			Image img3 = outerIcon.getImage();
-			Image changeimg2 = img3.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
-
-			// 상품 이미지 버튼
-			if (i % 2 != 0) {
-				imgIcon[i] = new ImageIcon(changeimg);
-			} else if (i % 2 == 0) {
-				imgIcon[i] = new ImageIcon(changeimg2);
+			int random = (int) (Math.random() * 36) + 1;
+			
+			Boolean check = true;
+			while(check) {
+				boolean numCheck = true;
+				for(int j = 0; j < checkList.size(); ++j) {
+					if(random == checkList.get(i)) {
+						numCheck = false;
+						random = (int) (Math.random() * 36) + 1;
+						break;
+					}
+				}
+				if(numCheck) {
+					checkList.add(random);
+					break;
+				}
 			}
+			
+			server.Product product = Client.products.get(random);
+			
+			String pCategory = product.getCategory();
+			String pImg = product.getImg();
+			System.out.println(pCategory);
+			System.out.println(pImg);
+			System.out.println(product.getName());
+			System.out.println(product.getPrice());
+			String setImg = "src/쇼핑몰 사진/"+ pCategory +"/" + pImg;
+			ImageIcon setIcon = new ImageIcon(setImg);
+			Image img = setIcon.getImage();
+			Image changeimg = img.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
+
+			imgIcon[i] = setIcon;
+			
 			productJbtn[i] = new JButton(imgIcon[i]);
 			productJbtn[i].setBackground(new Color(255, 255, 255)); // 버튼 색상 변경
 
 			// 상품 이름
-			imageJbtnName[i] = new JTextField(top[i]);
+			imageJbtnName[i] = new JTextField(product.getName());
 			imageJbtnName[i].setFont(new Font("한컴 말랑말랑", Font.BOLD, 12));
 			imageJbtnName[i].setHorizontalAlignment(SwingConstants.CENTER);
 			imageJbtnName[i].setColumns(10);
 
 			// 상품 가격
-			imageJbtnPrice[i] = new JTextField("가격");
+			imageJbtnPrice[i] = new JTextField(Integer.toString(product.getPrice()));
 			imageJbtnPrice[i].setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
 			imageJbtnPrice[i].setHorizontalAlignment(SwingConstants.CENTER);
 			imageJbtnPrice[i].setColumns(10);

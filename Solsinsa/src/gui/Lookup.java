@@ -133,19 +133,15 @@ public class Lookup extends JFrame {
 		userTable.getColumnModel().getColumn(0).setMinWidth(40);
 		userTable.getColumnModel().getColumn(0).setWidth(40);
 
-		userTable.getColumnModel().getColumn(4).setMaxWidth(100);
 		userTable.getColumnModel().getColumn(4).setMinWidth(100);
 		userTable.getColumnModel().getColumn(4).setWidth(100);
 
-		userTable.getColumnModel().getColumn(5).setMaxWidth(100);
 		userTable.getColumnModel().getColumn(5).setMinWidth(100);
 		userTable.getColumnModel().getColumn(5).setWidth(100);
 
-		userTable.getColumnModel().getColumn(6).setMaxWidth(100);
 		userTable.getColumnModel().getColumn(6).setMinWidth(100);
 		userTable.getColumnModel().getColumn(6).setWidth(100);
 
-		userTable.getColumnModel().getColumn(7).setMaxWidth(100);
 		userTable.getColumnModel().getColumn(7).setMinWidth(100);
 		userTable.getColumnModel().getColumn(7).setWidth(100);
 
@@ -159,14 +155,14 @@ public class Lookup extends JFrame {
 		logTable = new JTable(logInformation, logHeader);
 		logTable.setCellSelectionEnabled(true);
 		logTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		logTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-		logTable.getColumnModel().getColumn(0).setMaxWidth(80);
+//		logTable.getColumnModel().getColumn(0).setMaxWidth(80);
 		logTable.getColumnModel().getColumn(0).setMinWidth(80);
-		logTable.getColumnModel().getColumn(0).setWidth(80);
-
-		logTable.getColumnModel().getColumn(1).setMaxWidth(900);
-		logTable.getColumnModel().getColumn(1).setMinWidth(900);
-		logTable.getColumnModel().getColumn(1).setWidth(900);
+//		logTable.getColumnModel().getColumn(0).setWidth(80);
+		
+		logTable.getColumnModel().getColumn(1).setMinWidth(920);
+		logTable.getColumnModel().getColumn(1).setWidth(920);
 
 		// log테이블 글자 정렬
 		logTable.getColumn("일자").setCellRenderer(celAlignCenter);

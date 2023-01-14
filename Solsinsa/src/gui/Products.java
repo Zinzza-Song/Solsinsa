@@ -87,8 +87,11 @@ public class Products extends JFrame {
 				Image Img = imageIcon.getImage();
 				Image changeImg = Img.getScaledInstance(160, 172, Image.SCALE_SMOOTH);
 				ImageIcon changeIcon = new ImageIcon(changeImg);
+				
 				productImgBtn[i] = new JButton(changeIcon);
 				productImgBtn[i].setFocusPainted(false);
+				productImgBtn[i].setOpaque(true);
+				productImgBtn[i].setBackground(new Color(234, 232, 227));
 				
 				probName = top[i];
 				productName[i] = new JTextField(probName);

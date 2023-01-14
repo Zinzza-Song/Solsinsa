@@ -119,6 +119,7 @@ public class AfterLogin extends JFrame {
 		// ===========================================================================
 		// 상품표시패널
 		JPanel productPanel1 = new JPanel();
+		productPanel1.setBackground(new Color(237, 233, 226));
 		productPanel1.setSize(633, 1000);
 		productPanel1.setLayout(null);
 
@@ -209,8 +210,15 @@ public class AfterLogin extends JFrame {
 
 		contentPane.add(scrollPane);
 		//상단에 표시될 버튼들
+		
+		
+		ImageIcon cartIcon = new ImageIcon("./src/icon/Cart1.png");		
+		Image cartImg = cartIcon.getImage();
+		Image changeCartImg = cartImg.getScaledInstance(35,35,Image.SCALE_SMOOTH); 
+		ImageIcon changeCartIcon = new ImageIcon(changeCartImg);
+		
 		//장바구니 버튼
-		JButton cartBtn = new JButton("장바구니");
+		JButton cartBtn = new JButton(changeCartIcon);
 		cartBtn.setForeground(new Color(255, 255, 255));
 		cartBtn.setBackground(new Color(0, 0, 64));
 		cartBtn.setBounds(478, 10, 35, 35);
@@ -219,7 +227,7 @@ public class AfterLogin extends JFrame {
 		cartBtn.setOpaque(true);
 		//버튼 클릭시 장바구니 오픈
 		cartBtn.addActionListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -229,15 +237,21 @@ public class AfterLogin extends JFrame {
 			}
 			
 		});
+		
+        ImageIcon myIcon = new ImageIcon("./src/icon/Mypage1.png");	
+		Image myImg = myIcon.getImage();
+		Image changeMyImg = myImg.getScaledInstance(35,35,Image.SCALE_SMOOTH); 
+		ImageIcon changeMyIcon = new ImageIcon(changeMyImg);
+		
 		//마이 페이지 버튼
-		JButton mypageBtn = new JButton("마이페이지");
+		JButton mypageBtn = new JButton(changeMyIcon);
 		mypageBtn.setBackground(new Color(128, 128, 192));
 		mypageBtn.setBounds(544, 10, 35, 35);
 		mypageBtn.setFocusPainted(false);
 		contentPane.add(mypageBtn);
 		mypageBtn.setOpaque(true);
 		mypageBtn.addActionListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -247,21 +261,22 @@ public class AfterLogin extends JFrame {
 			}
 			
 		});
-		
-		JLabel welcomeLabel = new JLabel("000님 환영합니다.");
-		welcomeLabel.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 20));
-		welcomeLabel.setBounds(280, 10, 192, 35);
-		contentPane.add(welcomeLabel);
-		
+				
+        ImageIcon logoutIcon = new ImageIcon("./src/icon/Logout1.jpg");	
+		Image logoutImg = logoutIcon.getImage();
+		Image changelogoutImg = logoutImg.getScaledInstance(35,35,Image.SCALE_SMOOTH); 
+		ImageIcon changelogoutIcon = new ImageIcon(changelogoutImg);
+				
+
 		//로그아웃 버튼
-		JButton logoutBtn = new JButton("로그아웃");
+		JButton logoutBtn = new JButton(changelogoutIcon);
 		logoutBtn.setOpaque(true);
 		logoutBtn.setBackground(new Color(128, 128, 192));
-		logoutBtn.setBounds(614, 10, 81, 35);
+		logoutBtn.setBounds(610, 10, 35, 35);
 		contentPane.add(logoutBtn);
 		//로그아웃 클릭 시 액션 리스너
 		logoutBtn.addActionListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -272,5 +287,11 @@ public class AfterLogin extends JFrame {
 			}
 			
 		});
+		
+		JLabel welcomeLabel = new JLabel("000님 환영합니다.");
+		welcomeLabel.setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 20));
+		welcomeLabel.setBounds(280, 10, 192, 35);
+		contentPane.add(welcomeLabel);
+		
 	}
 }

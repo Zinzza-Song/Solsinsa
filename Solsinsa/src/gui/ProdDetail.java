@@ -37,7 +37,7 @@ public class ProdDetail extends JFrame {
 	public ProdDetail(String category, ImageIcon img, String probName) {
 		setBounds(100, 100, 931, 647);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(216,210,199));
+		contentPane.setBackground(new Color(234, 232, 227));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
@@ -84,9 +84,9 @@ public class ProdDetail extends JFrame {
 		// ============================
 		// 하단 버튼
 		JButton addCartBtn = new Rb("장바구니 담기");
-		addCartBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 30));
+		addCartBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 20));
 		addCartBtn.setFocusPainted(false);
-		addCartBtn.setBounds(148, 624, 272, 49);
+		addCartBtn.setBounds(535, 520, 143, 49);
 		contentPane.add(addCartBtn);
 
 		// 장바구니 db 연결 ========================
@@ -106,7 +106,7 @@ public class ProdDetail extends JFrame {
 		JButton cancelBtn = new Rb("닫기"); 
 		cancelBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 30));
 		cancelBtn.setFocusPainted(false);
-		cancelBtn.setBounds(535, 624, 272, 49);
+		cancelBtn.setBounds(731, 520, 143, 49);
 		contentPane.add(cancelBtn);
 		
 		JPanel FeaturePanel = new JPanel();
@@ -118,6 +118,9 @@ public class ProdDetail extends JFrame {
 		DetailPanel.setBounds(634, 33, 271, 426);
 		contentPane.add(DetailPanel);
 		DetailPanel.setLayout(new GridLayout(14, 0, 0, 0));
+		
+		
+		
 		for(int i = 0; i < 14; i++) {
 			FeatureTextField[i] = new JTextField();
 			FeatureTextField[i].setColumns(10);
@@ -143,5 +146,9 @@ public class ProdDetail extends JFrame {
 			}
 		});
 
+		
+		
+		
+		
 	}
 }

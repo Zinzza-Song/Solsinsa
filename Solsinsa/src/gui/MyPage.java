@@ -46,18 +46,18 @@ public class MyPage extends JFrame {
 		//마이페이지 제목
 		JLabel myPageLabel = new JLabel("MY Page");
 		myPageLabel.setForeground(new Color(255, 255, 255));
-		myPageLabel.setFont(new Font("굴림", Font.BOLD, 30));
+		myPageLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 30));
 		myPageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		myPageLabel.setBounds(53, 10, 282, 63);
 		changePanel.add(myPageLabel);
 		//정보 수정 버튼
 		JButton modifyBtn = new JButton("수 정");
-		modifyBtn.setFont(new Font("굴림", Font.PLAIN, 25));
+		modifyBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 25));
 		modifyBtn.setBounds(53, 354, 112, 52);
 		changePanel.add(modifyBtn);
 		//회원 탈퇴 버튼
 		JButton ResignBtn = new JButton("탈 퇴");
-		ResignBtn.setFont(new Font("굴림", Font.PLAIN, 25));
+		ResignBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 25));
 		ResignBtn.setBounds(207, 354, 112, 52);
 		changePanel.add(ResignBtn);
 		
@@ -140,18 +140,18 @@ public class MyPage extends JFrame {
 		
 		JLabel myPageLabel2 = new JLabel("MY Page");
 		myPageLabel2.setForeground(new Color(255, 255, 255));
-		myPageLabel2.setFont(new Font("굴림", Font.BOLD, 30));
+		myPageLabel2.setFont(new Font("한컴 말랑말랑 Bold", Font.BOLD, 30));
 		myPageLabel2.setHorizontalAlignment(SwingConstants.CENTER);
 		myPageLabel2.setBounds(53, 10, 282, 63);
 		afterPanel.add(myPageLabel2);
 		
-		JButton okBtn = new JButton("수 정 완 료");
-		okBtn.setFont(new Font("굴림", Font.PLAIN, 25));
+		JButton okBtn = new JButton("수정완료");
+		okBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 20));
 		okBtn.setBounds(53, 354, 112, 52);
 		afterPanel.add(okBtn);
 		
 		JButton cancleBtn = new JButton("취 소");
-		cancleBtn.setFont(new Font("굴림", Font.PLAIN, 25));
+		cancleBtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 25));
 		cancleBtn.setBounds(207, 354, 112, 52);
 		afterPanel.add(cancleBtn);
 		

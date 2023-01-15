@@ -10,9 +10,11 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import server.Bottom;
+import server.Log;
 import server.Outer;
 import server.Product;
 import server.Top;
+import server.User;
 
 public class Client extends Thread {
 
@@ -24,10 +26,12 @@ public class Client extends Thread {
 	public static String msg = null;
 	public static String ans = null;
 	
+	public static ArrayList<User> users;
 	public static ArrayList<Product> products;
 	public static ArrayList<Top> tops;
 	public static ArrayList<Outer> outers;
 	public static ArrayList<Bottom> bottoms;
+	public static ArrayList<Log> logs;
 
 	final String localhost = "127.0.0.1";
 
@@ -46,10 +50,12 @@ public class Client extends Thread {
 			
 			ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 			HashMap<Object, Object> map = (HashMap<Object, Object>) ois.readObject();
+			users = (ArrayList<User>)map.get("user");
 			products = (ArrayList<Product>) map.get("product");
 			tops = (ArrayList<Top>)map.get("top");
 			outers = (ArrayList<Outer>)map.get("outer");
 			bottoms = (ArrayList<Bottom>)map.get("bottom");
+			logs = (ArrayList<Log>)map.get("log");
 
 			SocketThread thread = new SocketThread(); // 메시지 수신을 위한 쓰레드 객체 생성
 			thread.start(); // 생성한 쓰레드 객체 실행

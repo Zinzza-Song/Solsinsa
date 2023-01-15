@@ -121,7 +121,7 @@ public class MyPage extends JFrame {
 		scrollPane.setBounds(12, 46, 360, 129);
 		orderPanel.add(scrollPane);
 		
-		String userNames[]= {"ID","이 름","PW","주소","이메일","전화번호","생년월일"};
+		String userNames[]= {"이 름", "ID","PW","주소","전화번호","이메일","생년월일"};
 		int startY =83;
 		String userName;  //라벨에 들어갈 이름
 		
@@ -132,8 +132,9 @@ public class MyPage extends JFrame {
 		String mail = Userinfo.getUserInfo().getMail();
 		String phone = Userinfo.getUserInfo().getPhone();
 		String birth = Userinfo.getUserInfo().getBirth();
-		String userTexts[]={id,name,pw,addr,mail,phone,birth};
-		String userText;
+		String userTexts[]={name,id,pw,addr,phone,mail,birth};
+		
+		JTextField[] setTextFields = new JTextField[userNames.length];
 		
 		//마이 페이지 유저 정보란 
 		for(int i=0;i<userNames.length;i++) {
@@ -151,6 +152,7 @@ public class MyPage extends JFrame {
 			myTextField[i].setBounds(126,startY,161,24);
 			myTextField[i].setEditable(false);   //텍스트필드 수정불가 
 			changePanel.add(myTextField[i]);
+			setTextFields[i] = myTextField[i];
 			startY+=35;
 		}
 		
@@ -180,12 +182,13 @@ public class MyPage extends JFrame {
 		cancleBtn.setBounds(207, 354, 112, 52);
 		afterPanel.add(cancleBtn);
 		
-		String userNames2[]= {"ID","이 름","PW","주소","이메일","전화번호","생년월일"}; 
+		String userNames2[]= {"이 름", "ID","PW","주소","전화번호","이메일","생년월일"}; 
 		int startY2 =83;
 		String myName2;  // 라벨들이 들어갈 이름
-		String userTexts2[]={id,name,pw,addr,mail,phone,birth}; // 수정된 값이 들어와야함
+		String userTexts2[]={name,id,pw,addr,phone,mail,birth}; // 수정된 값이 들어와야함
 		String myText2;  // 수정된 값이 차례대로 들어갈 변수명
 		
+		JTextField[] updatesFields = new JTextField[userNames2.length];
 		for(int i=0;i<userNames2.length;i++) {
 			
 			myLabel2 = new JLabel[7];
@@ -201,6 +204,7 @@ public class MyPage extends JFrame {
 			myTextField2[i].setBounds(126,startY2,161,24);
 			myTextField2[i].setEditable(true); //
 			afterPanel.add(myTextField2[i]);
+			updatesFields[i] = myTextField2[i];
 			startY2+=35;
 			
 		}
@@ -238,13 +242,30 @@ public class MyPage extends JFrame {
 		okBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				String updateUserInfo = "";
+				for(int i = 0;  i < updatesFields.length; ++i) {
+					setTextFields[i].setText(updatesFields[i].getText());
+					if(i != 0 && i != updatesFields.length - 1) {
+						if(i == updatesFields.length - 2)
+							updateUserInfo += updatesFields[i].getText();
+						else 
+							updateUserInfo += updatesFields[i].getText() + ",";
+					}
+				}
+				
+				Client.msg = updateUserInfo + ":1007";
+				
+				Userinfo.getUserInfo().setPw(updatesFields[2].getText());
+				Userinfo.getUserInfo().setAddr(updatesFields[3].getText());
+				Userinfo.getUserInfo().setPhone(updatesFields[4].getText());
+				Userinfo.getUserInfo().setMail(updatesFields[5].getText());
 				changePanel.setVisible(true);
 				afterPanel.setVisible(false);
 			}
 		});
 		// 취소 버튼 입력 시 돌아옴
 		cancleBtn.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				changePanel.setVisible(true);

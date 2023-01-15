@@ -57,7 +57,7 @@ public class NewUser extends JFrame {
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		setLocationRelativeTo(null);
 		
 		//회원가입라벨
 		signUpLabel = new JLabel("\uD68C\uC6D0\uAC00\uC785");
@@ -289,7 +289,6 @@ public class NewUser extends JFrame {
 				//프레임 종료
 				dispose();
 			}
-			
 		});
 	}
 

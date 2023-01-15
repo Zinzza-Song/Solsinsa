@@ -145,6 +145,7 @@ public class Server implements Runnable {
 					
 					User user = new User();
 					user.setNo(no);
+					user.setId(id);
 					user.setPw(pw);
 					user.setName(name);
 					user.setBirth(birth);
@@ -461,7 +462,7 @@ public class Server implements Runnable {
 			
 			ResultSet rs = (ResultSet)cstmt.getObject(2);
 			while(rs.next())
-				res += rs.getString("p_name") + "," + rs.getString("p_price") + "/";
+				res += rs.getString("p_name") + "," + rs.getString("p_price") + "," + rs.getString("p_no") + "/";
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -490,7 +491,7 @@ public class Server implements Runnable {
 			pro = "{call addorders(?,?)}";
 			try(CallableStatement cstmt = con.prepareCall(pro)) {
 				cstmt.setInt(1, c_no);
-				cstmt.setInt(2, c_no);
+				cstmt.setInt(2, p_no);
 				cstmt.execute();
 			} catch (SQLException e) {
 				System.out.println("insert오류");
@@ -567,14 +568,6 @@ public class Server implements Runnable {
 			e.printStackTrace();
 		}
 		return res;
-	}
-	
-	String adminUIInit() {
-		return null;
-	}
-	
-	String showDetailLog(String data) {
-		return null;
 	}
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {

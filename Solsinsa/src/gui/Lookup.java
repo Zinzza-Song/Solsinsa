@@ -152,7 +152,8 @@ public class Lookup extends JFrame {
 				add += 1;
 				value = (Object) add;
 				productTable.setValueAt(value, row, 4);
-
+				
+				Client.msg = productTable.getValueAt(row, 0) + ":1010";
 			}
 
 			@Override

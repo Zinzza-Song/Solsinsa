@@ -184,18 +184,16 @@ public class MyPage extends JFrame {
 		afterPanel.setVisible(false);  //수정누르기전에 false 누르면 true.
 		
 		//마이페이지 제목 표시줄의 x버튼으로 창 닫은 경우 리스너
-		this.addWindowListener(new WindowListener() {
-			@Override public void windowOpened(WindowEvent e) {}
-			@Override
-			public void windowClosing(WindowEvent e) {
-				AfterLogin after = new AfterLogin();
-				after.setVisible(true);
-			}
-			@Override public void windowClosed(WindowEvent e) {}
-			@Override public void windowIconified(WindowEvent e) {}
-			@Override public void windowDeiconified(WindowEvent e) {}
-			@Override public void windowActivated(WindowEvent e) {}
-			@Override public void windowDeactivated(WindowEvent e) {}});
+//		this.addWindowListener(new WindowListener() {
+//			@Override public void windowOpened(WindowEvent e) {}
+//			@Override
+//			public void windowClosing(WindowEvent e) {
+//			}
+//			@Override public void windowClosed(WindowEvent e) {}
+//			@Override public void windowIconified(WindowEvent e) {}
+//			@Override public void windowDeiconified(WindowEvent e) {}
+//			@Override public void windowActivated(WindowEvent e) {}
+//			@Override public void windowDeactivated(WindowEvent e) {}});
 		
 		// 수정 버튼 클릭 시 텍스트 수정가능하게 변화
 		modifyBtn.addActionListener(new ActionListener() {

@@ -19,7 +19,7 @@ public class AfterLogin extends JPanel {
 	/**
 	 * Create the frame.
 	 */
-	public AfterLogin() {
+	public AfterLogin(JPanel inputPanel) {
 		   //로그인 후 패널
 	      
 	      setBounds(0, 0, 707, 54);
@@ -97,8 +97,7 @@ public class AfterLogin extends JPanel {
 	            // TODO Auto-generated method stub
 	            JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
 	            Userinfo.getUserInfo().Logout();
-	            Home h = new Home();
-	            h.inputPanel.setVisible(true);
+	            inputPanel.setVisible(true);
 	            setVisible(false);
 	         }
 	      });

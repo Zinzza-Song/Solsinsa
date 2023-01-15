@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import client.Client;
 import client.Userinfo;
 
 import java.awt.*;
@@ -36,6 +37,7 @@ public class Payment extends JFrame {
 	private JTextField textField_6;
 	private JLabel lblNewLabel_6;
 	private ArrayList<String> list;
+	private String payThings = "";
 	
 	/**
 	 * Create the frame.
@@ -141,6 +143,11 @@ public class Payment extends JFrame {
 			int no = Integer.parseInt(st.nextToken());
 			String itemName = st.nextToken();
 			int itemPrice = Integer.parseInt(st.nextToken());
+
+			if(i != list.size() - 1)
+				payThings += no + ",";
+			else 
+				payThings += Integer.toString(no);
 			
 			// 상품명
 			payListNameLabel = new JLabel[payCount]; // 체크박스에 체크표시된 품목만큼의 라벨생성
@@ -247,6 +254,7 @@ public class Payment extends JFrame {
 				int result = JOptionPane.showConfirmDialog(null, "결제하시겠습니까?","결제 여부",JOptionPane.YES_NO_OPTION);
 				
 				if(result == 0) {
+					Client.msg = Userinfo.getUserInfo().getNo() + "/" + payThings +":1006";
 					JOptionPane.showMessageDialog(null,"결제가 완료되었습니다");
 					dispose();
 				}

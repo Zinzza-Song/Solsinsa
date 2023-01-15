@@ -1,10 +1,12 @@
 package gui;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.StringTokenizer;
 
 import javax.swing.*;
 import javax.swing.border.*;
 
+import client.Client;
 import client.Userinfo;
 
 public class MyPage extends JFrame {
@@ -70,15 +72,34 @@ public class MyPage extends JFrame {
 		contentPane.add(orderPanel);
 		orderPanel.setLayout(null);
 		
+		Client.msg = Userinfo.getUserInfo().getNo() + ":1009";
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		
+		String str = Client.ans;
+		StringTokenizer st = new StringTokenizer(str, "/");
 		
 		//주문 목록 조회 테이블 
-		int orderCnt=2;  //주문완료한 상품의 개수 
+		int orderCnt= st.countTokens();  //주문완료한 상품의 개수 
 		String myOrderListHeader[]= {"상품명", "가 격", "주문일"};
 		
 		//String myOrder[][]=new String[orderCnt][3];
-		String myOrder[][]={{"Velour Soccer Jersey Black", "82,000", "2023-01-11"},
-				{"Flat Single Coat (Black)", "69,000", "2023-01-11"}};
+//		String myOrder[][]={{"Velour Soccer Jersey Black", "82,000", "2023-01-11"},
+//				{"Flat Single Coat (Black)", "69,000", "2023-01-11"}};
 		
+		String[][] myOrder = new String[orderCnt][3];
+		
+		for(int i = 0; i < orderCnt; ++i) {
+			String item = st.nextToken();
+			StringTokenizer itemst = new StringTokenizer(item, ",");
+			myOrder[i][0] = itemst.nextToken();
+			myOrder[i][1] = itemst.nextToken();
+			myOrder[i][2] = itemst.nextToken();
+		}
 		
 		myOrderTable = new JTable(myOrder,myOrderListHeader);
 		myOrderTable.setCellSelectionEnabled(true);

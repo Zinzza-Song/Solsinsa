@@ -86,13 +86,7 @@ public class MyPage extends JFrame {
 		//주문 목록 조회 테이블 
 		int orderCnt= st.countTokens();  //주문완료한 상품의 개수 
 		String myOrderListHeader[]= {"상품명", "가 격", "주문일"};
-		
-		//String myOrder[][]=new String[orderCnt][3];
-//		String myOrder[][]={{"Velour Soccer Jersey Black", "82,000", "2023-01-11"},
-//				{"Flat Single Coat (Black)", "69,000", "2023-01-11"}};
-		
 		String[][] myOrder = new String[orderCnt][3];
-		
 		for(int i = 0; i < orderCnt; ++i) {
 			String item = st.nextToken();
 			StringTokenizer itemst = new StringTokenizer(item, ",");
@@ -130,7 +124,15 @@ public class MyPage extends JFrame {
 		String userNames[]= {"ID","이 름","PW","주소","이메일","전화번호","생년월일"};
 		int startY =83;
 		String userName;  //라벨에 들어갈 이름
-		String userTexts[]={"ID","이 름","PW","주소","이메일","전화번호","생년월일"};;
+		
+		String id = Userinfo.getUserInfo().getId();
+		String name = Userinfo.getUserInfo().getName();
+		String pw = Userinfo.getUserInfo().getPw();
+		String addr = Userinfo.getUserInfo().getAddr();
+		String mail = Userinfo.getUserInfo().getMail();
+		String phone = Userinfo.getUserInfo().getPhone();
+		String birth = Userinfo.getUserInfo().getBirth();
+		String userTexts[]={id,name,pw,addr,mail,phone,birth};
 		String userText;
 		
 		//마이 페이지 유저 정보란 
@@ -181,7 +183,7 @@ public class MyPage extends JFrame {
 		String userNames2[]= {"ID","이 름","PW","주소","이메일","전화번호","생년월일"}; 
 		int startY2 =83;
 		String myName2;  // 라벨들이 들어갈 이름
-		String userTexts2[]={"ID","이 름","PW","주소","이메일","전화번호","생년월일"}; // 수정된 값이 들어와야함
+		String userTexts2[]={id,name,pw,addr,mail,phone,birth}; // 수정된 값이 들어와야함
 		String myText2;  // 수정된 값이 차례대로 들어갈 변수명
 		
 		for(int i=0;i<userNames2.length;i++) {
@@ -203,18 +205,6 @@ public class MyPage extends JFrame {
 			
 		}
 		afterPanel.setVisible(false);  //수정누르기전에 false 누르면 true.
-		
-		//마이페이지 제목 표시줄의 x버튼으로 창 닫은 경우 리스너
-//		this.addWindowListener(new WindowListener() {
-//			@Override public void windowOpened(WindowEvent e) {}
-//			@Override
-//			public void windowClosing(WindowEvent e) {
-//			}
-//			@Override public void windowClosed(WindowEvent e) {}
-//			@Override public void windowIconified(WindowEvent e) {}
-//			@Override public void windowDeiconified(WindowEvent e) {}
-//			@Override public void windowActivated(WindowEvent e) {}
-//			@Override public void windowDeactivated(WindowEvent e) {}});
 		
 		// 수정 버튼 클릭 시 텍스트 수정가능하게 변화
 		modifyBtn.addActionListener(new ActionListener() {

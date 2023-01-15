@@ -4,7 +4,6 @@ import jdbc.JdbcConnector;
 import server.Product;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
@@ -12,13 +11,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import client.Client;
+
 import javax.swing.JScrollPane;
 import java.awt.Color;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +31,6 @@ public class Products extends JFrame {
 	JButton cancleBtn;
 	JButton cartBtn;
 
-	ArrayList<Product> products;
 	JTextField productName[];
 	JTextField productPrice[];
 	String Link;
@@ -39,13 +38,7 @@ public class Products extends JFrame {
 
 	// 홈 화면에서 카테고리에 따라 사진 변경을 위한 String category 추가
 	public Products(int num) {
-		if (num == 0) {
-			setTitle("TOP");
-		} else if (num == 1) {
-			setTitle("BOTTOM");
-		} else if (num == 2) {
-			setTitle("OUTER");
-		}
+
 		setBounds(100, 100, 694, 602);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -76,95 +69,35 @@ public class Products extends JFrame {
 		int xBtn3 = 30, xName3 = 22, xPrice3 = 53;
 		int xBtn4 = 30, xName4 = 22, xPrice4 = 53;
 
-		if (num == 0) {
-			for (int i = 0; i < 12; i++) {
-				Product prod = products.get(i);
-				String pName = prod.getName();
-				int ctgNum = prod.getCategory_code();
-				int pPrice = prod.getPrice();
-				Link = "./src/쇼핑몰 사진/상의/TOP_" + prod.getImg();
-				ImageIcon imageIcon = new ImageIcon(Link);
-				Image Img = imageIcon.getImage();
-				Image changeImg = Img.getScaledInstance(160, 172, Image.SCALE_SMOOTH);
-				ImageIcon changeIcon = new ImageIcon(changeImg);
+		for (int i = num; i < num + 12; i++) {
+			server.Product prod = Client.products.get(i);
+			String pName = prod.getName();
+			int ctgNum = prod.getCategory_code();
+			int pPrice = prod.getPrice();
+			Link = "./src/쇼핑몰 사진/"+ prod.getCategory()+"/" + prod.getImg();
+			ImageIcon imageIcon = new ImageIcon(Link);
+			Image Img = imageIcon.getImage();
+			Image changeImg = Img.getScaledInstance(160, 172, Image.SCALE_SMOOTH);
+			ImageIcon changeIcon = new ImageIcon(changeImg);
+			
+			productImgBtn[i-num] = new JButton(changeIcon);
+			productImgBtn[i-num].setFocusPainted(false);
+			productImgBtn[i-num].setBackground(new Color(234, 232, 227));
+			productImgBtn[i-num].setOpaque(true);
 
-				productImgBtn[i] = new JButton(changeIcon);
-				productImgBtn[i].setFocusPainted(false);
-				productImgBtn[i].setBackground(new Color(234, 232, 227));
-				productImgBtn[i].setOpaque(true);
-
-				productName[i] = new JTextField(pName);
-				productPrice[i] = new JTextField(pPrice + " 원");
-				// 상품의 카테고리 별 상품 클릭 시 상세정보 페이지 호출
-				productImgBtn[i].addActionListener(new ActionListener() {
-					// 상품 상세정보 페이지에 상품 사진, 이름 사용을 위해
-					// category, imageIcon, probName 파라미터를 사용해
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						ProdDetail productdt = new ProdDetail(prod, ctgNum);
-						productdt.setVisible(true);
-						setVisible(true);
-					}
-				});
-			}
-		} else if (num == 1) {
-			for (int i = 12; i < 24; i++) {
-				
-				Product prod = products.get(i);
-				String pName = prod.getName();
-				int ctgNum = prod.getCategory_code();
-				int pPrice = prod.getPrice();
-				
-				Link = "./src/쇼핑몰 사진/하의/BOTTOM_" + prod.getImg();
-				ImageIcon imageIcon = new ImageIcon(Link);
-				Image Img = imageIcon.getImage();
-				Image changeImg = Img.getScaledInstance(160, 172, Image.SCALE_SMOOTH);
-				ImageIcon changeIcon = new ImageIcon(changeImg);
-
-				productImgBtn[i] = new JButton(changeIcon);
-				productName[i] = new JTextField(pName);
-				productPrice[i] = new JTextField(pPrice);
-				// 상품의 카테고리 별 상품 클릭 시 상세정보 페이지 호출
-				productImgBtn[i].addActionListener(new ActionListener() {
-					// 상품 상세정보 페이지에 상품 사진, 이름 사용을 위해
-					// category, imageIcon, probName 파라미터를 사용해
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						ProdDetail productdt = new ProdDetail(prod, ctgNum);
-						productdt.setVisible(true);
-						setVisible(true);
-					}
-				});
-			}
-		} else if (num == 2) {
-			for (int i = 24; i < 36; i++) {
-
-				Product prod = products.get(i);
-				String pName = prod.getName();
-				int ctgNum = prod.getCategory_code();
-				int pPrice = prod.getPrice();
-
-				Link = "./src/쇼핑몰 사진/아우터/OUTER_" + prod.getImg();
-				ImageIcon imageIcon = new ImageIcon(Link);
-				Image Img = imageIcon.getImage();
-				Image changeImg = Img.getScaledInstance(160, 172, Image.SCALE_SMOOTH);
-				ImageIcon changeIcon = new ImageIcon(changeImg);
-
-				productImgBtn[i] = new JButton(changeIcon);
-				productName[i] = new JTextField(pName);
-				productPrice[i] = new JTextField(pPrice);
-				// 상품의 카테고리 별 상품 클릭 시 상세정보 페이지 호출
-				productImgBtn[i].addActionListener(new ActionListener() {
-					// 상품 상세정보 페이지에 상품 사진, 이름 사용을 위해
-					// category, imageIcon, probName 파라미터를 사용해
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						ProdDetail productdt = new ProdDetail(prod, ctgNum);
-						productdt.setVisible(true);
-						setVisible(true);
-					}
-				});
-			}
+			productName[i-num] = new JTextField(pName);
+			productPrice[i-num] = new JTextField(pPrice + " 원");
+			// 상품의 카테고리 별 상품 클릭 시 상세정보 페이지 호출
+			productImgBtn[i-num].addActionListener(new ActionListener() {
+				// 상품 상세정보 페이지에 상품 사진, 이름 사용을 위해
+				// category, imageIcon, probName 파라미터를 사용해
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					ProdDetail productdt = new ProdDetail(prod, ctgNum);
+					productdt.setVisible(true);
+					setVisible(true);
+				}
+			});
 		}
 		for (int i = 0; i < 12; i++) {
 			productName[i].setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));

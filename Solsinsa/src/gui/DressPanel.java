@@ -5,16 +5,14 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import server.Product;
+import client.Client;
 
 public class DressPanel extends JPanel {
-	ArrayList<Product> products;
 	DressThread1 dressThread1;
 	private JPanel panel;	// 상품사진 스레드 패널1
 	private JPanel panel2;	// 상품사진 스레드 패널2
@@ -44,7 +42,7 @@ public class DressPanel extends JPanel {
 		panel2.setLayout(new GridLayout(0, 4, 0, 0));
 		
 		// 1번 사진
-		Product product1 = products.get(6);
+		server.Product product1 = Client.products.get(6);
 		int ctgNum1 = product1.getCategory_code();
 		String Link1 = "./src/쇼핑몰 사진/상의/TOP_3.jpg";
 		ImageIcon image1 = new ImageIcon(Link1);
@@ -53,7 +51,7 @@ public class DressPanel extends JPanel {
 		ImageIcon changeIcon1 = new ImageIcon(changeimg1);
 
 		// 2번 사진
-		Product product2 = products.get(16);
+		server.Product product2 = Client.products.get(16);
 		int ctgNum2 = product1.getCategory_code();
 		String Link2 = "./src/쇼핑몰 사진/아우터/OUTER_5.jpg";
 		ImageIcon image2 = new ImageIcon(Link2);
@@ -62,7 +60,7 @@ public class DressPanel extends JPanel {
 		ImageIcon changeIcon2 = new ImageIcon(changeimg2);
 
 		// 3번 사진
-		Product product3 = products.get(6);
+		server.Product product3 = Client.products.get(6);
 		int ctgNum3 = product1.getCategory_code();
 		String Link3 = "./src/쇼핑몰 사진/상의/TOP_7.jpg";
 		ImageIcon image3 = new ImageIcon(Link3);
@@ -71,7 +69,7 @@ public class DressPanel extends JPanel {
 		ImageIcon changeIcon3 = new ImageIcon(changeimg3);
 
 		// 4번 사진
-		Product product4 = products.get(20);
+		server.Product product4 = Client.products.get(20);
 		int ctgNum4 = product1.getCategory_code();
 		String Link4 = "./src/쇼핑몰 사진/아우터/OUTER_9.jpg";
 		ImageIcon image4 = new ImageIcon(Link4);
@@ -88,21 +86,21 @@ public class DressPanel extends JPanel {
 		panel2.add(productImg11);
 		
 		productImg2 = new JLabel(changeIcon2);
-		productImg22.setBounds(200, 100, 100, 100);
+		productImg2.setBounds(200, 100, 100, 100);
 		productImg22 = new JLabel(changeIcon2);
 		productImg22.setBounds(200, 100, 100, 100);
 		panel.add(productImg2);
 		panel2.add(productImg22);
 		
 		productImg3 = new JLabel(changeIcon3);
-		productImg33.setBounds(400, 0, 100, 100);
+		productImg3.setBounds(400, 0, 100, 100);
 		productImg33 = new JLabel(changeIcon3);
 		productImg33.setBounds(400, 0, 100, 100);
 		panel.add(productImg3);
 		panel2.add(productImg33);
 		
 		productImg4 = new JLabel(changeIcon4);
-		productImg44.setBounds(600, 0, 100, 100);
+		productImg4.setBounds(600, 0, 100, 100);
 		productImg44 = new JLabel(changeIcon4);
 		productImg44.setBounds(600, 0, 100, 100);
 		panel.add(productImg4);

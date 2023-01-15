@@ -97,6 +97,8 @@ public class AfterLogin extends JPanel {
 	            // TODO Auto-generated method stub
 	            JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
 	            Userinfo.getUserInfo().Logout();
+	            Home h = new Home();
+	            h.inputPanel.setVisible(true);
 	            setVisible(false);
 	         }
 	      });

@@ -25,7 +25,7 @@ public class ProdDetail extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ProdDetail(Product prod, int ctgNum) {
+	public ProdDetail(server.Product prod, int ctgNum) {
 		
 		setBounds(100, 100, 931, 647);
 		contentPane = new JPanel();
@@ -38,16 +38,16 @@ public class ProdDetail extends JFrame {
 		String Link;
 		ImageIcon img = null;
 		
-		if (ctgNum == 1) {
-			Link = "./src/쇼핑몰 사진/상의/" + prod.getImg();
+		if (ctgNum == 0) {
+			Link = "./src/쇼핑몰 사진/"+ prod.getCategory() +"/"+ prod.getImg();
 			img = new ImageIcon(Link);
 		}
-		else if (ctgNum == 2) {		
-			Link = "./src/쇼핑몰 사진/하의/" + prod.getImg();
+		else if (ctgNum == 1) {		
+			Link = "./src/쇼핑몰 사진/"+ prod.getCategory() +"/"+ prod.getImg();
 			img = new ImageIcon(Link);
 		}
-		else if (ctgNum == 3) {
-			Link = "./src/쇼핑몰 사진/아우터/" + prod.getImg();
+		else if (ctgNum == 2) {
+			Link = "./src/쇼핑몰 사진/"+ prod.getCategory() +"/"+ prod.getImg();
 			img = new ImageIcon(Link);
 		}
 		
@@ -131,7 +131,7 @@ public class ProdDetail extends JFrame {
 			DetailTextField[i].setHorizontalAlignment(JTextField.CENTER);
 			DetailPanel.add(DetailTextField[i]);
 		}
-		
+		//닫기 버튼 클릭 시
 		cancelBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -139,10 +139,6 @@ public class ProdDetail extends JFrame {
 				dispose();
 			}
 		});
-
-		
-		
-		
 		
 	}
 }

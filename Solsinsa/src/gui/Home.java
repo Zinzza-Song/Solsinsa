@@ -10,10 +10,10 @@ import javax.swing.border.*;
 
 import client.Client;
 import client.Userinfo;
-import server.Product;
 
 public class Home extends JFrame {
 
+	JPanel inputPanel;
 	private JPanel contentPane;
 	private JTextField idtextField;
 	private JPasswordField pwtextField;
@@ -76,7 +76,7 @@ public class Home extends JFrame {
 		homeName.add(TitleLabel);
 		
 		// 상단 아이디 패스워드 입력 패널
-		JPanel inputPanel = new JPanel();
+		inputPanel = new JPanel();
 		inputPanel.setBounds(0, 0, 707, 54);
 		inputPanel.setBackground(new Color(216,210,199));
 		inputPanel.setLayout(null);
@@ -115,7 +115,6 @@ public class Home extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				String column = e.getActionCommand();
 				Products prod = new Products(0);
 				prod.setVisible(true);
 			}
@@ -133,8 +132,7 @@ public class Home extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				String column = e.getActionCommand();
-				Products prod = new Products(1);
+				Products prod = new Products(24);
 				prod.setVisible(true);
 			}
 		});
@@ -151,8 +149,7 @@ public class Home extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				String column = e.getActionCommand();
-				Products prod = new Products(2);
+				Products prod = new Products(12);
 				prod.setVisible(true);
 			}
 		});
@@ -293,8 +290,8 @@ public class Home extends JFrame {
 			ImageIcon setIcon = new ImageIcon(setImg);
 			Image img = setIcon.getImage();
 			Image changeimg = img.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
-
-			imgIcon[i] = setIcon;
+			ImageIcon changeIcon = new ImageIcon(changeimg);
+			imgIcon[i] = changeIcon;
 			
 			productJbtn[i] = new JButton(imgIcon[i]);
 			productJbtn[i].setBackground(new Color(255, 255, 255)); // 버튼 색상 변경
@@ -315,7 +312,8 @@ public class Home extends JFrame {
 			// 상품 클릭 시 상품 상세정보로 이동
 			productJbtn[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+					ProdDetail detail = new ProdDetail(product, product.getCategory_code());
+					detail.setVisible(true);
 				}});
 			
 			

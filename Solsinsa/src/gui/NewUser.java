@@ -288,10 +288,7 @@ public class NewUser extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//프레임 종료
 				dispose();
-				AfterLogin after = new AfterLogin();
-				after.setVisible(false);
 			}
-			
 		});
 	}
 

@@ -213,9 +213,11 @@ public class Home extends JFrame {
 						
 						Userinfo.getUserInfo();
 						Userinfo.getUserInfo().setUserinfo(noData, idData, pwData, nameData, birthData, addrData, phoneData, mailData);
-						AfterLogin login = new AfterLogin();
+						AfterLogin login = new AfterLogin(inputPanel);
 						contentPane.add(login);
 						login.setVisible(true);
+						idtextField.setText("");
+						pwtextField.setText("");
 						inputPanel.setVisible(false);
 					}
 				}

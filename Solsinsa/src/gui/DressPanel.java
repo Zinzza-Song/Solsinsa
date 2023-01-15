@@ -42,7 +42,7 @@ public class DressPanel extends JPanel {
 		panel2.setLayout(new GridLayout(0, 4, 0, 0));
 		
 		// 1번 사진
-		server.Product product1 = Client.products.get(6);
+		server.Product product1 = Client.products.get(2);
 		int ctgNum1 = product1.getCategory_code();
 		String Link1 = "./src/쇼핑몰 사진/상의/TOP_3.jpg";
 		ImageIcon image1 = new ImageIcon(Link1);
@@ -52,7 +52,7 @@ public class DressPanel extends JPanel {
 
 		// 2번 사진
 		server.Product product2 = Client.products.get(16);
-		int ctgNum2 = product1.getCategory_code();
+		int ctgNum2 = product2.getCategory_code();
 		String Link2 = "./src/쇼핑몰 사진/아우터/OUTER_5.jpg";
 		ImageIcon image2 = new ImageIcon(Link2);
 		Image img2 = image2.getImage();
@@ -61,7 +61,7 @@ public class DressPanel extends JPanel {
 
 		// 3번 사진
 		server.Product product3 = Client.products.get(6);
-		int ctgNum3 = product1.getCategory_code();
+		int ctgNum3 = product3.getCategory_code();
 		String Link3 = "./src/쇼핑몰 사진/상의/TOP_7.jpg";
 		ImageIcon image3 = new ImageIcon(Link3);
 		Image img3 = image3.getImage();
@@ -70,7 +70,7 @@ public class DressPanel extends JPanel {
 
 		// 4번 사진
 		server.Product product4 = Client.products.get(20);
-		int ctgNum4 = product1.getCategory_code();
+		int ctgNum4 = product4.getCategory_code();
 		String Link4 = "./src/쇼핑몰 사진/아우터/OUTER_9.jpg";
 		ImageIcon image4 = new ImageIcon(Link4);
 		Image img4 = image4.getImage();

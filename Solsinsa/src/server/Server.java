@@ -490,7 +490,7 @@ public class Server implements Runnable {
 			pro = "{call addorders(?,?)}";
 			try(CallableStatement cstmt = con.prepareCall(pro)) {
 				cstmt.setInt(1, c_no);
-				cstmt.setInt(2, c_no);
+				cstmt.setInt(2, p_no);
 				cstmt.execute();
 			} catch (SQLException e) {
 				System.out.println("insert오류");

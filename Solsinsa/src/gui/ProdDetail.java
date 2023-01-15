@@ -6,8 +6,15 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
@@ -20,9 +27,11 @@ public class ProdDetail extends JFrame {
 
 	private JTextField FeatureTextField[] = new JTextField[14];
 	private JTextField DetailTextField[] = new JTextField[14];
+	ImageIcon img;
+	server.Top topdetails;
 	private String detail[] = { "상품명", "가격", "재질", "핏", "촉감", "신축성", "비침", "두께", "사이즈", "총장", "너비", "어깨너비", "가슴단면",
 			"소매길이" };
-
+	
 	/**
 	 * Create the frame.
 	 */
@@ -37,17 +46,16 @@ public class ProdDetail extends JFrame {
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
 		String Link;
-		ImageIcon img = null;
 		
-		if (ctgNum == 0) {
+		if (ctgNum == 1) {
 			Link = "./src/쇼핑몰 사진/"+ prod.getCategory() +"/"+ prod.getImg();
 			img = new ImageIcon(Link);
 		}
-		else if (ctgNum == 1) {		
+		else if (ctgNum == 2) {		
 			Link = "./src/쇼핑몰 사진/"+ prod.getCategory() +"/"+ prod.getImg();
 			img = new ImageIcon(Link);
 		}
-		else if (ctgNum == 2) {
+		else if (ctgNum == 3) {
 			Link = "./src/쇼핑몰 사진/"+ prod.getCategory() +"/"+ prod.getImg();
 			img = new ImageIcon(Link);
 		}
@@ -125,9 +133,33 @@ public class ProdDetail extends JFrame {
 		}	
 		
 		for(int i = 0; i < 14; i++) {
+			
 			DetailTextField[i] = new JTextField();
 			DetailTextField[i].setColumns(10);
-			DetailTextField[0].setText("");
+			String topimg = prod.getImg().replace(".jpg", "");
+			if(ctgNum == 1) {
+				if(Client.tops.get(i).getImg().equals(topimg)) {
+					topdetails = Client.tops.get(i);
+		//리스트에 사진 링크나 이름 들 집어넣고 topimg랑 같은 인덱스 번호로 Client.tops.get(번호) 만들기
+					DetailTextField[0].setText(prod.getName());
+					DetailTextField[1].setText(Integer.toString(prod.getPrice()));
+					DetailTextField[2].setText(topdetails.getMaterial());
+				}
+				else {
+					continue;
+				}
+				
+			}
+			else if(ctgNum == 2) {
+				DetailTextField[0].setText(prod.getName());
+				DetailTextField[1].setText(Integer.toString(prod.getPrice()));
+				
+			}
+			else if(ctgNum == 3) {
+				DetailTextField[0].setText(prod.getName());
+				DetailTextField[1].setText(Integer.toString(prod.getPrice()));
+				
+			}
 			DetailTextField[i].setHorizontalAlignment(JTextField.CENTER);
 			DetailPanel.add(DetailTextField[i]);
 		}

@@ -53,33 +53,37 @@ public class Lookup extends JFrame {
 		JButton a = new JButton("추가");
 		// 상품 테이블에 행 추가하기
 		String productHeader[] = { "NO", "NAME", "PRICE", "CTG", "STOCK", "ADD" };
-		Object[][] productInformation = { { "상품번호", "상품명", "가격", "카테고리", 100, "추가" },
-				{ "상품번호", "상품명", "가격", "카테고리", 100, "추가" }, { "상품번호", "상품명", "가격", "카테고리", 100, "추가" },
-				{ "상품번호", "상품명", "가격", "카테고리", 100, "추가" }, { "상품번호", "상품명", "가격", "카테고리", 100, "추가" } };
 		
-//		Object[][] obj = new Object[Client.products.size()][6];
-//		for(int i = 0; i < Client.products.size(); ++i) {
-//			for(int j = 0; j < 6; ++j) {
-//				if(j == 0)
-//					obj[i][j] = Integer.toString(Client.products.get(i).getNo());
-//				else if(j == 1)
-//					obj[i][j] = Client.products.get(i).getName();
-//			}
-//		}
+		Object[][] productInformation = new Object[Client.products.size()][6];
+		for(int i = 0; i < Client.products.size(); ++i) {
+			productInformation[i][0] = Integer.toString(Client.products.get(i).getNo());
+			productInformation[i][1] = Client.products.get(i).getName();
+			productInformation[i][2] = Client.products.get(i).getPrice();
+			productInformation[i][3] = Client.products.get(i).getCategory();
+			productInformation[i][4] = Client.products.get(i).getStock();
+			productInformation[i][5] = "추가";
+		}
 
 		// 유저 테이블에 행 추가하기
 		String userHeader[] = { "NO", "ID", "PW", "NAME", "BIRTH", "ADDR", "PHONE", "EMAIL" };
-		String[][] userInformation = { { "회원번호", "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" },
-				{ "회원번호", "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" },
-				{ "회원번호", "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" },
-				{ "회원번호", "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" },
-				{ "회원번호", "아이디", "비밀번호", "이름", "생일", "주소", "핸드폰", "이메일" } };
-
+		String[][] userInformation = new String [Client.users.size()][8];
+		for(int i = 0; i < Client.users.size(); i++) {
+					userInformation[i][0] = Integer.toString(Client.users.get(i).getNo());
+					userInformation[i][1] = Client.users.get(i).getId();
+					userInformation[i][2] = Client.users.get(i).getPw();
+					userInformation[i][3] = Client.users.get(i).getName();
+					userInformation[i][4] = Client.users.get(i).getBirth();
+					userInformation[i][5] = Client.users.get(i).getAddr();
+					userInformation[i][6] = Client.users.get(i).getPhone();
+					userInformation[i][7] = Client.users.get(i).getMail();
+		}
 		// 로그 테이블에 행 추가하기
 		String logHeader[] = { "일자", "LOG" };
-		String logInformation[][] = { { "0000/00/00", "000님이 회원가입 하셨습니다." }, { "0000/00/00", "상품이름이 추가되었습니다." },
-				{ "0000/00/00", "000님이 회원탈퇴 하셨습니다." }, { "0000/00/00", "상품이름이 감소되었습니다." } };
-
+		String logInformation[][] = new String[Client.logs.size()][2];
+		for(int i = 0; i < Client.logs.size(); i++) {
+			logInformation[i][0] = Client.logs.get(i).getDate();
+			logInformation[i][1] = Client.logs.get(i).getMsg();
+		}
 		// 테이블 글자 정렬
 		DefaultTableCellRenderer celAlignCenter = new DefaultTableCellRenderer();
 		celAlignCenter.setHorizontalAlignment(JLabel.CENTER);

@@ -260,7 +260,7 @@ public class Home extends JFrame {
 		checkList.add(37);
 		
 		for (int i = 0; i < 4; i++) {
-			int random = (int) (Math.random() * 36) + 1;
+			int random = (int) (Math.random() * 35) + 1;
 			
 			Boolean check = true;
 			while(check) {

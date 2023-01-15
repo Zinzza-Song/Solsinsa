@@ -5,26 +5,28 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import server.Product;
+
 public class DressPanel extends JPanel {
-	
-	Home home;//홈에서 상품 이름 가져오기위한 필드변수 선언
+	ArrayList<Product> products;
 	DressThread1 dressThread1;
 	private JPanel panel;	// 상품사진 스레드 패널1
 	private JPanel panel2;	// 상품사진 스레드 패널2
 	//상품 사진 라벨
-	JLabel product1;
-	JLabel product2;
-	JLabel product3;
-	JLabel product4;
-	JLabel product11;
-	JLabel product22;
-	JLabel product33;
-	JLabel product44;
+	JLabel productImg1;
+	JLabel productImg2;
+	JLabel productImg3;
+	JLabel productImg4;
+	JLabel productImg11;
+	JLabel productImg22;
+	JLabel productImg33;
+	JLabel productImg44;
 
 	DressPanel() {
 		setBounds(12, 169, 683, 124);
@@ -42,7 +44,8 @@ public class DressPanel extends JPanel {
 		panel2.setLayout(new GridLayout(0, 4, 0, 0));
 		
 		// 1번 사진
-		String TopName1 = home.top[2];
+		Product product1 = products.get(6);
+		int ctgNum1 = product1.getCategory_code();
 		String Link1 = "./src/쇼핑몰 사진/상의/TOP_3.jpg";
 		ImageIcon image1 = new ImageIcon(Link1);
 		Image img1 = image1.getImage();
@@ -50,7 +53,8 @@ public class DressPanel extends JPanel {
 		ImageIcon changeIcon1 = new ImageIcon(changeimg1);
 
 		// 2번 사진
-		String OuterName1 = home.bottom[4];
+		Product product2 = products.get(16);
+		int ctgNum2 = product1.getCategory_code();
 		String Link2 = "./src/쇼핑몰 사진/아우터/OUTER_5.jpg";
 		ImageIcon image2 = new ImageIcon(Link2);
 		Image img2 = image2.getImage();
@@ -58,7 +62,8 @@ public class DressPanel extends JPanel {
 		ImageIcon changeIcon2 = new ImageIcon(changeimg2);
 
 		// 3번 사진
-		String TopName2 = home.top[6];
+		Product product3 = products.get(6);
+		int ctgNum3 = product1.getCategory_code();
 		String Link3 = "./src/쇼핑몰 사진/상의/TOP_7.jpg";
 		ImageIcon image3 = new ImageIcon(Link3);
 		Image img3 = image3.getImage();
@@ -66,7 +71,8 @@ public class DressPanel extends JPanel {
 		ImageIcon changeIcon3 = new ImageIcon(changeimg3);
 
 		// 4번 사진
-		String OuterName2 = home.outer[8];
+		Product product4 = products.get(20);
+		int ctgNum4 = product1.getCategory_code();
 		String Link4 = "./src/쇼핑몰 사진/아우터/OUTER_9.jpg";
 		ImageIcon image4 = new ImageIcon(Link4);
 		Image img4 = image4.getImage();
@@ -74,40 +80,40 @@ public class DressPanel extends JPanel {
 		ImageIcon changeIcon4 = new ImageIcon(changeimg4);
 
 		// 상품 이미지 패널들
-		product1 = new JLabel(changeIcon1);
-		product1.setBounds(0, 0, 100, 100);
-		product11 = new JLabel(changeIcon1);
-		product11.setBounds(0, 0, 100, 100);
-		panel.add(product1);
-		panel2.add(product11);
+		productImg1 = new JLabel(changeIcon1);
+		productImg1.setBounds(0, 0, 100, 100);
+		productImg11 = new JLabel(changeIcon1);
+		productImg11.setBounds(0, 0, 100, 100);
+		panel.add(productImg1);
+		panel2.add(productImg11);
 		
-		product2 = new JLabel(changeIcon2);
-		product2.setBounds(200, 100, 100, 100);
-		product22 = new JLabel(changeIcon2);
-		product22.setBounds(200, 100, 100, 100);
-		panel.add(product2);
-		panel2.add(product22);
+		productImg2 = new JLabel(changeIcon2);
+		productImg22.setBounds(200, 100, 100, 100);
+		productImg22 = new JLabel(changeIcon2);
+		productImg22.setBounds(200, 100, 100, 100);
+		panel.add(productImg2);
+		panel2.add(productImg22);
 		
-		product3 = new JLabel(changeIcon3);
-		product3.setBounds(400, 0, 100, 100);
-		product33 = new JLabel(changeIcon3);
-		product33.setBounds(400, 0, 100, 100);
-		panel.add(product3);
-		panel2.add(product33);
+		productImg3 = new JLabel(changeIcon3);
+		productImg33.setBounds(400, 0, 100, 100);
+		productImg33 = new JLabel(changeIcon3);
+		productImg33.setBounds(400, 0, 100, 100);
+		panel.add(productImg3);
+		panel2.add(productImg33);
 		
-		product4 = new JLabel(changeIcon4);
-		product4.setBounds(600, 0, 100, 100);
-		product44 = new JLabel(changeIcon4);
-		product44.setBounds(600, 0, 100, 100);
-		panel.add(product4);
-		panel2.add(product44);
+		productImg4 = new JLabel(changeIcon4);
+		productImg44.setBounds(600, 0, 100, 100);
+		productImg44 = new JLabel(changeIcon4);
+		productImg44.setBounds(600, 0, 100, 100);
+		panel.add(productImg4);
+		panel2.add(productImg44);
 		
 		//상품 사진 클릭 시 상품 상세 정보로 바로 이동
-		product1.addMouseListener(new MouseListener() {
+		productImg1.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProdDetail prod = new ProdDetail("TOP", image1, TopName1);
+				ProdDetail prod = new ProdDetail(product1, ctgNum1);
 				prod.setVisible(true);
 			}
 			@Override
@@ -115,11 +121,11 @@ public class DressPanel extends JPanel {
 			public void mouseReleased(MouseEvent e) {}@Override
 			public void mouseEntered(MouseEvent e) {}@Override
 			public void mouseExited(MouseEvent e) {}});
-		product2.addMouseListener(new MouseListener() {
+		productImg2.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProdDetail prod = new ProdDetail("OUTER", image2, OuterName1);
+				ProdDetail prod = new ProdDetail(product2, ctgNum2);
 				prod.setVisible(true);
 			}
 			@Override
@@ -127,11 +133,11 @@ public class DressPanel extends JPanel {
 			public void mouseReleased(MouseEvent e) {}@Override
 			public void mouseEntered(MouseEvent e) {}@Override
 			public void mouseExited(MouseEvent e) {}});
-		product3.addMouseListener(new MouseListener() {
+		productImg3.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProdDetail prod = new ProdDetail("TOP", image3, TopName2);
+				ProdDetail prod = new ProdDetail(product3, ctgNum3);
 				prod.setVisible(true);
 			}
 			@Override
@@ -139,11 +145,11 @@ public class DressPanel extends JPanel {
 			public void mouseReleased(MouseEvent e) {}@Override
 			public void mouseEntered(MouseEvent e) {}@Override
 			public void mouseExited(MouseEvent e) {}});
-		product4.addMouseListener(new MouseListener() {
+		productImg4.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProdDetail prod = new ProdDetail("OUTER", image4, OuterName2);
+				ProdDetail prod = new ProdDetail(product4, ctgNum4);
 				prod.setVisible(true);
 			}
 			@Override
@@ -151,11 +157,11 @@ public class DressPanel extends JPanel {
 			public void mouseReleased(MouseEvent e) {}@Override
 			public void mouseEntered(MouseEvent e) {}@Override
 			public void mouseExited(MouseEvent e) {}});
-		product11.addMouseListener(new MouseListener() {
+		productImg11.addMouseListener(new MouseListener() {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProdDetail prod = new ProdDetail("TOP", image1, TopName1);
+				ProdDetail prod = new ProdDetail(product1, ctgNum1);
 				prod.setVisible(true);
 			}
 			@Override
@@ -163,11 +169,11 @@ public class DressPanel extends JPanel {
 			public void mouseReleased(MouseEvent e) {}@Override
 			public void mouseEntered(MouseEvent e) {}@Override
 			public void mouseExited(MouseEvent e) {}});	
-		product22.addMouseListener(new MouseListener() {
+		productImg22.addMouseListener(new MouseListener() {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProdDetail prod = new ProdDetail("OUTER", image2, OuterName1);
+				ProdDetail prod = new ProdDetail(product2, ctgNum2);
 				prod.setVisible(true);
 			}
 			@Override
@@ -175,11 +181,11 @@ public class DressPanel extends JPanel {
 			public void mouseReleased(MouseEvent e) {}@Override
 			public void mouseEntered(MouseEvent e) {}@Override
 			public void mouseExited(MouseEvent e) {}});
-		product33.addMouseListener(new MouseListener() {
+		productImg33.addMouseListener(new MouseListener() {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProdDetail prod = new ProdDetail("TOP", image3, TopName2);
+				ProdDetail prod = new ProdDetail(product3, ctgNum3);
 				prod.setVisible(true);
 			}
 			@Override
@@ -187,11 +193,11 @@ public class DressPanel extends JPanel {
 			public void mouseReleased(MouseEvent e) {}@Override
 			public void mouseEntered(MouseEvent e) {}@Override
 			public void mouseExited(MouseEvent e) {}});
-		product44.addMouseListener(new MouseListener() {
+		productImg44.addMouseListener(new MouseListener() {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProdDetail prod = new ProdDetail("OUTER", image4, OuterName2);
+				ProdDetail prod = new ProdDetail(product4, ctgNum4);
 				prod.setVisible(true);
 			}
 			@Override

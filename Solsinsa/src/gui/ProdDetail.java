@@ -11,18 +11,21 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import server.Product;
+
 public class ProdDetail extends JFrame {
 
 	private JPanel contentPane;
 
-	
 	private JTextField FeatureTextField[] = new JTextField[14];
 	private JTextField DetailTextField[] = new JTextField[14];
-	private String detail[] = {"상품명","가격","재질","핏","촉감","신축성","비침","두께","사이즈","총장","너비","어깨너비","가슴단면","소매길이"};
+	private String detail[] = { "상품명", "가격", "재질", "핏", "촉감", "신축성", "비침", "두께", "사이즈", "총장", "너비", "어깨너비", "가슴단면",
+			"소매길이" };
+
 	/**
 	 * Create the frame.
 	 */
-	public ProdDetail(String category, ImageIcon img, String probName) {
+	public ProdDetail(Product prod, int ctgNum) {
 		
 		setBounds(100, 100, 931, 647);
 		contentPane = new JPanel();
@@ -31,6 +34,22 @@ public class ProdDetail extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
+		String Link;
+		ImageIcon img = null;
+		
+		if (ctgNum == 1) {
+			Link = "./src/쇼핑몰 사진/상의/" + prod.getImg();
+			img = new ImageIcon(Link);
+		}
+		else if (ctgNum == 2) {		
+			Link = "./src/쇼핑몰 사진/하의/" + prod.getImg();
+			img = new ImageIcon(Link);
+		}
+		else if (ctgNum == 3) {
+			Link = "./src/쇼핑몰 사진/아우터/" + prod.getImg();
+			img = new ImageIcon(Link);
+		}
 		
 		Image Img = img.getImage();
 		Image changeImg = Img.getScaledInstance(468, 500, Image.SCALE_SMOOTH);
@@ -74,7 +93,7 @@ public class ProdDetail extends JFrame {
 
 				JOptionPane.showMessageDialog(null, "장바구니에 추가되었습니다.");
 				dispose();
-				Products prod = new Products(category);
+				Products prod = new Products(5);
 				prod.setVisible(true);
 			}
 		});
@@ -108,7 +127,7 @@ public class ProdDetail extends JFrame {
 		for(int i = 0; i < 14; i++) {
 			DetailTextField[i] = new JTextField();
 			DetailTextField[i].setColumns(10);
-			DetailTextField[0].setText(probName);
+			DetailTextField[0].setText("");
 			DetailTextField[i].setHorizontalAlignment(JTextField.CENTER);
 			DetailPanel.add(DetailTextField[i]);
 		}

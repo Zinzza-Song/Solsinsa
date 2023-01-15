@@ -22,12 +22,6 @@ public class Home extends JFrame {
 	private JTextField imageJbtnPrice[];
 	private ImageIcon imgIcon[] = new ImageIcon[4];
 
-	static String top[] = { "허드슨 아란 점퍼 니트 님부스 / WJ 5740", "Velour Soccer Jersey Black", "WORLD EP HOODIE SLATE BLUE","코튼 워셔블 하찌 하프집업 니트_5 COLOR", "레터링 타투 후드 기모 블랙", "벌키 브러쉬 아가일 니트 BLACK", "미니멀 울 라이크 반목폴라 니트 [그레이]","Fluff Mood Check shirt S24 Navy", "프레첼 코듀로이 셔츠 카키브라운 JJLS7525", "울 하이넥 케이블 집업 니트 - 샌드","CROPPED HAIRY KNIT - MELANGE", "옵티멀 베이직 셔츠-화이트" };
-
-	static String outer[] = { "BROWN reversible shearling short coat(OJ315)","LIGHTWEIGHT VEGAN LEATHER MA-1 JACKET [BLACK]", "오버사이즈 울 트렌치 코트 [BEIGE]", "Flat Single Coat (Black)","OVERSIZED BALMACAAN COAT _ BLACK", "말본 아노락 자켓 BEIGE (MAN)", "[PRIMALOFT] 몬스터 숏패딩_블랙","REVERSIBLE WARM UP QUILTING JACKET BLACK / IVORY", "후드 미니멀 푸퍼_SPJPC4TC12","[리뉴얼ver]컴포터블 벌룬핏 다운 패딩 다크그레이 COOSJP031D.GRAY", "PERTEX® T Down Jacket Bandana Grey","[리뉴얼ver]컨템포러리 몬스터파카 다크그레이 COOSJP028D.GRAY" };
-
-	static String bottom[] = { "WIDE DENIM PANTS [BLACK]", "컷 오프 블리치 워시드 데님 팬츠 (TP0042)","1967 JET BLACK JEANS [WIDE STRAIGHT]", "와이드 워시드 카고 데님 팬츠 블랙", "TAG FLEECE PANTS - BLACK","코듀로이 원턱 조거팬츠-KHAKI", "939 LOGO SWEAT PANTS (BLACK)", "와이드 히든 밴딩 슬랙스 [블랙]", "테이퍼드 히든 밴딩 크롭 슬랙스 [라이트 베이지]","세미 부츠컷 슬랙스 [그레이]", "데님 오버롤 멜빵 팬츠 [블루]", "오버라운드 퍼티그 점프슈트 OF-501 블랙" };
-
 	/**
 	 * Launch the application.
 	 */
@@ -80,27 +74,33 @@ public class Home extends JFrame {
 		TitleLabel.setForeground(new Color(255, 255, 255));
 		TitleLabel.setBounds(228, 10, 212, 51);
 		homeName.add(TitleLabel);
-
+		
+		// 상단 아이디 패스워드 입력 패널
+		JPanel inputPanel = new JPanel();
+		inputPanel.setBounds(0, 0, 707, 54);
+		inputPanel.setBackground(new Color(216,210,199));
+		inputPanel.setLayout(null);
+		contentPane.add(inputPanel);
 		// 아이디 입력 창
 		idtextField = new JTextField();
 		idtextField.setBounds(33, 22, 116, 21);
-		contentPane.add(idtextField);
+		inputPanel.add(idtextField);
 		idtextField.setColumns(10);
 
 		JLabel idLabel = new JLabel("ID");
 		idLabel.setBounds(12, 25, 20, 15);
-		contentPane.add(idLabel);
+		inputPanel.add(idLabel);
 
 		// 비밀번호 입력 창
 		pwtextField = new JPasswordField();
 		pwtextField.setBounds(184, 21, 116, 21);
-		contentPane.add(pwtextField);
+		inputPanel.add(pwtextField);
 		pwtextField.setColumns(10);
 
 		JLabel pwLabel = new JLabel("PW");
 		pwLabel.setFont(new Font("굴림", Font.BOLD, 12));
 		pwLabel.setBounds(159, 24, 20, 15);
-		contentPane.add(pwLabel);
+		inputPanel.add(pwLabel);
 
 		// 카테고리 버튼 클릭시 제품 창 띄워짐
 		JButton CategoryTop = new Rb("TOP");
@@ -116,7 +116,7 @@ public class Home extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String column = e.getActionCommand();
-				Products prod = new Products(column);
+				Products prod = new Products(0);
 				prod.setVisible(true);
 			}
 		});
@@ -134,7 +134,7 @@ public class Home extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String column = e.getActionCommand();
-				Products prod = new Products(column);
+				Products prod = new Products(1);
 				prod.setVisible(true);
 			}
 		});
@@ -152,7 +152,7 @@ public class Home extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String column = e.getActionCommand();
-				Products prod = new Products(column);
+				Products prod = new Products(2);
 				prod.setVisible(true);
 			}
 		});
@@ -164,7 +164,7 @@ public class Home extends JFrame {
 		loginbtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
 		loginbtn.setBounds(310, 20, 67, 23);
 		loginbtn.setFocusPainted(false);
-		contentPane.add(loginbtn);
+		inputPanel.add(loginbtn);
 
 		// 로그인 시 액션 리스너
 		loginbtn.addActionListener(new ActionListener() {
@@ -217,8 +217,9 @@ public class Home extends JFrame {
 						Userinfo.getUserInfo();
 						Userinfo.getUserInfo().setUserinfo(noData, idData, pwData, nameData, birthData, addrData, phoneData, mailData);
 						AfterLogin login = new AfterLogin();
+						contentPane.add(login);
 						login.setVisible(true);
-						dispose();
+						inputPanel.setVisible(false);
 					}
 				}
 			}
@@ -231,7 +232,7 @@ public class Home extends JFrame {
 		joinbtn.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
 		joinbtn.setBounds(389, 21, 67, 23);
 		joinbtn.setFocusPainted(false);
-		contentPane.add(joinbtn);
+		inputPanel.add(joinbtn);
 
 		// 회원가입 버튼 액션 리스너
 		joinbtn.addActionListener(new ActionListener() {

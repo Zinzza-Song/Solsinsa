@@ -74,6 +74,7 @@ public class Server implements Runnable {
 					case 1004:
 						// 장바구니 담기
 						addBasket(data);
+						writer.println("장바구니담기완료");
 						break;
 					case 1005:
 						// 장바구니 보기
@@ -82,14 +83,17 @@ public class Server implements Runnable {
 					case 1006:
 						// 결제하기
 						pay(data);
+						writer.println("결제완료");
 						break;
 					case 1007:
 						// 회원 정보 수정
 						updateUserInfo(data);
+						writer.println("회원정보수정완료");
 						break;
 					case 1008:
 						// 회원 탈퇴
 						delUser(data);
+						writer.println("회원탈퇴완료");
 						break;
 					case 1009:
 						// 구매목록

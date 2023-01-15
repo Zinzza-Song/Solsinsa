@@ -99,6 +99,9 @@ public class Server implements Runnable {
 						// 구매목록
 						writer.println(showOrders(data));
 						break;
+					case 1010:
+						addProduct(data);
+						break;
 					default:
 						break;
 					}
@@ -568,6 +571,19 @@ public class Server implements Runnable {
 			e.printStackTrace();
 		}
 		return res;
+	}
+	
+	void addProduct(String data) {
+		int p_no = Integer.parseInt(data);
+		String pro = "{call updateProduct(?,?)}";
+		try(CallableStatement cstmt = con.prepareCall(pro)) {
+			cstmt.setInt(1, p_no);
+			cstmt.setInt(2, 1);
+			cstmt.execute();
+		} catch (SQLException e) {
+			System.out.println("update오류");
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {

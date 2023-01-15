@@ -125,11 +125,12 @@ public class ProdDetail extends JFrame {
 			// 장바구니 담기 클릭 시 장바구니에 추가됨
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Client.msg = Userinfo.getUserInfo().getNo() + "," + "540" + ":1004";
+				
+				Client.msg = Userinfo.getUserInfo().getNo() + "," + prod.getNo() + ":1004";
 				JOptionPane.showMessageDialog(null, "장바구니에 추가되었습니다.");
 				dispose();
-				Products prod = new Products(5);
-				prod.setVisible(true);
+//				Products prod = new Products(5);
+//				prod.setVisible(true);
 			}
 		});
 

@@ -18,8 +18,12 @@ public class MyPage extends JFrame {
 	private JTable myOrderTable;
 	private JLabel myLabel2[];
 	private JTextField myTextField2[];
+	private JPanel inputPanel;
+	private JPanel afterLoginPanel;
 
-	public MyPage() {
+	public MyPage(JPanel inputPanel, JPanel afterLoginPanel) {
+		this.inputPanel = inputPanel;
+		this.afterLoginPanel = afterLoginPanel;
 		initialize();
 	}
 
@@ -225,10 +229,12 @@ public class MyPage extends JFrame {
 			int result = JOptionPane.showConfirmDialog(null, "정말로 회원 탈퇴하시겠습니까?","회원탈퇴여부",JOptionPane.YES_NO_OPTION);
 				// 예 버튼 클릭 시 초기 홈 표출
 			if(JOptionPane.YES_OPTION == result) {
-					// 이곳에 회원 탈퇴 시 기능 작성 
-				// 예 버튼 클릭 시 초기 홈 화면 출력
-				Home h = new Home();
-				h.setVisible(true);
+					// 이곳에 회원 탈퇴 시 기능 작성
+				String id = Userinfo.getUserInfo().getId();
+				String pw = Userinfo.getUserInfo().getPw();
+				Client.msg = id + "," + pw + ":1008";
+				inputPanel.setVisible(true);
+				afterLoginPanel.setVisible(false);
 				Userinfo.getUserInfo().Logout();
 				dispose();
 				}

@@ -56,6 +56,7 @@ public class AfterLogin extends JPanel {
 	      Image changeMyImg = myImg.getScaledInstance(35,35,Image.SCALE_SMOOTH); 
 	      ImageIcon changeMyIcon = new ImageIcon(changeMyImg);
 	      
+	      JPanel afterLoginPanel = this;
 	      //마이 페이지 버튼
 	      JButton mypageBtn = new JButton(changeMyIcon);
 	      mypageBtn.setBackground(new Color(128, 128, 192));
@@ -66,7 +67,7 @@ public class AfterLogin extends JPanel {
 	      mypageBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MyPage my = new MyPage();
+				MyPage my = new MyPage(inputPanel, afterLoginPanel);
 				my.setVisible(true);
 			}
 	      });

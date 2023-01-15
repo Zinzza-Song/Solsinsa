@@ -461,7 +461,7 @@ public class Server implements Runnable {
 			
 			ResultSet rs = (ResultSet)cstmt.getObject(2);
 			while(rs.next())
-				res += rs.getString("p_name") + "," + rs.getString("p_price") + "/";
+				res += rs.getString("p_name") + "," + rs.getString("p_price") + "," + rs.getString("p_no") + "/";
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

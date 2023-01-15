@@ -3,8 +3,12 @@ package gui;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import client.Userinfo;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class Payment extends JFrame {
 
@@ -28,14 +32,16 @@ public class Payment extends JFrame {
 	private JLabel lblNewLabel_4;
 	private JTextField textField_6;
 	private JLabel lblNewLabel_6;
-
+	private HashMap<Integer, String> map;
+	
 	/**
 	 * Create the frame.
 	 */
-	public Payment() {
+	public Payment(HashMap<Integer, String> map) {
 
+		this.map = map;
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		;
 		setBounds(100, 100, 723, 660);
 		setResizable(false);
 		setLocationRelativeTo(null);
@@ -67,21 +73,21 @@ public class Payment extends JFrame {
 
 		textField = new JTextField();
 		textField.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		textField.setText("이름");
+		textField.setText(Userinfo.getUserInfo().getName());
 		textField.setBounds(12, 106, 116, 21);
 		orderPanel.add(textField);
 		textField.setColumns(10);
 
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		textField_1.setText("전화번호");
+		textField_1.setText(Userinfo.getUserInfo().getPhone());
 		textField_1.setBounds(153, 106, 158, 21);
 		orderPanel.add(textField_1);
 		textField_1.setColumns(10);
 
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		textField_2.setText("이메일");
+		textField_2.setText(Userinfo.getUserInfo().getMail());
 		textField_2.setBounds(12, 149, 219, 21);
 		orderPanel.add(textField_2);
 		textField_2.setColumns(10);
@@ -93,21 +99,21 @@ public class Payment extends JFrame {
 
 		textField_3 = new JTextField();
 		textField_3.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		textField_3.setText("이름");
+		textField_3.setText(Userinfo.getUserInfo().getName());
 		textField_3.setColumns(10);
 		textField_3.setBounds(12, 249, 116, 21);
 		orderPanel.add(textField_3);
 
 		textField_4 = new JTextField();
 		textField_4.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		textField_4.setText("전화번호");
+		textField_4.setText(Userinfo.getUserInfo().getPhone());
 		textField_4.setColumns(10);
 		textField_4.setBounds(153, 249, 158, 21);
 		orderPanel.add(textField_4);
 
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
-		textField_5.setText("주소");
+		textField_5.setText(Userinfo.getUserInfo().getAddr());
 		textField_5.setColumns(10);
 		textField_5.setBounds(12, 292, 219, 21);
 		orderPanel.add(textField_5);
@@ -119,43 +125,40 @@ public class Payment extends JFrame {
 		// 결제금액의 총 합
 		int paySum = 0;
 
-		// 결제품목 이름
-		String payListName[] = { "상품이름1", "상품이름2", "상품이름3", "상품이름4", "상품이름5" };
-		// 상품들의 가격
-		int payPrices[] = { 10000, 20000, 30000, 40000, 50000 };
-
 		// 결제리스트 패널
 		JPanel payList = new JPanel();
 		payList.setBounds(309, 214, 280, 13 * payCount);
 		payList.setBackground(new Color(255, 255, 255));
 		contentPane.add(payList);
 		payList.setLayout(null);
+		
+//		Iterator<E>
 
-		for (int i = 0; i < payCount; i++) {
-			// 상품명
-			payListNameLabel = new JLabel[payCount]; // 체크박스에 체크표시된 품목만큼의 라벨생성
-			payListNameLabel[i] = new JLabel(payListName[i]); // 상품명 라벨에 넣기
-			payListNameLabel[i].setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12)); // 상품명 폰트
-			payListNameLabel[i].setBounds(8, addHeight + 20, 100, 23); // 위치 사이즈
-			// 상품명 패널에 부착
-			payList.add(payListNameLabel[i]);
-
-			// 상품가격
-			int payPrice = payPrices[i]; // 상품가격을 차례대로 넣음
-			payPriceTextField = new JTextField[payCount]; // 가격텍스트필드 몇개인지!
-			payPriceTextField[i] = new JTextField(Integer.toString(payPrice)); // 문자열로 가격 입력함
-			payPriceTextField[i].setHorizontalAlignment(SwingConstants.RIGHT); // 글씨 오른쪽 정렬
-			payPriceTextField[i].setBounds(190, addHeight + 20, 100, 23);
-			// 가격 패널에 부착
-			payList.add(payPriceTextField[i]);
-
-			addHeight += 35; // 위에서부터 위치 떨어지는 정도를 추가
-		}
+//		for (int i = 0; i < payCount; i++) {
+//			// 상품명
+//			payListNameLabel = new JLabel[payCount]; // 체크박스에 체크표시된 품목만큼의 라벨생성
+//			payListNameLabel[i] = new JLabel(payListName[i]); // 상품명 라벨에 넣기
+//			payListNameLabel[i].setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12)); // 상품명 폰트
+//			payListNameLabel[i].setBounds(8, addHeight + 20, 100, 23); // 위치 사이즈
+//			// 상품명 패널에 부착
+//			payList.add(payListNameLabel[i]);
+//
+//			// 상품가격
+//			int payPrice = payPrices[i]; // 상품가격을 차례대로 넣음
+//			payPriceTextField = new JTextField[payCount]; // 가격텍스트필드 몇개인지!
+//			payPriceTextField[i] = new JTextField(Integer.toString(payPrice)); // 문자열로 가격 입력함
+//			payPriceTextField[i].setHorizontalAlignment(SwingConstants.RIGHT); // 글씨 오른쪽 정렬
+//			payPriceTextField[i].setBounds(190, addHeight + 20, 100, 23);
+//			// 가격 패널에 부착
+//			payList.add(payPriceTextField[i]);
+//
+//			addHeight += 35; // 위에서부터 위치 떨어지는 정도를 추가
+//		}
 
 		// 총 금액 표시 텍스트필드 == new JTextField(여기에 금액들의 합 입력)
-		for (int payPrice : payPrices) {
-			paySum += payPrice;
-		}
+//		for (int payPrice : payPrices) {
+//			paySum += payPrice;
+//		}
 		payTotalPrice = new JTextField();
 		payTotalPrice.setBounds(478, 260, 175, 22);
 		payTotalPrice.setText(Integer.toString(paySum));

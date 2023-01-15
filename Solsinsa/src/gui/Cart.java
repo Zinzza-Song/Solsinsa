@@ -1,11 +1,27 @@
 package gui;
 
-import jdbc.JdbcConnector;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.HashMap;
+import java.util.StringTokenizer;
 
-import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import client.Client;
+import client.Userinfo;
 
 public class Cart extends JFrame {
 
@@ -14,9 +30,10 @@ public class Cart extends JFrame {
 	private JCheckBox productCheckBox[];
 	private JLabel priceTextField[];
 	private JTextField CountTextField;
+	private HashMap<Integer, String> map;
 
-	int count; // 장바구니 품목 개수
-	int check; // 체크 한 상품 개수
+	int check = 0; // 체크 한 상품 개수
+	int sum = 0; // 가격
 	public Cart() {
 		setBounds(100, 100, 585, 492);
 		setResizable(false); // 프레임사이즈조절 불가능
@@ -34,31 +51,40 @@ public class Cart extends JFrame {
 		cartPanel.setBounds(0, 40, 569, 324);
 		cartPanel.setLayout(null);
 		
-
-		// 구매할 목록 체크하는 체크박스
-		// count는 db에서 장바구니 항목의 개수
-		count = 5;
-		
-		String name[] = { "상품이름1", "상품이름2", "상품이름3", "상품이름4", "상품이름5" };
-		int prices[] = { 10000, 20000, 30000, 40000, 50000 };
-		int sum = 0;
 		int yCoordinate = 31;
-
+		
 		// 장바구니 품목 개수에 맞춰서 목록 추가 생성
-		for (int i = 0; i < count; i++) {
-			check = i+1;
-			int price = prices[i];
-			// 체크 박스
-			productCheckBox = new JCheckBox[5];
-			productCheckBox[i] = new JCheckBox(name[i], true);
+		Client.msg = Integer.toString(Userinfo.getUserInfo().getNo()) + ":1005";
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+		
+		String list = Client.ans;
+		System.out.println(list);
+		StringTokenizer st = new StringTokenizer(list, "/");
+		int count = st.countTokens();
+		productCheckBox = new JCheckBox[count];
+		priceTextField = new JLabel[count];
+		
+		map = new HashMap<>();
+		
+		for(int i = 0; i < count; ++i) {
+			String listItem = st.nextToken();
+			StringTokenizer itemst = new StringTokenizer(listItem, ",");
+			String itemName = itemst.nextToken();
+			int itemPrice = Integer.parseInt(itemst.nextToken());
+			int itemNo = Integer.parseInt(itemst.nextToken());
+			
+			productCheckBox[i] = new JCheckBox(itemName, false);
 			productCheckBox[i].setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12));
 			productCheckBox[i].setBounds(8, yCoordinate, 367, 23);
-
+			
 			cartPanel.add(productCheckBox[i]);
-
-			// 상품 가격 텍스트필드 (문자열으로 가격 입력)
-			priceTextField = new JLabel[5];
-			priceTextField[i] = new JLabel(Integer.toString(price));
+			
+			priceTextField[i] = new JLabel(Integer.toString(itemPrice));
 			priceTextField[i].setHorizontalAlignment(SwingConstants.RIGHT); // 글씨 오른쪽 정렬
 			priceTextField[i].setBounds(396, yCoordinate, 144, 23);
 			yCoordinate += 38;
@@ -69,27 +95,27 @@ public class Cart extends JFrame {
 				public void itemStateChanged(ItemEvent e) {
 					//체크 되어있을경우
 					if (e.getStateChange() == 1) {
-						int sell = price;
-						int all = Integer.parseInt(totalPrice.getText());
-						totalPrice.setText(Integer.toString(all + sell));
+						sum += itemPrice;
+						totalPrice.setText(Integer.toString(sum));
 						check++;
 						CountTextField.setText(Integer.toString(check));
+						map.put(itemNo, itemName + "/" + itemPrice);
 					}
 					//체크 안된 경우
 					else {
-						int sell = price;
-						int all = Integer.parseInt(totalPrice.getText());
-						totalPrice.setText(Integer.toString(all - sell));
+						sum -= itemPrice;
+						totalPrice.setText(Integer.toString(sum));
 						check--;
 						CountTextField.setText(Integer.toString(check));
+						map.remove(itemNo);
 					}
 				}
 			});
 		}
 		// 총 금액 표시 텍스트필드 == new JTextField(여기에 금액들의 합 입력)
-		for(int price : prices) {
-			sum += price;
-		}
+//		for(int price : prices) {
+//			sum += price;
+//		}
 		totalPrice = new JTextField();
 		totalPrice.setText(Integer.toString(sum));
 		totalPrice.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -109,7 +135,7 @@ public class Cart extends JFrame {
 		paymentBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Payment pay = new Payment();
+				Payment pay = new Payment(map);
 				pay.setVisible(true);
 				dispose();
 			}

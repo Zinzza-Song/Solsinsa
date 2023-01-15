@@ -5,6 +5,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import client.Userinfo;
+
 public class MyPage extends JFrame {
 	
 	private JPanel contentPane;
@@ -214,6 +216,7 @@ public class MyPage extends JFrame {
 				// 예 버튼 클릭 시 초기 홈 화면 출력
 				Home h = new Home();
 				h.setVisible(true);
+				Userinfo.getUserInfo().Logout();
 				dispose();
 				}
 //			else if(JOptionPane.NO_OPTION == result) {

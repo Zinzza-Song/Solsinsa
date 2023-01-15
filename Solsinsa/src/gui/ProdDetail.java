@@ -116,8 +116,7 @@ public class ProdDetail extends JFrame {
 		cancelBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Products prod = new Products(category);
-				prod.setVisible(true);
+
 				dispose();
 			}
 		});

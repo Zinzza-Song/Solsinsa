@@ -104,7 +104,7 @@ public class Products extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						ProdDetail prod = new ProdDetail(category, imageIcon, probName);
 						prod.setVisible(true);
-						setVisible(false);
+						setVisible(true);
 					}
 				});
 			} else if (category.equals("BOTTOM")) {
@@ -126,7 +126,7 @@ public class Products extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						ProdDetail prod = new ProdDetail(category, imageIcon, probName);
 						prod.setVisible(true);
-						setVisible(false);
+						setVisible(true);
 					}
 				});
 			} else if (category.equals("OUTER")) {
@@ -148,7 +148,7 @@ public class Products extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						ProdDetail prod = new ProdDetail(category, imageIcon, probName);
 						prod.setVisible(true);
-						setVisible(false);
+						setVisible(true);
 					}
 				});
 			}

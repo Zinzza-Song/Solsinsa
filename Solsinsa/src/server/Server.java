@@ -18,6 +18,8 @@ import java.util.StringTokenizer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.lang.model.element.NestingKind;
+
 import jdbc.JdbcConnector;
 
 public class Server implements Runnable {
@@ -59,10 +61,6 @@ public class Server implements Runnable {
 					switch (protocol) {
 					case 1000:
 						// 상품 불러오기
-						// 클라이언트가 최초 실행시 product 테이블의 모든 데이터를 불러와서 클라이언트로 쏴준다.
-						// p_bottom, p_outer, p_top의 모든 데이터도 같이 쏴준다.
-						// 프로시저 all_product, selectProduct_bottom, selectProduct_outer,
-						// selectProduct_top 사용
 						appStart();
 						break;
 					case 1001:
@@ -77,47 +75,40 @@ public class Server implements Runnable {
 						break;
 					case 1004:
 						// 장바구니 담기
-						// 클라이언트가 상품담기를 클릭시 유저코드와 해당 상품 코드를 basket테이블에 추가
-						// 프로시저 addBasket 사용
+						addBasket(data);
 						break;
 					case 1005:
 						// 장바구니 보기
-						// 클라이언트가 장바구니 보기를 클릭하면 유저코드를 db로 보내 해당 데이터가 담긴 커서를 뽑아서 클라이언트로 쏴준다.
-						// 프로시저 selectBasket 사용
+						writer.println(showBasket(data));
 						break;
 					case 1006:
 						// 결제하기
-						// 클라이언트가 결제하기를 누르면 유저코드와 해당 상품코드를 db로 보내 basket 테이블에서 해당 컬럼을 삭제
-						// 위에서 삭제 후 orders 테이블에 해당 유저코드와 상품코드와 구매날짜를 보내 인서트
-						// 위 작업 후 product 테이블에서 재고량을 -1을 해주는 업데이트 작업
-						// 프로시저 del_basket, (orders 테이블 인서트 프로시저 아직 없음), updateProduct 사용
+						pay(data);
 						break;
 					case 1007:
 						// 회원 정보 수정
-						// 클라이언트가 회원정보 수정 버튼을 클릭시 입력한 값으로 customer 테이블을 업데이트(바꾸든 안 바꾸든 일단 덮어쓰는 방식)
-						// 프로시저 updateCustomer 사용
+						updateUserInfo(data);
 						break;
 					case 1008:
 						// 회원 탈퇴
-						// 회원 탈퇴를 할 경우 해당 유저의 아이디와 비밀번호를 db로 보내 해당 컬럼을 삭제
-						// 프로시저 delCustomer 사용
+						delUser(data);
 						break;
 					case 1009:
 						// 구매목록
-						// 마이페이지 들어갔을 때 하단에 구매목록을 띄어야한다
-						// 구매한 상품 이름, 가격, 구매 날짜가 뜨는 값이 담긴 커서를 뽑도록 요청
-						// 프로시저 order_select 사용
+						writer.println(showOrders(data));
 						break;
 					case 1010:
 						// 관리자 초기 화면 세팅
 						// 관리자가 로그인해서 Lookup 객체가 생성되면 실행
 						// 물품정보와 회원정보 전체로그를 불러와서 세팅
 						// 프로시저 selectLog_All, all_customer, all_product
+						writer.println(adminUIInit());
 						break;
 					case 1011:
 						// 구분 로그
 						// 상품로그보기 버튼 혹은 회원로그보기 버튼을 누르면 해당 코드를 보내 해당 로그만 보여준다.
 						// 프로시저 selectLog_choice사용
+						writer.println(showDetailLog(data));
 						break;
 					default:
 						break;
@@ -391,6 +382,149 @@ public class Server implements Runnable {
 		}
 
 		return res + "/" + userData;
+	}
+	
+	void addBasket(String data) {
+		StringTokenizer st = new StringTokenizer(data, ",");
+		int c_no = Integer.parseInt(st.nextToken());
+		int p_no = Integer.parseInt(st.nextToken());
+		
+		String pro = "{call addBasket(?,?)}";
+		try(CallableStatement cstmt = con.prepareCall(pro)) {
+			cstmt.setInt(1, c_no);
+			cstmt.setInt(2, p_no);
+			cstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	String showBasket(String data) {
+		int c_no = Integer.parseInt(data);
+		
+		String res = "";
+		String pro = "{call selectBasket(?,?)}";
+		try(CallableStatement cstmt = con.prepareCall(pro)) {
+			cstmt.setInt(1, c_no);
+			cstmt.registerOutParameter(2, oracle.jdbc.OracleTypes.CURSOR);
+			cstmt.execute();
+			
+			ResultSet rs = (ResultSet)cstmt.getObject(2);
+			while(rs.next())
+				res += rs.getString("p_name") + "," + rs.getString("p_price") + "/";
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	void pay(String data) {
+		StringTokenizer st = new StringTokenizer(data, "/");
+		int c_no = Integer.parseInt(st.nextToken());
+		String p_nos = st.nextToken();
+		
+		st = new StringTokenizer(p_nos, ",");
+		while(st.hasMoreTokens()) {
+			int p_no = Integer.parseInt(st.nextToken());
+			
+			String pro = "{call del_basket(?,?)}";
+			try(CallableStatement cstmt = con.prepareCall(pro)) {
+				cstmt.setInt(1, c_no);
+				cstmt.setInt(2, p_no);
+				cstmt.execute();
+			} catch (SQLException e) {
+				System.out.println("del오류");
+				e.printStackTrace();
+			}
+			
+			pro = "{call addorders(?,?)}";
+			try(CallableStatement cstmt = con.prepareCall(pro)) {
+				cstmt.setInt(1, c_no);
+				cstmt.setInt(2, c_no);
+				cstmt.execute();
+			} catch (SQLException e) {
+				System.out.println("insert오류");
+				e.printStackTrace();
+			}
+			
+			pro = "{call updateProduct(?,?)}";
+			try(CallableStatement cstmt = con.prepareCall(pro)) {
+				cstmt.setInt(1, p_no);
+				cstmt.setInt(2, -1);
+				cstmt.execute();
+			} catch (SQLException e) {
+				System.out.println("update오류");
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	void updateUserInfo(String data) {
+		StringTokenizer st = new StringTokenizer(data, ",");
+		String id = st.nextToken();
+		String pw = st.nextToken();
+		String addr = st.nextToken();
+		String phone = st.nextToken();
+		String mail = st.nextToken();
+		
+		String pro = "{call updateCustomer(?,?,?,?,?)}";
+		try(CallableStatement cstmt = con.prepareCall(pro)) {
+			cstmt.setString(1, id);
+			cstmt.setString(2, pw);
+			cstmt.setString(3, addr);
+			cstmt.setString(4, phone);
+			cstmt.setString(5, mail);
+			cstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	void delUser(String data) {
+		StringTokenizer st = new StringTokenizer(data, ",");
+		String id = st.nextToken();
+		String pw = st.nextToken();
+		
+		String pro = "{call delCustomer(?,?)}";
+		try(CallableStatement cstmt = con.prepareCall(pro)) {
+			cstmt.setString(1, id);
+			cstmt.setString(2, pw);
+			cstmt.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	String showOrders(String data) {
+		int c_no = Integer.parseInt(data);
+		
+		String res = "";
+		String pro = "{call order_select(?,?)}";
+		try(CallableStatement cstmt = con.prepareCall(pro)) {
+			cstmt.setInt(1, c_no);
+			cstmt.registerOutParameter(2, oracle.jdbc.OracleTypes.CURSOR);
+			cstmt.execute();
+			
+			ResultSet rs = (ResultSet)cstmt.getObject(2);
+			while(rs.next()) {
+				String name = rs.getString("p_name");
+				int price = rs.getInt("p_price");
+				String date = rs.getString("o_date");
+				res += name + "," + price + "," + date + "/";
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	String adminUIInit() {
+		return null;
+	}
+	
+	String showDetailLog(String data) {
+		return null;
 	}
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {

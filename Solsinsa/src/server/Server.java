@@ -133,13 +133,46 @@ public class Server implements Runnable {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(client.getOutputStream());
 			
+			ArrayList<User> users = new ArrayList<>();
 			ArrayList<Product> products = new ArrayList<>();
 			ArrayList<Top> tops = new ArrayList<>();
 			ArrayList<Outer> outers = new ArrayList<>();
 			ArrayList<Bottom> bottoms = new ArrayList<>();
+			ArrayList<Log> logs = new ArrayList<>();
 			
-			String pro = "{call all_product(?)}";
+			String pro = "{call all_customer(?)}";
+			try(CallableStatement cstmt = con.prepareCall(pro)) {
+				cstmt.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+				cstmt.execute();
+				
+				ResultSet rs = (ResultSet)cstmt.getObject(1);
+				while(rs.next()) {
+					int no = rs.getInt("c_no");
+					String id = rs.getString("c_id");
+					String pw = rs.getString("c_pw");
+					String name = rs.getString("c_name");
+					String birth = rs.getString("c_birth");
+					String addr = rs.getString("c_addr");
+					String phone = rs.getString("c_phone");
+					String mail = rs.getString("c_mail");
+					
+					User user = new User();
+					user.setNo(no);
+					user.setPw(pw);
+					user.setName(name);
+					user.setBirth(birth);
+					user.setAddr(addr);
+					user.setPhone(phone);
+					user.setMail(mail);
+					
+					users.add(user);
+				}
+				rs.close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 			
+			pro = "{call all_product(?)}";
 			try(CallableStatement cstmt = con.prepareCall(pro)){
 				cstmt.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
 				cstmt.execute();
@@ -168,7 +201,7 @@ public class Server implements Runnable {
 					
 					products.add(product);
 				}
-				
+				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -209,6 +242,7 @@ public class Server implements Runnable {
 					
 					tops.add(top);
 				}
+				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -249,6 +283,7 @@ public class Server implements Runnable {
 					
 					outers.add(outer);
 				}
+				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -291,15 +326,41 @@ public class Server implements Runnable {
 					
 					bottoms.add(bottom);
 				}
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			pro = "{call selectLog_All(?)}";
+			try(CallableStatement cstmt = con.prepareCall(pro)) {
+				cstmt.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
+				cstmt.execute();
+				
+				ResultSet rs = (ResultSet)cstmt.getObject(1);
+				while(rs.next()) {
+					String date = rs.getString("l_date");
+					String msg = rs.getString("l_msg");
+					int code = rs.getInt("l_code");
+					
+					Log log = new Log();
+					log.setDate(date);
+					log.setMsg(msg);
+					log.setCode(code);
+					
+					logs.add(log);
+				}
+				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			
 			HashMap<Object, Object> map = new HashMap<>();
+			map.put("user", users);
 			map.put("product", products);
 			map.put("top", tops);
 			map.put("outer", outers);
 			map.put("bottom", bottoms);
+			map.put("log", logs);
 			
 			oos.writeObject(map);
 			oos.flush();

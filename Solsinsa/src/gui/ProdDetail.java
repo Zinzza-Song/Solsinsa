@@ -11,6 +11,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
+import client.Client;
+import client.Userinfo;
+
 public class ProdDetail extends JFrame {
 
 	private JPanel contentPane;
@@ -70,8 +73,7 @@ public class ProdDetail extends JFrame {
 			// 장바구니 담기 클릭 시 장바구니에 추가됨
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
+				Client.msg = Userinfo.getUserInfo().getNo() + "," + "540" + ":1004";
 				JOptionPane.showMessageDialog(null, "장바구니에 추가되었습니다.");
 				dispose();
 				Products prod = new Products(category);

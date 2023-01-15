@@ -7,8 +7,11 @@ import client.Userinfo;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 public class Payment extends JFrame {
 
@@ -32,14 +35,14 @@ public class Payment extends JFrame {
 	private JLabel lblNewLabel_4;
 	private JTextField textField_6;
 	private JLabel lblNewLabel_6;
-	private HashMap<Integer, String> map;
+	private ArrayList<String> list;
 	
 	/**
 	 * Create the frame.
 	 */
-	public Payment(HashMap<Integer, String> map) {
+	public Payment(ArrayList<String> list) {
 
-		this.map = map;
+		this.list = list;
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 723, 660);
@@ -132,33 +135,35 @@ public class Payment extends JFrame {
 		contentPane.add(payList);
 		payList.setLayout(null);
 		
-//		Iterator<E>
+		int i = 0;
+		for(String item : list) {
+			StringTokenizer st = new StringTokenizer(item, "/");
+			int no = Integer.parseInt(st.nextToken());
+			String itemName = st.nextToken();
+			int itemPrice = Integer.parseInt(st.nextToken());
+			
+			// 상품명
+			payListNameLabel = new JLabel[payCount]; // 체크박스에 체크표시된 품목만큼의 라벨생성
+			payListNameLabel[i] = new JLabel(itemName); // 상품명 라벨에 넣기
+			payListNameLabel[i].setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12)); // 상품명 폰트
+			payListNameLabel[i].setBounds(8, addHeight + 20, 100, 23); // 위치 사이즈
+			// 상품명 패널에 부착
+			payList.add(payListNameLabel[i]);
+			
+			// 상품가격
+			int payPrice = itemPrice; // 상품가격을 차례대로 넣음
+			payPriceTextField = new JTextField[payCount]; // 가격텍스트필드 몇개인지!
+			payPriceTextField[i] = new JTextField(Integer.toString(payPrice)); // 문자열로 가격 입력함
+			payPriceTextField[i].setHorizontalAlignment(SwingConstants.RIGHT); // 글씨 오른쪽 정렬
+			payPriceTextField[i].setBounds(190, addHeight + 20, 100, 23);
+			// 가격 패널에 부착
+			payList.add(payPriceTextField[i]);
+			
+			addHeight += 35; // 위에서부터 위치 떨어지는 정도를 추가
+			paySum += itemPrice;
+			++i;
+		}
 
-//		for (int i = 0; i < payCount; i++) {
-//			// 상품명
-//			payListNameLabel = new JLabel[payCount]; // 체크박스에 체크표시된 품목만큼의 라벨생성
-//			payListNameLabel[i] = new JLabel(payListName[i]); // 상품명 라벨에 넣기
-//			payListNameLabel[i].setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 12)); // 상품명 폰트
-//			payListNameLabel[i].setBounds(8, addHeight + 20, 100, 23); // 위치 사이즈
-//			// 상품명 패널에 부착
-//			payList.add(payListNameLabel[i]);
-//
-//			// 상품가격
-//			int payPrice = payPrices[i]; // 상품가격을 차례대로 넣음
-//			payPriceTextField = new JTextField[payCount]; // 가격텍스트필드 몇개인지!
-//			payPriceTextField[i] = new JTextField(Integer.toString(payPrice)); // 문자열로 가격 입력함
-//			payPriceTextField[i].setHorizontalAlignment(SwingConstants.RIGHT); // 글씨 오른쪽 정렬
-//			payPriceTextField[i].setBounds(190, addHeight + 20, 100, 23);
-//			// 가격 패널에 부착
-//			payList.add(payPriceTextField[i]);
-//
-//			addHeight += 35; // 위에서부터 위치 떨어지는 정도를 추가
-//		}
-
-		// 총 금액 표시 텍스트필드 == new JTextField(여기에 금액들의 합 입력)
-//		for (int payPrice : payPrices) {
-//			paySum += payPrice;
-//		}
 		payTotalPrice = new JTextField();
 		payTotalPrice.setBounds(478, 260, 175, 22);
 		payTotalPrice.setText(Integer.toString(paySum));

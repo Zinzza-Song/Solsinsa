@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
@@ -14,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -30,7 +32,7 @@ public class Cart extends JFrame {
 	private JCheckBox productCheckBox[];
 	private JLabel priceTextField[];
 	private JTextField CountTextField;
-	private HashMap<Integer, String> map;
+	private ArrayList<String> items;
 
 	int check = 0; // 체크 한 상품 개수
 	int sum = 0; // 가격
@@ -69,7 +71,7 @@ public class Cart extends JFrame {
 		productCheckBox = new JCheckBox[count];
 		priceTextField = new JLabel[count];
 		
-		map = new HashMap<>();
+		items = new ArrayList<>();
 		
 		for(int i = 0; i < count; ++i) {
 			String listItem = st.nextToken();
@@ -89,6 +91,7 @@ public class Cart extends JFrame {
 			priceTextField[i].setBounds(396, yCoordinate, 144, 23);
 			yCoordinate += 38;
 			cartPanel.add(priceTextField[i]);
+
 			// 체크박스 설정 시 리스너
 			productCheckBox[i].addItemListener(new ItemListener() {
 				@Override
@@ -99,7 +102,7 @@ public class Cart extends JFrame {
 						totalPrice.setText(Integer.toString(sum));
 						check++;
 						CountTextField.setText(Integer.toString(check));
-						map.put(itemNo, itemName + "/" + itemPrice);
+						items.add(itemNo + "/" + itemName + "/" + itemPrice);
 					}
 					//체크 안된 경우
 					else {
@@ -107,15 +110,12 @@ public class Cart extends JFrame {
 						totalPrice.setText(Integer.toString(sum));
 						check--;
 						CountTextField.setText(Integer.toString(check));
-						map.remove(itemNo);
+						items.remove(itemNo + "/" + itemName + "/" + itemPrice);
 					}
 				}
 			});
 		}
-		// 총 금액 표시 텍스트필드 == new JTextField(여기에 금액들의 합 입력)
-//		for(int price : prices) {
-//			sum += price;
-//		}
+
 		totalPrice = new JTextField();
 		totalPrice.setText(Integer.toString(sum));
 		totalPrice.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -135,9 +135,13 @@ public class Cart extends JFrame {
 		paymentBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Payment pay = new Payment(map);
-				pay.setVisible(true);
-				dispose();
+				if(check != 0) {
+					Payment pay = new Payment(items);
+					pay.setVisible(true);
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "1개 이상 선택을 하세요.");
+				}
 			}
 		});
 

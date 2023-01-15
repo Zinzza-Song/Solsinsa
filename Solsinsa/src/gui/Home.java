@@ -21,7 +21,6 @@ public class Home extends JFrame {
 	private JTextField imageJbtnName[];
 	private JTextField imageJbtnPrice[];
 	private ImageIcon imgIcon[] = new ImageIcon[4];
-
 	/**
 	 * Launch the application.
 	 */
@@ -310,11 +309,11 @@ public class Home extends JFrame {
 			imageJbtnPrice[i].setFont(new Font("한컴 말랑말랑 Regular", Font.PLAIN, 12));
 			imageJbtnPrice[i].setHorizontalAlignment(SwingConstants.CENTER);
 			imageJbtnPrice[i].setColumns(10);
-
+			int num = random;
 			// 상품 클릭 시 상품 상세정보로 이동
 			productJbtn[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					ProdDetail detail = new ProdDetail(product, product.getCategory_code());
+					ProdDetail detail = new ProdDetail(product, num);
 					detail.setVisible(true);
 				}});
 			

@@ -87,13 +87,14 @@ public class Products extends JFrame {
 
 			productName[i-num] = new JTextField(pName);
 			productPrice[i-num] = new JTextField(pPrice + " 원");
+			int number = i;
 			// 상품의 카테고리 별 상품 클릭 시 상세정보 페이지 호출
 			productImgBtn[i-num].addActionListener(new ActionListener() {
 				// 상품 상세정보 페이지에 상품 사진, 이름 사용을 위해
 				// category, imageIcon, probName 파라미터를 사용해
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					ProdDetail productdt = new ProdDetail(prod, ctgNum);
+					ProdDetail productdt = new ProdDetail(prod, number);
 					productdt.setVisible(true);
 					setVisible(true);
 				}

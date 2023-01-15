@@ -568,14 +568,6 @@ public class Server implements Runnable {
 		}
 		return res;
 	}
-	
-	String adminUIInit() {
-		return null;
-	}
-	
-	String showDetailLog(String data) {
-		return null;
-	}
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 

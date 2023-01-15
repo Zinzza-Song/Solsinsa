@@ -23,6 +23,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
+
+import client.Client;
+
 import java.awt.event.MouseListener;
 
 public class Lookup extends JFrame {
@@ -53,6 +56,16 @@ public class Lookup extends JFrame {
 		Object[][] productInformation = { { "상품번호", "상품명", "가격", "카테고리", 100, "추가" },
 				{ "상품번호", "상품명", "가격", "카테고리", 100, "추가" }, { "상품번호", "상품명", "가격", "카테고리", 100, "추가" },
 				{ "상품번호", "상품명", "가격", "카테고리", 100, "추가" }, { "상품번호", "상품명", "가격", "카테고리", 100, "추가" } };
+		
+//		Object[][] obj = new Object[Client.products.size()][6];
+//		for(int i = 0; i < Client.products.size(); ++i) {
+//			for(int j = 0; j < 6; ++j) {
+//				if(j == 0)
+//					obj[i][j] = Integer.toString(Client.products.get(i).getNo());
+//				else if(j == 1)
+//					obj[i][j] = Client.products.get(i).getName();
+//			}
+//		}
 
 		// 유저 테이블에 행 추가하기
 		String userHeader[] = { "NO", "ID", "PW", "NAME", "BIRTH", "ADDR", "PHONE", "EMAIL" };

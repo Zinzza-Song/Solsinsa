@@ -99,19 +99,6 @@ public class Server implements Runnable {
 						// 구매목록
 						writer.println(showOrders(data));
 						break;
-					case 1010:
-						// 관리자 초기 화면 세팅
-						// 관리자가 로그인해서 Lookup 객체가 생성되면 실행
-						// 물품정보와 회원정보 전체로그를 불러와서 세팅
-						// 프로시저 selectLog_All, all_customer, all_product
-						writer.println(adminUIInit());
-						break;
-					case 1011:
-						// 구분 로그
-						// 상품로그보기 버튼 혹은 회원로그보기 버튼을 누르면 해당 코드를 보내 해당 로그만 보여준다.
-						// 프로시저 selectLog_choice사용
-						writer.println(showDetailLog(data));
-						break;
 					default:
 						break;
 					}

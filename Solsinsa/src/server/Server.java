@@ -145,6 +145,7 @@ public class Server implements Runnable {
 					
 					User user = new User();
 					user.setNo(no);
+					user.setId(id);
 					user.setPw(pw);
 					user.setName(name);
 					user.setBirth(birth);

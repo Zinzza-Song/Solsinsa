@@ -25,6 +25,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
 import client.Client;
+import oracle.net.aso.m;
+import server.Log;
 
 import java.awt.event.MouseListener;
 
@@ -37,6 +39,12 @@ public class Lookup extends JFrame {
 	private JTable productTable;
 	private JTable userTable;
 	private JTable logTable;
+
+	String logHeader[] = { "일자", "LOG" };
+	String logInformation[][] = new String[Client.logs.size()][2];
+	String userLogInformation[][] = null;
+	String productLogInformation[][] = null;
+	DefaultTableCellRenderer celAlignCenter = new DefaultTableCellRenderer();
 
 	/**
 	 * Create the frame.
@@ -53,9 +61,9 @@ public class Lookup extends JFrame {
 		JButton a = new JButton("추가");
 		// 상품 테이블에 행 추가하기
 		String productHeader[] = { "NO", "NAME", "PRICE", "CTG", "STOCK", "ADD" };
-		
+
 		Object[][] productInformation = new Object[Client.products.size()][6];
-		for(int i = 0; i < Client.products.size(); ++i) {
+		for (int i = 0; i < Client.products.size(); ++i) {
 			productInformation[i][0] = Integer.toString(Client.products.get(i).getNo());
 			productInformation[i][1] = Client.products.get(i).getName();
 			productInformation[i][2] = Client.products.get(i).getPrice();
@@ -66,26 +74,47 @@ public class Lookup extends JFrame {
 
 		// 유저 테이블에 행 추가하기
 		String userHeader[] = { "NO", "ID", "PW", "NAME", "BIRTH", "ADDR", "PHONE", "EMAIL" };
-		String[][] userInformation = new String [Client.users.size()][8];
-		for(int i = 0; i < Client.users.size(); i++) {
-					userInformation[i][0] = Integer.toString(Client.users.get(i).getNo());
-					userInformation[i][1] = Client.users.get(i).getId();
-					userInformation[i][2] = Client.users.get(i).getPw();
-					userInformation[i][3] = Client.users.get(i).getName();
-					userInformation[i][4] = Client.users.get(i).getBirth();
-					userInformation[i][5] = Client.users.get(i).getAddr();
-					userInformation[i][6] = Client.users.get(i).getPhone();
-					userInformation[i][7] = Client.users.get(i).getMail();
+		String[][] userInformation = new String[Client.users.size()][8];
+		for (int i = 0; i < Client.users.size(); i++) {
+			userInformation[i][0] = Integer.toString(Client.users.get(i).getNo());
+			userInformation[i][1] = Client.users.get(i).getId();
+			userInformation[i][2] = Client.users.get(i).getPw();
+			userInformation[i][3] = Client.users.get(i).getName();
+			userInformation[i][4] = Client.users.get(i).getBirth();
+			userInformation[i][5] = Client.users.get(i).getAddr();
+			userInformation[i][6] = Client.users.get(i).getPhone();
+			userInformation[i][7] = Client.users.get(i).getMail();
 		}
 		// 로그 테이블에 행 추가하기
-		String logHeader[] = { "일자", "LOG" };
-		String logInformation[][] = new String[Client.logs.size()][2];
-		for(int i = 0; i < Client.logs.size(); i++) {
+		int userLogsCnt = 0;
+		int productLogsCnt = 0;
+		for (int i = 0; i < Client.logs.size(); i++) {
 			logInformation[i][0] = Client.logs.get(i).getDate();
 			logInformation[i][1] = Client.logs.get(i).getMsg();
+
+			if (Client.logs.get(i).getCode() == 1000)
+				userLogsCnt++;
+			else
+				productLogsCnt++;
 		}
+		// 상품,회원로그 테이블에 행 추가하기
+		userLogInformation = new String[userLogsCnt][2];
+		productLogInformation = new String[productLogsCnt][2];
+		int userLogsIndex = 0;
+		int productLogsIndex = 0;
+		for (Log log : Client.logs) {
+			if (log.getCode() == 1000) {
+				userLogInformation[userLogsIndex][0] = log.getDate();
+				userLogInformation[userLogsIndex][1] = log.getMsg();
+				userLogsIndex++;
+			} else {
+				productLogInformation[productLogsIndex][0] = log.getDate();
+				productLogInformation[productLogsIndex][1] = log.getMsg();
+				productLogsIndex++;
+			}
+		}
+
 		// 테이블 글자 정렬
-		DefaultTableCellRenderer celAlignCenter = new DefaultTableCellRenderer();
 		celAlignCenter.setHorizontalAlignment(JLabel.CENTER);
 		contentPane.setLayout(null);
 
@@ -118,22 +147,30 @@ public class Lookup extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				int row = productTable.getSelectedRow();
-				Object value = productTable.getValueAt(row,4);
-				int add = (Integer)value;
+				Object value = productTable.getValueAt(row, 4);
+				int add = (Integer) value;
 				add += 1;
-				value = (Object)add;
+				value = (Object) add;
 				productTable.setValueAt(value, row, 4);
 
 			}
-			@Override
-			public void mousePressed(MouseEvent e) {}
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-			@Override
-			public void mouseExited(MouseEvent e) {}});
 
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+		});
 
 		// customer테이블
 		userTable = new JTable(userInformation, userHeader);
@@ -168,43 +205,41 @@ public class Lookup extends JFrame {
 		}
 		contentPane.add(userScrolledPane);
 
-		// log테이블
-		logTable = new JTable(logInformation, logHeader);
-		logTable.setCellSelectionEnabled(true);
-		logTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		logTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-
-//		logTable.getColumnModel().getColumn(0).setMaxWidth(80);
-		logTable.getColumnModel().getColumn(0).setMinWidth(80);
-//		logTable.getColumnModel().getColumn(0).setWidth(80);
+		makeLogTable(0);
 		
-		logTable.getColumnModel().getColumn(1).setMinWidth(920);
-		logTable.getColumnModel().getColumn(1).setWidth(920);
-
-		// log테이블 글자 정렬
-		logTable.getColumn("일자").setCellRenderer(celAlignCenter);
-
-		logScrolledPane = new JScrollPane(logTable);
-		logScrolledPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		logScrolledPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-		logScrolledPane.setBounds(5, 330, 980, 291);
-		logScrolledPane.setBorder(new LineBorder(new Color(0, 0, 0)));
-		contentPane.add(logScrolledPane);
-
 		JButton custLog = new JButton("회원로그조회");
 		custLog.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
 		custLog.setBounds(291, 297, 119, 23);
 		contentPane.add(custLog);
+		custLog.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				makeLogTable(1);
+			}
+		});
 
 		JButton productLog = new JButton("상품로그조회");
 		productLog.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
 		productLog.setBounds(153, 296, 119, 23);
 		contentPane.add(productLog);
+		productLog.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				makeLogTable(2);
+			}
+		});
 
 		JButton allLog = new JButton("전체로그조회");
 		allLog.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
 		allLog.setBounds(15, 296, 119, 23);
 		contentPane.add(allLog);
+		allLog.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				makeLogTable(0);
+			}
+		});
+		
 		// 조회프레임 닫을 경우 기본 홈 화면으로 돌아가기
 		this.addWindowListener(new WindowListener() {
 			@Override
@@ -245,6 +280,38 @@ public class Lookup extends JFrame {
 		productTable.getColumnModel().getColumn(5).setCellRenderer(new ButtonRenderer());
 		productTable.getColumnModel().getColumn(5).setCellEditor(new ButtonEditor(new JTextField()));
 
+	}
+
+	void makeLogTable(int num) {
+		if(logScrolledPane != null)
+			contentPane.remove(logScrolledPane);
+		// log테이블
+
+		// 0: 전체로그 1: 회원 로그 2: 상품 로그
+		if(num == 0)
+			logTable = new JTable(logInformation, logHeader);
+		else if(num == 1)
+			logTable = new JTable(userLogInformation, logHeader);
+		else
+			logTable = new JTable(productLogInformation, logHeader);
+		
+		logTable.setCellSelectionEnabled(true);
+		logTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		logTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+		logTable.getColumnModel().getColumn(0).setMinWidth(80);
+		logTable.getColumnModel().getColumn(1).setMinWidth(920);
+		logTable.getColumnModel().getColumn(1).setWidth(920);
+
+		// log테이블 글자 정렬
+		logTable.getColumn("일자").setCellRenderer(celAlignCenter);
+
+		logScrolledPane = new JScrollPane(logTable);
+		logScrolledPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		logScrolledPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		logScrolledPane.setBounds(5, 330, 980, 291);
+		logScrolledPane.setBorder(new LineBorder(new Color(0, 0, 0)));
+		contentPane.add(logScrolledPane);
 	}
 
 	// BUTTON RENDERER 클래스

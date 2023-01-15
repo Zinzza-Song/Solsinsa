@@ -123,7 +123,7 @@ public class DressPanel extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProdDetail prod = new ProdDetail(product2, ctgNum2);
+				ProdDetail prod = new ProdDetail(product2, 16);
 				prod.setVisible(true);
 			}
 			@Override
@@ -147,7 +147,7 @@ public class DressPanel extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProdDetail prod = new ProdDetail(product4, ctgNum4);
+				ProdDetail prod = new ProdDetail(product4, 20);
 				prod.setVisible(true);
 			}
 			@Override
@@ -171,7 +171,7 @@ public class DressPanel extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProdDetail prod = new ProdDetail(product2, ctgNum2);
+				ProdDetail prod = new ProdDetail(product2, 16);
 				prod.setVisible(true);
 			}
 			@Override
@@ -195,7 +195,7 @@ public class DressPanel extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ProdDetail prod = new ProdDetail(product4, ctgNum4);
+				ProdDetail prod = new ProdDetail(product4, 20);
 				prod.setVisible(true);
 			}
 			@Override

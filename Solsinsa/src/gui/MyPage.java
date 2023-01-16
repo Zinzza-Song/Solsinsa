@@ -137,7 +137,7 @@ public class MyPage extends JFrame {
 		String mail = Userinfo.getUserInfo().getMail();
 		String phone = Userinfo.getUserInfo().getPhone();
 		String birth = Userinfo.getUserInfo().getBirth();
-		String userTexts[] = { name, id, pw, addr, phone, mail, birth };
+		String userTexts[] = { name, id, "", addr, phone, mail, birth };
 
 		JTextField[] setTextFields = new JTextField[userNames.length];
 
@@ -191,7 +191,7 @@ public class MyPage extends JFrame {
 		int startY2 = 83;
 		
 		// 라벨들이 들어갈 이름
-		String userTexts2[] = { name, id, pw, addr, phone, mail, birth }; // 수정된 값이 들어와야함
+		String userTexts2[] = { name, id, "", addr, phone, mail, birth }; // 수정된 값이 들어와야함
 
 		JTextField[] updatesFields = new JTextField[userNames2.length];
 		for (int i = 0; i < userNames2.length; i++) {

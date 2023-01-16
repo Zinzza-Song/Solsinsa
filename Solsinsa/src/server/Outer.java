@@ -2,7 +2,7 @@ package server;
 
 import java.io.Serializable;
 
-public class Outer implements Serializable{
+public class Outer implements Serializable {
 
 	private static final long serialVersionUID = 456789654L;
 

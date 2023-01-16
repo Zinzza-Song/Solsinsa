@@ -1,29 +1,25 @@
 package gui;
 
-import jdbc.JdbcConnector;
-import server.Product;
-
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import client.Client;
 
-import javax.swing.JScrollPane;
-import java.awt.Color;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
+@SuppressWarnings("serial")
 public class Products extends JFrame {
 
 	private JPanel contentPane;
@@ -72,24 +68,23 @@ public class Products extends JFrame {
 		for (int i = num; i < num + 12; i++) {
 			server.Product prod = Client.products.get(i);
 			String pName = prod.getName();
-			int ctgNum = prod.getCategory_code();
 			int pPrice = prod.getPrice();
-			Link = "./src/쇼핑몰 사진/"+ prod.getCategory()+"/" + prod.getImg();
+			Link = "./src/쇼핑몰 사진/" + prod.getCategory() + "/" + prod.getImg();
 			ImageIcon imageIcon = new ImageIcon(Link);
 			Image Img = imageIcon.getImage();
 			Image changeImg = Img.getScaledInstance(160, 172, Image.SCALE_SMOOTH);
 			ImageIcon changeIcon = new ImageIcon(changeImg);
-			
-			productImgBtn[i-num] = new JButton(changeIcon);
-			productImgBtn[i-num].setFocusPainted(false);
-			productImgBtn[i-num].setBackground(new Color(234, 232, 227));
-			productImgBtn[i-num].setOpaque(true);
 
-			productName[i-num] = new JTextField(pName);
-			productPrice[i-num] = new JTextField(pPrice + " 원");
+			productImgBtn[i - num] = new JButton(changeIcon);
+			productImgBtn[i - num].setFocusPainted(false);
+			productImgBtn[i - num].setBackground(new Color(234, 232, 227));
+			productImgBtn[i - num].setOpaque(true);
+
+			productName[i - num] = new JTextField(pName);
+			productPrice[i - num] = new JTextField(pPrice + " 원");
 			int number = i;
 			// 상품의 카테고리 별 상품 클릭 시 상세정보 페이지 호출
-			productImgBtn[i-num].addActionListener(new ActionListener() {
+			productImgBtn[i - num].addActionListener(new ActionListener() {
 				// 상품 상세정보 페이지에 상품 사진, 이름 사용을 위해
 				// category, imageIcon, probName 파라미터를 사용해
 				@Override
@@ -163,7 +158,6 @@ public class Products extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				dispose();
 			}
 

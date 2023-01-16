@@ -27,6 +27,7 @@ public class Server implements Runnable {
 
 	static Connection con;
 
+	@SuppressWarnings("static-access")
 	public Server(Socket client) { // 멀티 쓰레드 환경구출을 위한 생성자, 클라이언트별 쓰레드 생성
 		this.client = client;
 		list.add(client); // 쓰레드를 리스트에 추가
@@ -37,10 +38,9 @@ public class Server implements Runnable {
 		// 클라이언트 별로 동작하는 메소드
 		// 클라이언트 별 송수신관련 메소드와 변수들을 갖고 있음
 
-		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream())); // 수신 버퍼
-			OutputStream out = client.getOutputStream(); // 클라이언트로 메세지 보내기
-			PrintWriter writer = new PrintWriter(out, true); // 송신 버퍼
+		try (OutputStream out = client.getOutputStream(); // 클라이언트로 메세지 보내기
+				BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream())); // 수신 버퍼
+				PrintWriter writer = new PrintWriter(out, true);) {// 송신 버퍼
 
 			StringTokenizer st = null;
 
@@ -108,35 +108,34 @@ public class Server implements Runnable {
 				}
 			}
 
-			out.close();
-			System.out.println("클라이언트" + Thread.currentThread() + "종료");
+			System.out.println("클라이언트 종료");
+			list.remove(client);
 
 		} catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("클라 비정상 종료");
+			System.out.println("클라이언트 종료");
 			list.remove(client);
 		}
 
 	}
 
-	void appStart() { // 클라이언트가 실행되면 db에 있는 상품테이블의 데이터와 상의 하의 아우터 상세정보 테이블의 데이터들을 
+	void appStart() { // 클라이언트가 실행되면 db에 있는 상품테이블의 데이터와 상의 하의 아우터 상세정보 테이블의 데이터들을
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(client.getOutputStream());
-			
+
 			ArrayList<User> users = new ArrayList<>();
 			ArrayList<Product> products = new ArrayList<>();
 			ArrayList<Top> tops = new ArrayList<>();
 			ArrayList<Outer> outers = new ArrayList<>();
 			ArrayList<Bottom> bottoms = new ArrayList<>();
 			ArrayList<Log> logs = new ArrayList<>();
-			
+
 			String pro = "{call all_customer(?)}";
-			try(CallableStatement cstmt = con.prepareCall(pro)) {
+			try (CallableStatement cstmt = con.prepareCall(pro)) {
 				cstmt.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
 				cstmt.execute();
-				
-				ResultSet rs = (ResultSet)cstmt.getObject(1);
-				while(rs.next()) {
+
+				ResultSet rs = (ResultSet) cstmt.getObject(1);
+				while (rs.next()) {
 					int no = rs.getInt("c_no");
 					String id = rs.getString("c_id");
 					String pw = rs.getString("c_pw");
@@ -145,7 +144,7 @@ public class Server implements Runnable {
 					String addr = rs.getString("c_addr");
 					String phone = rs.getString("c_phone");
 					String mail = rs.getString("c_mail");
-					
+
 					User user = new User();
 					user.setNo(no);
 					user.setId(id);
@@ -155,55 +154,55 @@ public class Server implements Runnable {
 					user.setAddr(addr);
 					user.setPhone(phone);
 					user.setMail(mail);
-					
+
 					users.add(user);
 				}
 				rs.close();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			
+
 			pro = "{call all_product(?)}";
-			try(CallableStatement cstmt = con.prepareCall(pro)){
+			try (CallableStatement cstmt = con.prepareCall(pro)) {
 				cstmt.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
 				cstmt.execute();
-				
+
 				ResultSet rs = (ResultSet) cstmt.getObject(1);
-				while(rs.next()) {
+				while (rs.next()) {
 					int no = rs.getInt("p_no");
 					String name = rs.getString("p_name");
 					int price = rs.getInt("p_price");
 					int category_code = rs.getInt("p_ctg");
 					int stock = rs.getInt("p_stock");
 					String img = rs.getString("p_img");
-					
+
 					Product product = new Product();
 					product.setNo(no);
 					product.setName(name);
 					product.setPrice(price);
-					if(category_code == 1)
+					if (category_code == 1)
 						product.setCategory("상의");
-					else if(category_code == 2)
+					else if (category_code == 2)
 						product.setCategory("하의");
-					else if(category_code == 3)
+					else if (category_code == 3)
 						product.setCategory("아우터");
 					product.setStock(stock);
 					product.setImg(img);
-					
+
 					products.add(product);
 				}
 				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
+
 			pro = "{call selectProduct_top(?)}";
-			try(CallableStatement cstmt = con.prepareCall(pro)){
+			try (CallableStatement cstmt = con.prepareCall(pro)) {
 				cstmt.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
 				cstmt.execute();
-				
+
 				ResultSet rs = (ResultSet) cstmt.getObject(1);
-				while(rs.next()) {
+				while (rs.next()) {
 					String img = rs.getString("p_img_top");
 					String material = rs.getString("p_material");
 					String fit = rs.getString("p_fit");
@@ -216,7 +215,7 @@ public class Server implements Runnable {
 					int shoulder = rs.getInt("p_shoulder");
 					int chest = rs.getInt("p_chest");
 					int sleeve = rs.getInt("p_sleeve");
-					
+
 					Top top = new Top();
 					top.setImg(img);
 					top.setMaterial(material);
@@ -230,21 +229,21 @@ public class Server implements Runnable {
 					top.setShoulder(shoulder);
 					top.setChest(chest);
 					top.setSleeve(sleeve);
-					
+
 					tops.add(top);
 				}
 				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
+
 			pro = "{call selectProduct_outer(?)}";
-			try(CallableStatement cstmt = con.prepareCall(pro)){
+			try (CallableStatement cstmt = con.prepareCall(pro)) {
 				cstmt.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
 				cstmt.execute();
-				
+
 				ResultSet rs = (ResultSet) cstmt.getObject(1);
-				while(rs.next()) {
+				while (rs.next()) {
 					String img = rs.getString("p_img_outer");
 					String material = rs.getString("p_material");
 					String fit = rs.getString("p_fit");
@@ -257,7 +256,7 @@ public class Server implements Runnable {
 					int shoulder = rs.getInt("p_shoulder");
 					int chest = rs.getInt("p_chest");
 					int sleeve = rs.getInt("p_sleeve");
-					
+
 					Outer outer = new Outer();
 					outer.setImg(img);
 					outer.setMaterial(material);
@@ -271,21 +270,21 @@ public class Server implements Runnable {
 					outer.setShoulder(shoulder);
 					outer.setChest(chest);
 					outer.setSleeve(sleeve);
-					
+
 					outers.add(outer);
 				}
 				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
+
 			pro = "{call selectProduct_bottom(?)}";
-			try(CallableStatement cstmt = con.prepareCall(pro)){
+			try (CallableStatement cstmt = con.prepareCall(pro)) {
 				cstmt.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
 				cstmt.execute();
-				
+
 				ResultSet rs = (ResultSet) cstmt.getObject(1);
-				while(rs.next()) {
+				while (rs.next()) {
 					String img = rs.getString("p_img_bottom");
 					String material = rs.getString("p_material");
 					String fit = rs.getString("p_fit");
@@ -299,7 +298,7 @@ public class Server implements Runnable {
 					int thigh = rs.getInt("p_thigh");
 					int rise = rs.getInt("p_rise");
 					int hem = rs.getInt("p_hem");
-					
+
 					Bottom bottom = new Bottom();
 					bottom.setImg(img);
 					bottom.setMaterial(material);
@@ -314,37 +313,37 @@ public class Server implements Runnable {
 					bottom.setThigh(thigh);
 					bottom.setRise(rise);
 					bottom.setHem(hem);
-					
+
 					bottoms.add(bottom);
 				}
 				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
+
 			pro = "{call selectLog_All(?)}";
-			try(CallableStatement cstmt = con.prepareCall(pro)) {
+			try (CallableStatement cstmt = con.prepareCall(pro)) {
 				cstmt.registerOutParameter(1, oracle.jdbc.OracleTypes.CURSOR);
 				cstmt.execute();
-				
-				ResultSet rs = (ResultSet)cstmt.getObject(1);
-				while(rs.next()) {
+
+				ResultSet rs = (ResultSet) cstmt.getObject(1);
+				while (rs.next()) {
 					String date = rs.getString("l_date");
 					String msg = rs.getString("l_msg");
 					int code = rs.getInt("l_code");
-					
+
 					Log log = new Log();
 					log.setDate(date);
 					log.setMsg(msg);
 					log.setCode(code);
-					
+
 					logs.add(log);
 				}
 				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
+
 			HashMap<Object, Object> map = new HashMap<>();
 			map.put("user", users);
 			map.put("product", products);
@@ -352,10 +351,10 @@ public class Server implements Runnable {
 			map.put("outer", outers);
 			map.put("bottom", bottoms);
 			map.put("log", logs);
-			
+
 			oos.writeObject(map);
 			oos.flush();
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -437,14 +436,14 @@ public class Server implements Runnable {
 
 		return res + "/" + userData;
 	}
-	
+
 	void addBasket(String data) {
 		StringTokenizer st = new StringTokenizer(data, ",");
 		int c_no = Integer.parseInt(st.nextToken());
 		int p_no = Integer.parseInt(st.nextToken());
-		
+
 		String pro = "{call addBasket(?,?)}";
-		try(CallableStatement cstmt = con.prepareCall(pro)) {
+		try (CallableStatement cstmt = con.prepareCall(pro)) {
 			cstmt.setInt(1, c_no);
 			cstmt.setInt(2, p_no);
 			cstmt.execute();
@@ -452,37 +451,37 @@ public class Server implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	String showBasket(String data) {
 		int c_no = Integer.parseInt(data);
-		
+
 		String res = "";
 		String pro = "{call selectBasket(?,?)}";
-		try(CallableStatement cstmt = con.prepareCall(pro)) {
+		try (CallableStatement cstmt = con.prepareCall(pro)) {
 			cstmt.setInt(1, c_no);
 			cstmt.registerOutParameter(2, oracle.jdbc.OracleTypes.CURSOR);
 			cstmt.execute();
-			
-			ResultSet rs = (ResultSet)cstmt.getObject(2);
-			while(rs.next())
+
+			ResultSet rs = (ResultSet) cstmt.getObject(2);
+			while (rs.next())
 				res += rs.getString("p_name") + "," + rs.getString("p_price") + "," + rs.getString("p_no") + "/";
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return res;
 	}
-	
+
 	void pay(String data) {
 		StringTokenizer st = new StringTokenizer(data, "/");
 		int c_no = Integer.parseInt(st.nextToken());
 		String p_nos = st.nextToken();
-		
+
 		st = new StringTokenizer(p_nos, ",");
-		while(st.hasMoreTokens()) {
+		while (st.hasMoreTokens()) {
 			int p_no = Integer.parseInt(st.nextToken());
-			
+
 			String pro = "{call del_basket(?,?)}";
-			try(CallableStatement cstmt = con.prepareCall(pro)) {
+			try (CallableStatement cstmt = con.prepareCall(pro)) {
 				cstmt.setInt(1, c_no);
 				cstmt.setInt(2, p_no);
 				cstmt.execute();
@@ -490,9 +489,9 @@ public class Server implements Runnable {
 				System.out.println("del오류");
 				e.printStackTrace();
 			}
-			
+
 			pro = "{call addorders(?,?)}";
-			try(CallableStatement cstmt = con.prepareCall(pro)) {
+			try (CallableStatement cstmt = con.prepareCall(pro)) {
 				cstmt.setInt(1, c_no);
 				cstmt.setInt(2, p_no);
 				cstmt.execute();
@@ -500,9 +499,9 @@ public class Server implements Runnable {
 				System.out.println("insert오류");
 				e.printStackTrace();
 			}
-			
+
 			pro = "{call updateProduct(?,?)}";
-			try(CallableStatement cstmt = con.prepareCall(pro)) {
+			try (CallableStatement cstmt = con.prepareCall(pro)) {
 				cstmt.setInt(1, p_no);
 				cstmt.setInt(2, -1);
 				cstmt.execute();
@@ -512,7 +511,7 @@ public class Server implements Runnable {
 			}
 		}
 	}
-	
+
 	void updateUserInfo(String data) {
 		StringTokenizer st = new StringTokenizer(data, ",");
 		String id = st.nextToken();
@@ -520,9 +519,9 @@ public class Server implements Runnable {
 		String addr = st.nextToken();
 		String phone = st.nextToken();
 		String mail = st.nextToken();
-		
+
 		String pro = "{call updateCustomer(?,?,?,?,?)}";
-		try(CallableStatement cstmt = con.prepareCall(pro)) {
+		try (CallableStatement cstmt = con.prepareCall(pro)) {
 			cstmt.setString(1, id);
 			cstmt.setString(2, pw);
 			cstmt.setString(3, addr);
@@ -533,14 +532,14 @@ public class Server implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	void delUser(String data) {
 		StringTokenizer st = new StringTokenizer(data, ",");
 		String id = st.nextToken();
 		String pw = st.nextToken();
-		
+
 		String pro = "{call delCustomer(?,?)}";
-		try(CallableStatement cstmt = con.prepareCall(pro)) {
+		try (CallableStatement cstmt = con.prepareCall(pro)) {
 			cstmt.setString(1, id);
 			cstmt.setString(2, pw);
 			cstmt.execute();
@@ -548,19 +547,19 @@ public class Server implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	String showOrders(String data) {
 		int c_no = Integer.parseInt(data);
-		
+
 		String res = "";
 		String pro = "{call order_select(?,?)}";
-		try(CallableStatement cstmt = con.prepareCall(pro)) {
+		try (CallableStatement cstmt = con.prepareCall(pro)) {
 			cstmt.setInt(1, c_no);
 			cstmt.registerOutParameter(2, oracle.jdbc.OracleTypes.CURSOR);
 			cstmt.execute();
-			
-			ResultSet rs = (ResultSet)cstmt.getObject(2);
-			while(rs.next()) {
+
+			ResultSet rs = (ResultSet) cstmt.getObject(2);
+			while (rs.next()) {
 				String name = rs.getString("p_name");
 				int price = rs.getInt("p_price");
 				String date = rs.getString("o_date");
@@ -572,11 +571,11 @@ public class Server implements Runnable {
 		}
 		return res;
 	}
-	
+
 	void addProduct(String data) {
 		int p_no = Integer.parseInt(data);
 		String pro = "{call updateProduct(?,?)}";
-		try(CallableStatement cstmt = con.prepareCall(pro)) {
+		try (CallableStatement cstmt = con.prepareCall(pro)) {
 			cstmt.setInt(1, p_no);
 			cstmt.setInt(2, 1);
 			cstmt.execute();

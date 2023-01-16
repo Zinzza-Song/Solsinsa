@@ -28,9 +28,6 @@ public class MyPage extends JFrame {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 
 		setBounds(100, 100, 400, 650);
@@ -86,6 +83,7 @@ public class MyPage extends JFrame {
 		}
 
 		String str = Client.ans;
+		Client.ans = null;
 		StringTokenizer st = new StringTokenizer(str, "/");
 
 		// 주문 목록 조회 테이블

@@ -95,12 +95,15 @@ public class NewUser extends JFrame {
 				String data = idTextField.getText(); // 중복검사를 할 아이디
 				String code = ":1002"; // 중복검사 프로토콜 코드
 				Client.msg = data + code; // 서버로 중복검사를 할 아이디와 프로토콜 코드를 알려줘 중복검사 작업을 요청
+
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 				} // 응답을 받기위한 대기시간
+
 				String str = Client.ans; // 서버 응답(중복검사 결과)
+				Client.ans = null;
 				int check = Integer.parseInt(str); // 해당 결과를 정수로 형변환
 
 				// 서버가 응답한 결과에 따른 처리
@@ -109,9 +112,9 @@ public class NewUser extends JFrame {
 					idTextField.setText("");
 				} else if (check == -2) {
 					JOptionPane.showMessageDialog(null, "아이디가 검색 중 오류가 발생");
-				} else if (check == 0) {
+					idTextField.setText("");
+				} else if (check == 0)
 					JOptionPane.showMessageDialog(null, "아이디가 사용 가능합니다.");
-				}
 			}
 		});
 
@@ -257,7 +260,7 @@ public class NewUser extends JFrame {
 					BirthTextField.setText("");
 					JOptionPane.showMessageDialog(null, "생년월일을 형식에 맞게 입력해 주세요\n(1900 또는 2000) - (01 ~ 12) - (01 ~ 31)");
 				}
-
+				// 정상 입력 후 로그인 작업 시작
 				else if ((idTextField.getText() != null && idTextField.getText().length() != 0)
 						|| (pwTextField.getText() != null || pwTextField.getText().length() != 0)
 						|| (pwCheckTextField.getText() != null && pwCheckTextField.getText().length() != 0)

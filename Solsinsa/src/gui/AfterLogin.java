@@ -42,7 +42,6 @@ public class AfterLogin extends JPanel {
 		cartBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				Cart cart = new Cart();
 				cart.setVisible(true);
 			}
@@ -92,7 +91,6 @@ public class AfterLogin extends JPanel {
 		logoutBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				JOptionPane.showMessageDialog(null, "로그아웃 되었습니다.");
 				Userinfo.getUserInfo().Logout();
 				inputPanel.setVisible(true);

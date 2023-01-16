@@ -49,9 +49,6 @@ public class Payment extends JFrame {
 	private ArrayList<String> list;
 	private String payThings = "";
 
-	/**
-	 * Create the frame.
-	 */
 	public Payment(ArrayList<String> list) {
 
 		this.list = list;
@@ -261,14 +258,20 @@ public class Payment extends JFrame {
 		paymentBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int result = JOptionPane.showConfirmDialog(null, "결제하시겠습니까?", "결제 여부", JOptionPane.YES_NO_OPTION);
+				if(textField_6.getText().trim().length() == 0)
+					JOptionPane.showMessageDialog(null, "입금자 명을 입력하세요.");
+				else if(!rdbtnNewRadioButton.isSelected())
+					JOptionPane.showMessageDialog(null, "입방식을 선택해 주세요.");
+				else {
+					int result = JOptionPane.showConfirmDialog(null, "결제하시겠습니까?", "결제 여부", JOptionPane.YES_NO_OPTION);
 
-				if (result == 0) {
-					Client.msg = Userinfo.getUserInfo().getNo() + "/" + payThings + ":1006";
-					JOptionPane.showMessageDialog(null, "결제가 완료되었습니다");
-					dispose();
-				} else {
-					dispose();
+					if (result == 0) {
+						Client.msg = Userinfo.getUserInfo().getNo() + "/" + payThings + ":1006";
+						JOptionPane.showMessageDialog(null, "결제가 완료되었습니다");
+						dispose();
+					} else {
+						dispose();
+					}
 				}
 			}
 		});

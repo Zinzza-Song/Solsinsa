@@ -37,9 +37,6 @@ public class ProdDetail extends JFrame {
 	int index;
 	String str[];
 
-	/**
-	 * Create the frame.
-	 */
 	public ProdDetail(server.Product prod, int num) {
 
 		setBounds(100, 100, 931, 647);
@@ -128,8 +125,6 @@ public class ProdDetail extends JFrame {
 				Client.msg = Userinfo.getUserInfo().getNo() + "," + prod.getNo() + ":1004";
 				JOptionPane.showMessageDialog(null, "장바구니에 추가되었습니다.");
 				dispose();
-//				Products prod = new Products(5);
-//				prod.setVisible(true);
 			}
 		});
 

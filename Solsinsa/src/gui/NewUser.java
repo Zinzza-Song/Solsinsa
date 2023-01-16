@@ -235,7 +235,7 @@ public class NewUser extends JFrame {
 					JOptionPane.showMessageDialog(null, "모든 정보를 입력해 주세요");
 				}
 				// 비밀번호가 일치하지 않으면 다이어로그 호출로 회원가입 방지
-				if (!pwTextField.getText().equals(pwCheckTextField.getText())) {
+				else if (!pwTextField.getText().equals(pwCheckTextField.getText())) {
 					pwTextField.setText("");
 					pwCheckTextField.setText("");
 					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
@@ -261,13 +261,7 @@ public class NewUser extends JFrame {
 					JOptionPane.showMessageDialog(null, "생년월일을 형식에 맞게 입력해 주세요\n(1900 또는 2000) - (01 ~ 12) - (01 ~ 31)");
 				}
 				// 정상 입력 후 로그인 작업 시작
-				else if ((idTextField.getText() != null && idTextField.getText().length() != 0)
-						|| (pwTextField.getText() != null || pwTextField.getText().length() != 0)
-						|| (pwCheckTextField.getText() != null && pwCheckTextField.getText().length() != 0)
-						|| (addressTextField.getText() != null || addressTextField.getText().length() != 0)
-						|| (emailTextField.getText() != null && emailTextField.getText().length() != 0)
-						|| (phoneTextField.getText() != null || phoneTextField.getText().length() != 0)
-						|| (BirthTextField.getText() != null && BirthTextField.getText().length() != 0)) {
+				else {
 
 					String id = idTextField.getText() + ",";
 					String pw = pwTextField.getText() + ",";

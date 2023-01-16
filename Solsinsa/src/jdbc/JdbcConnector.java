@@ -2,42 +2,31 @@ package jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class JdbcConnector {
-	
-public static Connection getCon() throws ClassNotFoundException, SQLException {
-		
+
+	public static Connection getCon() {
+
 		Connection con = null;
-		
+
 		try {
-			String id = "c##zinzza"; // °èÁ¤¸í
-			String pw = "1234"; // °èÁ¤ÆĞ½º¿öµå
-			String url = "jdbc:oracle:thin:@1.239.126.62:11521:xe"; // È£½ºÆ® À§Ä¡
-			
+			String id = "c##zinzza"; // ê³„ì •ëª…
+			String pw = "1234"; // ê³„ì •íŒ¨ìŠ¤ì›Œë“œ
+			String url = "jdbc:oracle:thin:@localhost:1521:xe"; // í˜¸ìŠ¤íŠ¸ ìœ„ì¹˜
+
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			// Class Å¬·¡½º·Î JDBC µå¶óÀÌ¹ö¸¦ ·ÎµùÇÏ´Â ÄÚµå => DriverManager¿¡ µî·ÏµÊ
-			
+			// Class í´ë˜ìŠ¤ë¡œ JDBC ë“œë¼ì´ë²„ë¥¼ ë¡œë”©í•˜ëŠ” ì½”ë“œ => DriverManagerì— ë“±ë¡ë¨
+
 			con = DriverManager.getConnection(url, id, pw);
-			// Connection °´Ã¼¸¦ ¾òÀ½
-			// conÀº ½ÇÁ¦·Î µ¥ÀÌÅÍº£ÀÌ½º¿Í ¿¬°áÇÏ¿© ÀÛ¾÷À» ¼öÇàÇÒ ¼ö ÀÖ´Â Åë·Î·Î ÀÚ¿ëÇÏ´Â Áß¿äÇÑ °´Ã¼ º¯¼ö·Î »ç¿ë
-			
+			// Connection ê°ì²´ë¥¼ ì–»ìŒ
+			// conì€ ì‹¤ì œë¡œ ë°ì´í„°ë² ì´ìŠ¤ì™€ ì—°ê²°í•˜ì—¬ ì‘ì—…ì„ ìˆ˜í–‰í•  ìˆ˜ ìˆëŠ” í†µë¡œë¡œ ììš©í•˜ëŠ” ì¤‘ìš”í•œ ê°ì²´ ë³€ìˆ˜ë¡œ ì‚¬ìš©
+
 			return con;
-		} catch (Exception e) { // dbÀ§Ä¡¿¡¼­ ÀÛ¾÷ÇÒ °æ¿ì(È£½ºÆ®¿¡¼­´Â È£½ºÆ®ÀÇ ¿ÜºÎ¾ÆÀÌÇÇ·Î Á¢±Ù ºÒ°¡)
-			String id = "c##zinzza"; // °èÁ¤¸í
-			String pw = "1234"; // °èÁ¤ÆĞ½º¿öµå
-			String url = "jdbc:oracle:thin:@localhost:1521:xe"; // dbÀ§Ä¡
-			
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			// Class Å¬·¡½º·Î JDBC µå¶óÀÌ¹ö¸¦ ·ÎµùÇÏ´Â ÄÚµå => DriverManager¿¡ µî·ÏµÊ
-			
-			con = DriverManager.getConnection(url, id, pw);
-			// Connection °´Ã¼¸¦ ¾òÀ½
-			// conÀº ½ÇÁ¦·Î µ¥ÀÌÅÍº£ÀÌ½º¿Í ¿¬°áÇÏ¿© ÀÛ¾÷À» ¼öÇàÇÒ ¼ö ÀÖ´Â Åë·Î·Î ÀÚ¿ëÇÏ´Â Áß¿äÇÑ °´Ã¼ º¯¼ö·Î »ç¿ë
-			
-			return con;
+		} catch (Exception e) { // dbìœ„ì¹˜ì—ì„œ ì‘ì—…í•  ê²½ìš°(í˜¸ìŠ¤íŠ¸ì—ì„œëŠ” í˜¸ìŠ¤íŠ¸ì˜ ì™¸ë¶€ì•„ì´í”¼ë¡œ ì ‘ê·¼ ë¶ˆê°€)
+			System.out.println("DBì—°ê²° ì‹¤íŒ¨");
+			return null;
 		}
-		
+
 	}
 
 }

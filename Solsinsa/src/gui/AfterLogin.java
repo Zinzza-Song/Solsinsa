@@ -72,7 +72,7 @@ public class AfterLogin extends JPanel {
 		// ㅇㅇㅇ님 환영합니다 라벨
 		JLabel welcomeLabel = new JLabel(Userinfo.getUserInfo().getId() + "님 환영합니다.");
 		welcomeLabel.setFont(new Font("한컴 말랑말랑 Bold", Font.PLAIN, 22));
-		welcomeLabel.setBounds(158, 8, 192, 35);
+		welcomeLabel.setBounds(93, 10, 331, 35);
 		add(welcomeLabel);
 
 		// 로그아웃 버튼

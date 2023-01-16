@@ -42,7 +42,6 @@ public class ProdDetail extends JFrame {
 	 */
 	public ProdDetail(server.Product prod, int num) {
 
-		System.out.println(prod.getImg());
 		setBounds(100, 100, 931, 647);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(234, 232, 227));

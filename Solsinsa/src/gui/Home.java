@@ -265,10 +265,6 @@ public class Home extends JFrame {
 
 			String pCategory = product.getCategory();
 			String pImg = product.getImg();
-			System.out.println(pCategory);
-			System.out.println(pImg);
-			System.out.println(product.getName());
-			System.out.println(product.getPrice());
 			String setImg = "src/쇼핑몰 사진/" + pCategory + "/" + pImg;
 			ImageIcon setIcon = new ImageIcon(setImg);
 			Image img = setIcon.getImage();

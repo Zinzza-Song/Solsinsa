@@ -33,8 +33,12 @@ public class Client extends Thread {
 	public static ArrayList<Bottom> bottoms;
 	public static ArrayList<Log> logs;
 
+	final String ip = "1.239.126.62";
+	final int port = 11522;
+	
 	final String localhost = "127.0.0.1";
-
+	final int localPort = 7048;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void run() {
@@ -42,7 +46,14 @@ public class Client extends Thread {
 
 		try {
 			// 서버의 accept()가 호출 후 쓰레드가 만들어지고, List에 추가됨
-			socket = new Socket(localhost, 7048); // 7048포트로 서버와 연결
+			try {
+				socket = new Socket(ip, port); // 7048포트로 서버와 연결
+				System.out.println("외부에서 연결");
+			} catch (Exception e) {
+				socket = new Socket(localhost, localPort);
+				System.out.println("내부에서 연결");
+			}
+			
 
 			out = new PrintWriter(socket.getOutputStream(), true);
 

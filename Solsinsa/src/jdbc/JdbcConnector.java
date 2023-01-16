@@ -13,7 +13,7 @@ public class JdbcConnector {
 		try {
 			String id = "c##zinzza"; // 계정명
 			String pw = "1234"; // 계정패스워드
-			String url = "jdbc:oracle:thin:@1.239.126.62:11521:xe"; // 호스트 위치
+			String url = "jdbc:oracle:thin:@localhost:1521:xe"; // 호스트 위치
 
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			// Class 클래스로 JDBC 드라이버를 로딩하는 코드 => DriverManager에 등록됨

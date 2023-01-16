@@ -494,7 +494,6 @@ public class Server implements Runnable {
 					cstmt.setInt(2, p_no);
 					cstmt.execute();
 				} catch (SQLException e) {
-					System.out.println("del오류");
 					e.printStackTrace();
 				}
 
@@ -504,7 +503,6 @@ public class Server implements Runnable {
 					cstmt.setInt(2, p_no);
 					cstmt.execute();
 				} catch (SQLException e) {
-					System.out.println("insert오류");
 					e.printStackTrace();
 				}
 
@@ -514,7 +512,6 @@ public class Server implements Runnable {
 					cstmt.setInt(2, -1);
 					cstmt.execute();
 				} catch (SQLException e) {
-					System.out.println("update오류");
 					e.printStackTrace();
 				}
 			}
@@ -591,7 +588,6 @@ public class Server implements Runnable {
 			cstmt.setInt(2, 1);
 			cstmt.execute();
 		} catch (SQLException e) {
-			System.out.println("update오류");
 			e.printStackTrace();
 		}
 	}

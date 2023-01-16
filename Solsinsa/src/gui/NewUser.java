@@ -95,7 +95,6 @@ public class NewUser extends JFrame {
 				String data = idTextField.getText(); // 중복검사를 할 아이디
 				String code = ":1002"; // 중복검사 프로토콜 코드
 				Client.msg = data + code; // 서버로 중복검사를 할 아이디와 프로토콜 코드를 알려줘 중복검사 작업을 요청
-				System.out.println(Client.msg);
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {

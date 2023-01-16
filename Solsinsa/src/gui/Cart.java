@@ -66,7 +66,6 @@ public class Cart extends JFrame {
 		}
 
 		String list = Client.ans;
-		System.out.println(list);
 		StringTokenizer st = new StringTokenizer(list, "/");
 		int count = st.countTokens();
 		productCheckBox = new JCheckBox[count];

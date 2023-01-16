@@ -1,29 +1,25 @@
 package gui;
 
-import jdbc.JdbcConnector;
-import server.Product;
-
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import client.Client;
 
-import javax.swing.JScrollPane;
-import java.awt.Color;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
+@SuppressWarnings("serial")
 public class Products extends JFrame {
 
 	private JPanel contentPane;
@@ -72,7 +68,6 @@ public class Products extends JFrame {
 		for (int i = num; i < num + 12; i++) {
 			server.Product prod = Client.products.get(i);
 			String pName = prod.getName();
-			int ctgNum = prod.getCategory_code();
 			int pPrice = prod.getPrice();
 			Link = "./src/쇼핑몰 사진/" + prod.getCategory() + "/" + prod.getImg();
 			ImageIcon imageIcon = new ImageIcon(Link);
@@ -163,7 +158,6 @@ public class Products extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				dispose();
 			}
 

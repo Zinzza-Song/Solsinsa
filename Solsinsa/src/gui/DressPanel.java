@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import client.Client;
 
+@SuppressWarnings("serial")
 public class DressPanel extends JPanel {
 	DressThread1 dressThread1;
 	private JPanel panel; // 상품사진 스레드 패널1
@@ -52,7 +53,6 @@ public class DressPanel extends JPanel {
 
 		// 2번 사진
 		server.Product product2 = Client.products.get(16);
-		int ctgNum2 = product2.getCategory_code();
 		String Link2 = "./src/쇼핑몰 사진/아우터/OUTER_5.jpg";
 		ImageIcon image2 = new ImageIcon(Link2);
 		Image img2 = image2.getImage();
@@ -70,7 +70,6 @@ public class DressPanel extends JPanel {
 
 		// 4번 사진
 		server.Product product4 = Client.products.get(20);
-		int ctgNum4 = product4.getCategory_code();
 		String Link4 = "./src/쇼핑몰 사진/아우터/OUTER_9.jpg";
 		ImageIcon image4 = new ImageIcon(Link4);
 		Image img4 = image4.getImage();
@@ -303,7 +302,6 @@ public class DressPanel extends JPanel {
 		// 스레드에 마우스 올릴 시
 //		this.addMouseListener(new MouseListener() {
 //			public void mouseEntered(MouseEvent e) {
-//				// TODO Auto-generated method stub
 //				try {
 //					DressThread1.sleep(2000);
 //

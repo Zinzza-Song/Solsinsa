@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 
 import client.Client;
 
+@SuppressWarnings("serial")
 public class NewUser extends JFrame {
 
 	private JPanel contentPane;
@@ -29,7 +30,6 @@ public class NewUser extends JFrame {
 	private JTextField idTextField;
 	private JLabel nameLabel;
 	private JTextField nameTextField;
-	private JButton reduplicationCheckBtn;
 	private JLabel pwLabel;
 	private JPasswordField pwTextField;
 	private JLabel pwCheckLabel;
@@ -220,6 +220,7 @@ public class NewUser extends JFrame {
 		// 회원 가입 버튼 클릭 시 액션 리스너
 		confirmBtn.addActionListener(new ActionListener() {
 
+			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if ((idTextField.getText() == null || idTextField.getText().length() == 0)

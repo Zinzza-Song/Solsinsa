@@ -35,6 +35,7 @@ public class Client extends Thread {
 
 	final String localhost = "127.0.0.1";
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void run() {
 		System.out.println("Connecting...");

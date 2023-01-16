@@ -11,6 +11,7 @@ import javax.swing.border.*;
 import client.Client;
 import client.Userinfo;
 
+@SuppressWarnings("serial")
 public class Home extends JFrame {
 
 	JPanel inputPanel;
@@ -20,22 +21,6 @@ public class Home extends JFrame {
 	private JButton productJbtn[];
 	private JTextField imageJbtnName[];
 	private JTextField imageJbtnPrice[];
-	private ImageIcon imgIcon[] = new ImageIcon[4];
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Home frame = new Home();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the frame.
@@ -112,7 +97,6 @@ public class Home extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				Products prod = new Products(0);
 				prod.setVisible(true);
 			}
@@ -129,7 +113,6 @@ public class Home extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				Products prod = new Products(24);
 				prod.setVisible(true);
 			}
@@ -146,7 +129,6 @@ public class Home extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				Products prod = new Products(12);
 				prod.setVisible(true);
 			}
@@ -166,6 +148,7 @@ public class Home extends JFrame {
 			// 관리자 계정 로그인 시 조회프레임 호출
 			// 로그인 버튼 클릭 시 db와 연동해서 로그인
 			// db에 없는 데이터라면 오류 띄우기
+			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String id = idtextField.getText();
@@ -236,7 +219,6 @@ public class Home extends JFrame {
 		joinbtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				NewUser userFrame = new NewUser();
 				userFrame.setVisible(true);
 			}

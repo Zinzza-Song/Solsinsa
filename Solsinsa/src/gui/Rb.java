@@ -5,6 +5,7 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import java.awt.*;
 
+@SuppressWarnings("serial")
 public class Rb extends JButton {
 	public Rb() {
 		super();

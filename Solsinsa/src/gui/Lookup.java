@@ -5,9 +5,11 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.awt.event.MouseEvent;
+
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,14 +24,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableModel;
 
 import client.Client;
-import oracle.net.aso.m;
 import server.Log;
 
-import java.awt.event.MouseListener;
-
+@SuppressWarnings("serial")
 public class Lookup extends JFrame {
 	private JPanel contentPane;
 
@@ -46,9 +45,6 @@ public class Lookup extends JFrame {
 	String productLogInformation[][] = null;
 	DefaultTableCellRenderer celAlignCenter = new DefaultTableCellRenderer();
 
-	/**
-	 * Create the frame.
-	 */
 	public Lookup() {
 		setBounds(100, 100, 1000, 660);
 		setLocationRelativeTo(null);
@@ -58,7 +54,7 @@ public class Lookup extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		JButton a = new JButton("추가");
+
 		// 상품 테이블에 행 추가하기
 		String productHeader[] = { "NO", "NAME", "PRICE", "CTG", "STOCK", "ADD" };
 
@@ -338,6 +334,7 @@ public class Lookup extends JFrame {
 	class ButtonEditor extends DefaultCellEditor {
 		protected JButton btn;
 		private String lbl;
+		@SuppressWarnings("unused")
 		private Boolean clicked;
 
 		public ButtonEditor(JTextField txt) {
@@ -365,19 +362,6 @@ public class Lookup extends JFrame {
 			return btn;
 		}
 
-		// 버튼 클릭 시
-		@Override
-		public Object getCellEditorValue() {
-
-			if (clicked) {
-				int a = (Integer) productTable.getValueAt(4, 4) + 1;
-			}
-			// 클릭한 즉시 "추가"텍스트를 덧씌워줌
-			// 이게 없으면 버튼 클릭 시 텍스트 지워지
-			clicked = false;
-			return new String(lbl);
-		}
-
 		@Override
 		public boolean stopCellEditing() {
 
@@ -388,7 +372,6 @@ public class Lookup extends JFrame {
 
 		@Override
 		protected void fireEditingStopped() {
-			// TODO Auto-generated method stub
 			super.fireEditingStopped();
 		}
 	}

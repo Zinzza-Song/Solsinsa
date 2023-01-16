@@ -6,7 +6,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +20,7 @@ import javax.swing.border.MatteBorder;
 import client.Client;
 import client.Userinfo;
 
+@SuppressWarnings("serial")
 public class ProdDetail extends JFrame {
 
 	private JPanel contentPane;

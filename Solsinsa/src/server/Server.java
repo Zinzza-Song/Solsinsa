@@ -27,6 +27,7 @@ public class Server implements Runnable {
 
 	static Connection con;
 
+	@SuppressWarnings("static-access")
 	public Server(Socket client) { // 멀티 쓰레드 환경구출을 위한 생성자, 클라이언트별 쓰레드 생성
 		this.client = client;
 		list.add(client); // 쓰레드를 리스트에 추가

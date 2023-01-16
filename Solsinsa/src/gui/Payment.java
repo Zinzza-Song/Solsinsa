@@ -1,19 +1,29 @@
 package gui;
 
-import javax.swing.*;
-import javax.swing.border.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import client.Client;
 import client.Userinfo;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.StringTokenizer;
-
+@SuppressWarnings("serial")
 public class Payment extends JFrame {
 
 	private JPanel contentPane;
@@ -29,13 +39,13 @@ public class Payment extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private JPanel panel;
 	private JLabel payTitleLabel;
 	private JPanel panel_1;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
 	private JTextField textField_6;
 	private JLabel lblNewLabel_6;
+	@SuppressWarnings("unused")
 	private ArrayList<String> list;
 	private String payThings = "";
 

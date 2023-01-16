@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.StringTokenizer;
 
 import javax.swing.JButton;
@@ -25,6 +24,7 @@ import javax.swing.border.EmptyBorder;
 import client.Client;
 import client.Userinfo;
 
+@SuppressWarnings("serial")
 public class Cart extends JFrame {
 
 	private JPanel contentPane;

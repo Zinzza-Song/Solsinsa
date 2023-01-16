@@ -10,10 +10,10 @@ import javax.swing.border.*;
 import client.Client;
 import client.Userinfo;
 
+@SuppressWarnings("serial")
 public class MyPage extends JFrame {
 
 	private JPanel contentPane;
-	private JFrame frame;
 	private JLabel myLabel[];
 	private JTextField myTextField[];
 	private JTable myOrderTable;
@@ -128,8 +128,8 @@ public class MyPage extends JFrame {
 
 		String userNames[] = { "이 름", "ID", "PW", "주소", "전화번호", "이메일", "생년월일" };
 		int startY = 83;
-		String userName; // 라벨에 들어갈 이름
-
+		
+		// 라벨에 들어갈 이름
 		String id = Userinfo.getUserInfo().getId();
 		String name = Userinfo.getUserInfo().getName();
 		String pw = Userinfo.getUserInfo().getPw();
@@ -189,9 +189,9 @@ public class MyPage extends JFrame {
 
 		String userNames2[] = { "이 름", "ID", "PW", "주소", "전화번호", "이메일", "생년월일" };
 		int startY2 = 83;
-		String myName2; // 라벨들이 들어갈 이름
+		
+		// 라벨들이 들어갈 이름
 		String userTexts2[] = { name, id, pw, addr, phone, mail, birth }; // 수정된 값이 들어와야함
-		String myText2; // 수정된 값이 차례대로 들어갈 변수명
 
 		JTextField[] updatesFields = new JTextField[userNames2.length];
 		for (int i = 0; i < userNames2.length; i++) {

@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import client.Userinfo;
 
+@SuppressWarnings("serial")
 public class AfterLogin extends JPanel {
 
 	public AfterLogin(JPanel inputPanel) {

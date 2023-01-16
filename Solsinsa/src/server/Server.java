@@ -25,8 +25,6 @@ public class Server implements Runnable {
 	private static Socket client; // 클라이언트 구분을 위한 소켓 변수
 	static ArrayList<Socket> list = new ArrayList<Socket>(); // 클라이언트 쓰레드를 담을 리스트
 
-//	static Connection con;
-
 	@SuppressWarnings("static-access")
 	public Server(Socket client) { // 멀티 쓰레드 환경구출을 위한 생성자, 클라이언트별 쓰레드 생성
 		this.client = client;
@@ -45,13 +43,13 @@ public class Server implements Runnable {
 			StringTokenizer st = null;
 
 			while (true) {
-				String msg = br.readLine();
+				String msg = br.readLine(); // 클라이언트로 부터 들어온 요청 메세지
 				System.out.println("요청 : " + msg);
 
 				st = new StringTokenizer(msg, ":");
 
-				String data = st.nextToken();
-				int protocol = Integer.parseInt(st.nextToken());
+				String data = st.nextToken(); // 클라이언트로 부터 들어온 요청을 처리하기 위한 데이터
+				int protocol = Integer.parseInt(st.nextToken()); // 요청을 구분하기 위한 프로토콜
 
 				if (protocol == 9999)
 					break;
@@ -62,19 +60,20 @@ public class Server implements Runnable {
 						appStart();
 						break;
 					case 1001:
+						// 회원 가입
 						insertUser(data);
-						writer.println("회원가입완료");
 						break;
 					case 1002:
+						// 회원 가입 시 아이디 유효성 검사
 						writer.println(checkId(data));
 						break;
 					case 1003:
+						// 로그인
 						writer.println(login(data));
 						break;
 					case 1004:
 						// 장바구니 담기
 						addBasket(data);
-						writer.println("장바구니담기완료");
 						break;
 					case 1005:
 						// 장바구니 보기
@@ -83,23 +82,21 @@ public class Server implements Runnable {
 					case 1006:
 						// 결제하기
 						pay(data);
-						writer.println("결제완료");
 						break;
 					case 1007:
 						// 회원 정보 수정
 						updateUserInfo(data);
-						writer.println("회원정보수정완료");
 						break;
 					case 1008:
 						// 회원 탈퇴
 						delUser(data);
-						writer.println("회원탈퇴완료");
 						break;
 					case 1009:
 						// 구매목록
 						writer.println(showOrders(data));
 						break;
 					case 1010:
+						// 재고량 추가
 						addProduct(data);
 						break;
 					default:
@@ -118,7 +115,7 @@ public class Server implements Runnable {
 
 	}
 
-	void appStart() { // 클라이언트가 실행되면 db에 있는 상품테이블의 데이터와 상의 하의 아우터 상세정보 테이블의 데이터들을
+	void appStart() { // 클라이언트가 최초 실행 시 앱동작을 위한 모든 객체들을 직렬화하여 클라이언트로 보내준다.
 		try (Connection con = JdbcConnector.getCon()) {
 			ObjectOutputStream oos = new ObjectOutputStream(client.getOutputStream());
 
@@ -344,6 +341,7 @@ public class Server implements Runnable {
 				e.printStackTrace();
 			}
 
+			// 위에서 만든 객체들을 담은 리스트들을 해쉬맵으로 하나로 묶어준다.
 			HashMap<Object, Object> map = new HashMap<>();
 			map.put("user", users);
 			map.put("product", products);
@@ -351,7 +349,8 @@ public class Server implements Runnable {
 			map.put("outer", outers);
 			map.put("bottom", bottoms);
 			map.put("log", logs);
-
+			
+			// 위에서 묶은 해쉬맵을 직렬화하여 클라이언트로 보내준다.
 			oos.writeObject(map);
 			oos.flush();
 
@@ -444,7 +443,7 @@ public class Server implements Runnable {
 		return res + "/" + userData;
 	}
 
-	void addBasket(String data) {
+	void addBasket(String data) { // 장바구니 추가 메소드
 		StringTokenizer st = new StringTokenizer(data, ",");
 		int c_no = Integer.parseInt(st.nextToken());
 		int p_no = Integer.parseInt(st.nextToken());
@@ -459,7 +458,7 @@ public class Server implements Runnable {
 		}
 	}
 
-	String showBasket(String data) {
+	String showBasket(String data) { // 장바구니를 보여주는 메소드
 		int c_no = Integer.parseInt(data);
 
 		String res = "";
@@ -478,7 +477,7 @@ public class Server implements Runnable {
 		return res;
 	}
 
-	void pay(String data) {
+	void pay(String data) { // 결제 기능 메소드
 		StringTokenizer st = new StringTokenizer(data, "/");
 		int c_no = Integer.parseInt(st.nextToken());
 		String p_nos = st.nextToken();
@@ -520,7 +519,7 @@ public class Server implements Runnable {
 		}
 	}
 
-	void updateUserInfo(String data) {
+	void updateUserInfo(String data) { // 회원정보 업데이트 메소드
 		StringTokenizer st = new StringTokenizer(data, ",");
 		String id = st.nextToken();
 		String pw = st.nextToken();
@@ -541,7 +540,7 @@ public class Server implements Runnable {
 		}
 	}
 
-	void delUser(String data) {
+	void delUser(String data) { // 회원탈퇴 메소드
 		StringTokenizer st = new StringTokenizer(data, ",");
 		String id = st.nextToken();
 		String pw = st.nextToken();
@@ -556,7 +555,7 @@ public class Server implements Runnable {
 		}
 	}
 
-	String showOrders(String data) {
+	String showOrders(String data) { // 구매목록을 보여주는 메소드
 		int c_no = Integer.parseInt(data);
 
 		String res = "";
@@ -580,7 +579,7 @@ public class Server implements Runnable {
 		return res;
 	}
 
-	void addProduct(String data) {
+	void addProduct(String data) { // 재고량 추가 기능 메소드
 		int p_no = Integer.parseInt(data);
 		String pro = "{call updateProduct(?,?)}";
 		try (Connection con = JdbcConnector.getCon(); CallableStatement cstmt = con.prepareCall(pro)) {

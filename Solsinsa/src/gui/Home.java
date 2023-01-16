@@ -151,56 +151,63 @@ public class Home extends JFrame {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String id = idtextField.getText();
-				String pw = pwtextField.getText();
+				if(idtextField.getText().trim().length() == 0) 
+					JOptionPane.showMessageDialog(null, "아이디를 입력하세요.");
+				else if(pwtextField.getText().trim().length() == 0)
+					JOptionPane.showMessageDialog(null, "비밀번호를 입력하세요.");
+				else {
+					String id = idtextField.getText();
+					String pw = pwtextField.getText();
 
-				String data = id + "," + pw;
-				String protocol = ":1003";
+					String data = id + "," + pw;
+					String protocol = ":1003";
 
-				Client.msg = data + protocol;
+					Client.msg = data + protocol;
 
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e1) {
-					e1.printStackTrace();
-				} // 응답을 받기위한 대기시간
-				String str = Client.ans; // 서버 응답(로그인 결과)
-				Client.ans = null;
-				StringTokenizer st = new StringTokenizer(str, "/");
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					} // 응답을 받기위한 대기시간
+					
+					String str = Client.ans; // 서버 응답(로그인 결과)
+					Client.ans = null;
+					StringTokenizer st = new StringTokenizer(str, "/");
 
-				int check = Integer.parseInt(st.nextToken()); // 해당 결과를 정수로 형변환
+					int check = Integer.parseInt(st.nextToken()); // 해당 결과를 정수로 형변환
 
-				if (check == -1)
-					JOptionPane.showMessageDialog(null, "해당 아이디가 없습니다.");
-				else if (check == -2)
-					JOptionPane.showMessageDialog(null, "비밀번호가 틀렸습니다.");
-				else if (check == 0) {
-					if (idtextField.getText().equals("admin") && pwtextField.getText().equals("1234")) {
-						dispose();
-						Lookup lookup = new Lookup();
-						lookup.setVisible(true);
-					} else {
-						String userData = st.nextToken();
-						st = new StringTokenizer(userData, ",");
+					if (check == -1)
+						JOptionPane.showMessageDialog(null, "해당 아이디가 없습니다.");
+					else if (check == -2)
+						JOptionPane.showMessageDialog(null, "비밀번호가 틀렸습니다.");
+					else if (check == 0) {
+						if (idtextField.getText().equals("admin") && pwtextField.getText().equals("1234")) {
+							dispose();
+							Lookup lookup = new Lookup();
+							lookup.setVisible(true);
+						} else {
+							String userData = st.nextToken();
+							st = new StringTokenizer(userData, ",");
 
-						int noData = Integer.parseInt(st.nextToken());
-						String idData = st.nextToken();
-						String pwData = st.nextToken();
-						String nameData = st.nextToken();
-						String birthData = st.nextToken();
-						String addrData = st.nextToken();
-						String phoneData = st.nextToken();
-						String mailData = st.nextToken();
+							int noData = Integer.parseInt(st.nextToken());
+							String idData = st.nextToken();
+							String pwData = st.nextToken();
+							String nameData = st.nextToken();
+							String birthData = st.nextToken();
+							String addrData = st.nextToken();
+							String phoneData = st.nextToken();
+							String mailData = st.nextToken();
 
-						Userinfo.getUserInfo();
-						Userinfo.getUserInfo().setUserinfo(noData, idData, pwData, nameData, birthData, addrData,
-								phoneData, mailData);
-						AfterLogin login = new AfterLogin(inputPanel);
-						contentPane.add(login);
-						login.setVisible(true);
-						idtextField.setText("");
-						pwtextField.setText("");
-						inputPanel.setVisible(false);
+							Userinfo.getUserInfo();
+							Userinfo.getUserInfo().setUserinfo(noData, idData, pwData, nameData, birthData, addrData,
+									phoneData, mailData);
+							AfterLogin login = new AfterLogin(inputPanel);
+							contentPane.add(login);
+							login.setVisible(true);
+							idtextField.setText("");
+							pwtextField.setText("");
+							inputPanel.setVisible(false);
+						}
 					}
 				}
 			}

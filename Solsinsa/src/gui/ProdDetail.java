@@ -6,7 +6,6 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +20,7 @@ import javax.swing.border.MatteBorder;
 import client.Client;
 import client.Userinfo;
 
+@SuppressWarnings("serial")
 public class ProdDetail extends JFrame {
 
 	private JPanel contentPane;
@@ -125,7 +125,7 @@ public class ProdDetail extends JFrame {
 			// 장바구니 담기 클릭 시 장바구니에 추가됨
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				Client.msg = Userinfo.getUserInfo().getNo() + "," + prod.getNo() + ":1004";
 				JOptionPane.showMessageDialog(null, "장바구니에 추가되었습니다.");
 				dispose();
@@ -152,7 +152,7 @@ public class ProdDetail extends JFrame {
 		if (prod.getCategory().equals("상의")) {
 			FeaturePanel.setLayout(new GridLayout(13, 0, 0, 0));
 			DetailPanel.setLayout(new GridLayout(13, 0, 0, 0));
-			
+
 			for (int i = 0; i < 13; i++) {
 				FeatureTextField[i] = new JTextField();
 				FeatureTextField[i].setColumns(10);
@@ -184,7 +184,7 @@ public class ProdDetail extends JFrame {
 				DetailTextField[i].setHorizontalAlignment(JTextField.CENTER);
 				DetailPanel.add(DetailTextField[i]);
 			}
-		} else if(prod.getCategory().equals("아우터")){
+		} else if (prod.getCategory().equals("아우터")) {
 			FeaturePanel.setLayout(new GridLayout(13, 0, 0, 0));
 			DetailPanel.setLayout(new GridLayout(13, 0, 0, 0));
 			for (int i = 0; i < 13; i++) {

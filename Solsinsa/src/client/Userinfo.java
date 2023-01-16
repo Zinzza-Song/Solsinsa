@@ -9,10 +9,12 @@ public class Userinfo {
 	private String addr;
 	private String phone;
 	private String mail;
-	
-	private Userinfo(){}
-	
-	public void setUserinfo(int no, String id, String pw, String name, String birth, String addr, String phone, String mail) {
+
+	private Userinfo() {
+	}
+
+	public void setUserinfo(int no, String id, String pw, String name, String birth, String addr, String phone,
+			String mail) {
 		this.no = no;
 		this.id = id;
 		this.pw = pw;
@@ -31,7 +33,7 @@ public class Userinfo {
 
 		return instance;
 	}
-	
+
 	public int getNo() {
 		return no;
 	}

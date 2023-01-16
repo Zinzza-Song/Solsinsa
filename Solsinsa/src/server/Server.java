@@ -25,7 +25,7 @@ public class Server implements Runnable {
 	private static Socket client; // 클라이언트 구분을 위한 소켓 변수
 	static ArrayList<Socket> list = new ArrayList<Socket>(); // 클라이언트 쓰레드를 담을 리스트
 
-	static Connection con;
+//	static Connection con;
 
 	@SuppressWarnings("static-access")
 	public Server(Socket client) { // 멀티 쓰레드 환경구출을 위한 생성자, 클라이언트별 쓰레드 생성
@@ -119,7 +119,7 @@ public class Server implements Runnable {
 	}
 
 	void appStart() { // 클라이언트가 실행되면 db에 있는 상품테이블의 데이터와 상의 하의 아우터 상세정보 테이블의 데이터들을
-		try {
+		try (Connection con = JdbcConnector.getCon()) {
 			ObjectOutputStream oos = new ObjectOutputStream(client.getOutputStream());
 
 			ArrayList<User> users = new ArrayList<>();
@@ -355,7 +355,7 @@ public class Server implements Runnable {
 			oos.writeObject(map);
 			oos.flush();
 
-		} catch (IOException e) {
+		} catch (IOException | SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -365,7 +365,7 @@ public class Server implements Runnable {
 
 		String pro = "{call addCustomer(?, ?, ?, ?, ?, ?, ?)}"; // 회원가입을 위한 프로시저 콜
 
-		try (CallableStatement cstmt = con.prepareCall(pro)) {
+		try (Connection con = JdbcConnector.getCon(); CallableStatement cstmt = con.prepareCall(pro)) {
 
 			int i = 1; // 회원가입을 위한 데이터들을 세팅
 			while (st.hasMoreTokens()) {
@@ -385,7 +385,7 @@ public class Server implements Runnable {
 		// 아이디 사용 가능 : 0을 반환
 		// 아이디 중복 : -1을 반환
 
-		try (CallableStatement cstmt = con.prepareCall(pro)) {
+		try (Connection con = JdbcConnector.getCon(); CallableStatement cstmt = con.prepareCall(pro)) {
 			cstmt.setString(1, data); // 중복 검사를 위한 아이디값 삽입
 			cstmt.registerOutParameter(2, oracle.jdbc.OracleTypes.NUMBER); // 결과값 반환을 위한 세팅
 			cstmt.execute(); // 쿼리문을 날린다
@@ -402,38 +402,45 @@ public class Server implements Runnable {
 		String pro = "{call login(?,?,?)}";
 		String id = st.nextToken();
 		String pw = st.nextToken();
-		int res;
-		try (CallableStatement cstmt = con.prepareCall(pro)) {
-			cstmt.setString(1, id);
-			cstmt.setString(2, pw);
-			cstmt.registerOutParameter(3, oracle.jdbc.OracleTypes.NUMBER);
-			cstmt.execute();
 
-			res = cstmt.getInt(3);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
-
-		pro = "{call selectLoginCustomer(?, ?)}";
+		int res = 0;
 		String userData = "";
-		try (CallableStatement cstmt = con.prepareCall(pro)) {
-			cstmt.setString(1, id);
-			cstmt.registerOutParameter(2, oracle.jdbc.OracleTypes.CURSOR);
-			cstmt.execute();
 
-			ResultSet rs = (ResultSet) cstmt.getObject(2);
-			while (rs.next()) {
-				userData = rs.getString("c_no") + "," + rs.getString("c_id") + "," + rs.getString("c_pw") + ","
-						+ rs.getString("c_name") + "," + rs.getString("c_birth") + "," + rs.getString("c_addr") + ","
-						+ rs.getString("c_phone") + "," + rs.getString("c_mail");
+		try (Connection con = JdbcConnector.getCon()) {
+			try (CallableStatement cstmt = con.prepareCall(pro)) {
+				cstmt.setString(1, id);
+				cstmt.setString(2, pw);
+				cstmt.registerOutParameter(3, oracle.jdbc.OracleTypes.NUMBER);
+				cstmt.execute();
+
+				res = cstmt.getInt(3);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
 			}
-			rs.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
 
+			pro = "{call selectLoginCustomer(?, ?)}";
+
+			try (CallableStatement cstmt = con.prepareCall(pro)) {
+				cstmt.setString(1, id);
+				cstmt.registerOutParameter(2, oracle.jdbc.OracleTypes.CURSOR);
+				cstmt.execute();
+
+				ResultSet rs = (ResultSet) cstmt.getObject(2);
+				while (rs.next()) {
+					userData = rs.getString("c_no") + "," + rs.getString("c_id") + "," + rs.getString("c_pw") + ","
+							+ rs.getString("c_name") + "," + rs.getString("c_birth") + "," + rs.getString("c_addr")
+							+ "," + rs.getString("c_phone") + "," + rs.getString("c_mail");
+				}
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
+
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
 		return res + "/" + userData;
 	}
 
@@ -443,7 +450,7 @@ public class Server implements Runnable {
 		int p_no = Integer.parseInt(st.nextToken());
 
 		String pro = "{call addBasket(?,?)}";
-		try (CallableStatement cstmt = con.prepareCall(pro)) {
+		try (Connection con = JdbcConnector.getCon(); CallableStatement cstmt = con.prepareCall(pro)) {
 			cstmt.setInt(1, c_no);
 			cstmt.setInt(2, p_no);
 			cstmt.execute();
@@ -457,7 +464,7 @@ public class Server implements Runnable {
 
 		String res = "";
 		String pro = "{call selectBasket(?,?)}";
-		try (CallableStatement cstmt = con.prepareCall(pro)) {
+		try (Connection con = JdbcConnector.getCon(); CallableStatement cstmt = con.prepareCall(pro)) {
 			cstmt.setInt(1, c_no);
 			cstmt.registerOutParameter(2, oracle.jdbc.OracleTypes.CURSOR);
 			cstmt.execute();
@@ -477,38 +484,42 @@ public class Server implements Runnable {
 		String p_nos = st.nextToken();
 
 		st = new StringTokenizer(p_nos, ",");
-		while (st.hasMoreTokens()) {
-			int p_no = Integer.parseInt(st.nextToken());
+		try (Connection con = JdbcConnector.getCon()) {
+			while (st.hasMoreTokens()) {
+				int p_no = Integer.parseInt(st.nextToken());
 
-			String pro = "{call del_basket(?,?)}";
-			try (CallableStatement cstmt = con.prepareCall(pro)) {
-				cstmt.setInt(1, c_no);
-				cstmt.setInt(2, p_no);
-				cstmt.execute();
-			} catch (SQLException e) {
-				System.out.println("del오류");
-				e.printStackTrace();
-			}
+				String pro = "{call del_basket(?,?)}";
+				try (CallableStatement cstmt = con.prepareCall(pro)) {
+					cstmt.setInt(1, c_no);
+					cstmt.setInt(2, p_no);
+					cstmt.execute();
+				} catch (SQLException e) {
+					System.out.println("del오류");
+					e.printStackTrace();
+				}
 
-			pro = "{call addorders(?,?)}";
-			try (CallableStatement cstmt = con.prepareCall(pro)) {
-				cstmt.setInt(1, c_no);
-				cstmt.setInt(2, p_no);
-				cstmt.execute();
-			} catch (SQLException e) {
-				System.out.println("insert오류");
-				e.printStackTrace();
-			}
+				pro = "{call addorders(?,?)}";
+				try (CallableStatement cstmt = con.prepareCall(pro)) {
+					cstmt.setInt(1, c_no);
+					cstmt.setInt(2, p_no);
+					cstmt.execute();
+				} catch (SQLException e) {
+					System.out.println("insert오류");
+					e.printStackTrace();
+				}
 
-			pro = "{call updateProduct(?,?)}";
-			try (CallableStatement cstmt = con.prepareCall(pro)) {
-				cstmt.setInt(1, p_no);
-				cstmt.setInt(2, -1);
-				cstmt.execute();
-			} catch (SQLException e) {
-				System.out.println("update오류");
-				e.printStackTrace();
+				pro = "{call updateProduct(?,?)}";
+				try (CallableStatement cstmt = con.prepareCall(pro)) {
+					cstmt.setInt(1, p_no);
+					cstmt.setInt(2, -1);
+					cstmt.execute();
+				} catch (SQLException e) {
+					System.out.println("update오류");
+					e.printStackTrace();
+				}
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -521,7 +532,7 @@ public class Server implements Runnable {
 		String mail = st.nextToken();
 
 		String pro = "{call updateCustomer(?,?,?,?,?)}";
-		try (CallableStatement cstmt = con.prepareCall(pro)) {
+		try (Connection con = JdbcConnector.getCon(); CallableStatement cstmt = con.prepareCall(pro)) {
 			cstmt.setString(1, id);
 			cstmt.setString(2, pw);
 			cstmt.setString(3, addr);
@@ -539,7 +550,7 @@ public class Server implements Runnable {
 		String pw = st.nextToken();
 
 		String pro = "{call delCustomer(?,?)}";
-		try (CallableStatement cstmt = con.prepareCall(pro)) {
+		try (Connection con = JdbcConnector.getCon(); CallableStatement cstmt = con.prepareCall(pro)) {
 			cstmt.setString(1, id);
 			cstmt.setString(2, pw);
 			cstmt.execute();
@@ -553,7 +564,7 @@ public class Server implements Runnable {
 
 		String res = "";
 		String pro = "{call order_select(?,?)}";
-		try (CallableStatement cstmt = con.prepareCall(pro)) {
+		try (Connection con = JdbcConnector.getCon(); CallableStatement cstmt = con.prepareCall(pro)) {
 			cstmt.setInt(1, c_no);
 			cstmt.registerOutParameter(2, oracle.jdbc.OracleTypes.CURSOR);
 			cstmt.execute();
@@ -575,7 +586,7 @@ public class Server implements Runnable {
 	void addProduct(String data) {
 		int p_no = Integer.parseInt(data);
 		String pro = "{call updateProduct(?,?)}";
-		try (CallableStatement cstmt = con.prepareCall(pro)) {
+		try (Connection con = JdbcConnector.getCon(); CallableStatement cstmt = con.prepareCall(pro)) {
 			cstmt.setInt(1, p_no);
 			cstmt.setInt(2, 1);
 			cstmt.execute();
@@ -586,8 +597,6 @@ public class Server implements Runnable {
 	}
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-
-		con = JdbcConnector.getCon();
 
 		ExecutorService eService = Executors.newFixedThreadPool(100);
 		// 쓰레드 생성, 접속자 100명 이하로 제한(원할한 서비스 제공을 위하여 설정)

@@ -47,8 +47,8 @@ public class Client extends Thread {
 		try {
 			// 서버의 accept()가 호출 후 쓰레드가 만들어지고, List에 추가됨
 			try {
-				socket = new Socket(ip, port); // 7048포트로 서버와 연결
-				System.out.println("외부에서 연결");
+				socket = new Socket(ip, port); // 7048포트로 서버와 외부 pc에서 실행된 클라이언트와 연결
+				System.out.println("외부에서 연결"); // 7048포트로 서버와 내부 pc에서 실행된 클라이언트와 연결
 			} catch (Exception e) {
 				socket = new Socket(localhost, localPort);
 				System.out.println("내부에서 연결");

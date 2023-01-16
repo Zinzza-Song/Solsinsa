@@ -45,11 +45,10 @@ public class Home extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(0, 0, 723, 653);
 		setLocationRelativeTo(null);
-		
+
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(216, 210, 199));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -73,11 +72,11 @@ public class Home extends JFrame {
 		TitleLabel.setForeground(new Color(255, 255, 255));
 		TitleLabel.setBounds(228, 10, 212, 51);
 		homeName.add(TitleLabel);
-		
+
 		// 상단 아이디 패스워드 입력 패널
 		inputPanel = new JPanel();
 		inputPanel.setBounds(0, 0, 707, 54);
-		inputPanel.setBackground(new Color(216,210,199));
+		inputPanel.setBackground(new Color(216, 210, 199));
 		inputPanel.setLayout(null);
 		contentPane.add(inputPanel);
 		// 아이디 입력 창
@@ -171,12 +170,12 @@ public class Home extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String id = idtextField.getText();
 				String pw = pwtextField.getText();
-				
+
 				String data = id + "," + pw;
 				String protocol = ":1003";
-				
+
 				Client.msg = data + protocol;
-				
+
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
@@ -185,22 +184,22 @@ public class Home extends JFrame {
 				String str = Client.ans; // 서버 응답(로그인 결과)
 				Client.ans = null;
 				StringTokenizer st = new StringTokenizer(str, "/");
-				
+
 				int check = Integer.parseInt(st.nextToken()); // 해당 결과를 정수로 형변환
-				
-				if(check == -1)
+
+				if (check == -1)
 					JOptionPane.showMessageDialog(null, "해당 아이디가 없습니다.");
-				else if(check == -2)
+				else if (check == -2)
 					JOptionPane.showMessageDialog(null, "비밀번호가 틀렸습니다.");
-				else if(check == 0) {
-					if(idtextField.getText().equals("admin")&&pwtextField.getText().equals("1234")) {
+				else if (check == 0) {
+					if (idtextField.getText().equals("admin") && pwtextField.getText().equals("1234")) {
 						dispose();
 						Lookup lookup = new Lookup();
 						lookup.setVisible(true);
 					} else {
 						String userData = st.nextToken();
 						st = new StringTokenizer(userData, ",");
-						
+
 						int noData = Integer.parseInt(st.nextToken());
 						String idData = st.nextToken();
 						String pwData = st.nextToken();
@@ -209,9 +208,10 @@ public class Home extends JFrame {
 						String addrData = st.nextToken();
 						String phoneData = st.nextToken();
 						String mailData = st.nextToken();
-						
+
 						Userinfo.getUserInfo();
-						Userinfo.getUserInfo().setUserinfo(noData, idData, pwData, nameData, birthData, addrData, phoneData, mailData);
+						Userinfo.getUserInfo().setUserinfo(noData, idData, pwData, nameData, birthData, addrData,
+								phoneData, mailData);
 						AfterLogin login = new AfterLogin(inputPanel);
 						contentPane.add(login);
 						login.setVisible(true);
@@ -259,41 +259,41 @@ public class Home extends JFrame {
 
 		ArrayList<Integer> checkList = new ArrayList<>();
 		checkList.add(37);
-		
+
 		for (int i = 0; i < 4; i++) {
 			int random = (int) (Math.random() * 35) + 1;
-			
+
 			Boolean check = true;
-			while(check) {
+			while (check) {
 				boolean numCheck = true;
-				for(int j = 0; j < checkList.size(); ++j) {
-					if(random == checkList.get(i)) {
+				for (int j = 0; j < checkList.size(); ++j) {
+					if (random == checkList.get(i)) {
 						numCheck = false;
 						random = (int) (Math.random() * 36) + 1;
 						break;
 					}
 				}
-				if(numCheck) {
+				if (numCheck) {
 					checkList.add(random);
 					break;
 				}
 			}
-			
+
 			server.Product product = Client.products.get(random);
-			
+
 			String pCategory = product.getCategory();
 			String pImg = product.getImg();
 			System.out.println(pCategory);
 			System.out.println(pImg);
 			System.out.println(product.getName());
 			System.out.println(product.getPrice());
-			String setImg = "src/쇼핑몰 사진/"+ pCategory +"/" + pImg;
+			String setImg = "src/쇼핑몰 사진/" + pCategory + "/" + pImg;
 			ImageIcon setIcon = new ImageIcon(setImg);
 			Image img = setIcon.getImage();
 			Image changeimg = img.getScaledInstance(250, 210, Image.SCALE_SMOOTH); // 이미지 사이즈 조절
 			ImageIcon changeIcon = new ImageIcon(changeimg);
 			imgIcon[i] = changeIcon;
-			
+
 			productJbtn[i] = new JButton(imgIcon[i]);
 			productJbtn[i].setBackground(new Color(255, 255, 255)); // 버튼 색상 변경
 			productJbtn[i].setFocusPainted(false);
@@ -315,9 +315,9 @@ public class Home extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					ProdDetail detail = new ProdDetail(product, num);
 					detail.setVisible(true);
-				}});
-			
-			
+				}
+			});
+
 			if (i < 2) {
 				productJbtn[i].setBounds(xBtn1, 10, 295, 210);
 				productPanel1.add(productJbtn[i]);

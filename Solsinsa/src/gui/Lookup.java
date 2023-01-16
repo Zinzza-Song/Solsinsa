@@ -152,7 +152,7 @@ public class Lookup extends JFrame {
 				add += 1;
 				value = (Object) add;
 				productTable.setValueAt(value, row, 4);
-				
+
 				Client.msg = productTable.getValueAt(row, 0) + ":1010";
 			}
 
@@ -207,7 +207,7 @@ public class Lookup extends JFrame {
 		contentPane.add(userScrolledPane);
 
 		makeLogTable(0);
-		
+
 		JButton custLog = new JButton("회원로그조회");
 		custLog.setFont(new Font("맑은 고딕", Font.PLAIN, 13));
 		custLog.setBounds(291, 297, 119, 23);
@@ -240,7 +240,7 @@ public class Lookup extends JFrame {
 				makeLogTable(0);
 			}
 		});
-		
+
 		// 조회프레임 닫을 경우 기본 홈 화면으로 돌아가기
 		this.addWindowListener(new WindowListener() {
 			@Override
@@ -284,18 +284,18 @@ public class Lookup extends JFrame {
 	}
 
 	void makeLogTable(int num) {
-		if(logScrolledPane != null)
+		if (logScrolledPane != null)
 			contentPane.remove(logScrolledPane);
 		// log테이블
 
 		// 0: 전체로그 1: 회원 로그 2: 상품 로그
-		if(num == 0)
+		if (num == 0)
 			logTable = new JTable(logInformation, logHeader);
-		else if(num == 1)
+		else if (num == 1)
 			logTable = new JTable(userLogInformation, logHeader);
 		else
 			logTable = new JTable(productLogInformation, logHeader);
-		
+
 		logTable.setCellSelectionEnabled(true);
 		logTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		logTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

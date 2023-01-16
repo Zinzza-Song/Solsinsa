@@ -38,19 +38,19 @@ public class Payment extends JFrame {
 	private JLabel lblNewLabel_6;
 	private ArrayList<String> list;
 	private String payThings = "";
-	
+
 	/**
 	 * Create the frame.
 	 */
 	public Payment(ArrayList<String> list) {
 
 		this.list = list;
-		
+
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 723, 660);
 		setResizable(false);
 		setLocationRelativeTo(null);
-		
+
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(62, 62, 62));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -136,19 +136,19 @@ public class Payment extends JFrame {
 		payList.setBackground(new Color(255, 255, 255));
 		contentPane.add(payList);
 		payList.setLayout(null);
-		
+
 		int i = 0;
-		for(String item : list) {
+		for (String item : list) {
 			StringTokenizer st = new StringTokenizer(item, "/");
 			int no = Integer.parseInt(st.nextToken());
 			String itemName = st.nextToken();
 			int itemPrice = Integer.parseInt(st.nextToken());
 
-			if(i != list.size() - 1)
+			if (i != list.size() - 1)
 				payThings += no + ",";
-			else 
+			else
 				payThings += Integer.toString(no);
-			
+
 			// 상품명
 			payListNameLabel = new JLabel[payCount]; // 체크박스에 체크표시된 품목만큼의 라벨생성
 			payListNameLabel[i] = new JLabel(itemName); // 상품명 라벨에 넣기
@@ -156,7 +156,7 @@ public class Payment extends JFrame {
 			payListNameLabel[i].setBounds(8, addHeight + 20, 100, 23); // 위치 사이즈
 			// 상품명 패널에 부착
 			payList.add(payListNameLabel[i]);
-			
+
 			// 상품가격
 			int payPrice = itemPrice; // 상품가격을 차례대로 넣음
 			payPriceTextField = new JTextField[payCount]; // 가격텍스트필드 몇개인지!
@@ -165,7 +165,7 @@ public class Payment extends JFrame {
 			payPriceTextField[i].setBounds(190, addHeight + 20, 100, 23);
 			// 가격 패널에 부착
 			payList.add(payPriceTextField[i]);
-			
+
 			addHeight += 35; // 위에서부터 위치 떨어지는 정도를 추가
 			paySum += itemPrice;
 			++i;
@@ -251,19 +251,18 @@ public class Payment extends JFrame {
 		paymentBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int result = JOptionPane.showConfirmDialog(null, "결제하시겠습니까?","결제 여부",JOptionPane.YES_NO_OPTION);
-				
-				if(result == 0) {
-					Client.msg = Userinfo.getUserInfo().getNo() + "/" + payThings +":1006";
-					JOptionPane.showMessageDialog(null,"결제가 완료되었습니다");
+				int result = JOptionPane.showConfirmDialog(null, "결제하시겠습니까?", "결제 여부", JOptionPane.YES_NO_OPTION);
+
+				if (result == 0) {
+					Client.msg = Userinfo.getUserInfo().getNo() + "/" + payThings + ":1006";
+					JOptionPane.showMessageDialog(null, "결제가 완료되었습니다");
 					dispose();
-				}
-				else {
+				} else {
 					dispose();
 				}
 			}
 		});
-		
+
 		// 취소버튼
 		JButton cancleBtn = new Rb("\uCDE8 \uC18C");
 		cancleBtn.setBounds(182, 231, 96, 47);

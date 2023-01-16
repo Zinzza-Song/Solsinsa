@@ -25,7 +25,7 @@ public class Client extends Thread {
 
 	public static String msg = null;
 	public static String ans = null;
-	
+
 	public static ArrayList<User> users;
 	public static ArrayList<Product> products;
 	public static ArrayList<Top> tops;
@@ -47,15 +47,15 @@ public class Client extends Thread {
 
 			System.out.println("Connected!!");
 			out.println("start:1000");
-			
+
 			ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 			HashMap<Object, Object> map = (HashMap<Object, Object>) ois.readObject();
-			users = (ArrayList<User>)map.get("user");
+			users = (ArrayList<User>) map.get("user");
 			products = (ArrayList<Product>) map.get("product");
-			tops = (ArrayList<Top>)map.get("top");
-			outers = (ArrayList<Outer>)map.get("outer");
-			bottoms = (ArrayList<Bottom>)map.get("bottom");
-			logs = (ArrayList<Log>)map.get("log");
+			tops = (ArrayList<Top>) map.get("top");
+			outers = (ArrayList<Outer>) map.get("outer");
+			bottoms = (ArrayList<Bottom>) map.get("bottom");
+			logs = (ArrayList<Log>) map.get("log");
 
 			SocketThread thread = new SocketThread(); // 메시지 수신을 위한 쓰레드 객체 생성
 			thread.start(); // 생성한 쓰레드 객체 실행
@@ -72,7 +72,7 @@ public class Client extends Thread {
 					msg = null;
 				}
 			}
-			System.out.println("클라종료");
+			out.close();
 			socket.close();
 			thread.interrupt();
 		} catch (Exception e) {
@@ -90,10 +90,10 @@ public class Client extends Thread {
 					String res = null; // 수신된 메시지를 저장
 					while ((res = br.readLine()) != null) { // br에 읽을 메시지가 있는 한 무한루프
 						ans = res;
-						System.out.println("응답" + ans);
+						System.out.println("응답 : " + ans);
 					}
 				}
-				System.out.println("쓰레드 수정");
+				br.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

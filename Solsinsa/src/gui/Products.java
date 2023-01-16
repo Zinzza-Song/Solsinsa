@@ -74,22 +74,22 @@ public class Products extends JFrame {
 			String pName = prod.getName();
 			int ctgNum = prod.getCategory_code();
 			int pPrice = prod.getPrice();
-			Link = "./src/쇼핑몰 사진/"+ prod.getCategory()+"/" + prod.getImg();
+			Link = "./src/쇼핑몰 사진/" + prod.getCategory() + "/" + prod.getImg();
 			ImageIcon imageIcon = new ImageIcon(Link);
 			Image Img = imageIcon.getImage();
 			Image changeImg = Img.getScaledInstance(160, 172, Image.SCALE_SMOOTH);
 			ImageIcon changeIcon = new ImageIcon(changeImg);
-			
-			productImgBtn[i-num] = new JButton(changeIcon);
-			productImgBtn[i-num].setFocusPainted(false);
-			productImgBtn[i-num].setBackground(new Color(234, 232, 227));
-			productImgBtn[i-num].setOpaque(true);
 
-			productName[i-num] = new JTextField(pName);
-			productPrice[i-num] = new JTextField(pPrice + " 원");
+			productImgBtn[i - num] = new JButton(changeIcon);
+			productImgBtn[i - num].setFocusPainted(false);
+			productImgBtn[i - num].setBackground(new Color(234, 232, 227));
+			productImgBtn[i - num].setOpaque(true);
+
+			productName[i - num] = new JTextField(pName);
+			productPrice[i - num] = new JTextField(pPrice + " 원");
 			int number = i;
 			// 상품의 카테고리 별 상품 클릭 시 상세정보 페이지 호출
-			productImgBtn[i-num].addActionListener(new ActionListener() {
+			productImgBtn[i - num].addActionListener(new ActionListener() {
 				// 상품 상세정보 페이지에 상품 사진, 이름 사용을 위해
 				// category, imageIcon, probName 파라미터를 사용해
 				@Override

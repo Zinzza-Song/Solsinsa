@@ -34,8 +34,8 @@ public class Client extends Thread {
 	public static ArrayList<Log> logs;
 
 	// 외부에서 접속 할 때 필요한 정보
-	final String ip = "1.239.126.62";
-	final int port = 11522;
+	final String ip = "Your IP";
+	final int port = 0; // write your external port
 	
 	// 내부에서 접속 할 대 필요한 정보
 	final String localhost = "127.0.0.1";

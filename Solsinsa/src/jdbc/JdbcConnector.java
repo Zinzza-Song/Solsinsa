@@ -10,9 +10,9 @@ public class JdbcConnector {
 		Connection con = null;
 
 		try {
-			String id = "c##zinzza"; // 계정명
-			String pw = "1234"; // 계정패스워드
-			String url = "jdbc:oracle:thin:@localhost:1521:xe"; // 호스트 위치
+			String id = "your id"; // 계정명
+			String pw = "your password"; // 계정패스워드
+			String url = "your DB url"; // 호스트 위치
 
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			// Class 클래스로 JDBC 드라이버를 로딩하는 코드 => DriverManager에 등록됨

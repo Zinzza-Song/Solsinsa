@@ -250,7 +250,7 @@ public class Home extends JFrame {
 		checkList.add(37);
 
 		for (int i = 0; i < 4; i++) {
-			int random = (int) (Math.random() * 35) + 1;
+			int random = (int) (Math.random() * 36);
 
 			Boolean check = true;
 			while (check) {
@@ -258,7 +258,7 @@ public class Home extends JFrame {
 				for (int j = 0; j < checkList.size(); ++j) {
 					if (random == checkList.get(i)) {
 						numCheck = false;
-						random = (int) (Math.random() * 36) + 1;
+						random = (int) (Math.random() * 36);
 						break;
 					}
 				}
